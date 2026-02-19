@@ -1,0 +1,202 @@
+# Tarefa: Criar Anuncios
+
+id: criar-anuncio
+nome: Criar Anuncios de Trafego Pago
+descricao: Criar conceitos de anuncios para Meta, Google ou YouTube
+agente: trafego
+comando: /criar-anuncio
+
+versao: "2.0"
+categoria: trafego
+
+# Baseado em: Nicholas Kusmich, Tom Breeze, Dennis Yu
+
+entradas:
+  obrigatorias:
+    - nome: plataforma
+      pergunta: "Para qual plataforma?"
+      tipo: escolha
+      opcoes:
+        - Meta (Facebook/Instagram)
+        - Google Ads
+        - YouTube Ads
+        - TikTok
+
+    - nome: objetivo
+      pergunta: "Qual o objetivo da campanha?"
+      tipo: escolha
+      opcoes:
+        - Conversao (vendas diretas)
+        - Leads (captura de contatos)
+        - Trafego (visitas ao site)
+        - Awareness (reconhecimento)
+
+    - nome: oferta
+      pergunta: "O que esta promovendo?"
+      tipo: texto
+
+    - nome: publico
+      pergunta: "Quem e o publico-alvo?"
+      tipo: texto
+
+  opcionais:
+    - nome: temperatura
+      pergunta: "Qual temperatura do publico?"
+      tipo: escolha
+      opcoes:
+        - Frio (nunca ouviram de voce)
+        - Morno (ja engajaram)
+        - Quente (ja visitaram/compraram)
+      padrao: "Frio"
+
+    - nome: depoimentos
+      pergunta: "Tem depoimentos de clientes?"
+      tipo: texto
+      padrao: "Nao"
+
+passos:
+  - numero: 1
+    acao: "Definir contexto e objetivo"
+
+  - numero: 2
+    acao: "Aplicar framework Hook-Story-Offer"
+    estrutura:
+      hook: "0-3 segundos - capturar atencao"
+      story: "3-30 segundos - conectar com problema"
+      offer: "30+ segundos - apresentar solucao"
+
+  - numero: 3
+    acao: "Criar conceitos por angulo"
+    angulos:
+      - Beneficio direto
+      - Problema-solucao
+      - Prova social
+      - Antes/Depois
+      - Curiosidade
+      - Controvérsia
+
+  - numero: 4
+    acao: "Definir formatos"
+    formatos:
+      meta:
+        - Video curto (15-30s)
+        - Video medio (60-90s)
+        - Imagem estatica
+        - Carrossel
+      google:
+        - Search (texto)
+        - Display (imagem)
+        - Responsive
+      youtube:
+        - In-stream skippable
+        - In-stream non-skippable
+        - Bumper (6s)
+
+  - numero: 5
+    acao: "Escrever copies e roteiros"
+
+saida:
+  formato: markdown
+  template: |
+    # Anuncios: [Plataforma] - [Objetivo]
+
+    ## Contexto
+    - **Plataforma:** [Meta/Google/YouTube]
+    - **Objetivo:** [Conversao/Leads/etc]
+    - **Temperatura:** [Frio/Morno/Quente]
+    - **Oferta:** [Descricao]
+
+    ---
+
+    ## Conceito 1: [Angulo - ex: Beneficio Direto]
+
+    ### Hook (0-3s)
+    **Visual:** [Descricao do que aparece]
+    **Texto/Audio:** "[O que e dito/mostrado]"
+
+    ### Story (3-30s)
+    **Visual:** [Descricao]
+    **Texto/Audio:** "[Narrativa]"
+
+    ### Offer (30s+)
+    **Visual:** [Descricao]
+    **Texto/Audio:** "[CTA]"
+
+    ### Copy Principal (para texto)
+    ```
+    [Headline]
+
+    [Corpo do anuncio]
+
+    [CTA]
+    ```
+
+    ### Headline
+    [Headline para o anuncio]
+
+    ### CTA
+    [Texto do botao]
+
+    ---
+
+    ## Conceito 2: [Angulo - ex: Problema-Solucao]
+    [Repetir estrutura]
+
+    ---
+
+    ## Conceito 3: [Angulo - ex: Prova Social]
+    [Repetir estrutura]
+
+    ---
+
+    ## Direcao Visual
+
+    ### Estilo
+    - Cores:
+    - Fontes:
+    - Mood:
+
+    ### Referencias
+    - [Referencia 1]
+    - [Referencia 2]
+
+    ---
+
+    ## Variacoes para Teste A/B
+
+    ### Headlines para testar:
+    1. [Headline A]
+    2. [Headline B]
+    3. [Headline C]
+
+    ### Hooks para testar:
+    1. [Hook A]
+    2. [Hook B]
+    3. [Hook C]
+
+    ---
+
+    ## Metricas Esperadas
+
+    | Metrica | Benchmark | Meta |
+    |---------|-----------|------|
+    | CTR | > 2% | 3%+ |
+    | Hook Rate | > 30% | 40%+ |
+    | CPC | Varia | Abaixo de [X] |
+
+conhecimento:
+  - trafego-pago.md
+  - copywriting.md
+  - gatilhos.md
+  - formulas.md
+
+gates:
+  - Hook captura atencao em 3 segundos?
+  - Story conecta com o problema?
+  - Offer esta clara?
+  - CTA e especifico?
+
+proximos_passos:
+  - Produzir criativos
+  - Configurar campanhas
+  - Lancar testes A/B

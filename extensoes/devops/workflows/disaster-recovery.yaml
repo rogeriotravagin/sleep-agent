@@ -1,0 +1,148 @@
+# ============================================================
+# Workflow: Disaster Recovery
+# ============================================================
+# Plano e execucao de disaster recovery
+
+id: disaster-recovery
+nome: Plano de Disaster Recovery
+comando: /disaster-recovery
+versao: "1.0"
+
+descricao: |
+  Cria e executa plano completo de disaster recovery:
+  classificacao de servicos, RTO/RPO, estrategia de backup,
+  procedimentos de restauracao e testes.
+
+pre_requisitos:
+  - "Inventario de infraestrutura atualizado"
+  - "Acesso a Hetzner API e Portainer"
+
+# ============================================================
+# FASES
+# ============================================================
+fases:
+  - numero: 1
+    nome: AVALIACAO
+    agente: devops-estrategista
+    descricao: Classificar servicos por criticidade
+    acoes:
+      - "Listar todos os servicos"
+      - "Classificar cada um (Critico, Importante, Normal)"
+      - "Identificar dependencias entre servicos"
+      - "Mapear dados que precisam de backup"
+    entregas:
+      - Mapa de criticidade
+      - Grafo de dependencias
+
+  - numero: 2
+    nome: DEFINICAO_RTO_RPO
+    agente: devops-seguranca
+    descricao: Definir metricas de recuperacao
+    acoes:
+      - "Definir RTO por servico (tempo max para restaurar)"
+      - "Definir RPO por servico (perda max aceitavel de dados)"
+      - "Alinhar com expectativas do usuario"
+    entregas:
+      - Tabela RTO/RPO por servico
+
+  - numero: 3
+    nome: ESTRATEGIA_BACKUP
+    descricao: Configurar backups por tipo
+    paralelo: true
+    fork:
+      - tarefa: snapshots-servidor
+        agente: devops-hetzner
+        descricao: Configurar snapshots automaticos
+        acoes:
+          - "Habilitar backups automaticos na Hetzner"
+          - "Criar snapshot manual atual"
+          - "Definir politica de retencao"
+      - tarefa: backup-volumes
+        agente: devops-portainer
+        descricao: Configurar backup de volumes Docker
+        acoes:
+          - "Identificar volumes criticos"
+          - "Criar script de backup"
+          - "Configurar agendamento (cron)"
+      - tarefa: backup-stacks
+        agente: devops-portainer
+        descricao: Exportar todos os compose files
+        acoes:
+          - "Exportar compose de cada stack"
+          - "Salvar variaveis de ambiente (sem valores)"
+          - "Versionar em git"
+    join:
+      estrategia: aguardar_todos
+
+  - numero: 4
+    nome: RUNBOOKS
+    agente: devops-seguranca
+    descricao: Criar procedimentos de restauracao
+    acoes:
+      - "Runbook: Restaurar servidor de snapshot"
+      - "Runbook: Restaurar volume de backup"
+      - "Runbook: Redeployar stack completa"
+      - "Runbook: Resposta a incidente de seguranca"
+    entregas:
+      - Runbooks em markdown
+      - Scripts de restauracao
+
+  - numero: 5
+    nome: TESTE
+    agente: devops-seguranca
+    descricao: Testar procedimento de restauracao
+    acoes:
+      - "Testar restore de volume em ambiente isolado"
+      - "Verificar integridade dos dados restaurados"
+      - "Medir tempo real de restauracao"
+      - "Documentar resultado do teste"
+    gate:
+      nivel: 3
+      verificacao: "Testes de restore validados pelo usuario?"
+
+  - numero: 6
+    nome: DOCUMENTACAO
+    agente: devops-estrategista
+    descricao: Consolidar plano de DR
+    acoes:
+      - "Criar documento consolidado de DR"
+      - "Incluir contatos e responsaveis"
+      - "Definir frequencia de testes"
+      - "Salvar em local acessivel"
+
+# ============================================================
+# SAIDA
+# ============================================================
+saida:
+  formato: markdown
+  salvar_em: "workspace/{{empresa}}/devops/docs/runbooks/"
+  template: |
+    # Plano de Disaster Recovery
+
+    ## Servicos e Classificacao
+    | Servico | Criticidade | RTO | RPO | Backup |
+    |---------|-------------|-----|-----|--------|
+    {{#servicos}}
+    | {{nome}} | {{criticidade}} | {{rto}} | {{rpo}} | {{backup_tipo}} |
+    {{/servicos}}
+
+    ## Estrategia de Backup
+    ### Servidor
+    - Snapshots automaticos: {{snapshot_freq}}
+    - Retencao: {{snapshot_retencao}}
+
+    ### Volumes Docker
+    - Backup: {{volume_freq}}
+    - Retencao: {{volume_retencao}}
+    - Local: {{volume_local}}
+
+    ### Stacks (Compose Files)
+    - Versionados em: {{stack_repo}}
+    - Backup: a cada alteracao
+
+    ## Procedimentos de Restauracao
+    Ver runbooks em: devops/docs/runbooks/
+
+    ## Proxima Revisao
+    Data: {{proxima_revisao}}
+    Responsavel: {{responsavel}}

@@ -1,0 +1,301 @@
+# =============================================================
+# TOOL REGISTRY - Inventario Centralizado de Ferramentas
+# =============================================================
+# Catalogo unico de TODAS as ferramentas disponiveis no sistema
+# Permite descoberta por capacidade e validacao de credenciais
+# =============================================================
+
+versao: 1.0
+ultima_atualizacao: "2026-02-19"
+
+ferramentas:
+
+  # ===========================================================
+  # APIs EXTERNAS
+  # ===========================================================
+
+  - id: activecampaign
+    tipo: api
+    categoria: crm
+    descricao: "CRM e automacao de marketing"
+    base_url_env: "ACTIVECAMPAIGN_URL"
+    capacidades:
+      - buscar_contato
+      - criar_contato
+      - atualizar_contato
+      - criar_deal
+      - atualizar_deal
+      - adicionar_nota
+      - enviar_email
+      - listar_pipelines
+      - listar_stages
+    autenticacao:
+      tipo: api_key
+      header: "Api-Token"
+      env_var: "ACTIVECAMPAIGN_API_KEY"
+    extensoes_que_usam:
+      - customer-success
+      - marketing
+    documentacao: "https://developers.activecampaign.com/reference"
+    notas:
+      - "Filtro stage: usar filters[stage]=ID (NAO filters[d_stageid])"
+      - "Campos custom de deal: usar deal.fields array"
+      - "Notas: reltype 'Deal' com D maiusculo"
+
+  - id: curseduca
+    tipo: api
+    categoria: plataforma_ensino
+    descricao: "Plataforma de cursos online"
+    servidores:
+      membros: "prof.curseduca.pro"
+      reports: "clas.curseduca.pro"
+    capacidades:
+      - buscar_membro
+      - listar_matriculas
+      - ver_progresso
+      - gerenciar_grupos
+      - remover_grupo_acesso
+    autenticacao:
+      tipo: dual_header
+      headers:
+        - nome: "api_key"
+          env_var: "CURSEDUCA_API_KEY"
+        - nome: "Authorization"
+          formato: "Bearer {token}"
+          env_var: "CURSEDUCA_BEARER"
+    extensoes_que_usam:
+      - customer-success
+    notas:
+      - "2 servidores diferentes (prof e clas)"
+      - "PATCH /members/{id} com situationId:2 NAO funciona para bloquear"
+      - "CORRETO: DELETE /members/{id}/groups/{group_id} para remover acesso"
+
+  - id: mautic
+    tipo: api
+    categoria: email_marketing
+    descricao: "Automacao de email marketing"
+    capacidades:
+      - criar_email
+      - criar_campanha
+      - segmentar_contatos
+      - enviar_campanha
+      - gerenciar_listas
+    autenticacao:
+      tipo: basic_auth
+      env_vars:
+        - "MAUTIC_URL"
+        - "MAUTIC_USER"
+        - "MAUTIC_PASSWORD"
+    extensoes_que_usam:
+      - marketing
+    notas:
+      - "Gerar HTML com inline CSS (NAO MJML)"
+      - "Tokens: {tracking_pixel}, {unsubscribe_url}"
+      - "Peso maximo HTML: 102KB"
+
+  - id: hotmart
+    tipo: api
+    categoria: pagamentos
+    descricao: "Plataforma de vendas de infoprodutos"
+    capacidades:
+      - buscar_compra
+      - verificar_assinatura
+      - solicitar_reembolso
+    autenticacao:
+      tipo: oauth2
+      formato: "base64(client_id:client_secret) como Basic auth"
+      env_vars:
+        - "HOTMART_CLIENT_ID"
+        - "HOTMART_CLIENT_SECRET"
+    extensoes_que_usam:
+      - customer-success
+    notas:
+      - "Auth: data= form-encoded, NAO json"
+      - "Refund PIX NAO funciona via API - fazer MANUAL no painel"
+
+  - id: uazapi
+    tipo: api
+    categoria: mensageria
+    descricao: "API de WhatsApp"
+    capacidades:
+      - enviar_mensagem
+      - listar_contatos
+      - listar_grupos
+      - verificar_status
+    autenticacao:
+      tipo: query_param
+      param: "token"
+      env_var: "UAZAPI_TOKEN"
+    extensoes_que_usam:
+      - customer-success
+    notas:
+      - "Auth via query param ?token= (NAO header)"
+      - "NAO possui endpoint de leitura de historico"
+      - "Mensagens recebidas vao via webhook para n8n"
+
+  - id: circle
+    tipo: api
+    categoria: comunidade
+    descricao: "Plataforma de comunidade online"
+    base_url: "https://app.circle.so/api/admin/v2/"
+    capacidades:
+      - buscar_membro
+      - listar_membros
+      - ver_atividade
+    autenticacao:
+      tipo: bearer
+      env_var: "CIRCLE_API_TOKEN"
+    extensoes_que_usam:
+      - customer-success
+    notas:
+      - "Usar API v2 (v1 nao funciona mais)"
+      - "API NAO suporta remocao de tags"
+      - "Cancelamento: trocar grupo de acesso (MANUAL no painel)"
+
+  - id: chatwoot
+    tipo: api
+    categoria: atendimento
+    descricao: "Plataforma de atendimento ao cliente"
+    instancias:
+      principal:
+        url: "${CHATWOOT_URL}"
+        account_id: "${CHATWOOT_ACCOUNT_ID}"
+    capacidades:
+      - buscar_contato
+      - listar_conversas
+      - ler_mensagens
+    autenticacao:
+      tipo: header
+      header: "api_access_token"
+      env_var: "CHATWOOT_API_TOKEN"
+    extensoes_que_usam:
+      - customer-success
+
+  - id: pagtrust
+    tipo: api
+    categoria: pagamentos
+    descricao: "Plataforma de pagamentos e checkout"
+    servidores:
+      ead: "api.pagtrust.com.br"
+      sales: "api-sales.pagtrust.com.br"
+      checkout: "api-checkout.pagtrust.com.br"
+    capacidades:
+      - buscar_pedido
+      - listar_pedidos
+      - detalhes_financeiros
+      - listar_produtos
+    autenticacao:
+      tipo: jwt
+      endpoint: "POST /Auth"
+      formato: "{grantType: 'password', email, password}"
+      env_vars:
+        - "PAGTRUST_EMAIL"
+        - "PAGTRUST_PASSWORD"
+      expiry: "5min"
+    extensoes_que_usam:
+      - customer-success
+    notas:
+      - "Filtro por email: usar param 'Buyer' (NAO 'BuyerEmail')"
+      - "Precisa de DateInit e DateEnd junto com Buyer"
+      - "transactionValue = valor cobrado (com acrescimo parcelamento)"
+      - "Integration token NAO funciona para auth"
+
+  # ===========================================================
+  # SCRIPTS LOCAIS
+  # ===========================================================
+
+  - id: cancelamento_consultar
+    tipo: script
+    categoria: automacao
+    descricao: "Consulta plataformas para processo de cancelamento"
+    caminho: "workspace/academia-lendaria/scripts/cancelamento_consultar_plataformas.py"
+    capacidades:
+      - consultar_plataformas_cancelamento
+    dependencias:
+      - python3
+      - requests
+      - python-dotenv
+    extensoes_que_usam:
+      - customer-success
+
+  - id: finalizar_cancelamento
+    tipo: script
+    categoria: automacao
+    descricao: "Finaliza processo de cancelamento em todas as plataformas"
+    caminho: "workspace/academia-lendaria/scripts/finalizar_cancelamento.py"
+    capacidades:
+      - finalizar_cancelamento
+      - revogar_acessos
+    dependencias:
+      - python3
+      - requests
+      - python-dotenv
+    extensoes_que_usam:
+      - customer-success
+
+  - id: enviar_email_cancelamento
+    tipo: script
+    categoria: automacao
+    descricao: "Envia email formal de cancelamento"
+    caminho: "workspace/academia-lendaria/scripts/enviar_email_cancelamento.py"
+    capacidades:
+      - enviar_email_cancelamento
+    dependencias:
+      - python3
+      - requests
+    extensoes_que_usam:
+      - customer-success
+
+  # ===========================================================
+  # FERRAMENTAS INTERNAS
+  # ===========================================================
+
+  - id: gerador_html_email
+    tipo: interno
+    categoria: output
+    descricao: "Gera emails HTML com inline CSS para Mautic"
+    capacidades:
+      - gerar_email_html
+      - gerar_email_venda
+      - gerar_email_newsletter
+      - gerar_email_transacional
+    templates: "extensoes/marketing/templates/mautic/"
+    extensoes_que_usam:
+      - marketing
+
+  - id: gerador_landing_page
+    tipo: interno
+    categoria: output
+    descricao: "Gera landing pages HTML otimizadas"
+    capacidades:
+      - gerar_landing_page
+      - gerar_pagina_vendas
+      - gerar_pagina_captura
+    extensoes_que_usam:
+      - marketing
+
+  - id: deploy_vercel
+    tipo: interno
+    categoria: deploy
+    descricao: "Faz deploy de paginas na Vercel"
+    capacidades:
+      - deploy_pagina
+      - configurar_dominio
+      - preview_pagina
+    extensoes_que_usam:
+      - deploy
+
+# ===========================================================
+# CATEGORIAS
+# ===========================================================
+categorias:
+  crm: "Gerenciamento de relacionamento com clientes"
+  plataforma_ensino: "Plataformas de cursos e EAD"
+  email_marketing: "Envio e automacao de emails"
+  pagamentos: "Processamento de pagamentos e assinaturas"
+  mensageria: "Envio de mensagens (WhatsApp, SMS)"
+  comunidade: "Plataformas de comunidade"
+  atendimento: "Suporte e atendimento ao cliente"
+  automacao: "Scripts e automacoes locais"
+  output: "Geracao de entregas (HTML, documentos)"
+  deploy: "Publicacao e deploy de paginas"

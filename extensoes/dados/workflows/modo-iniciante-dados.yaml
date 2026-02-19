@@ -1,0 +1,171 @@
+# Workflow: Modo Iniciante Dados
+# Caminho rapido para primeira analise
+
+id: modo-iniciante-dados
+nome: Modo Iniciante Dados
+comando: /iniciante-dados
+descricao: Modo rapido para sua primeira analise de dados
+
+# ============================================
+# VISAO GERAL
+# ============================================
+
+objetivo: |
+  Guiar usuarios iniciantes em sua primeira analise de dados,
+  com perguntas simples e resultado pratico.
+
+resultado_final: |
+  Analise basica com:
+  - Visao geral dos dados
+  - Principais metricas
+  - 3 insights acionaveis
+  - Proximos passos recomendados
+
+# ============================================
+# PERGUNTAS SIMPLES (5 PERGUNTAS)
+# ============================================
+
+perguntas_iniciais:
+  - numero: 1
+    pergunta: "O que voce quer entender ou descobrir?"
+    exemplo: "Por que vendas cairam no ultimo mes"
+    mapeamento: objetivo
+
+  - numero: 2
+    pergunta: "Qual area do negocio? (vendas, usuarios, marketing, produto)"
+    exemplo: "Vendas"
+    mapeamento: area
+
+  - numero: 3
+    pergunta: "Qual o periodo de analise?"
+    exemplo: "Ultimos 3 meses"
+    mapeamento: periodo
+
+  - numero: 4
+    pergunta: "Quem vai usar essa analise? (voce, seu chefe, diretoria)"
+    exemplo: "Meu gestor"
+    mapeamento: audiencia
+
+  - numero: 5
+    pergunta: "Que dados voce tem disponivel? (planilhas, sistema, metricas)"
+    exemplo: "Planilha de vendas no Excel"
+    mapeamento: dados_disponiveis
+
+# ============================================
+# PROCESSAMENTO AUTOMATICO
+# ============================================
+
+processamento:
+  fase_1:
+    nome: "Entendimento"
+    agente: analista-dados
+    acoes:
+      - Interpretar objetivo do usuario
+      - Identificar metricas relevantes
+      - Definir estrutura da analise
+    output: "Plano de analise"
+
+  fase_2:
+    nome: "Analise Rapida"
+    agente: cientista-dados
+    acoes:
+      - Analisar dados disponiveis
+      - Calcular metricas basicas
+      - Identificar padroes obvios
+    output: "Dados analisados"
+
+  fase_3:
+    nome: "Sintese"
+    agente: analista-dados
+    acoes:
+      - Extrair 3 principais insights
+      - Formular recomendacoes simples
+      - Criar visualizacao basica
+    output: "Analise final"
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Analise: {objetivo}
+
+  ## Resumo Rapido
+
+  **Periodo:** {periodo}
+  **Area:** {area}
+  **Objetivo:** {objetivo}
+
+  ---
+
+  ## Principais Numeros
+
+  | Metrica | Valor | Comparacao | Status |
+  |---------|-------|------------|--------|
+  | {metrica_1} | {valor} | {vs_anterior} | {status} |
+  | {metrica_2} | {valor} | {vs_anterior} | {status} |
+  | {metrica_3} | {valor} | {vs_anterior} | {status} |
+
+  ---
+
+  ## 3 Insights Principais
+
+  ### 1. {insight_1_titulo}
+
+  {descricao_simples}
+
+  **O que significa:** {implicacao}
+
+  ### 2. {insight_2_titulo}
+
+  {descricao_simples}
+
+  **O que significa:** {implicacao}
+
+  ### 3. {insight_3_titulo}
+
+  {descricao_simples}
+
+  **O que significa:** {implicacao}
+
+  ---
+
+  ## O Que Fazer Agora
+
+  1. **Acao imediata:** {acao_1}
+  2. **Investigar mais:** {acao_2}
+  3. **Acompanhar:** {acao_3}
+
+  ---
+
+  ## Proximos Passos
+
+  Para aprofundar essa analise, recomendo:
+
+  - [ ] {proximo_passo_1}
+  - [ ] {proximo_passo_2}
+  - [ ] {proximo_passo_3}
+
+  ---
+
+  *Analise gerada pelo Sleep Agent - Extensao Dados*
+  *Para analise mais detalhada, use `/analise-completa`*
+
+# ============================================
+# INTEGRACAO RALPH
+# ============================================
+
+ralph_integration:
+  ativo: true
+  descricao: "Pode gerar dashboard automatico se solicitado"
+  prd_template: frameworks/ralph/templates/prd-dashboard.json
+  prompt_template: frameworks/ralph/templates/prompt-dashboard.md
+
+# ============================================
+# OUTPUT
+# ============================================
+
+output:
+  formato: md
+  destino: output/{produto}/analises/
+  nome_arquivo: analise-rapida-{area}-{data}.md

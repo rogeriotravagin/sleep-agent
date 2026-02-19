@@ -1,0 +1,111 @@
+# Workflow: Campanha de Marketing
+
+id: campanha
+nome: Criar Campanha de Marketing
+descricao: Desenvolve uma campanha completa de marketing do zero
+comando: /campanha
+
+versao: "1.0"
+
+# Visão geral
+sobre: |
+  Este workflow ajuda a criar uma campanha de marketing completa,
+  desde a estratégia até os materiais de execução.
+
+  Ideal para:
+  - Lançar produto novo
+  - Promover serviço existente
+  - Campanha sazonal/promocional
+
+# Etapas
+etapas:
+  - numero: 1
+    nome: Estratégia da Campanha
+    agente: estrategista
+    descricao: Definir objetivo, público, mensagem central e canais
+    entregavel: Documento de estratégia
+    perguntas:
+      - Qual o objetivo da campanha? (vendas, leads, awareness)
+      - Qual o produto/serviço?
+      - Quem é o público-alvo?
+      - Qual o orçamento disponível?
+      - Quanto tempo durará a campanha?
+
+  - numero: 2
+    nome: Mensagem Central
+    agente: copywriter
+    descricao: Criar big idea e mensagem principal da campanha
+    entregavel: Conceito criativo + headlines principais
+    depende_de: 1
+
+  - numero: 3
+    nome: Materiais de Copy
+    agente: copywriter
+    descricao: Desenvolver textos para todos os pontos de contato
+    entregavel: Copy para página, emails, posts
+    depende_de: 2
+    detalhes:
+      materiais:
+        - Headline e subheadline
+        - Copy de página/landing page
+        - 3-5 posts para redes sociais
+        - 3 emails da campanha
+
+  - numero: 4
+    nome: Plano de Anúncios
+    agente: trafego
+    descricao: Estruturar campanhas de tráfego pago
+    entregavel: Estrutura de campanha + copies de anúncios
+    depende_de: [1, 2]
+    detalhes:
+      inclui:
+        - Estrutura de campanha (funil)
+        - Públicos recomendados
+        - 3-5 conceitos de anúncios
+        - Sugestão de orçamento por etapa
+
+# Perguntas iniciais
+perguntas_iniciais:
+  - Qual o objetivo principal da campanha?
+  - O que você está promovendo?
+  - Quem é seu cliente ideal?
+  - Qual seu orçamento total?
+  - Quando a campanha precisa começar?
+
+# Tipos de campanha
+tipos:
+  vendas:
+    foco: Conversão direta
+    metricas: [vendas, ROAS, CPA]
+
+  leads:
+    foco: Captura de contatos
+    metricas: [leads, CPL, taxa de conversão]
+
+  awareness:
+    foco: Alcance e reconhecimento
+    metricas: [alcance, impressões, engajamento]
+
+# Progresso
+progresso_template: |
+  ## Campanha: [nome]
+  **Objetivo:** [objetivo]
+  **Duração:** [período]
+
+  [x] Etapa 1: Estratégia - Concluída
+  [ ] Etapa 2: Mensagem Central - Em andamento
+  [ ] Etapa 3: Materiais de Copy - Pendente
+  [ ] Etapa 4: Plano de Anúncios - Pendente
+
+# Entrega final
+entrega_final:
+  formato: pasta
+  estrutura: |
+    projetos/campanha-[nome]/
+    ├── 01-estrategia.md
+    ├── 02-conceito-criativo.md
+    ├── 03-materiais/
+    │   ├── copy-pagina.md
+    │   ├── emails.md
+    │   └── posts-social.md
+    └── 04-plano-anuncios.md

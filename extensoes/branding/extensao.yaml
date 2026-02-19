@@ -1,0 +1,364 @@
+# Extensao: Branding & Visual
+# Versao: 1.0 - Framework Ralph de Execucao Visual
+
+nome: Branding & Visual
+slug: branding
+descricao: Framework completo de branding - da identidade visual ao posicionamento
+versao: "1.0"
+status: ativo
+
+comando: /branding
+
+mensagem_ativacao: |
+  **Sleep Agent - Extensao Branding & Visual v1.1**
+
+  Framework completo baseado nas maiores referencias mundiais:
+  - Paul Rand, Saul Bass, Milton Glaser (Logo Design)
+  - Marty Neumeier (The Brand Gap, Zag)
+  - David Aaker (Brand Equity)
+  - Simon Sinek (Golden Circle)
+  - Jakob Nielsen (Usability Heuristics)
+  - Oli Gardner (Conversion-Centered Design)
+  - Josef Muller-Brockmann, Dieter Rams (Analise Visual)
+
+  **Agentes Disponiveis:**
+  - `@brand-designer` - Designer Visual (logos, identidade, graficos)
+  - `@brand-ux` - UI/UX Specialist (interfaces, landing pages)
+  - `@brand-estrategia` - Brand Strategist (estrategia, posicionamento)
+  - `@brand-analista` - Design Analyst (analise de referencias, diretrizes)
+
+  **Workflows Completos:**
+  - `/brand-completo` - Do zero a identidade completa (8 fases)
+  - `/landing-completa` - Landing page de alta conversao
+  - `/identidade-visual` - Sistema de identidade visual
+  - `/analise-design` - Analisar referencia e criar style guide
+
+  **Tarefas Rapidas:**
+  - `/criar-logo` - Conceito e briefing de logo
+  - `/definir-marca` - Definir identidade de marca
+  - `/criar-landing` - Landing page otimizada
+  - `/posicionamento` - Posicionamento de marca
+  - `/personal-brand` - Marca pessoal/empresario
+  - `/design-system` - Criar design system
+  - `/paleta-cores` - Definir paleta de cores
+  - `/analisar-referencia` - Analisar print, link ou pagina
+  - `/extrair-diretrizes` - Extrair diretrizes de design
+  - `/criar-styleguide` - Criar style guide do produto
+
+  O que voce gostaria de fazer?
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+agentes:
+  - id: brand-designer
+    arquivo: agentes/BRAND-DESIGNER.md
+    comando: "@brand-designer"
+    maturidade: 3  # Completo
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: true
+      exemplos: true
+      gates: true
+    especialidades:
+      - Logo design
+      - Identidade visual
+      - Design grafico
+      - Tipografia
+      - Paleta de cores
+
+  - id: brand-ux
+    arquivo: agentes/BRAND-UX.md
+    comando: "@brand-ux"
+    maturidade: 2  # Intermediario
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: false
+      exemplos: false
+      gates: false
+    especialidades:
+      - Landing pages
+      - Interfaces de usuario
+      - Experiencia do usuario
+      - Wireframes
+      - Prototipagem
+      - Design systems
+
+  - id: brand-estrategista
+    arquivo: agentes/BRAND-ESTRATEGISTA.md
+    comando: "@brand-estrategia"
+    maturidade: 2  # Intermediario
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: false
+      exemplos: false
+      gates: false
+    especialidades:
+      - Estrategia de marca
+      - Posicionamento
+      - Brand voice
+      - Arquitetura de marca
+      - Personal branding
+
+  - id: brand-analista
+    arquivo: agentes/BRAND-ANALISTA.md
+    comando: "@brand-analista"
+    maturidade: 1  # Basico
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: false
+      workflows: false
+      templates: false
+      exemplos: false
+      gates: false
+    especialidades:
+      - Analise de referencias visuais
+      - Reverse engineering de design
+      - Extracao de padroes
+      - Criacao de style guides
+      - Diretrizes de design
+
+# =====================================================
+# TAREFAS
+# =====================================================
+
+tarefas:
+  # Fase 1: Estrategia
+  - id: posicionamento-marca
+    arquivo: tarefas/posicionamento-marca.yaml
+    comando: /posicionamento
+    fase: estrategia
+
+  - id: personal-branding
+    arquivo: tarefas/personal-branding.yaml
+    comando: /personal-brand
+    fase: estrategia
+
+  # Fase 2: Identidade
+  - id: definir-marca
+    arquivo: tarefas/definir-marca.yaml
+    comando: /definir-marca
+    fase: identidade
+
+  - id: criar-logo
+    arquivo: tarefas/criar-logo.yaml
+    comando: /criar-logo
+    fase: identidade
+
+  - id: paleta-cores
+    arquivo: tarefas/paleta-cores.yaml
+    comando: /paleta-cores
+    fase: identidade
+
+  # Fase 3: Sistema
+  - id: design-system
+    arquivo: tarefas/design-system.yaml
+    comando: /design-system
+    fase: sistema
+
+  # Fase 4: Aplicacao
+  - id: criar-landing
+    arquivo: tarefas/criar-landing.yaml
+    comando: /criar-landing
+    fase: aplicacao
+
+  # Fase 0: Analise (nova fase)
+  - id: analisar-referencia
+    arquivo: tarefas/analisar-referencia.yaml
+    comando: /analisar-referencia
+    fase: analise
+
+  - id: extrair-diretrizes
+    arquivo: tarefas/extrair-diretrizes.yaml
+    comando: /extrair-diretrizes
+    fase: analise
+
+  - id: criar-styleguide
+    arquivo: tarefas/criar-styleguide.yaml
+    comando: /criar-styleguide
+    fase: analise
+
+# =====================================================
+# WORKFLOWS
+# =====================================================
+
+workflows:
+  - id: brand-completo
+    arquivo: workflows/brand-completo.yaml
+    comando: /brand-completo
+    descricao: Processo completo de branding em 8 fases
+
+  - id: landing-completa
+    arquivo: workflows/landing-completa.yaml
+    comando: /landing-completa
+    descricao: Landing page de alta conversao
+
+  - id: identidade-visual
+    arquivo: workflows/identidade-visual.yaml
+    comando: /identidade-visual
+    descricao: Sistema de identidade visual completo
+
+  - id: analise-design
+    arquivo: workflows/analise-design.yaml
+    comando: /analise-design
+    descricao: Analisar referencia e criar style guide do produto
+
+# =====================================================
+# BASE DE CONHECIMENTO
+# =====================================================
+
+conhecimento:
+  # Fundamentos
+  - branding.md
+  - logo-design.md
+  - ui-ux.md
+  - landing-pages.md
+  - personal-branding.md
+  - design-systems.md
+  - analise-visual.md
+
+exemplos:
+  - logo-exemplo.md
+  - landing-exemplo.md
+
+# =====================================================
+# FRAMEWORK DE EXECUCAO (Ralph)
+# =====================================================
+
+framework_execucao:
+  arquivo: ../../core/FRAMEWORK-BRANDING.md
+
+  fases:
+    - numero: 0
+      nome: ANALISE
+      tarefas: [analisar-referencia, extrair-diretrizes, criar-styleguide]
+      agente: brand-analista
+      descricao: Analisar referencias visuais e criar diretrizes de design
+
+    - numero: 1
+      nome: DESCOBERTA
+      tarefas: [pesquisa-visual, analise-concorrentes]
+      agente: brand-estrategista
+
+    - numero: 2
+      nome: ESTRATEGIA
+      tarefas: [posicionamento-marca, brand-archetype]
+      agente: brand-estrategista
+
+    - numero: 3
+      nome: IDENTIDADE VERBAL
+      tarefas: [brand-voice, tom-comunicacao, messaging]
+      agente: brand-estrategista
+
+    - numero: 4
+      nome: IDENTIDADE VISUAL
+      tarefas: [criar-logo, paleta-cores, tipografia]
+      agente: brand-designer
+
+    - numero: 5
+      nome: SISTEMA
+      tarefas: [design-system, guidelines]
+      agente: brand-designer
+
+    - numero: 6
+      nome: UI/UX
+      tarefas: [wireframes, prototipo, landing-page]
+      agente: brand-ux
+
+    - numero: 7
+      nome: APLICACAO
+      tarefas: [criar-landing, materiais-marketing]
+      agente: brand-ux
+
+    - numero: 8
+      nome: PERSONAL BRAND
+      tarefas: [posicionamento-empresario, presenca-digital]
+      agente: brand-estrategista
+
+# =====================================================
+# REFERENCIAS INCLUIDAS
+# =====================================================
+
+referencias:
+  logo_design:
+    lendas:
+      - Paul Rand (IBM, ABC, UPS)
+      - Saul Bass (AT&T, United Airlines)
+      - Milton Glaser (I Love NY)
+      - Massimo Vignelli (NYC Subway)
+      - Paula Scher (Citibank)
+      - Michael Bierut (Mastercard)
+    modernos:
+      - Aaron Draplin (DDC)
+      - Jessica Walsh (Sagmeister & Walsh)
+      - David Airey (Logo Design Love)
+
+  branding:
+    estrategia:
+      - Marty Neumeier (The Brand Gap, Zag)
+      - David Aaker (Brand Equity Model)
+      - Al Ries & Jack Trout (Positioning)
+      - Simon Sinek (Golden Circle, Start With Why)
+      - Seth Godin (Purple Cow)
+    frameworks:
+      - Brand Archetypes (Carl Jung, Margaret Mark)
+      - Brand Prism (Kapferer)
+      - Brand Pyramid (Keller)
+      - Brand Positioning Statement
+
+  ui_ux:
+    especialistas:
+      - Don Norman (Design of Everyday Things)
+      - Steve Krug (Don't Make Me Think)
+      - Jakob Nielsen (10 Heuristics)
+      - Alan Cooper (About Face)
+      - Luke Wroblewski (Mobile First)
+    design_systems:
+      - Material Design (Google)
+      - Human Interface Guidelines (Apple)
+      - Atomic Design (Brad Frost)
+
+  landing_pages:
+    especialistas:
+      - Oli Gardner (Unbounce, CCD)
+      - Peep Laja (CXL, ResearchXL)
+      - Tim Ash (Neuromarketing)
+      - Joanna Wiebe (Copyhackers)
+    frameworks:
+      - LIFT Model (Widerfunnel)
+      - Conversion-Centered Design
+      - AIDA Model
+      - PAS Model
+
+  personal_branding:
+    especialistas:
+      - Gary Vaynerchuk (Crushing It)
+      - Dorie Clark (Stand Out, The Long Game)
+      - Chris Ducker (Youpreneur)
+      - Austin Kleon (Show Your Work)
+    conceitos:
+      - Thought Leadership
+      - Executive Presence
+      - Content Positioning
+
+  agencias:
+    - Pentagram
+    - Landor
+    - Wolff Olins
+    - Interbrand
+    - IDEO

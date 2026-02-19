@@ -1,0 +1,182 @@
+# Regras de Delegacao - Extensao Marketing
+# Define qual agente atende cada tipo de pedido
+
+# =====================================================
+# CONFIGURACAO DE OUTPUT
+# =====================================================
+
+output:
+  # Caminho base (relativo ao workspace)
+  extensao: marketing
+
+  # Tipos de conteudo suportados
+  tipos:
+    - paginas-html
+    - emails
+    - emails-mautic
+    - headlines
+    - anuncios
+    - ofertas
+    - pesquisas
+    - estrategias
+    - copies
+    - sequencias
+    - sequencias-mautic
+
+  # Criar pasta automaticamente se nao existir
+  auto_criar: true
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+# Agente Copywriter
+copywriter:
+  agente: agentes/COPYWRITER.md
+  gatilhos:
+    - headline
+    - titulo
+    - copy
+    - texto de venda
+    - persuasao
+    - bullet points
+    - beneficios
+    - promessa
+    - gancho
+    - lead
+    - big idea
+    - pagina de vendas
+    - vsl
+    - script
+  tarefas:
+    - criar-headline
+    - criar-email
+    - criar-sequencia-email
+
+# Agente Estrategista
+estrategista:
+  agente: agentes/ESTRATEGISTA.md
+  gatilhos:
+    - estrategia
+    - posicionamento
+    - publico-alvo
+    - persona
+    - icp
+    - proposta de valor
+    - diferencial
+    - concorrencia
+    - mercado
+    - oferta
+    - precificacao
+    - pesquisa
+  tarefas:
+    - pesquisa-mercado
+    - criar-icp
+    - criar-persona
+    - criar-oferta
+
+# Agente Trafego
+trafego:
+  agente: agentes/TRAFEGO.md
+  gatilhos:
+    - anuncio
+    - ads
+    - facebook ads
+    - meta ads
+    - google ads
+    - youtube ads
+    - trafego pago
+    - campanha
+    - segmentacao
+    - publico
+    - criativo
+    - cpc
+    - cpm
+    - roas
+  tarefas:
+    - criar-anuncio
+
+# Agente Email Builder (Mautic)
+email-builder:
+  agente: agentes/MKT-EMAIL-BUILDER.md
+  gatilhos:
+    - email mautic
+    - email html
+    - email mjml
+    - template email
+    - mautic
+    - automacao email
+    - sequencia mautic
+    - newsletter mautic
+    - email responsivo
+    - email builder
+    - criar email mautic
+    - welcome sequence mautic
+    - cart abandonment
+    - email transacional
+  tarefas:
+    - criar-email-mautic
+    - sequencia-mautic
+
+# Agente Revisor de Copy
+revisor-copy:
+  agente: agentes/MKT-REVISOR-COPY.md
+  gatilhos:
+    - revisar copy
+    - corrigir copy
+    - revisar texto
+    - corrigir texto
+    - melhorar copy
+    - melhorar texto
+    - revisao
+    - quality gate
+    - checar copy
+    - conferir texto
+    - ajustar copy
+    - reescrever
+    - texto robotico
+    - copy ruim
+    - copy de ia
+  tarefas:
+    - revisar-copy
+
+# =====================================================
+# REGRAS DE PRIORIDADE
+# =====================================================
+
+prioridade:
+  # Se mencionar multiplos gatilhos, qual agente prevalece
+  ordem:
+    - estrategista   # Primeiro: visao estrategica
+    - revisor-copy   # Segundo: quando pede pra revisar/corrigir texto existente
+    - email-builder  # Terceiro: emails para Mautic (quando mencionado)
+    - copywriter     # Quarto: criacao de textos
+    - trafego        # Quinto: distribuicao
+
+# =====================================================
+# CASOS ESPECIAIS
+# =====================================================
+
+casos_especiais:
+  # Pedidos que precisam de multiplos agentes
+  multi_agente:
+    - gatilho: "lancamento"
+      workflow: workflows/lancamento.yaml
+    - gatilho: "campanha completa"
+      workflow: workflows/campanha.yaml
+    - gatilho: "oferta completa"
+      workflow: workflows/oferta-completa.yaml
+    - gatilho: "email mautic"
+      workflow: workflows/email-mautic.yaml
+    - gatilho: "sequencia mautic"
+      workflow: workflows/sequencia-email-mautic.yaml
+    - gatilho: "sequencia email mautic"
+      workflow: workflows/sequencia-email-mautic.yaml
+
+  # Pedidos que devem explorar antes de delegar
+  explorar_primeiro:
+    - "preciso vender"
+    - "quero faturar"
+    - "aumentar vendas"
+    - "ganhar dinheiro"
+    - "preciso de clientes"

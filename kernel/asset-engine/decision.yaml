@@ -1,0 +1,221 @@
+# =============================================================
+# ASSET ENGINE - Motor de Reuso Inteligente
+# =============================================================
+# Antes de criar qualquer entrega, o sistema verifica se ja
+# existe algo similar que pode ser reusado ou adaptado.
+# Decisao: REUSAR / ADAPTAR / CRIAR
+# =============================================================
+
+versao: 1.0
+
+asset_engine:
+  descricao: |
+    O Sleep Agent v4 criava tudo do zero. Se o usuario ja tinha
+    5 headlines aprovadas, nao consultava as anteriores. O Asset
+    Engine analisa o inventario de ativos existentes antes de
+    criar, economizando tempo e mantendo consistencia.
+
+  # ---------------------------------------------------------
+  # DECISAO: REUSAR / ADAPTAR / CRIAR
+  # ---------------------------------------------------------
+  decisao:
+
+    REUSAR:
+      condicao: "Score de relevancia >= 90%"
+      acao: "Usar diretamente, sem modificacao"
+      exemplos:
+        - "Paleta de cores ja definida para esta marca"
+        - "Template de email ja aprovado e identico ao pedido"
+        - "ICP ja pesquisado e nada mudou"
+      notificar: "Informar usuario: 'Usando [ativo] ja aprovado anteriormente.'"
+
+    ADAPTAR:
+      condicao: "Score de relevancia entre 60% e 89%"
+      acao: "Usar como base, modificar para contexto atual"
+      exemplos:
+        - "Headline do produto A adaptada para produto B"
+        - "Email de venda adaptado para novo publico"
+        - "Landing page adaptada para nova oferta"
+      notificar: "Informar usuario: 'Adaptando [ativo] anterior como base.'"
+
+    CRIAR:
+      condicao: "Score de relevancia < 60%"
+      acao: "Criar do zero, sem referencia direta"
+      exemplos:
+        - "Primeira headline da marca"
+        - "Novo tipo de entrega nunca feito"
+        - "Publico completamente diferente"
+      notificar: "Nenhum ativo similar encontrado. Criando do zero."
+
+  # ---------------------------------------------------------
+  # SCORING DE RELEVANCIA
+  # ---------------------------------------------------------
+  scoring:
+    fatores:
+      tipo_match:
+        peso: 0.4
+        descricao: "Mesmo tipo de ativo? (headline vs headline, email vs email)"
+        valores:
+          identico: 1.0
+          similar: 0.7     # email-venda vs email-boas-vindas
+          diferente: 0.0
+
+      marca_match:
+        peso: 0.2
+        descricao: "Mesma marca ou produto?"
+        valores:
+          mesma_marca: 1.0
+          mesma_holding: 0.5
+          marca_diferente: 0.0
+
+      publico_match:
+        peso: 0.2
+        descricao: "Mesmo publico-alvo?"
+        valores:
+          identico: 1.0
+          similar: 0.6     # ambos B2B mas segmentos diferentes
+          diferente: 0.0
+
+      tempo_match:
+        peso: 0.1
+        descricao: "Quao recente e o ativo?"
+        valores:
+          ultimos_7_dias: 1.0
+          ultimos_30_dias: 0.7
+          ultimos_90_dias: 0.4
+          mais_antigo: 0.1
+
+      aprovacao_match:
+        peso: 0.1
+        descricao: "Foi aprovado pelo usuario (gate nivel 3)?"
+        valores:
+          aprovado: 1.0
+          aprovado_com_ajustes: 0.5
+          nao_avaliado: 0.2
+          reprovado: 0.0
+
+    formula: |
+      score = (tipo * 0.4) + (marca * 0.2) + (publico * 0.2)
+            + (tempo * 0.1) + (aprovacao * 0.1)
+
+      >= 0.9: REUSAR
+      >= 0.6: ADAPTAR
+      < 0.6: CRIAR
+
+  # ---------------------------------------------------------
+  # INVENTARIO DE ATIVOS
+  # ---------------------------------------------------------
+  inventario:
+    localizacao: "workspace/.state/asset-index.yaml"
+    descricao: |
+      Catalogo de todos os ativos criados e aprovados.
+      Alimentado automaticamente pelo Event Bus quando
+      gate nivel 3 e aprovado.
+
+    formato_item:
+      id: null              # Identificador unico (asset_001, asset_002...)
+      tipo: null             # headline, email, landing, paleta, icp, oferta, etc
+      subtipo: null          # email-venda, email-boas-vindas, headline-principal
+      conteudo_resumo: null  # Resumo do conteudo (max 200 chars)
+      conteudo_completo: null  # Referencia ao arquivo completo
+      marca: null            # Marca/produto associado
+      publico: null          # Publico-alvo
+      extensao: null         # Extensao que criou
+      agente: null           # Agente que criou
+      criado_em: null        # Data de criacao
+      aprovado: false        # Se passou pelo gate nivel 3
+      aprovado_com_ajustes: false
+      vezes_reusado: 0       # Contador de reuso
+      vezes_adaptado: 0      # Contador de adaptacao
+      ultimo_uso: null       # Data do ultimo reuso/adaptacao
+      tags: []               # Tags para busca
+      score_reusabilidade: 0  # Score calculado
+
+  # ---------------------------------------------------------
+  # CICLO DE VIDA DOS ATIVOS
+  # ---------------------------------------------------------
+  ciclo_de_vida:
+
+    criacao:
+      trigger: "gate.passou (nivel 3)"
+      acoes:
+        - "Registrar no inventario (asset-index.yaml)"
+        - "Extrair tags automaticamente do conteudo"
+        - "Calcular score de reusabilidade"
+        - "Associar marca, publico e extensao"
+      descricao: "Todo output aprovado pelo usuario vira ativo"
+
+    uso:
+      ao_reusar:
+        - "Incrementar vezes_reusado"
+        - "Atualizar ultimo_uso"
+        - "Recalcular score"
+      ao_adaptar:
+        - "Incrementar vezes_adaptado no ativo original"
+        - "Criar novo ativo para a adaptacao"
+        - "Vincular original ← adaptacao"
+
+    promocao:
+      regra: "Ativo reusado 3+ vezes"
+      acao: "Promover para template oficial"
+      destino: "extensoes/{extensao}/templates/"
+      processo:
+        - "Identificar variaveis no conteudo"
+        - "Parametrizar (nome_marca, publico, oferta)"
+        - "Salvar como template"
+        - "Marcar ativo original como template_origem"
+
+    depreciacao:
+      regra: "Nao usado em 60 dias E vezes_reusado == 0"
+      acao: "Marcar como deprecated"
+      processo:
+        - "Definir status: deprecated"
+        - "Excluir de buscas futuras"
+        - "Manter no inventario (nao deletar)"
+      reversivel: true  # Pode ser restaurado se necessario
+
+  # ---------------------------------------------------------
+  # BUSCA DE ATIVOS
+  # ---------------------------------------------------------
+  busca:
+    descricao: |
+      Antes de criar qualquer entrega, o sistema busca ativos
+      relevantes no inventario usando os fatores de scoring.
+
+    processo:
+      1: "Receber tipo de entrega pedida (headline, email, etc)"
+      2: "Filtrar inventario por tipo"
+      3: "Calcular score para cada ativo filtrado"
+      4: "Ordenar por score (maior primeiro)"
+      5: "Aplicar decisao: REUSAR / ADAPTAR / CRIAR"
+      6: "Se ADAPTAR: passar ativos como referencia ao agente"
+
+    max_resultados: 5  # Top 5 ativos mais relevantes
+    score_minimo: 0.3  # Ignorar ativos com score muito baixo
+
+  # ---------------------------------------------------------
+  # INTEGRACAO
+  # ---------------------------------------------------------
+  integracao:
+
+    com_event_bus:
+      escuta:
+        - "gate.passou (nivel 3) → indexar novo ativo"
+        - "tarefa.concluida → verificar se ativo foi reusado"
+      emite:
+        - "ativo.indexado → novo ativo no inventario"
+        - "ativo.reusado → ativo foi reusado"
+        - "ativo.promovido → ativo virou template"
+        - "ativo.depreciado → ativo marcado como inativo"
+
+    com_blackboard:
+      descricao: "Resultados da busca ficam disponiveis no blackboard"
+      campo: "blackboard.ativos_relevantes"
+
+    com_context_manager:
+      descricao: "Ativos relevantes sao carregados como nivel 3"
+      carregamento: "sob_demanda"
+
+    com_memoria:
+      descricao: "Insights sobre reuso alimentam memoria semantica"
+      exemplo: "Para este cliente, headlines com numeros funcionam (3 ativos aprovados com numeros)"

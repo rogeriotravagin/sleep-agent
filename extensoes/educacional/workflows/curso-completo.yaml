@@ -1,0 +1,444 @@
+# ============================================
+# WORKFLOW: Curso Completo do Zero
+# ============================================
+
+id: curso-completo
+nome: Criação de Curso Completo
+descricao: Workflow profissional para criar um curso do zero até o lançamento
+comando: /curso-completo
+versao: "1.0"
+
+# ============================================
+# VISÃO GERAL
+# ============================================
+
+visao_geral:
+  objetivo: "Criar curso profissional completo com estrutura, conteúdo, avaliações e gamificação"
+  duracao_estimada: "3-5 sessões de trabalho"
+  resultado: "Curso pronto para lançamento"
+
+  baseado_em:
+    - "ADDIE Model (Análise, Design, Desenvolvimento, Implementação, Avaliação)"
+    - "Backward Design (Wiggins & McTighe)"
+    - "9 Events of Instruction (Gagné)"
+    - "Gamification (Yu-kai Chou)"
+
+# ============================================
+# FASES DO WORKFLOW
+# ============================================
+
+fases:
+  # ------------------------------------------
+  # FASE 1: DESCOBERTA
+  # ------------------------------------------
+  - numero: 1
+    nome: DESCOBERTA
+    descricao: "Entender o contexto, público e transformação desejada"
+    agente: designer-instrucional
+    tempo_estimado: "30-45 minutos"
+
+    etapas:
+      - id: briefing
+        nome: "Briefing Inicial"
+        descricao: "Coletar informações essenciais sobre o curso"
+
+        perguntas:
+          - pergunta: "Qual o tema principal do curso?"
+            tipo: texto
+            obrigatorio: true
+
+          - pergunta: "Quem é o público-alvo? (perfil, nível, contexto)"
+            tipo: texto
+            obrigatorio: true
+
+          - pergunta: "Qual problema o curso resolve?"
+            tipo: texto
+            obrigatorio: true
+
+          - pergunta: "Qual a transformação prometida? (O que o aluno será capaz de fazer?)"
+            tipo: texto
+            obrigatorio: true
+
+          - pergunta: "Qual a carga horária desejada?"
+            tipo: escolha
+            opcoes: ["Mini-curso (1-2h)", "Curto (3-5h)", "Médio (6-15h)", "Completo (16-40h)"]
+            obrigatorio: true
+
+          - pergunta: "Qual o formato principal?"
+            tipo: escolha
+            opcoes: ["100% online", "Híbrido", "Presencial"]
+            obrigatorio: true
+
+        entregavel: briefing.md
+
+      - id: analise-publico
+        nome: "Análise do Público"
+        descricao: "Criar perfil detalhado do aluno ideal"
+
+        template_entregavel: |
+          ## Perfil do Aluno Ideal
+
+          ### Características
+          - **Idade/Faixa:**
+          - **Profissão/Área:**
+          - **Nível de conhecimento:**
+
+          ### Dores
+          1. [Dor principal]
+          2. [Dor secundária]
+          3. [Dor terciária]
+
+          ### Desejos
+          1. [O que quer alcançar]
+          2. [Como quer se sentir]
+          3. [Onde quer chegar]
+
+          ### Objeções Comuns
+          1. [Objeção 1]
+          2. [Objeção 2]
+
+          ### Contexto de Aprendizagem
+          - Tempo disponível:
+          - Dispositivo preferido:
+          - Momento de estudo:
+
+        entregavel: publico-alvo.md
+
+    checkpoint:
+      pergunta: "As informações estão claras para seguir?"
+      acao_se_nao: "Refinar briefing"
+
+  # ------------------------------------------
+  # FASE 2: ARQUITETURA
+  # ------------------------------------------
+  - numero: 2
+    nome: ARQUITETURA
+    descricao: "Projetar estrutura do curso com objetivos e módulos"
+    agente: designer-instrucional
+    tempo_estimado: "45-60 minutos"
+
+    etapas:
+      - id: objetivos
+        nome: "Definir Objetivos de Aprendizagem"
+        descricao: "Criar objetivos usando Taxonomia de Bloom"
+
+        processo:
+          - "Definir objetivo geral do curso"
+          - "Desdobrar em objetivos específicos por módulo"
+          - "Usar verbos de ação mensuráveis"
+          - "Garantir alinhamento com transformação prometida"
+
+        template_entregavel: |
+          ## Objetivos de Aprendizagem
+
+          ### Objetivo Geral
+          > Ao final do curso, o aluno será capaz de [VERBO + OBJETO + CONDIÇÃO]
+
+          ### Objetivos Específicos por Módulo
+
+          **Módulo 1:**
+          - OE1.1: O aluno será capaz de [verbo] [objeto]
+          - OE1.2: O aluno será capaz de [verbo] [objeto]
+
+          **Módulo 2:**
+          - OE2.1: O aluno será capaz de [verbo] [objeto]
+          ...
+
+        entregavel: objetivos.md
+
+      - id: grade-curricular
+        nome: "Criar Grade Curricular"
+        descricao: "Estruturar módulos e aulas"
+
+        processo:
+          - "Dividir conteúdo em módulos lógicos"
+          - "Sequenciar do simples ao complexo"
+          - "Definir aulas por módulo"
+          - "Estimar carga horária"
+
+        template_entregavel: |
+          ## Grade Curricular
+
+          | Módulo | Nome | Aulas | Duração |
+          |--------|------|-------|---------|
+          | 1 | [Nome] | [X] | [X]h |
+          | 2 | [Nome] | [X] | [X]h |
+          ...
+
+          ### Detalhamento
+
+          #### Módulo 1: [Nome]
+          | Aula | Título | Tipo | Duração |
+          |------|--------|------|---------|
+          | 1.1 | [Título] | [Teórica/Prática] | [XX]min |
+          ...
+
+        entregavel: grade-curricular.md
+
+      - id: trilha
+        nome: "Criar Trilha de Aprendizagem"
+        descricao: "Visualizar jornada do aluno"
+
+        entregavel: trilha-aprendizagem.md
+
+    checkpoint:
+      pergunta: "A estrutura está adequada à transformação prometida?"
+      acao_se_nao: "Ajustar módulos e objetivos"
+
+  # ------------------------------------------
+  # FASE 3: CONTEÚDO
+  # ------------------------------------------
+  - numero: 3
+    nome: CONTEÚDO
+    descricao: "Criar planos de aula e roteiros"
+    agente: conteudista
+    tempo_estimado: "2-4 horas"
+
+    etapas:
+      - id: planos-aula
+        nome: "Criar Planos de Aula"
+        descricao: "Detalhar cada aula do curso"
+
+        processo:
+          - "Para cada aula, criar plano completo"
+          - "Estruturar usando 9 Eventos de Gagné"
+          - "Incluir exemplos e exercícios"
+          - "Definir materiais necessários"
+
+        usar_tarefa: criar-aula
+        repetir_para: "cada aula do curso"
+
+        entregavel: aulas/
+
+      - id: roteiros
+        nome: "Criar Roteiros de Vídeo"
+        descricao: "Escrever scripts para gravação"
+
+        processo:
+          - "Transformar planos em roteiros"
+          - "Incluir marcações de edição"
+          - "Definir visuais necessários"
+
+        usar_tarefa: criar-roteiro
+        repetir_para: "cada aula em vídeo"
+
+        entregavel: roteiros/
+
+      - id: materiais
+        nome: "Criar Materiais de Apoio"
+        descricao: "Desenvolver PDFs, templates, checklists"
+
+        entregavel: materiais/
+
+    checkpoint:
+      pergunta: "O conteúdo cobre todos os objetivos?"
+      acao_se_nao: "Complementar lacunas"
+
+  # ------------------------------------------
+  # FASE 4: ATIVIDADES
+  # ------------------------------------------
+  - numero: 4
+    nome: ATIVIDADES
+    descricao: "Criar exercícios, projetos e avaliações"
+    agente: especialista-avaliacao
+    tempo_estimado: "1-2 horas"
+
+    etapas:
+      - id: exercicios
+        nome: "Criar Exercícios"
+        descricao: "Desenvolver questões e exercícios práticos"
+
+        usar_tarefa: criar-exercicio
+        repetir_para: "cada módulo"
+
+        entregavel: exercicios/
+
+      - id: atividades-praticas
+        nome: "Criar Atividades Práticas"
+        descricao: "Desenvolver projetos e estudos de caso"
+
+        usar_tarefa: criar-atividade
+        repetir_para: "cada módulo"
+
+        entregavel: atividades/
+
+      - id: avaliacoes
+        nome: "Criar Avaliações"
+        descricao: "Desenvolver sistema de avaliação completo"
+
+        processo:
+          - "Avaliação diagnóstica (início)"
+          - "Avaliações formativas (quizzes por módulo)"
+          - "Avaliação somativa (projeto final)"
+          - "Rubricas de avaliação"
+
+        entregavel: avaliacoes/
+
+      - id: projeto-final
+        nome: "Criar Projeto Integrador"
+        descricao: "Desenvolver projeto que integra todo aprendizado"
+
+        entregavel: projeto-final.md
+
+    checkpoint:
+      pergunta: "As avaliações estão alinhadas aos objetivos?"
+      acao_se_nao: "Ajustar alinhamento"
+
+  # ------------------------------------------
+  # FASE 5: GAMIFICAÇÃO
+  # ------------------------------------------
+  - numero: 5
+    nome: GAMIFICAÇÃO
+    descricao: "Adicionar elementos de engajamento"
+    agente: especialista-avaliacao
+    tempo_estimado: "30-45 minutos"
+
+    etapas:
+      - id: sistema-gamificacao
+        nome: "Criar Sistema de Gamificação"
+        descricao: "Desenvolver pontos, badges, níveis"
+
+        usar_tarefa: gamificar-curso
+
+        entregavel: gamificacao.yaml
+
+      - id: checklists
+        nome: "Criar Checklists de Progresso"
+        descricao: "Desenvolver checklists por módulo"
+
+        usar_tarefa: criar-checklist
+        repetir_para: "cada módulo"
+
+        entregavel: checklists/
+
+    checkpoint:
+      pergunta: "A gamificação incentiva os comportamentos desejados?"
+      acao_se_nao: "Ajustar mecânicas"
+
+  # ------------------------------------------
+  # FASE 6: ENTREGA
+  # ------------------------------------------
+  - numero: 6
+    nome: ENTREGA
+    descricao: "Finalizar e preparar para lançamento"
+    agente: designer-instrucional
+    tempo_estimado: "30 minutos"
+
+    etapas:
+      - id: checklist-lancamento
+        nome: "Checklist de Lançamento"
+        descricao: "Verificar se tudo está pronto"
+
+        template_entregavel: |
+          ## Checklist de Lançamento
+
+          ### Estrutura
+          - [ ] Grade curricular completa
+          - [ ] Objetivos definidos
+          - [ ] Trilha mapeada
+
+          ### Conteúdo
+          - [ ] Todas as aulas criadas
+          - [ ] Roteiros escritos
+          - [ ] Materiais de apoio prontos
+
+          ### Avaliações
+          - [ ] Exercícios criados
+          - [ ] Quizzes configurados
+          - [ ] Projeto final documentado
+          - [ ] Rubricas prontas
+
+          ### Gamificação
+          - [ ] Sistema de pontos configurado
+          - [ ] Badges criados
+          - [ ] Níveis definidos
+          - [ ] Checklists prontos
+
+          ### Plataforma
+          - [ ] Conteúdo carregado
+          - [ ] Configurações testadas
+          - [ ] Acesso verificado
+
+        entregavel: checklist-lancamento.md
+
+      - id: certificacao
+        nome: "Configurar Certificação"
+        descricao: "Definir critérios e modelo de certificado"
+
+        entregavel: certificacao.md
+
+      - id: resumo-final
+        nome: "Resumo do Curso"
+        descricao: "Documento consolidado do curso"
+
+        entregavel: resumo-curso.md
+
+# ============================================
+# ENTREGA FINAL
+# ============================================
+
+entrega_final:
+  formato: pasta
+  local: projetos/curso-{{slug}}/
+  estrutura: |
+    curso-{{slug}}/
+    ├── 01-planejamento/
+    │   ├── briefing.md
+    │   ├── publico-alvo.md
+    │   └── objetivos.md
+    ├── 02-estrutura/
+    │   ├── grade-curricular.md
+    │   └── trilha-aprendizagem.md
+    ├── 03-conteudo/
+    │   ├── aulas/
+    │   │   ├── modulo-1/
+    │   │   ├── modulo-2/
+    │   │   └── ...
+    │   ├── roteiros/
+    │   └── materiais/
+    ├── 04-avaliacoes/
+    │   ├── exercicios/
+    │   ├── atividades/
+    │   ├── quizzes/
+    │   └── projeto-final.md
+    ├── 05-gamificacao/
+    │   ├── gamificacao.yaml
+    │   └── checklists/
+    └── 06-lancamento/
+        ├── checklist-lancamento.md
+        ├── certificacao.md
+        └── resumo-curso.md
+
+# ============================================
+# EXECUÇÃO
+# ============================================
+
+execucao:
+  comando: /curso-completo
+  fluxo:
+    1: "Coletar briefing inicial"
+    2: "Analisar público-alvo"
+    3: "Definir objetivos de aprendizagem"
+    4: "Criar grade curricular"
+    5: "Desenvolver planos de aula"
+    6: "Criar exercícios e avaliações"
+    7: "Configurar gamificação"
+    8: "Verificar checklist de lançamento"
+    9: "Entregar curso completo"
+
+# ============================================
+# FALLBACKS
+# ============================================
+
+fallbacks:
+  se_informacao_incompleta:
+    acao: "perguntar"
+    mensagem: "Preciso de mais informações sobre {{campo}}. Pode detalhar?"
+
+  se_estrutura_muito_grande:
+    acao: "dividir"
+    mensagem: "Este curso ficou extenso. Sugiro dividir em [X] módulos menores."
+
+  se_usuario_travar:
+    acao: "sugerir"
+    mensagem: "Posso sugerir alguns exemplos baseados em cursos similares?"

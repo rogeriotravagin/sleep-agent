@@ -1,0 +1,420 @@
+# ============================================
+# WORKFLOW: Customer Success Completo
+# ============================================
+# Processo profissional para criar programa
+# completo de Customer Success em 6 fases
+# ============================================
+
+id: cs-completo
+nome: Programa Customer Success Completo
+descricao: Criar programa de CS do zero com diagnostico, estrategia, onboarding, acompanhamento, retencao e expansion
+comando: /cs-completo
+versao: "1.0"
+
+# ============================================
+# VISAO GERAL
+# ============================================
+
+visao_geral:
+  objetivo: "Criar programa completo de Customer Success estruturado e profissional"
+  duracao_estimada: "4-6 horas de trabalho ao longo de 1-2 semanas"
+  resultado: "Programa CS implementavel com playbooks, metricas e processos"
+
+  para_quem:
+    - Empresas iniciando area de CS
+    - Times de CS que querem profissionalizar
+    - Gestores buscando estrutura metodica
+    - Empreendedores querendo reduzir churn
+
+  entregaveis:
+    - Analise da base de clientes
+    - Health Score personalizado
+    - Mapeamento de jornada
+    - Playbook de onboarding
+    - Processos de acompanhamento
+    - Estrategia de retencao
+    - Dashboard e metricas
+
+# ============================================
+# FASES
+# ============================================
+
+fases:
+  # ------------------------------------------
+  # FASE 1: DIAGNOSTICO
+  # ------------------------------------------
+  - numero: 1
+    nome: DIAGNOSTICO
+    descricao: "Entender a situacao atual da base de clientes"
+    agente: csm-estrategista
+    tempo_estimado: "45-60 minutos"
+
+    etapas:
+      - id: briefing
+        nome: "Briefing Inicial"
+        descricao: "Coletar informacoes sobre o negocio e clientes"
+        perguntas:
+          - "Qual seu produto/servico e modelo de negocio?"
+          - "Quantos clientes ativos voce tem?"
+          - "Qual o ticket medio e ciclo de contrato?"
+          - "Qual o churn atual (se souber)?"
+          - "Quais os maiores desafios com clientes hoje?"
+        entregavel: briefing-cs.md
+
+      - id: analise-base
+        nome: "Analisar Base de Clientes"
+        descricao: "Segmentar e diagnosticar base atual"
+        tarefa: analise-base-clientes
+        entregavel: analise-base.md
+
+      - id: mapeamento-jornada
+        nome: "Mapear Jornada Atual"
+        descricao: "Entender jornada atual do cliente"
+        tarefa: mapear-jornada
+        entregavel: jornada-atual.md
+
+    checkpoint:
+      pergunta: "O diagnostico reflete a realidade do seu negocio?"
+      acao_se_nao: "Refinar analise com informacoes adicionais"
+
+    saida_fase: |
+      ## Diagnostico Completo
+
+      ✅ Base de clientes analisada e segmentada
+      ✅ Jornada atual mapeada
+      ✅ Gaps e oportunidades identificados
+      ✅ Prioridades definidas
+
+  # ------------------------------------------
+  # FASE 2: ESTRATEGIA
+  # ------------------------------------------
+  - numero: 2
+    nome: ESTRATEGIA
+    descricao: "Definir estrategia de Customer Success"
+    agente: csm-estrategista
+    tempo_estimado: "45-60 minutos"
+
+    etapas:
+      - id: health-score
+        nome: "Criar Health Score"
+        descricao: "Desenvolver sistema de Health Score personalizado"
+        tarefa: criar-health-score
+        entregavel: health-score.md
+
+      - id: modelo-atendimento
+        nome: "Definir Modelo de Atendimento"
+        descricao: "Estruturar modelo de cobertura por segmento"
+        processo:
+          - "Definir tiers (Enterprise, Mid, SMB)"
+          - "Estabelecer ratio CSM:cliente"
+          - "Definir cadencia de touchpoints"
+          - "Criar playbooks por segmento"
+        entregavel: modelo-atendimento.md
+
+      - id: metricas
+        nome: "Definir Metricas e Metas"
+        descricao: "Estabelecer KPIs e metas do programa CS"
+        processo:
+          - "Definir KPIs principais (NRR, Churn, NPS, Health)"
+          - "Estabelecer metas por periodo"
+          - "Criar dashboard de acompanhamento"
+        entregavel: metricas-cs.md
+
+    checkpoint:
+      pergunta: "A estrategia esta alinhada com seus objetivos de negocio?"
+      acao_se_nao: "Ajustar estrategia conforme feedback"
+
+    saida_fase: |
+      ## Estrategia Definida
+
+      ✅ Health Score criado
+      ✅ Modelo de atendimento estruturado
+      ✅ Metricas e metas estabelecidas
+      ✅ Dashboard configurado
+
+  # ------------------------------------------
+  # FASE 3: ONBOARDING
+  # ------------------------------------------
+  - numero: 3
+    nome: ONBOARDING
+    descricao: "Estruturar processo de onboarding de clientes"
+    agente: onboarding-specialist
+    tempo_estimado: "45-60 minutos"
+
+    etapas:
+      - id: playbook-onboarding
+        nome: "Criar Playbook de Onboarding"
+        descricao: "Desenvolver playbook completo de onboarding"
+        tarefa: criar-playbook-onboarding
+        entregavel: playbook-onboarding.md
+
+      - id: checklist-ativacao
+        nome: "Definir Marcos de Ativacao"
+        descricao: "Criar checklist de ativacao e TTFV"
+        tarefa: criar-checklist-ativacao
+        entregavel: checklist-ativacao.md
+
+      - id: comunicacao-inicial
+        nome: "Criar Sequencia de Boas-vindas"
+        descricao: "Desenvolver emails de onboarding"
+        tarefa: criar-sequencia-boas-vindas
+        entregavel: sequencia-boas-vindas.md
+
+    checkpoint:
+      pergunta: "O processo de onboarding cobre todas as etapas ate o primeiro valor?"
+      acao_se_nao: "Completar etapas faltantes"
+
+    saida_fase: |
+      ## Onboarding Estruturado
+
+      ✅ Playbook completo de onboarding
+      ✅ Checklist de ativacao definido
+      ✅ Sequencia de boas-vindas criada
+      ✅ Metricas de onboarding estabelecidas
+
+  # ------------------------------------------
+  # FASE 4: ACOMPANHAMENTO
+  # ------------------------------------------
+  - numero: 4
+    nome: ACOMPANHAMENTO
+    descricao: "Definir processos de acompanhamento ongoing"
+    agente: retention-expert
+    tempo_estimado: "30-45 minutos"
+
+    etapas:
+      - id: cadencia-touchpoints
+        nome: "Definir Cadencia de Touchpoints"
+        descricao: "Estabelecer frequencia de contato por segmento"
+        processo:
+          - "Touchpoints por tier"
+          - "Tipos de interacao"
+          - "Templates de comunicacao"
+        entregavel: cadencia-touchpoints.md
+
+      - id: qbr-estrutura
+        nome: "Estruturar QBRs"
+        descricao: "Criar template e processo de Business Reviews"
+        tarefa: criar-qbr
+        modelo: true
+        entregavel: template-qbr.md
+
+      - id: comunicacao-valor
+        nome: "Criar Comunicacao de Valor"
+        descricao: "Desenvolver emails de valor ongoing"
+        processo:
+          - "Email mensal de valor"
+          - "Newsletter de novidades"
+          - "Alertas de marco"
+        entregavel: comunicacao-valor.md
+
+    checkpoint:
+      pergunta: "Os processos de acompanhamento sao viaveis com sua estrutura atual?"
+      acao_se_nao: "Ajustar escopo e priorizar"
+
+    saida_fase: |
+      ## Acompanhamento Definido
+
+      ✅ Cadencia de touchpoints por segmento
+      ✅ Template de QBR criado
+      ✅ Comunicacao de valor estruturada
+      ✅ Processo de acompanhamento documentado
+
+  # ------------------------------------------
+  # FASE 5: RETENCAO
+  # ------------------------------------------
+  - numero: 5
+    nome: RETENCAO
+    descricao: "Criar estrategia de retencao e prevencao de churn"
+    agente: retention-expert
+    tempo_estimado: "45-60 minutos"
+
+    etapas:
+      - id: plano-retencao
+        nome: "Criar Plano de Retencao"
+        descricao: "Desenvolver estrategia anti-churn"
+        tarefa: criar-plano-retencao
+        entregavel: plano-retencao.md
+
+      - id: alertas-risco
+        nome: "Configurar Alertas de Risco"
+        descricao: "Definir sistema de early warning"
+        processo:
+          - "Triggers de alerta"
+          - "Niveis de urgencia"
+          - "Responsaveis"
+          - "SLAs de resposta"
+        entregavel: alertas-risco.md
+
+      - id: playbook-save
+        nome: "Criar Playbooks de Save"
+        descricao: "Desenvolver playbooks para clientes em risco"
+        tarefa: criar-plano-risco
+        modelo: true
+        entregavel: playbooks-save.md
+
+    checkpoint:
+      pergunta: "Os playbooks de retencao cobrem os principais cenarios de risco?"
+      acao_se_nao: "Adicionar cenarios faltantes"
+
+    saida_fase: |
+      ## Retencao Estruturada
+
+      ✅ Plano de retencao completo
+      ✅ Sistema de alertas configurado
+      ✅ Playbooks de save prontos
+      ✅ Processo de intervencao documentado
+
+  # ------------------------------------------
+  # FASE 6: EXPANSION
+  # ------------------------------------------
+  - numero: 6
+    nome: EXPANSION
+    descricao: "Estruturar estrategia de expansion e advocacy"
+    agente: retention-expert
+    tempo_estimado: "30-45 minutos"
+
+    etapas:
+      - id: estrategia-expansion
+        nome: "Criar Estrategia de Expansion"
+        descricao: "Desenvolver abordagem de upsell/cross-sell"
+        processo:
+          - "Identificar sinais de prontidao"
+          - "Mapear oportunidades por cliente"
+          - "Criar playbook de expansion"
+          - "Definir metas de NRR"
+        entregavel: estrategia-expansion.md
+
+      - id: programa-advocacy
+        nome: "Criar Programa de Advocacy"
+        descricao: "Estruturar programa de promotores"
+        processo:
+          - "Criterios para advocacy"
+          - "Tipos de participacao"
+          - "Beneficios para promotores"
+          - "Metricas de advocacy"
+        entregavel: programa-advocacy.md
+
+      - id: integracao-final
+        nome: "Integrar Programa CS"
+        descricao: "Consolidar todos os elementos"
+        processo:
+          - "Revisar todos os entregaveis"
+          - "Garantir consistencia"
+          - "Criar visao unificada"
+          - "Planejar implementacao"
+        entregavel: programa-cs-completo.md
+
+    checkpoint:
+      pergunta: "O programa CS esta completo e pronto para implementacao?"
+      acao_se_nao: "Finalizar elementos pendentes"
+
+    saida_fase: |
+      ## Expansion e Finalizacao
+
+      ✅ Estrategia de expansion criada
+      ✅ Programa de advocacy estruturado
+      ✅ Programa CS completo e integrado
+      ✅ Plano de implementacao definido
+
+# ============================================
+# ENTREGA FINAL
+# ============================================
+
+entrega_final:
+  formato: pasta
+  local: output/customer-success/programa-{{slug_empresa}}/
+
+  estrutura: |
+    programa-cs-{{empresa}}/
+    ├── README.md                    # Visao geral do programa
+    ├── 01-diagnostico/
+    │   ├── analise-base.md
+    │   └── jornada-atual.md
+    ├── 02-estrategia/
+    │   ├── health-score.md
+    │   ├── modelo-atendimento.md
+    │   └── metricas-cs.md
+    ├── 03-onboarding/
+    │   ├── playbook-onboarding.md
+    │   ├── checklist-ativacao.md
+    │   └── sequencia-boas-vindas.md
+    ├── 04-acompanhamento/
+    │   ├── cadencia-touchpoints.md
+    │   ├── template-qbr.md
+    │   └── comunicacao-valor.md
+    ├── 05-retencao/
+    │   ├── plano-retencao.md
+    │   ├── alertas-risco.md
+    │   └── playbooks-save.md
+    └── 06-expansion/
+        ├── estrategia-expansion.md
+        └── programa-advocacy.md
+
+  mensagem_entrega: |
+    ## Programa CS Completo Entregue!
+
+    Seu programa de Customer Success inclui:
+
+    **Diagnostico**
+    - Analise de base e segmentacao
+    - Mapeamento de jornada
+
+    **Estrategia**
+    - Health Score personalizado
+    - Modelo de atendimento por tier
+    - Metricas e metas
+
+    **Onboarding**
+    - Playbook completo
+    - Checklist de ativacao
+    - Sequencia de emails
+
+    **Acompanhamento**
+    - Cadencia de touchpoints
+    - Template de QBR
+    - Comunicacao de valor
+
+    **Retencao**
+    - Plano anti-churn
+    - Sistema de alertas
+    - Playbooks de save
+
+    **Expansion**
+    - Estrategia de upsell
+    - Programa de advocacy
+
+    **Proximos Passos:**
+    1. Revisar entregaveis com time
+    2. Priorizar implementacao
+    3. Treinar equipe
+    4. Lancar programa piloto
+    5. Medir e iterar
+
+# ============================================
+# EXECUCAO
+# ============================================
+
+execucao:
+  comando: /cs-completo
+
+  mensagem_inicial: |
+    ## Programa Customer Success Completo
+
+    Vou te guiar na criacao de um programa CS profissional em 6 fases:
+
+    1. **DIAGNOSTICO** - Entender sua base de clientes
+    2. **ESTRATEGIA** - Definir Health Score e modelo de atendimento
+    3. **ONBOARDING** - Estruturar ativacao de novos clientes
+    4. **ACOMPANHAMENTO** - Criar processos ongoing
+    5. **RETENCAO** - Desenvolver estrategia anti-churn
+    6. **EXPANSION** - Planejar crescimento de receita
+
+    Vamos comecar?
+
+  progressao:
+    - "Fase 1/6: Diagnosticando sua base de clientes..."
+    - "Fase 2/6: Definindo estrategia de CS..."
+    - "Fase 3/6: Estruturando onboarding..."
+    - "Fase 4/6: Criando processos de acompanhamento..."
+    - "Fase 5/6: Desenvolvendo estrategia de retencao..."
+    - "Fase 6/6: Finalizando programa de expansion..."

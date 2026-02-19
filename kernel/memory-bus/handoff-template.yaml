@@ -1,0 +1,46 @@
+# =============================================================
+# TEMPLATE DE HANDOFF - Transferencia entre Agentes
+# =============================================================
+# Usado quando um agente passa trabalho para outro
+# Garante que NENHUM contexto se perde na transicao
+#
+# COMO USAR:
+# 1. Agente que esta finalizando preenche este template
+# 2. Salva em workspace/.state/ultimo-handoff.yaml
+# 3. Orquestrador carrega para o proximo agente
+# =============================================================
+
+handoff:
+  # QUEM
+  de: null              # Agente que esta entregando (ex: "estrategista")
+  para: null            # Agente que vai receber (ex: "copywriter")
+  timestamp: null       # ISO8601
+
+  # O QUE FOI FEITO
+  contexto:
+    tarefa_original: null      # O que o usuario pediu originalmente
+    o_que_ja_fiz: null         # Resumo do trabalho feito (2-3 frases)
+    decisoes_tomadas: []       # Lista de decisoes com motivo
+    # Formato:
+    #   - "Decisao X. Motivo: Y"
+    #   - "Decisao Z. Motivo: W"
+
+  # ENTREGAS
+  entrega:
+    arquivos: []               # Caminhos dos arquivos gerados
+    dados: {}                  # Dados estruturados relevantes
+    # Exemplos de dados:
+    #   icp_resumo: "Empresarios 30-50 anos..."
+    #   tom_voz: "Direto e conversacional"
+    #   preco: "R$ 1.997"
+
+  # O QUE FAZER AGORA
+  instrucoes:
+    o_que_fazer: null          # Tarefa clara para o proximo agente
+    restricoes: null           # O que NAO fazer
+    prioridade: "normal"       # critica | alta | normal | baixa
+    deadline: null             # Se houver urgencia
+
+  # VERIFICACAO
+  blackboard_atualizado: false # Confirma que atualizou o blackboard
+  memoria_atualizada: false    # Confirma que salvou aprendizados

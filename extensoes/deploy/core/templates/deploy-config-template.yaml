@@ -1,0 +1,76 @@
+# Deploy Configuration Template
+# Salvo em: workspace/.config/deploy-config.yaml
+
+# Provider de Deploy
+provider: vercel  # vercel, netlify, cloudflare-pages, github-pages
+
+# Configurações de Deploy
+deploy:
+  auto_commit: true           # Commit automático antes de deploy
+  production_branch: main     # Branch de produção
+  auto_push: true            # Push automático
+  build_command: ""          # Comando de build (vazio = auto)
+  output_directory: "."      # Diretório de output
+
+# Configurações de Domínio
+domain:
+  primary: null              # meusite.com.br
+  www_redirect: true         # Redirecionar www → não-www
+  force_https: true          # Forçar HTTPS
+  dns_provider: auto         # auto, cloudflare, route53, manual
+
+# Notificações
+notifications:
+  enabled: true
+  on_success: true
+  on_failure: true
+  channels: []               # email, slack, discord
+
+# Git
+git:
+  remote: origin
+  default_branch: main
+  commit_message_prefix: "Deploy:"
+  co_author: "Sleep Agent <noreply@sleepagent.dev>"
+
+# Validação
+validation:
+  enabled: true
+  run_after_deploy: true
+  min_score: 70             # Score mínimo para aprovar
+  checks:
+    - http_status
+    - https_active
+    - response_time
+    - assets_loading
+    - seo_basics
+
+# Providers API Keys (opcional)
+api_keys:
+  vercel: null              # Vercel Token
+  netlify: null             # Netlify Token
+  cloudflare_email: null    # Cloudflare Email
+  cloudflare_api_key: null  # Cloudflare API Key
+  aws_access_key: null      # AWS Access Key
+  aws_secret_key: null      # AWS Secret Key
+
+# Outputs
+outputs:
+  logs_dir: workspace/{project}/deploy/logs
+  reports_dir: workspace/{project}/deploy/reports
+  domains_dir: workspace/{project}/deploy/domains
+
+# Advanced
+advanced:
+  cache_enabled: true
+  build_timeout: 300        # 5 minutos
+  dns_check_interval: 30    # segundos
+  dns_check_timeout: 1800   # 30 minutos
+  ssl_wait_time: 15         # segundos
+
+# Metadata
+metadata:
+  created_at: null
+  last_deploy_at: null
+  total_deploys: 0
+  version: 1.0.0

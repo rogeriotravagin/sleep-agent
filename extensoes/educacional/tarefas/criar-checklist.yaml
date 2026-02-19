@@ -1,0 +1,255 @@
+# ============================================
+# TAREFA: Criar Checklist de Progresso
+# ============================================
+
+id: criar-checklist
+nome: Criar Checklist de Progresso
+descricao: Criar checklist para acompanhamento de progresso e conclusão
+agente: especialista-avaliacao
+comando: /criar-checklist
+versao: "1.0"
+categoria: engajamento
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: escopo
+      pergunta: "Para qual escopo é o checklist?"
+      tipo: escolha
+      opcoes:
+        - "Curso completo"
+        - "Módulo específico"
+        - "Aula/Lição"
+        - "Projeto/Atividade"
+      padrao: "Módulo específico"
+
+    - nome: titulo
+      pergunta: "Qual o título/nome do item?"
+      tipo: texto
+      exemplo: "Módulo 1: Fundamentos de Marketing"
+
+    - nome: itens_principais
+      pergunta: "Quais são os itens principais a serem checados?"
+      tipo: lista
+      exemplo:
+        - "Assistir aula 1.1"
+        - "Fazer exercício prático"
+        - "Completar quiz"
+        - "Entregar projeto"
+
+  opcionais:
+    - nome: tipo
+      pergunta: "Qual o tipo de checklist?"
+      tipo: escolha
+      opcoes:
+        - "Checklist de conclusão"
+        - "Checklist de qualidade"
+        - "Checklist de preparação"
+        - "Checklist de lançamento"
+      padrao: "Checklist de conclusão"
+
+    - nome: marcos
+      pergunta: "Incluir marcos de celebração?"
+      tipo: escolha
+      opcoes:
+        - "Sim"
+        - "Não"
+      padrao: "Sim"
+
+    - nome: gamificacao
+      pergunta: "Incluir elementos de gamificação?"
+      tipo: escolha
+      opcoes:
+        - "Sim (pontos e badges)"
+        - "Não"
+      padrao: "Sim (pontos e badges)"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Listar todos os itens"
+    detalhes:
+      - Identificar todas as ações necessárias
+      - Agrupar por categoria/fase
+      - Ordenar logicamente
+
+  - numero: 2
+    acao: "Definir critérios de conclusão"
+    detalhes:
+      - O que define item como "feito"
+      - Evidências necessárias
+      - Dependências entre itens
+
+  - numero: 3
+    acao: "Adicionar marcos"
+    detalhes:
+      - Identificar pontos de celebração
+      - Criar mensagens motivacionais
+      - Definir recompensas (se gamificado)
+
+  - numero: 4
+    acao: "Incluir pontuação (se aplicável)"
+    detalhes:
+      - Atribuir XP por item
+      - Definir badges conquistáveis
+      - Criar barra de progresso
+
+# ============================================
+# SAÍDA
+# ============================================
+
+saida:
+  formato: markdown
+  local: output/checklists/
+  template: |
+    # Checklist: {{titulo}}
+
+    ## Visão Geral
+
+    | Item | Valor |
+    |------|-------|
+    | **Escopo** | {{escopo}} |
+    | **Tipo** | {{tipo}} |
+    | **Total de itens** | [X itens] |
+    | **XP Total** | [X pontos] |
+
+    ---
+
+    ## Progresso
+
+    ```
+    ████████░░░░░░░░░░░░ 40% completo
+
+    [8/20 itens] | [400/1000 XP]
+    ```
+
+    ---
+
+    ## Checklist de Conclusão
+
+    ### Fase 1: [Nome da Fase]
+
+    | Status | Item | XP | Badge |
+    |--------|------|----|-------|
+    | ☐ | [Item 1.1] | 10 | - |
+    | ☐ | [Item 1.2] | 15 | - |
+    | ☐ | [Item 1.3] | 20 | - |
+    | ☐ | **Quiz da Fase 1** | 25 | 🎯 |
+
+    **Marco:** Ao completar → Badge "Fase 1 Completa" + 50 XP bônus
+
+    ---
+
+    ### Fase 2: [Nome da Fase]
+
+    | Status | Item | XP | Badge |
+    |--------|------|----|-------|
+    | ☐ | [Item 2.1] | 10 | - |
+    | ☐ | [Item 2.2] | 15 | - |
+    | ☐ | **Exercício Prático** | 30 | 💪 |
+    | ☐ | [Item 2.4] | 10 | - |
+
+    **Marco:** Ao completar → Badge "Praticante" + 75 XP bônus
+
+    ---
+
+    ### Fase 3: [Nome da Fase]
+
+    | Status | Item | XP | Badge |
+    |--------|------|----|-------|
+    | ☐ | [Item 3.1] | 15 | - |
+    | ☐ | [Item 3.2] | 20 | - |
+    | ☐ | **Projeto Final** | 100 | 🏆 |
+
+    **Marco:** Ao completar → Badge "Mestre do [Tema]" + 150 XP bônus
+
+    ---
+
+    ## Marcos de Celebração
+
+    | Marco | Requisito | Recompensa |
+    |-------|-----------|------------|
+    | 🌟 Primeiro Passo | Completar 1º item | Badge + 10 XP |
+    | 🎯 25% Completo | 25% dos itens | Badge + 25 XP |
+    | 💪 Metade do Caminho | 50% dos itens | Badge + 50 XP |
+    | 🚀 Reta Final | 75% dos itens | Badge + 75 XP |
+    | 🏆 Concluído! | 100% dos itens | Badge Especial + 200 XP |
+
+    ---
+
+    ## Badges Conquistáveis
+
+    | Badge | Como Conquistar | Raridade |
+    |-------|-----------------|----------|
+    | 🎯 Focado | Completar fase sem pausar | Comum |
+    | 💯 Perfeccionista | 100% em todos os quizzes | Raro |
+    | ⚡ Relâmpago | Completar módulo em 1 dia | Raro |
+    | 🌟 Dedicado | Streak de 7 dias | Épico |
+    | 🏆 [Nome] Master | Completar tudo | Lendário |
+
+    ---
+
+    ## Dicas para Conclusão
+
+    ### Para Manter o Ritmo
+    - ✓ Defina horário fixo de estudo
+    - ✓ Comece pelo mais fácil para ganhar momentum
+    - ✓ Celebre cada item concluído
+    - ✓ Não quebre o streak!
+
+    ### Se Estiver Travado
+    - Revise o material anterior
+    - Pergunte no fórum/comunidade
+    - Tente uma abordagem diferente
+    - Descanse e volte depois
+
+    ---
+
+    ## Resumo de Pontuação
+
+    ```yaml
+    pontuacao:
+      itens_concluidos: 0
+      xp_ganho: 0
+      badges_conquistados: 0
+
+      proxima_meta:
+        nome: "25% Completo"
+        falta: 5 itens
+
+      nivel_atual: "Iniciante"
+      proximo_nivel: "Aprendiz (100 XP)"
+    ```
+
+# ============================================
+# CONHECIMENTO UTILIZADO
+# ============================================
+
+conhecimento:
+  - conhecimento/gamificacao-educacional.md
+  - conhecimento/engajamento-alunos.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "Todos os itens necessários estão listados?"
+  - "A ordem faz sentido (dependências respeitadas)?"
+  - "Os marcos estão bem distribuídos?"
+  - "A pontuação está balanceada?"
+  - "As descrições são claras?"
+
+# ============================================
+# PRÓXIMOS PASSOS SUGERIDOS
+# ============================================
+
+proximos_passos:
+  - "/gamificar - Expandir sistema de gamificação"
+  - "/criar-atividade - Criar atividades para os itens"

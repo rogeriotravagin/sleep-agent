@@ -1,0 +1,242 @@
+# ============================================
+# TAREFA: Analise de Base de Clientes
+# ============================================
+
+id: analise-base-clientes
+nome: Analise e Segmentacao de Base de Clientes
+descricao: Analisar base de clientes atual, segmentar por valor e potencial, identificar padroes e oportunidades
+agente: csm-estrategista
+comando: /analise-clientes
+versao: "1.0"
+categoria: diagnostico
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: num_clientes
+      pergunta: "Quantos clientes ativos voce tem atualmente?"
+      tipo: numero
+      exemplo: "150"
+
+    - nome: ticket_medio
+      pergunta: "Qual o ticket medio mensal por cliente?"
+      tipo: texto
+      exemplo: "R$ 500/mes"
+
+    - nome: modelo_negocio
+      pergunta: "Qual o modelo de negocio? (SaaS, servicos, educacao, etc)"
+      tipo: escolha
+      opcoes:
+        - SaaS B2B
+        - SaaS B2C
+        - Servicos
+        - Educacao
+        - Consultoria
+        - Outro
+      exemplo: "SaaS B2B"
+
+  opcionais:
+    - nome: churn_atual
+      pergunta: "Qual o churn mensal/anual atual? (se souber)"
+      tipo: texto
+      exemplo: "3% ao mes"
+
+    - nome: dados_disponiveis
+      pergunta: "Quais dados de clientes voce tem disponivel?"
+      tipo: lista
+      exemplo:
+        - "MRR por cliente"
+        - "Data de inicio"
+        - "Uso do produto"
+        - "Tickets de suporte"
+
+    - nome: segmentacao_atual
+      pergunta: "Ja tem alguma segmentacao hoje?"
+      tipo: texto
+      exemplo: "Por plano (basico, pro, enterprise)"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Entender o contexto do negocio"
+    detalhes:
+      - "Analisar modelo de negocio"
+      - "Entender proposta de valor"
+      - "Identificar ciclo de vida tipico"
+      - "Mapear jornada atual"
+
+  - numero: 2
+    acao: "Definir criterios de segmentacao"
+    detalhes:
+      - "Segmentacao por valor (MRR/ARR)"
+      - "Segmentacao por potencial"
+      - "Segmentacao por maturidade"
+      - "Segmentacao por risco"
+
+  - numero: 3
+    acao: "Criar modelo de segmentacao"
+    detalhes:
+      - "Definir tiers (Enterprise, Mid, SMB)"
+      - "Estabelecer thresholds"
+      - "Criar matriz valor x potencial"
+      - "Mapear modelo de atendimento"
+
+  - numero: 4
+    acao: "Identificar padroes e insights"
+    detalhes:
+      - "Caracteristicas de clientes de sucesso"
+      - "Sinais de clientes em risco"
+      - "Oportunidades de expansion"
+      - "Gaps de atendimento"
+
+  - numero: 5
+    acao: "Recomendar proximos passos"
+    detalhes:
+      - "Priorizar segmentos"
+      - "Alocar recursos"
+      - "Definir acoes por segmento"
+      - "Estabelecer metricas"
+
+# ============================================
+# SAIDA
+# ============================================
+
+saida:
+  formato: markdown
+  template: |
+    # Analise de Base de Clientes
+
+    ## Visao Geral
+
+    - **Total de Clientes:** {{num_clientes}}
+    - **Ticket Medio:** {{ticket_medio}}
+    - **MRR Total Estimado:** {{mrr_total}}
+    - **Modelo:** {{modelo_negocio}}
+
+    ---
+
+    ## Segmentacao Proposta
+
+    ### Por Valor (Tier)
+
+    | Tier | Criterio | % Base | MRR |
+    |------|----------|--------|-----|
+    | Enterprise | >{{threshold_enterprise}} | {{pct_enterprise}}% | {{mrr_enterprise}} |
+    | Mid-Market | {{threshold_mid}} | {{pct_mid}}% | {{mrr_mid}} |
+    | SMB | <{{threshold_smb}} | {{pct_smb}}% | {{mrr_smb}} |
+
+    ### Modelo de Atendimento
+
+    | Tier | Cobertura | Ratio CSM | Touchpoints |
+    |------|-----------|-----------|-------------|
+    | Enterprise | High-touch | 1:{{ratio_ent}} | Mensal |
+    | Mid-Market | Mid-touch | 1:{{ratio_mid}} | Trimestral |
+    | SMB | Tech-touch | 1:{{ratio_smb}} | Automatizado |
+
+    ---
+
+    ## Matriz Valor x Potencial
+
+    ```
+                     POTENCIAL
+                 Baixo    Alto
+              ┌────────┬────────┐
+        Alto  │ MANTER │ CRESCER│
+    V         │        │   ⭐   │
+    A         ├────────┼────────┤
+    L   Baixo │ AVALIAR│ INVESTIR│
+    O         │        │        │
+    R         └────────┴────────┘
+    ```
+
+    ### Distribuicao Atual
+
+    - **Crescer (Alto valor + Alto potencial):** {{pct_crescer}}%
+    - **Manter (Alto valor + Baixo potencial):** {{pct_manter}}%
+    - **Investir (Baixo valor + Alto potencial):** {{pct_investir}}%
+    - **Avaliar (Baixo valor + Baixo potencial):** {{pct_avaliar}}%
+
+    ---
+
+    ## Insights Identificados
+
+    ### Caracteristicas de Clientes de Sucesso
+    {{#each caracteristicas_sucesso}}
+    - {{this}}
+    {{/each}}
+
+    ### Sinais de Risco
+    {{#each sinais_risco}}
+    - {{this}}
+    {{/each}}
+
+    ### Oportunidades de Expansion
+    {{#each oportunidades}}
+    - {{this}}
+    {{/each}}
+
+    ---
+
+    ## Recomendacoes
+
+    ### Prioridades Imediatas
+
+    1. **{{prioridade_1}}**
+       - Acao: {{acao_1}}
+       - Impacto esperado: {{impacto_1}}
+
+    2. **{{prioridade_2}}**
+       - Acao: {{acao_2}}
+       - Impacto esperado: {{impacto_2}}
+
+    3. **{{prioridade_3}}**
+       - Acao: {{acao_3}}
+       - Impacto esperado: {{impacto_3}}
+
+    ### Proximos Passos
+
+    - [ ] Implementar segmentacao no CRM
+    - [ ] Criar Health Score por tier
+    - [ ] Definir playbooks por segmento
+    - [ ] Alocar CSMs conforme modelo
+
+    ---
+
+    ## Metricas para Acompanhar
+
+    | Metrica | Atual | Meta 30d | Meta 90d |
+    |---------|-------|----------|----------|
+    | Churn Rate | {{churn_atual}} | {{meta_churn_30}} | {{meta_churn_90}} |
+    | NRR | {{nrr_atual}} | {{meta_nrr_30}} | {{meta_nrr_90}} |
+    | Health Score medio | - | Implementar | >70 |
+
+  arquivo: output/customer-success/analises/analise-{{slug_cliente}}-{{data}}.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "A segmentacao faz sentido para o negocio?"
+  - "Os thresholds sao realistas?"
+  - "O modelo de atendimento e viavel?"
+  - "As recomendacoes sao acionaveis?"
+  - "As metricas sao mensuraveis?"
+
+# ============================================
+# PROXIMOS PASSOS
+# ============================================
+
+proximos_passos:
+  - tarefa: criar-health-score
+    se: "Cliente quer implementar Health Score"
+  - tarefa: mapear-jornada
+    se: "Precisa mapear jornada do cliente"
+  - tarefa: criar-playbook-onboarding
+    se: "Gaps identificados no onboarding"

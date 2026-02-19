@@ -1,0 +1,507 @@
+# ============================================
+# TAREFA: Gamificar Curso
+# ============================================
+
+id: gamificar-curso
+nome: Gamificar Curso
+descricao: Criar sistema de gamificação completo para o curso
+agente: especialista-avaliacao
+comando: /gamificar
+versao: "1.0"
+categoria: engajamento
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: nome_curso
+      pergunta: "Qual o nome do curso?"
+      tipo: texto
+      exemplo: "Marketing Digital Completo"
+
+    - nome: estrutura
+      pergunta: "Qual a estrutura do curso? (módulos e aulas)"
+      tipo: texto
+      exemplo: "5 módulos, 25 aulas, 50 exercícios"
+
+    - nome: objetivos_gamificacao
+      pergunta: "Quais comportamentos você quer incentivar?"
+      tipo: lista
+      exemplo:
+        - "Completar aulas diariamente"
+        - "Fazer exercícios"
+        - "Participar da comunidade"
+        - "Concluir o curso"
+
+  opcionais:
+    - nome: tema_narrativo
+      pergunta: "Quer usar um tema narrativo? (ex: jornada do herói, academia, etc)"
+      tipo: texto
+      exemplo: "Jornada do Especialista"
+
+    - nome: nivel_gamificacao
+      pergunta: "Qual o nível de gamificação?"
+      tipo: escolha
+      opcoes:
+        - "Básico (pontos e badges)"
+        - "Intermediário (+ níveis e streaks)"
+        - "Avançado (+ leaderboards e missões)"
+      padrao: "Intermediário (+ níveis e streaks)"
+
+    - nome: elementos_sociais
+      pergunta: "Incluir elementos sociais?"
+      tipo: escolha
+      opcoes:
+        - "Sim (leaderboards, colaboração)"
+        - "Não (foco individual)"
+      padrao: "Sim (leaderboards, colaboração)"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Mapear ações do aluno"
+    detalhes:
+      - Listar todas as ações possíveis
+      - Identificar ações de maior valor
+      - Definir frequência esperada
+
+  - numero: 2
+    acao: "Criar sistema de pontos"
+    detalhes:
+      - Atribuir XP por ação
+      - Balancear recompensas
+      - Evitar inflação de pontos
+
+  - numero: 3
+    acao: "Definir níveis"
+    detalhes:
+      - Criar progressão de níveis
+      - Nomear níveis tematicamente
+      - Definir XP necessário
+      - Adicionar benefícios por nível
+
+  - numero: 4
+    acao: "Criar badges"
+    detalhes:
+      - Badges de conquista
+      - Badges de comportamento
+      - Badges de milestone
+      - Definir raridades
+
+  - numero: 5
+    acao: "Implementar streaks"
+    detalhes:
+      - Definir o que conta como streak
+      - Criar recompensas crescentes
+      - Adicionar proteções
+
+  - numero: 6
+    acao: "Criar missões/desafios"
+    detalhes:
+      - Missões diárias
+      - Missões semanais
+      - Desafios especiais
+
+  - numero: 7
+    acao: "Configurar elementos sociais"
+    detalhes:
+      - Leaderboards
+      - Colaboração em grupo
+      - Reconhecimento público
+
+# ============================================
+# SAÍDA
+# ============================================
+
+saida:
+  formato: yaml
+  local: output/gamificacao/
+  template: |
+    # ============================================
+    # SISTEMA DE GAMIFICAÇÃO: {{nome_curso}}
+    # ============================================
+
+    metadata:
+      curso: "{{nome_curso}}"
+      tema: "{{tema_narrativo}}"
+      nivel: "{{nivel_gamificacao}}"
+
+    # ============================================
+    # SISTEMA DE PONTOS (XP)
+    # ============================================
+
+    pontos:
+      acoes_basicas:
+        - acao: "completar_aula"
+          xp: 10
+          descricao: "Assistir aula até o final"
+
+        - acao: "fazer_exercicio"
+          xp: 20
+          descricao: "Completar exercício prático"
+
+        - acao: "acertar_quiz"
+          xp: 5
+          descricao: "Por questão correta no quiz"
+
+        - acao: "completar_modulo"
+          xp: 100
+          descricao: "Finalizar módulo completo"
+          bonus: true
+
+      acoes_engajamento:
+        - acao: "comentar_aula"
+          xp: 10
+          descricao: "Deixar comentário relevante"
+
+        - acao: "ajudar_colega"
+          xp: 25
+          descricao: "Responder dúvida de colega"
+
+        - acao: "compartilhar_aprendizado"
+          xp: 15
+          descricao: "Compartilhar nas redes"
+
+      bonus_especiais:
+        - acao: "100_percent_quiz"
+          xp: 50
+          descricao: "Acertar 100% do quiz"
+
+        - acao: "primeiro_do_dia"
+          xp: 20
+          descricao: "Primeiro a completar aula"
+
+        - acao: "streak_bonus"
+          xp: "variavel"
+          descricao: "Multiplicador de streak"
+
+    # ============================================
+    # SISTEMA DE NÍVEIS
+    # ============================================
+
+    niveis:
+      - nivel: 1
+        nome: "Iniciante"
+        xp_minimo: 0
+        xp_proximo: 100
+        icone: "🌱"
+        beneficios:
+          - "Acesso ao curso"
+
+      - nivel: 2
+        nome: "Aprendiz"
+        xp_minimo: 100
+        xp_proximo: 300
+        icone: "📚"
+        beneficios:
+          - "Badge Aprendiz"
+          - "Acesso ao fórum"
+
+      - nivel: 3
+        nome: "Praticante"
+        xp_minimo: 300
+        xp_proximo: 600
+        icone: "🎯"
+        beneficios:
+          - "Badge Praticante"
+          - "Material bônus"
+
+      - nivel: 4
+        nome: "Especialista"
+        xp_minimo: 600
+        xp_proximo: 1000
+        icone: "⭐"
+        beneficios:
+          - "Badge Especialista"
+          - "Mentoria em grupo"
+
+      - nivel: 5
+        nome: "Mestre"
+        xp_minimo: 1000
+        xp_proximo: null
+        icone: "🏆"
+        beneficios:
+          - "Badge Mestre"
+          - "Certificado Gold"
+          - "Acesso vitalício"
+
+    # ============================================
+    # BADGES (CONQUISTAS)
+    # ============================================
+
+    badges:
+      progresso:
+        - nome: "Primeiro Passo"
+          icone: "👣"
+          criterio: "Completar primeira aula"
+          xp_bonus: 10
+          raridade: "comum"
+
+        - nome: "25% Completo"
+          icone: "🌟"
+          criterio: "Completar 25% do curso"
+          xp_bonus: 50
+          raridade: "comum"
+
+        - nome: "Metade do Caminho"
+          icone: "🎯"
+          criterio: "Completar 50% do curso"
+          xp_bonus: 100
+          raridade: "incomum"
+
+        - nome: "Reta Final"
+          icone: "🚀"
+          criterio: "Completar 75% do curso"
+          xp_bonus: 150
+          raridade: "raro"
+
+        - nome: "Graduado"
+          icone: "🎓"
+          criterio: "Completar 100% do curso"
+          xp_bonus: 300
+          raridade: "épico"
+
+      comportamento:
+        - nome: "Consistente"
+          icone: "📅"
+          criterio: "Streak de 7 dias"
+          xp_bonus: 100
+          raridade: "incomum"
+
+        - nome: "Dedicado"
+          icone: "💪"
+          criterio: "Streak de 30 dias"
+          xp_bonus: 300
+          raridade: "raro"
+
+        - nome: "Incansável"
+          icone: "🔥"
+          criterio: "Streak de 100 dias"
+          xp_bonus: 1000
+          raridade: "lendário"
+
+      conquista:
+        - nome: "Perfeccionista"
+          icone: "💯"
+          criterio: "100% em 5 quizzes seguidos"
+          xp_bonus: 200
+          raridade: "raro"
+
+        - nome: "Relâmpago"
+          icone: "⚡"
+          criterio: "Completar módulo em 1 dia"
+          xp_bonus: 100
+          raridade: "raro"
+
+        - nome: "Maratonista"
+          icone: "🏃"
+          criterio: "5 aulas em uma sessão"
+          xp_bonus: 75
+          raridade: "incomum"
+
+      social:
+        - nome: "Colaborador"
+          icone: "🤝"
+          criterio: "Ajudar 5 colegas"
+          xp_bonus: 100
+          raridade: "incomum"
+
+        - nome: "Mentor"
+          icone: "🧙"
+          criterio: "Ajudar 25 colegas"
+          xp_bonus: 300
+          raridade: "raro"
+
+        - nome: "Influenciador"
+          icone: "📢"
+          criterio: "Indicar 5 amigos"
+          xp_bonus: 500
+          raridade: "épico"
+
+    # ============================================
+    # SISTEMA DE STREAKS
+    # ============================================
+
+    streaks:
+      definicao:
+        acao_valida: "Completar pelo menos 1 aula"
+        reset: "Meia-noite do fuso do usuário"
+        tolerancia: "1 freeze por semana"
+
+      multiplicadores:
+        - dias: 3
+          multiplicador: 1.1
+          bonus_xp: 10
+
+        - dias: 7
+          multiplicador: 1.2
+          bonus_xp: 50
+          badge: "Consistente"
+
+        - dias: 14
+          multiplicador: 1.3
+          bonus_xp: 100
+
+        - dias: 30
+          multiplicador: 1.5
+          bonus_xp: 300
+          badge: "Dedicado"
+
+      protecoes:
+        freeze_semanal: 1
+        aviso_perigo: "Você tem 3 horas para manter seu streak!"
+
+    # ============================================
+    # MISSÕES E DESAFIOS
+    # ============================================
+
+    missoes:
+      diarias:
+        - nome: "Estudante do Dia"
+          objetivo: "Completar 1 aula"
+          recompensa: 20
+          renovacao: "diária"
+
+        - nome: "Quiz Master"
+          objetivo: "Acertar 5 questões"
+          recompensa: 15
+          renovacao: "diária"
+
+        - nome: "Engajado"
+          objetivo: "Comentar em 1 aula"
+          recompensa: 10
+          renovacao: "diária"
+
+      semanais:
+        - nome: "Dedicação Total"
+          objetivo: "Estudar 5 dias na semana"
+          recompensa: 100
+          badge_chance: "Consistente"
+          renovacao: "segunda-feira"
+
+        - nome: "Explorador"
+          objetivo: "Completar 1 módulo"
+          recompensa: 150
+          renovacao: "segunda-feira"
+
+        - nome: "Social"
+          objetivo: "Ajudar 2 colegas"
+          recompensa: 75
+          renovacao: "segunda-feira"
+
+      especiais:
+        - nome: "Desafio Relâmpago"
+          objetivo: "Quiz em menos de 2 minutos"
+          recompensa: "Badge Relâmpago"
+          disponibilidade: "aleatório"
+
+        - nome: "Black Friday do Conhecimento"
+          objetivo: "3 módulos em 1 semana"
+          recompensa: 500
+          disponibilidade: "evento"
+
+    # ============================================
+    # LEADERBOARDS
+    # ============================================
+
+    leaderboards:
+      geral:
+        nome: "Ranking Geral"
+        metrica: "XP total"
+        visibilidade: "Top 10 + posição própria"
+        atualizacao: "tempo real"
+
+      semanal:
+        nome: "Ranking da Semana"
+        metrica: "XP da semana"
+        reset: "Segunda-feira"
+        premio_top3:
+          - posicao: 1
+            badge: "Campeão da Semana"
+            xp_bonus: 200
+          - posicao: 2
+            xp_bonus: 100
+          - posicao: 3
+            xp_bonus: 50
+
+      hall_da_fama:
+        nome: "Hall da Fama"
+        metrica: "Conclusão com honras"
+        criterio: "100% + todos os badges"
+        permanente: true
+
+    # ============================================
+    # FEEDBACK VISUAL
+    # ============================================
+
+    feedback:
+      ao_ganhar_xp:
+        animacao: "Número subindo (+X XP)"
+        som: "coin.mp3"
+        duracao: "2 segundos"
+
+      ao_subir_nivel:
+        animacao: "Celebração com confetti"
+        mensagem: "Parabéns! Você agora é [Nível]!"
+        som: "level_up.mp3"
+        duracao: "3 segundos"
+
+      ao_ganhar_badge:
+        animacao: "Badge brilhando"
+        mensagem: "Nova conquista: [Badge]!"
+        som: "achievement.mp3"
+        compartilhavel: true
+
+      ao_completar_missao:
+        animacao: "Check animado"
+        mensagem: "Missão cumprida! +X XP"
+        som: "complete.mp3"
+
+    # ============================================
+    # MÉTRICAS DE ACOMPANHAMENTO
+    # ============================================
+
+    metricas:
+      engajamento:
+        - "DAU/MAU (usuários ativos)"
+        - "Taxa de conclusão"
+        - "Streak médio"
+        - "Badges conquistados"
+
+      gamificacao:
+        - "XP distribuído/dia"
+        - "Badges mais conquistados"
+        - "Missões mais completadas"
+        - "Pontos de abandono"
+
+# ============================================
+# CONHECIMENTO UTILIZADO
+# ============================================
+
+conhecimento:
+  - conhecimento/gamificacao-educacional.md
+  - conhecimento/engajamento-alunos.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "O sistema de pontos está balanceado?"
+  - "A progressão de níveis é justa?"
+  - "Os badges são motivadores e alcançáveis?"
+  - "As missões incentivam os comportamentos certos?"
+  - "Os elementos sociais promovem competição saudável?"
+
+# ============================================
+# PRÓXIMOS PASSOS SUGERIDOS
+# ============================================
+
+proximos_passos:
+  - "/criar-checklist - Criar checklists gamificados"
+  - "/criar-atividade - Criar atividades com pontuação"

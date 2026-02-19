@@ -1,0 +1,276 @@
+# Extensao: Dados & Analytics
+# Versao: 1.0 - Inteligencia de Dados para Decisoes
+
+nome: Dados
+slug: dados
+descricao: Framework completo de data intelligence - pesquisa de mercado, analise de dados internos e relatorios executivos
+versao: "1.0"
+status: ativo
+
+comando: /dados
+
+mensagem_ativacao: |
+  **Sleep Agent - Extensao Dados v1.0**
+
+  Framework completo de Data Intelligence para decisoes baseadas em dados.
+
+  **Agentes Disponiveis:**
+  - `@data-cientista` - Cientista de Dados (pesquisas profundas, analise exploratoria)
+  - `@data-analista` - Analista de Dados (relatorios, dashboards, metricas)
+  - `@data-pesquisador` - Pesquisador de Mercado (inteligencia competitiva, tendencias)
+
+  **Workflows Completos:**
+  - `/pesquisa-completa` - Pesquisa de mercado do zero ao relatorio
+  - `/analise-completa` - Analise de dados internos completa
+  - `/relatorio-executivo` - Criar relatorio para lideranca
+
+  **Tarefas Rapidas:**
+  - `/pesquisar` - Pesquisa profunda sobre qualquer tema
+  - `/analisar` - Analise de dados internos
+  - `/dashboard` - Estruturar dashboard de metricas
+  - `/relatorio` - Criar relatorio executivo
+  - `/benchmark` - Benchmarking competitivo
+  - `/tendencias` - Analise de tendencias de mercado
+
+  O que voce gostaria de fazer?
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+agentes:
+  - id: data-cientista
+    arquivo: agentes/DATA-CIENTISTA.md
+    comando: "@data-cientista"
+    especialidades:
+      - Pesquisas profundas de dados
+      - Analise exploratoria
+      - Modelagem estatistica
+      - Data mining e descoberta de padroes
+      - Hipoteses e validacao
+      - Visualizacao de dados complexos
+
+  - id: data-analista
+    arquivo: agentes/DATA-ANALISTA.md
+    comando: "@data-analista"
+    especialidades:
+      - Construcao de relatorios
+      - Dashboards e KPIs
+      - Analise de dados internos
+      - SQL e manipulacao de dados
+      - Metricas de negocio
+      - Storytelling com dados
+
+  - id: data-pesquisador
+    arquivo: agentes/DATA-PESQUISADOR.md
+    comando: "@data-pesquisador"
+    especialidades:
+      - Inteligencia competitiva
+      - Pesquisa de mercado
+      - Analise de tendencias
+      - Benchmarking
+      - Pesquisa qualitativa e quantitativa
+      - Consumer insights
+
+# =====================================================
+# TAREFAS
+# =====================================================
+
+tarefas:
+  # Fase 1: Pesquisa
+  - id: pesquisa-profunda
+    arquivo: tarefas/pesquisa-profunda.yaml
+    comando: /pesquisar
+    fase: pesquisa
+    agente: data-cientista
+
+  - id: pesquisa-mercado
+    arquivo: tarefas/pesquisa-mercado.yaml
+    comando: /pesquisa-mercado
+    fase: pesquisa
+    agente: data-pesquisador
+
+  - id: benchmark-competitivo
+    arquivo: tarefas/benchmark-competitivo.yaml
+    comando: /benchmark
+    fase: pesquisa
+    agente: data-pesquisador
+
+  - id: analise-tendencias
+    arquivo: tarefas/analise-tendencias.yaml
+    comando: /tendencias
+    fase: pesquisa
+    agente: data-pesquisador
+
+  # Fase 2: Analise
+  - id: analise-dados-internos
+    arquivo: tarefas/analise-dados-internos.yaml
+    comando: /analisar
+    fase: analise
+    agente: data-analista
+
+  - id: criar-dashboard
+    arquivo: tarefas/criar-dashboard.yaml
+    comando: /dashboard
+    fase: analise
+    agente: data-analista
+
+  - id: definir-metricas
+    arquivo: tarefas/definir-metricas.yaml
+    comando: /metricas
+    fase: analise
+    agente: data-analista
+
+  # Fase 3: Comunicacao
+  - id: relatorio-executivo
+    arquivo: tarefas/relatorio-executivo.yaml
+    comando: /relatorio
+    fase: comunicacao
+    agente: data-analista
+
+  - id: apresentacao-dados
+    arquivo: tarefas/apresentacao-dados.yaml
+    comando: /apresentar
+    fase: comunicacao
+    agente: data-analista
+
+# =====================================================
+# WORKFLOWS
+# =====================================================
+
+workflows:
+  - id: pesquisa-completa
+    arquivo: workflows/pesquisa-completa.yaml
+    comando: /pesquisa-completa
+    descricao: Pesquisa de mercado do zero ao relatorio final
+
+  - id: analise-completa
+    arquivo: workflows/analise-completa.yaml
+    comando: /analise-completa
+    descricao: Analise de dados internos com dashboard e relatorio
+
+  - id: modo-iniciante
+    arquivo: workflows/modo-iniciante-dados.yaml
+    comando: /iniciante-dados
+    descricao: Modo rapido para primeira analise
+    integracao: ralph
+
+# =====================================================
+# BASE DE CONHECIMENTO
+# =====================================================
+
+conhecimento:
+  # Metodologias
+  - metodologias-pesquisa.md
+  - frameworks-analise.md
+  - storytelling-dados.md
+
+  # Referencias
+  - metricas-negocios.md
+  - ferramentas-dados.md
+  - boas-praticas.md
+
+exemplos:
+  - relatorio-exemplo.md
+  - dashboard-exemplo.md
+  - pesquisa-exemplo.md
+
+# =====================================================
+# FRAMEWORK DE EXECUCAO
+# =====================================================
+
+framework_execucao:
+  arquivo: ../../frameworks/data/README.md
+
+  fases:
+    - numero: 1
+      nome: DESCOBERTA
+      tarefas: [pesquisa-profunda, pesquisa-mercado]
+      agente: data-cientista
+
+    - numero: 2
+      nome: COLETA
+      tarefas: [benchmark-competitivo, analise-tendencias]
+      agente: data-pesquisador
+
+    - numero: 3
+      nome: ANALISE
+      tarefas: [analise-dados-internos, definir-metricas]
+      agente: data-analista
+
+    - numero: 4
+      nome: VISUALIZACAO
+      tarefas: [criar-dashboard]
+      agente: data-analista
+
+    - numero: 5
+      nome: COMUNICACAO
+      tarefas: [relatorio-executivo, apresentacao-dados]
+      agente: data-analista
+
+# =====================================================
+# REFERENCIAS INCLUIDAS
+# =====================================================
+
+referencias:
+  data_science:
+    academicos:
+      - Peter Fader (Wharton - CLV, Customer Analytics)
+      - DJ Patil (First US Chief Data Scientist)
+      - Hilary Mason (Data Science Pioneer)
+      - Monica Rogati (Data Science Hierarchy of Needs)
+    praticos:
+      - Avinash Kaushik (Digital Analytics, So What Framework)
+      - Cole Nussbaumer Knaflic (Storytelling with Data)
+      - Alberto Cairo (Data Visualization)
+
+  pesquisa_mercado:
+    metodologias:
+      - Philip Kotler (Marketing Research)
+      - Naresh Malhotra (Research Methodology)
+      - Byron Sharp (How Brands Grow)
+    praticos:
+      - Nielsen (Consumer Insights)
+      - McKinsey (Market Analysis)
+      - Gartner (Tech Research)
+
+  analytics:
+    frameworks:
+      - AARRR (Pirate Metrics)
+      - North Star Metric
+      - DMMM (Digital Marketing Measurement Model)
+      - OKRs e KPIs
+
+# =====================================================
+# INTEGRACAO COM FRAMEWORK DATA
+# =====================================================
+
+integracoes:
+  data_framework:
+    ativo: true
+    localizacao: frameworks/data/
+    clones_disponiveis:
+      - peter-fader (CLV, RFM)
+      - sean-ellis (Growth, AARRR)
+      - nick-mehta (Health Score)
+      - avinash-kaushik (Attribution, Reports)
+      - david-spinks (Community Metrics)
+      - wes-kao (Learning Outcomes)
+
+  outras_extensoes:
+    - nome: marketing
+      uso: "Para aplicar insights em campanhas"
+    - nome: customer-success
+      uso: "Para analise de health score e churn"
+
+# =====================================================
+# OUTPUT
+# =====================================================
+
+output:
+  pesquisas: output/{produto}/pesquisas/
+  relatorios: output/{produto}/relatorios/
+  dashboards: output/{produto}/dashboards/
+  analises: output/{produto}/analises/
+
+projetos: projetos/{produto}/dados/

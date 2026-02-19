@@ -1,0 +1,151 @@
+# ============================================================
+# Workflow: Nova Stack
+# ============================================================
+# Deploy de nova stack com validacao completa
+
+id: nova-stack
+nome: Deploy de Nova Stack
+comando: /nova-stack
+versao: "1.0"
+
+descricao: |
+  Faz deploy de uma nova stack Docker Swarm via Portainer com
+  validacao de seguranca, health checks e documentacao.
+
+pre_requisitos:
+  - "Credenciais Portainer configuradas"
+  - "Servidor com Docker Swarm ativo"
+  - "Network overlay publica (para servicos web)"
+
+# ============================================================
+# FASES
+# ============================================================
+fases:
+  - numero: 1
+    nome: REQUISITOS
+    agente: devops-estrategista
+    descricao: Entender o que precisa ser deployado
+    perguntas:
+      - "Qual aplicacao quer subir?"
+      - "Ja tem docker-compose pronto?"
+      - "Precisa de banco de dados?"
+      - "Precisa de acesso externo (dominio)?"
+      - "Tem dados que precisam persistir?"
+      - "Variaveis de ambiente necessarias?"
+    entregas:
+      - Requisitos documentados
+      - Lista de services necessarios
+
+  - numero: 2
+    nome: VERIFICACAO
+    agente: devops-portainer
+    descricao: Verificar recursos disponiveis
+    acoes:
+      - "Autenticar no Portainer"
+      - "Verificar recursos do servidor (CPU, RAM, disco)"
+      - "Verificar networks existentes"
+      - "Verificar se nome da stack ja existe"
+    gate:
+      nivel: 1
+      verificacao: "Recursos suficientes para a stack?"
+
+  - numero: 3
+    nome: COMPOSE
+    agente: devops-portainer
+    descricao: Criar ou validar docker-compose.yaml
+    acoes:
+      - "Criar compose se nao fornecido"
+      - "Validar sintaxe"
+      - "Verificar tags de imagem (nao :latest)"
+      - "Verificar health checks"
+      - "Verificar resource limits"
+      - "Verificar networks"
+    gate:
+      nivel: 2
+      agente: devops-seguranca
+      verificacao: "Compose passa na validacao de seguranca?"
+
+  - numero: 4
+    nome: DEPLOY
+    agente: devops-portainer
+    descricao: Deploy da stack via Portainer API
+    acoes:
+      - "Criar volumes necessarios"
+      - "Criar networks necessarias"
+      - "Deploy da stack"
+      - "Aguardar services ficarem running"
+    gate:
+      nivel: 1
+      verificacao: "Todos os services running?"
+
+  - numero: 5
+    nome: VALIDACAO
+    agente: devops-portainer
+    descricao: Validar saude da stack
+    acoes:
+      - "Verificar health checks de cada service"
+      - "Verificar logs por erros"
+      - "Testar conectividade (se servico web)"
+      - "Verificar SSL (se dominio configurado)"
+    gate:
+      nivel: 1
+      verificacao: "Todos health checks passando?"
+
+  - numero: 6
+    nome: DOCUMENTACAO
+    agente: devops-estrategista
+    descricao: Documentar stack no inventario
+    acoes:
+      - "Salvar compose em devops/configs/"
+      - "Atualizar inventario de stacks"
+      - "Documentar variaveis de ambiente usadas"
+      - "Registrar dominio associado (se houver)"
+    entregas:
+      - Compose salvo
+      - Inventario atualizado
+      - Instrucoes de acesso
+
+# ============================================================
+# SAIDA
+# ============================================================
+saida:
+  formato: markdown
+  salvar_em: "workspace/{{empresa}}/devops/docs/"
+  template: |
+    # Stack Deployed: {{nome}}
+
+    ## Services
+    | Service | Imagem | Replicas | Status |
+    |---------|--------|----------|--------|
+    {{#services}}
+    | {{nome}} | {{imagem}} | {{replicas}} | {{status}} |
+    {{/services}}
+
+    ## Acesso
+    {{#dominio}}
+    - URL: https://{{dominio}}
+    {{/dominio}}
+    - Portainer: Stack "{{nome}}"
+
+    ## Volumes
+    {{#volumes}}
+    - {{nome}}: {{mount}}
+    {{/volumes}}
+
+    ## Variaveis de Ambiente
+    {{#env}}
+    - {{nome}}: [configurado]
+    {{/env}}
+
+    ## Proximos Passos
+    - Configurar backup de volumes: `/plano-backup`
+    - Monitorar saude: `/status-servicos`
+    - Configurar dominio (se necessario): `/gerenciar-dns`
+
+# ============================================================
+# ROLLBACK
+# ============================================================
+rollback:
+  - "Se falhar no deploy: remover stack e recursos criados"
+  - "Se health check falhar: verificar logs → corrigir compose → redeployar"
+  - "Sempre: manter compose anterior como backup"

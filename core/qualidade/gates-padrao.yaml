@@ -1,0 +1,269 @@
+# Gates Padrao do Sleep Agent
+# Colecao de verificacoes reutilizaveis por categoria
+
+# ============================================================
+# GATES DE FORMATO
+# Verificacoes automaticas de estrutura
+# ============================================================
+formato:
+  markdown_valido:
+    id: formato_markdown
+    descricao: "Arquivo e markdown valido"
+    nivel: 1
+    tipo: automatico
+    verificacao: "Estrutura markdown correta, sem erros de sintaxe"
+
+  yaml_valido:
+    id: formato_yaml
+    descricao: "Arquivo YAML e valido"
+    nivel: 1
+    tipo: automatico
+    verificacao: "YAML parseia sem erros"
+
+  json_valido:
+    id: formato_json
+    descricao: "Arquivo JSON e valido"
+    nivel: 1
+    tipo: automatico
+    verificacao: "JSON parseia sem erros"
+
+  html_valido:
+    id: formato_html
+    descricao: "HTML e valido e bem formado"
+    nivel: 1
+    tipo: automatico
+    verificacao: "Tags fechadas, estrutura correta"
+
+# ============================================================
+# GATES DE COMPLETUDE
+# Verificacoes de campos e secoes
+# ============================================================
+completude:
+  campos_obrigatorios:
+    id: completude_campos
+    descricao: "Todos os campos obrigatorios preenchidos"
+    nivel: 1
+    tipo: automatico
+    verificacao: "Nenhum campo obrigatorio vazio ou null"
+
+  secoes_preenchidas:
+    id: completude_secoes
+    descricao: "Todas as secoes do template preenchidas"
+    nivel: 1
+    tipo: automatico
+    verificacao: "Nenhuma secao com placeholder ou vazia"
+
+  tamanho_minimo:
+    id: completude_tamanho
+    descricao: "Conteudo tem tamanho minimo adequado"
+    nivel: 1
+    tipo: automatico
+    verificacao: "Conteudo nao e muito curto para o tipo de entrega"
+    parametros:
+      headline: 5  # palavras
+      email: 100   # palavras
+      landing: 500 # palavras
+      artigo: 300  # palavras
+
+# ============================================================
+# GATES DE COPY
+# Verificacoes especificas para textos persuasivos
+# ============================================================
+copy:
+  clareza:
+    id: copy_clareza
+    descricao: "Texto e claro e facil de entender"
+    nivel: 2
+    tipo: agente
+    agente_revisor: copywriter
+    verificacao: "Frases curtas, palavras simples, mensagem clara"
+
+  gatilhos:
+    id: copy_gatilhos
+    descricao: "Usa gatilhos mentais adequados"
+    nivel: 2
+    tipo: agente
+    agente_revisor: copywriter
+    verificacao: "Pelo menos 2-3 gatilhos identificaveis e bem aplicados"
+
+  cta:
+    id: copy_cta
+    descricao: "Call-to-action claro e convincente"
+    nivel: 2
+    tipo: agente
+    agente_revisor: copywriter
+    verificacao: "CTA especifico, urgente e orientado a acao"
+
+  tom_voz:
+    id: copy_tom
+    descricao: "Tom de voz consistente com a marca"
+    nivel: 2
+    tipo: agente
+    agente_revisor: estrategista
+    verificacao: "Linguagem alinhada com personalidade da marca"
+
+# ============================================================
+# GATES DE DESIGN
+# Verificacoes especificas para entregas visuais
+# ============================================================
+design:
+  principios:
+    id: design_principios
+    descricao: "Segue principios basicos de design"
+    nivel: 2
+    tipo: agente
+    agente_revisor: designer
+    verificacao: "Hierarquia visual, contraste, alinhamento, espacamento"
+
+  marca:
+    id: design_marca
+    descricao: "Visual alinhado com identidade da marca"
+    nivel: 2
+    tipo: agente
+    agente_revisor: designer
+    verificacao: "Cores, tipografia e estilo consistentes com brand guide"
+
+  acessibilidade:
+    id: design_acessibilidade
+    descricao: "Atende requisitos basicos de acessibilidade"
+    nivel: 2
+    tipo: agente
+    agente_revisor: uiux
+    verificacao: "Contraste adequado, textos legiveis, navegacao clara"
+
+# ============================================================
+# GATES DE ESTRATEGIA
+# Verificacoes para entregas estrategicas
+# ============================================================
+estrategia:
+  coerencia:
+    id: estrategia_coerencia
+    descricao: "Estrategia e internamente coerente"
+    nivel: 2
+    tipo: agente
+    agente_revisor: estrategista
+    verificacao: "Elementos se conectam logicamente, sem contradicoes"
+
+  viabilidade:
+    id: estrategia_viabilidade
+    descricao: "Estrategia e viavel e executavel"
+    nivel: 2
+    tipo: agente
+    agente_revisor: estrategista
+    verificacao: "Acoes concretas, recursos identificados, timeline realista"
+
+  diferenciacao:
+    id: estrategia_diferenciacao
+    descricao: "Proposta tem diferenciacao clara"
+    nivel: 2
+    tipo: agente
+    agente_revisor: estrategista
+    verificacao: "Posicionamento unico identificavel vs concorrentes"
+
+# ============================================================
+# GATES HUMANOS
+# Verificacoes que requerem decisao do usuario
+# ============================================================
+humano:
+  satisfacao:
+    id: humano_satisfacao
+    descricao: "Usuario satisfeito com o resultado"
+    nivel: 3
+    tipo: humano
+    pergunta: "O resultado atende suas expectativas?"
+    opcoes:
+      - "Sim, esta otimo"
+      - "Precisa de pequenos ajustes"
+      - "Precisa de mudancas significativas"
+      - "Nao era isso que eu queria"
+
+  representatividade:
+    id: humano_representatividade
+    descricao: "Resultado representa bem o negocio"
+    nivel: 3
+    tipo: humano
+    pergunta: "Isso representa bem seu negocio/marca?"
+    opcoes:
+      - "Sim, perfeitamente"
+      - "Em partes"
+      - "Nao muito"
+
+  uso:
+    id: humano_uso
+    descricao: "Usuario usaria o resultado"
+    nivel: 3
+    tipo: humano
+    pergunta: "Voce usaria isso no seu negocio?"
+    opcoes:
+      - "Sim, com certeza"
+      - "Sim, com alguns ajustes"
+      - "Talvez"
+      - "Nao"
+
+  continuacao:
+    id: humano_continuacao
+    descricao: "Permissao para continuar"
+    nivel: 3
+    tipo: humano
+    pergunta: "Posso salvar e continuar para o proximo passo?"
+    opcoes:
+      - "Sim, continuar"
+      - "Espere, preciso revisar primeiro"
+
+# ============================================================
+# COMBINACOES PRE-DEFINIDAS
+# Sets de gates para tipos comuns de tarefa
+# ============================================================
+combinacoes:
+  headline:
+    descricao: "Gates para criacao de headlines"
+    gates:
+      - formato_markdown
+      - completude_tamanho
+      - copy_clareza
+      - copy_gatilhos
+      - humano_satisfacao
+
+  email:
+    descricao: "Gates para emails de venda"
+    gates:
+      - formato_markdown
+      - completude_tamanho
+      - copy_clareza
+      - copy_gatilhos
+      - copy_cta
+      - copy_tom
+      - humano_satisfacao
+      - humano_uso
+
+  landing_page:
+    descricao: "Gates para landing pages"
+    gates:
+      - formato_html
+      - completude_secoes
+      - copy_clareza
+      - copy_gatilhos
+      - copy_cta
+      - design_principios
+      - design_acessibilidade
+      - humano_satisfacao
+      - humano_representatividade
+
+  logo:
+    descricao: "Gates para criacao de logo"
+    gates:
+      - completude_campos
+      - design_principios
+      - design_marca
+      - humano_satisfacao
+      - humano_representatividade
+
+  estrategia:
+    descricao: "Gates para entregas estrategicas"
+    gates:
+      - formato_markdown
+      - completude_secoes
+      - estrategia_coerencia
+      - estrategia_viabilidade
+      - humano_satisfacao
+      - humano_continuacao

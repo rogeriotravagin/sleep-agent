@@ -1,0 +1,591 @@
+# Workflow: Criacao de Oferta Completa
+# Framework Ralph de Execucao
+
+id: oferta-completa
+nome: Criar Oferta do Zero ao Lancamento
+descricao: Processo completo desde pesquisa ate implementacao
+comando: /oferta-completa
+
+versao: "2.0"
+
+# Baseado em:
+# - Alex Hormozi ($100M Offers)
+# - Stefan Georgi (RMBC Method)
+# - Russell Brunson (Value Ladder)
+# - Eugene Schwartz (Levels of Awareness)
+# - Andre Chaperon (Email Sequences)
+
+sobre: |
+  Este workflow guia voce por TODAS as etapas necessarias para criar
+  uma oferta irresistivel, desde a pesquisa de mercado ate a execucao.
+
+  Ao final voce tera:
+  - Pesquisa de mercado completa
+  - ICP e Persona definidos
+  - Posicionamento claro
+  - Oferta estruturada (Metodo Hormozi)
+  - Copy de vendas
+  - Sequencias de email
+  - Estrutura de trafego
+
+# =====================================================
+# FASE 1: DESCOBERTA E PESQUISA
+# =====================================================
+
+fases:
+  - numero: 1
+    nome: DESCOBERTA
+    descricao: Entender o contexto e pesquisar o mercado
+
+    etapas:
+      - id: 1.1
+        nome: Briefing Inicial
+        agente: estrategista
+        descricao: Coletar informacoes basicas do projeto
+        perguntas:
+          - O que voce quer vender ou promover?
+          - Qual problema voce resolve?
+          - Quem voce acredita ser seu publico-alvo?
+          - Qual seu objetivo principal? (vendas, leads, autoridade)
+          - Qual seu orcamento disponivel para marketing?
+          - Qual seu prazo ou deadline?
+          - Voce ja tem clientes? O que eles dizem?
+        entregavel: documento-briefing.md
+
+      - id: 1.2
+        nome: Pesquisa de Mercado
+        agente: estrategista
+        descricao: Pesquisa profunda do mercado e concorrencia
+        depende_de: ["1.1"]
+        acoes:
+          - Pesquisar Google Trends para tendencias
+          - Analisar foruns e comunidades do nicho
+          - Ler reviews de produtos concorrentes
+          - Mapear linguagem do publico
+          - Identificar objecoes comuns
+          - Listar concorrentes diretos e indiretos
+        fontes_pesquisa:
+          - Google Trends
+          - Reddit/Foruns do nicho
+          - Amazon Reviews
+          - YouTube Comments
+          - Grupos Facebook
+          - Quora
+          - AnswerThePublic
+        entregavel: pesquisa-mercado.md
+
+      - id: 1.3
+        nome: Analise de Concorrencia
+        agente: estrategista
+        descricao: Mapear o que os concorrentes estao fazendo
+        depende_de: ["1.2"]
+        acoes:
+          - Listar 5-10 concorrentes principais
+          - Analisar ofertas de cada um
+          - Identificar precos praticados
+          - Mapear pontos fortes e fracos
+          - Encontrar gaps no mercado
+        entregavel: analise-concorrencia.md
+
+# =====================================================
+# FASE 2: DEFINICAO DE PUBLICO
+# =====================================================
+
+  - numero: 2
+    nome: PUBLICO-ALVO
+    descricao: Definir quem e o cliente ideal
+
+    etapas:
+      - id: 2.1
+        nome: Construcao do ICP
+        agente: estrategista
+        descricao: Definir o Perfil do Cliente Ideal
+        depende_de: ["1.3"]
+        framework: |
+          ICP = Cliente que:
+          - Tem o problema que voce resolve
+          - Reconhece que tem o problema
+          - Tem capacidade de pagar
+          - Tem urgencia em resolver
+          - E facil de alcancar
+          - Gera bons resultados
+        criterios:
+          demografico:
+            - Idade
+            - Genero
+            - Localizacao
+            - Renda
+            - Escolaridade
+          profissional:
+            - Cargo
+            - Industria
+            - Tamanho da empresa
+          comportamental:
+            - Onde passa tempo online
+            - O que consome de conteudo
+            - Como toma decisoes
+          situacional:
+            - Momento de vida
+            - Gatilhos de compra
+        entregavel: icp.md
+
+      - id: 2.2
+        nome: Construcao de Persona
+        agente: estrategista
+        descricao: Criar persona detalhada
+        depende_de: ["2.1"]
+        template: |
+          PERSONA: [Nome]
+
+          DADOS BASICOS:
+          - Idade:
+          - Profissao:
+          - Renda:
+          - Localizacao:
+          - Familia:
+
+          UM DIA NA VIDA:
+          [Descrever rotina]
+
+          DORES E FRUSTRACOES:
+          1.
+          2.
+          3.
+
+          DESEJOS E ASPIRACOES:
+          1.
+          2.
+          3.
+
+          OBJECOES PREVISIVEIS:
+          1.
+          2.
+          3.
+
+          GATILHOS DE COMPRA:
+          1.
+          2.
+          3.
+        entregavel: persona.md
+
+      - id: 2.3
+        nome: Mapeamento de Jornada
+        agente: estrategista
+        descricao: Mapear a jornada do cliente
+        depende_de: ["2.2"]
+        framework: Customer Value Journey (Ryan Deiss)
+        estagios:
+          - estagio: Unaware
+            estado: Nao sabe que tem problema
+            conteudo: Educacional
+          - estagio: Problem Aware
+            estado: Sabe do problema
+            conteudo: Comparativo
+          - estagio: Solution Aware
+            estado: Conhece solucoes
+            conteudo: Case studies
+          - estagio: Product Aware
+            estado: Conhece seu produto
+            conteudo: Testemunhos
+          - estagio: Most Aware
+            estado: Pronto para comprar
+            conteudo: Oferta direta
+        entregavel: jornada-cliente.md
+
+# =====================================================
+# FASE 3: ESTRATEGIA
+# =====================================================
+
+  - numero: 3
+    nome: ESTRATEGIA
+    descricao: Definir posicionamento e diferenciacao
+
+    etapas:
+      - id: 3.1
+        nome: Definicao de Posicionamento
+        agente: estrategista
+        descricao: Criar declaracao de posicionamento
+        depende_de: ["2.3"]
+        framework: |
+          Para [PUBLICO-ALVO]
+          que [TEM ESSE PROBLEMA]
+          [NOME DO PRODUTO] e [CATEGORIA]
+          que [BENEFICIO PRINCIPAL]
+          diferente de [CONCORRENTES]
+          porque [RAZAO DE ACREDITAR]
+        perguntas:
+          - O que voce faz que ninguem mais faz igual?
+          - Por que alguem pagaria 10x mais pelo que voce faz?
+          - Qual problema voce resolve que tira o sono?
+        entregavel: posicionamento.md
+
+      - id: 3.2
+        nome: Mecanismo Unico
+        agente: estrategista
+        descricao: Definir o mecanismo que explica por que funciona
+        depende_de: ["3.1"]
+        framework: Stefan Georgi / Todd Brown
+        componentes:
+          - nome: Mecanismo do Problema
+            descricao: Por que falharam antes
+          - nome: Mecanismo da Solucao
+            descricao: Por que vao ter sucesso agora
+        elementos:
+          - Nome proprietario
+          - Explicacao logica
+          - Diferenciacao clara
+          - Credibilidade
+        entregavel: mecanismo-unico.md
+
+      - id: 3.3
+        nome: Big Idea
+        agente: copywriter
+        descricao: Desenvolver a ideia central da campanha
+        depende_de: ["3.2"]
+        criterios:
+          - Originalidade
+          - Importancia
+          - Excitacao
+          - Beneficio
+        processo:
+          - Listar 10-20 angulos possiveis
+          - Testar contra os 4 criterios
+          - Selecionar o mais forte
+          - Desenvolver narrativa
+        entregavel: big-idea.md
+
+# =====================================================
+# FASE 4: CONSTRUCAO DA OFERTA
+# =====================================================
+
+  - numero: 4
+    nome: OFERTA
+    descricao: Construir oferta irresistivel
+
+    etapas:
+      - id: 4.1
+        nome: Equacao de Valor
+        agente: estrategista
+        descricao: Aplicar framework Hormozi
+        depende_de: ["3.3"]
+        formula: |
+          VALOR = (Dream Outcome x Probabilidade) / (Tempo x Esforco)
+        processo:
+          - Listar TODOS os problemas do cliente
+          - Criar solucao para cada problema
+          - Transformar em componentes da oferta
+          - Maximizar Dream Outcome
+          - Aumentar Probabilidade percebida
+          - Reduzir Tempo para resultado
+          - Reduzir Esforco necessario
+        entregavel: equacao-valor.md
+
+      - id: 4.2
+        nome: Value Stacking
+        agente: estrategista
+        descricao: Empilhar valor na oferta
+        depende_de: ["4.1"]
+        estrutura:
+          oferta_principal:
+            - componente_1
+            - componente_2
+            - componente_3
+          bonus:
+            - bonus_1:
+                nome: Nome com beneficio
+                resolve: Problema especifico
+                valor: R$ X
+            - bonus_2:
+                nome: Nome com beneficio
+                resolve: Problema especifico
+                valor: R$ X
+            - bonus_3:
+                nome: Nome com beneficio
+                resolve: Problema especifico
+                valor: R$ X
+        regras:
+          - Bonus devem resolver preocupacoes especificas
+          - Ferramentas > Treinamentos
+          - Valor dos bonus > Oferta principal
+          - Adicionar escassez aos bonus
+        entregavel: value-stack.md
+
+      - id: 4.3
+        nome: Precificacao
+        agente: estrategista
+        descricao: Definir estrategia de preco
+        depende_de: ["4.2"]
+        frameworks:
+          - Preco baseado em valor
+          - Ancoragem
+          - Payback
+        principio: Preco alto atrai clientes melhores
+        entregavel: precificacao.md
+
+      - id: 4.4
+        nome: Garantia
+        agente: estrategista
+        descricao: Definir reversao de risco
+        depende_de: ["4.3"]
+        tipos:
+          - Money-back (media)
+          - Risk Reversal (alta)
+          - Performance (muito alta)
+        elementos:
+          - Prazo claro
+          - Processo simples
+          - Condicoes especificas
+        entregavel: garantia.md
+
+      - id: 4.5
+        nome: Urgencia e Escassez
+        agente: estrategista
+        descricao: Definir elementos de urgencia
+        depende_de: ["4.4"]
+        tipos:
+          - Limite de vagas
+          - Bonus por tempo
+          - Aumento de preco
+          - Encerramento
+        regra: Deve ser REAL
+        entregavel: urgencia-escassez.md
+
+# =====================================================
+# FASE 5: CRIACAO DE COPY
+# =====================================================
+
+  - numero: 5
+    nome: COPY
+    descricao: Criar todos os textos persuasivos
+
+    etapas:
+      - id: 5.1
+        nome: Headlines
+        agente: copywriter
+        descricao: Criar headlines para todos os materiais
+        depende_de: ["4.5"]
+        processo:
+          - Gerar 20-30 opcoes
+          - Aplicar filtro 4Us
+          - Selecionar 10 melhores
+        categorias:
+          - Beneficio direto
+          - Curiosidade
+          - Problema-solucao
+          - Prova social
+          - Urgencia
+        entregavel: headlines.md
+
+      - id: 5.2
+        nome: Lead e Abertura
+        agente: copywriter
+        descricao: Criar lead da copy
+        depende_de: ["5.1"]
+        tipos:
+          - Promise Lead
+          - Problem-Solution Lead
+          - Big Secret Lead
+          - Story Lead
+        regra: Lead = 20% do corpo
+        entregavel: lead.md
+
+      - id: 5.3
+        nome: Copy Completa
+        agente: copywriter
+        descricao: Escrever copy de vendas completa
+        depende_de: ["5.2"]
+        estrutura:
+          - Headline
+          - Subheadline
+          - Lead
+          - Problema
+          - Agitacao
+          - Solucao
+          - Mecanismo
+          - Beneficios
+          - Prova
+          - Oferta + Stack
+          - Bonus
+          - Preco + Ancoragem
+          - Garantia
+          - Urgencia
+          - CTA
+          - PS
+        entregavel: copy-vendas.md
+
+      - id: 5.4
+        nome: Bullets e Fascinations
+        agente: copywriter
+        descricao: Criar bullet points persuasivos
+        depende_de: ["5.3"]
+        principio: Provoque, nao conte
+        quantidade: 20-30 bullets
+        entregavel: bullets.md
+
+# =====================================================
+# FASE 6: ESTRUTURA DE FUNIL
+# =====================================================
+
+  - numero: 6
+    nome: FUNIL
+    descricao: Definir estrutura de conversao
+
+    etapas:
+      - id: 6.1
+        nome: Tipo de Funil
+        agente: estrategista
+        descricao: Definir qual funil usar
+        depende_de: ["5.4"]
+        opcoes:
+          - Tripwire (produto barato)
+          - Webinar (medio/alto ticket)
+          - Application (high-ticket)
+          - Product Launch (lancamento)
+          - Challenge (comunidade)
+          - Book Funnel (autoridade)
+        entregavel: estrutura-funil.md
+
+      - id: 6.2
+        nome: Welcome Sequence
+        agente: copywriter
+        descricao: Criar sequencia de boas-vindas
+        depende_de: ["6.1"]
+        framework: Soap Opera Sequence (Andre Chaperon)
+        emails:
+          - Email 1: Boas-vindas + entrega
+          - Email 2: Historia pessoal
+          - Email 3: Conflito
+          - Email 4: Jornada
+          - Email 5: Solucao
+          - Email 6: Oferta
+        entregavel: welcome-sequence.md
+
+      - id: 6.3
+        nome: Sales Sequence
+        agente: copywriter
+        descricao: Criar sequencia de vendas
+        depende_de: ["6.2"]
+        emails:
+          - Email 1: Abertura de carrinho
+          - Email 2: Beneficios
+          - Email 3: Prova social
+          - Email 4: Quebra de objecoes
+          - Email 5: Urgencia
+          - Email 6: Ultima chance
+          - Email 7: Encerramento
+        entregavel: sales-sequence.md
+
+# =====================================================
+# FASE 7: TRAFEGO E DISTRIBUICAO
+# =====================================================
+
+  - numero: 7
+    nome: TRAFEGO
+    descricao: Estrategia de aquisicao
+
+    etapas:
+      - id: 7.1
+        nome: Estrategia de Trafego
+        agente: trafego
+        descricao: Definir plano de trafego
+        depende_de: ["6.3"]
+        framework: Temperatura de Trafego
+        temperaturas:
+          - Frio: Audiencia nova
+          - Morno: Engajados
+          - Quente: Visitantes/Leads
+        entregavel: estrategia-trafego.md
+
+      - id: 7.2
+        nome: Criativos de Anuncio
+        agente: trafego
+        descricao: Criar conceitos de anuncios
+        depende_de: ["7.1"]
+        framework: Hook-Story-Offer
+        formatos:
+          - Video curto (15-30s)
+          - Video medio (60-90s)
+          - Imagem estatica
+          - Carrossel
+        quantidade: 3-5 conceitos por formato
+        entregavel: criativos.md
+
+      - id: 7.3
+        nome: Estrutura de Campanhas
+        agente: trafego
+        descricao: Definir estrutura de campanhas
+        depende_de: ["7.2"]
+        estrutura:
+          prospecting:
+            - Interesse 1
+            - Interesse 2
+            - Lookalike 1%
+            - Lookalike 3%
+          retargeting:
+            - Engagers 7d
+            - Visitors 14d
+            - Leads nao convertidos
+          conversao:
+            - Add to cart 7d
+            - Checkout abandonado
+            - Clientes (cross-sell)
+        entregavel: estrutura-campanhas.md
+
+# =====================================================
+# ENTREGA FINAL
+# =====================================================
+
+entrega_final:
+  formato: pasta
+  estrutura: |
+    projetos/oferta-[nome]/
+    ├── 01-descoberta/
+    │   ├── briefing.md
+    │   ├── pesquisa-mercado.md
+    │   └── analise-concorrencia.md
+    ├── 02-publico/
+    │   ├── icp.md
+    │   ├── persona.md
+    │   └── jornada-cliente.md
+    ├── 03-estrategia/
+    │   ├── posicionamento.md
+    │   ├── mecanismo-unico.md
+    │   └── big-idea.md
+    ├── 04-oferta/
+    │   ├── equacao-valor.md
+    │   ├── value-stack.md
+    │   ├── precificacao.md
+    │   ├── garantia.md
+    │   └── urgencia-escassez.md
+    ├── 05-copy/
+    │   ├── headlines.md
+    │   ├── lead.md
+    │   ├── copy-vendas.md
+    │   └── bullets.md
+    ├── 06-funil/
+    │   ├── estrutura-funil.md
+    │   ├── welcome-sequence.md
+    │   └── sales-sequence.md
+    └── 07-trafego/
+        ├── estrategia-trafego.md
+        ├── criativos.md
+        └── estrutura-campanhas.md
+
+# =====================================================
+# COMO EXECUTAR
+# =====================================================
+
+execucao:
+  modo_completo:
+    descricao: Execute todas as fases em ordem
+    tempo_estimado: 5-7 sessoes
+
+  modo_rapido:
+    descricao: Fases 4-6 apenas (oferta + copy + funil)
+    prerequisitos: Ja ter ICP e pesquisa
+    tempo_estimado: 2-3 sessoes
+
+  modo_otimizacao:
+    descricao: Fases 5-7 (copy + funil + trafego)
+    prerequisitos: Ja ter oferta definida
+    tempo_estimado: 2-3 sessoes

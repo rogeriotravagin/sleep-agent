@@ -1,0 +1,285 @@
+# ============================================
+# WORKFLOW: Discovery Sprint
+# ============================================
+
+id: discovery-sprint
+nome: Sprint de Discovery (1 semana)
+descricao: Ciclo rapido de discovery para validar hipoteses
+comando: /discovery-sprint
+versao: "1.0"
+
+# ============================================
+# VISAO GERAL
+# ============================================
+
+visao_geral:
+  objetivo: "Realizar ciclo completo de discovery em 1 semana"
+  resultado: "Hipoteses validadas/invalidadas com evidencias"
+
+  diferencial: |
+    Sprint intensivo de discovery:
+    - 5 dias focados
+    - 5+ entrevistas com usuarios
+    - Decisao ao final da semana
+
+  baseado_em:
+    - "Continuous Discovery Habits - Teresa Torres"
+    - "Sprint - Jake Knapp"
+
+# ============================================
+# FASES (5 DIAS)
+# ============================================
+
+fases:
+  # ------------------------------------------
+  # DIA 1: FOCO
+  # ------------------------------------------
+  - numero: 1
+    nome: "DIA 1 - FOCO"
+    descricao: "Definir outcome e hipoteses a testar"
+    agente: discovery-lead
+
+    etapas:
+      - id: outcome
+        nome: "Definir Outcome"
+        descricao: "Clarificar resultado desejado"
+        perguntas:
+          - "Qual metrica queremos mover?"
+          - "Qual o baseline atual?"
+          - "Qual o target?"
+
+      - id: hipoteses
+        nome: "Documentar Hipoteses"
+        descricao: "Listar o que precisamos validar"
+        perguntas:
+          - "O que acreditamos sobre os usuarios?"
+          - "O que acreditamos sobre o problema?"
+          - "O que acreditamos sobre a solucao?"
+
+      - id: recrutamento
+        nome: "Recrutar Participantes"
+        descricao: "Agendar 5+ entrevistas para a semana"
+        acoes:
+          - Definir perfil de entrevistados
+          - Enviar convites
+          - Agendar horarios
+
+    entregaveis:
+      - "Outcome definido"
+      - "Lista de hipoteses"
+      - "5+ entrevistas agendadas"
+
+  # ------------------------------------------
+  # DIA 2-3: ENTREVISTAS
+  # ------------------------------------------
+  - numero: 2
+    nome: "DIA 2-3 - ENTREVISTAS"
+    descricao: "Conduzir entrevistas story-based"
+    agente: discovery-lead
+
+    etapas:
+      - id: entrevistas
+        nome: "Realizar Entrevistas"
+        descricao: "Conduzir 5+ entrevistas story-based"
+
+        roteiro_base: |
+          1. Contexto (2min)
+             "Obrigado por participar. Estamos pesquisando..."
+
+          2. Historia (15min)
+             "Conte-me sobre a ultima vez que voce [acao]"
+             - O que levou a isso?
+             - O que aconteceu?
+             - Como se sentiu?
+             - O que fez depois?
+
+          3. Frequencia (5min)
+             - Isso acontece com que frequencia?
+             - Sempre e assim?
+
+          4. Encerramento (3min)
+             - Algo mais que gostaria de compartilhar?
+
+      - id: notas
+        nome: "Documentar Notas"
+        descricao: "Registrar insights de cada entrevista"
+
+    entregaveis:
+      - "Notas de 5+ entrevistas"
+      - "Citacoes importantes"
+
+  # ------------------------------------------
+  # DIA 4: SINTESE
+  # ------------------------------------------
+  - numero: 3
+    nome: "DIA 4 - SINTESE"
+    descricao: "Sintetizar aprendizados e atualizar OST"
+    agente: discovery-lead
+
+    etapas:
+      - id: sintese
+        nome: "Sintetizar Entrevistas"
+        descricao: "Compilar insights das entrevistas"
+        acoes:
+          - Agrupar temas comuns
+          - Identificar padroes
+          - Extrair oportunidades
+
+      - id: ost
+        nome: "Atualizar OST"
+        tarefa: /mapear-oportunidades
+        descricao: "Atualizar Opportunity Solution Tree"
+
+      - id: validacao
+        nome: "Validar Hipoteses"
+        descricao: "Marcar hipoteses como validadas/invalidadas"
+
+    entregaveis:
+      - "Sintese de entrevistas"
+      - "OST atualizada"
+      - "Hipoteses validadas/invalidadas"
+
+  # ------------------------------------------
+  # DIA 5: DECISAO
+  # ------------------------------------------
+  - numero: 4
+    nome: "DIA 5 - DECISAO"
+    descricao: "Decidir proximos passos"
+    agente: discovery-lead
+
+    etapas:
+      - id: apresentacao
+        nome: "Apresentar Aprendizados"
+        descricao: "Compartilhar descobertas com time"
+
+      - id: decisao
+        nome: "Tomar Decisao"
+        descricao: "Decidir o que fazer com aprendizados"
+        opcoes:
+          - "Prosseguir para prototipo"
+          - "Pivotar direcao"
+          - "Mais discovery necessario"
+          - "Cancelar iniciativa"
+
+      - id: proximos_passos
+        nome: "Definir Proximos Passos"
+        descricao: "Planejar acoes pos-sprint"
+
+    entregaveis:
+      - "Apresentacao de resultados"
+      - "Decisao documentada"
+      - "Plano de acao"
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Discovery Sprint - {{nome_sprint}}
+
+  **Periodo:** {{data_inicio}} a {{data_fim}}
+  **Outcome:** {{outcome}}
+
+  ---
+
+  ## Hipoteses Testadas
+
+  | Hipotese | Status | Evidencia |
+  |----------|--------|-----------|
+  | {{hip_1}} | {{status_1}} | {{evidencia_1}} |
+  | {{hip_2}} | {{status_2}} | {{evidencia_2}} |
+  | {{hip_3}} | {{status_3}} | {{evidencia_3}} |
+
+  ---
+
+  ## Entrevistas Realizadas
+
+  | # | Perfil | Data | Principais Insights |
+  |---|--------|------|---------------------|
+  | 1 | {{perfil_1}} | {{data_1}} | {{insight_1}} |
+  | 2 | {{perfil_2}} | {{data_2}} | {{insight_2}} |
+  | ... | ... | ... | ... |
+
+  ---
+
+  ## Oportunidades Identificadas
+
+  ### Oportunidade 1: {{oport_1}}
+  - Frequencia: Apareceu em {{n}}/{{total}} entrevistas
+  - Citacao: "{{citacao_1}}"
+
+  ### Oportunidade 2: {{oport_2}}
+  - Frequencia: Apareceu em {{n}}/{{total}} entrevistas
+  - Citacao: "{{citacao_2}}"
+
+  ---
+
+  ## Decisao
+
+  **Escolha:** {{decisao}}
+
+  **Justificativa:**
+  {{justificativa}}
+
+  ---
+
+  ## Proximos Passos
+
+  1. {{passo_1}}
+  2. {{passo_2}}
+  3. {{passo_3}}
+
+  ---
+
+  *Sprint conduzido por: {{responsavel}}*
+
+# ============================================
+# EXECUCAO
+# ============================================
+
+execucao:
+  comando: /discovery-sprint
+
+  fluxo:
+    1: "Dia 1: Definir foco e recrutar"
+    2: "Dia 2-3: Conduzir entrevistas"
+    3: "Dia 4: Sintetizar aprendizados"
+    4: "Dia 5: Decidir proximos passos"
+
+  mensagem_inicial: |
+    ## Discovery Sprint - 5 Dias
+
+    Vamos realizar um ciclo completo de discovery em 1 semana.
+
+    **Cronograma:**
+    - Dia 1: Definir foco e recrutar participantes
+    - Dia 2-3: Conduzir 5+ entrevistas
+    - Dia 4: Sintetizar aprendizados
+    - Dia 5: Decidir proximos passos
+
+    **Prerequisitos:**
+    - Acesso a usuarios para entrevistas
+    - Disponibilidade do trio (PM, Design, Eng)
+    - Outcome claro para investigar
+
+    Vamos comecar definindo o foco.
+
+    **Qual outcome voce quer investigar?**
+    (Ex: "Aumentar ativacao de 40% para 60%")
+
+  mensagem_final: |
+    ## Discovery Sprint Concluido!
+
+    **Resultado:** {{total_entrevistas}} entrevistas realizadas
+
+    **Hipoteses:**
+    - Validadas: {{validadas}}
+    - Invalidadas: {{invalidadas}}
+    - Inconclusivas: {{inconclusivas}}
+
+    **Decisao:** {{decisao}}
+
+    **Documentacao salva em:**
+    `output/{{produto}}/produtos/discovery/sprint-{{data}}.md`
+
+    Quer planejar o proximo sprint ou prosseguir para prototipacao?

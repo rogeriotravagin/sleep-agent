@@ -1,0 +1,499 @@
+# Workflow: Landing Page Completa
+# Framework Ralph de Execucao
+
+id: landing-completa
+nome: Landing Page de Alta Conversao
+descricao: Criar landing page otimizada para conversao usando principios de CRO
+comando: /landing-completa
+
+versao: "1.0"
+
+# Baseado em: Oli Gardner (CCD), Peep Laja (CXL), Tim Ash, LIFT Model
+
+duracao_estimada: "Processo completo"
+resultado_final: "Landing page completa com wireframe, copy e especificacoes"
+
+# =====================================================
+# VISAO GERAL
+# =====================================================
+
+visao_geral: |
+  Este workflow cria uma landing page de alta conversao,
+  aplicando os melhores frameworks de CRO (Conversion Rate Optimization).
+
+  Combina estrategia, copy e design para maximizar conversoes.
+
+# =====================================================
+# FASES DO WORKFLOW
+# =====================================================
+
+fases:
+  # ===================================================
+  # FASE 1: ESTRATEGIA
+  # ===================================================
+  - numero: 1
+    nome: ESTRATEGIA
+    agente: brand-strategist
+    objetivo: "Definir estrategia de conversao"
+
+    tarefas:
+      - id: briefing
+        nome: "Coletar Briefing"
+        perguntas:
+          - "Qual o objetivo da landing page? (vendas, leads, downloads)"
+          - "O que voce esta oferecendo?"
+          - "Quem e o publico-alvo?"
+          - "De onde vira o trafego? (ads, organico, email)"
+          - "Qual a acao principal esperada?"
+          - "Tem oferta ou incentivo especial?"
+          - "Quais as principais objecoes do publico?"
+          - "Tem prova social? (testimonials, numeros, logos)"
+
+      - id: analise-lift
+        nome: "Aplicar LIFT Model"
+        framework:
+          value_proposition: "Qual o valor unico oferecido?"
+          clarity: "A mensagem e clara?"
+          relevance: "E relevante para o publico?"
+          anxiety: "Quais ansiedades precisam ser reduzidas?"
+          distraction: "O que pode distrair da conversao?"
+          urgency: "Existe urgencia real ou criada?"
+
+      - id: message-match
+        nome: "Definir Message Match"
+        elementos:
+          - Headline do anuncio → Headline da LP
+          - Promessa do ad → Entrega na LP
+          - Visual do ad → Visual da LP
+
+    entregas:
+      - Briefing completo
+      - Analise LIFT documentada
+      - Estrategia de message match
+
+    gates:
+      - "Objetivo esta claro?"
+      - "Publico esta definido?"
+      - "Value proposition esta forte?"
+
+  # ===================================================
+  # FASE 2: COPY
+  # ===================================================
+  - numero: 2
+    nome: COPY
+    agente: copywriter
+    objetivo: "Escrever copy persuasiva"
+    dependencias: [1]
+
+    tarefas:
+      - id: headline
+        nome: "Criar Headlines"
+        tipos:
+          - Headline principal (beneficio)
+          - Headline de problema
+          - Headline de curiosidade
+        criterios:
+          - Clara e especifica
+          - Focada no beneficio
+          - Gera interesse imediato
+
+      - id: hero-copy
+        nome: "Escrever Copy do Hero"
+        elementos:
+          - Kicker (social proof curto)
+          - Headline
+          - Subheadline (expande beneficio)
+          - CTA primario
+          - CTA secundario (opcional)
+
+      - id: secoes
+        nome: "Escrever Secoes"
+        estrutura_aida:
+          attention: "Hero com headline impactante"
+          interest: "Problema + Solucao"
+          desire: "Beneficios + Prova social"
+          action: "CTA final"
+
+      - id: prova-social
+        nome: "Organizar Prova Social"
+        tipos:
+          - Logos de clientes
+          - Numeros (usuarios, avaliacoes)
+          - Testimonials
+          - Case studies
+          - Badges/Certificacoes
+
+      - id: objecoes
+        nome: "Quebrar Objecoes"
+        formato: "FAQ ou secao dedicada"
+        objecoes_comuns:
+          - Preco
+          - Funcionalidade
+          - Confianca
+          - Tempo
+          - Suporte
+
+    entregas:
+      - 3 opcoes de headline
+      - Copy completa por secao
+      - FAQ com objecoes
+      - CTAs otimizados
+
+    gates:
+      - "Headlines sao claras e atraentes?"
+      - "Beneficios estao evidentes?"
+      - "Objecoes foram endereacadas?"
+
+  # ===================================================
+  # FASE 3: ESTRUTURA
+  # ===================================================
+  - numero: 3
+    nome: ESTRUTURA
+    agente: uiux
+    objetivo: "Definir estrutura e hierarquia"
+    dependencias: [2]
+
+    tarefas:
+      - id: arquitetura
+        nome: "Definir Arquitetura da Pagina"
+        secoes_recomendadas:
+          - numero: 1
+            nome: "Hero"
+            elementos: [kicker, headline, subheadline, cta, imagem]
+          - numero: 2
+            nome: "Social Proof Bar"
+            elementos: [logos, numeros]
+          - numero: 3
+            nome: "Problema/Agitacao"
+            elementos: [dor, consequencias]
+          - numero: 4
+            nome: "Solucao"
+            elementos: [sua oferta, como resolve]
+          - numero: 5
+            nome: "Features/Benefits"
+            elementos: [3-5 beneficios com icones]
+          - numero: 6
+            nome: "Como Funciona"
+            elementos: [3-4 passos]
+          - numero: 7
+            nome: "Testimonials"
+            elementos: [2-4 depoimentos]
+          - numero: 8
+            nome: "Pricing/Oferta"
+            elementos: [opcoes, comparacao]
+          - numero: 9
+            nome: "FAQ"
+            elementos: [5-7 perguntas]
+          - numero: 10
+            nome: "CTA Final"
+            elementos: [headline, beneficio, botao]
+          - numero: 11
+            nome: "Footer"
+            elementos: [links, contato, legal]
+
+      - id: hierarquia-visual
+        nome: "Definir Hierarquia Visual"
+        principios:
+          - Headline e maior elemento de texto
+          - CTA tem cor de destaque
+          - Espacamento agrupa relacionados
+          - Imagens suportam a mensagem
+
+      - id: attention-ratio
+        nome: "Otimizar Attention Ratio"
+        meta: "1:1 (1 objetivo = 1 CTA)"
+        eliminar:
+          - Navegacao completa
+          - Links externos
+          - Distractores visuais
+
+    entregas:
+      - Mapa de secoes
+      - Hierarquia de elementos
+      - Wireframe low-fidelity
+
+    gates:
+      - "Fluxo e logico?"
+      - "Attention ratio e 1:1?"
+      - "Hierarquia esta clara?"
+
+  # ===================================================
+  # FASE 4: WIREFRAME
+  # ===================================================
+  - numero: 4
+    nome: WIREFRAME
+    agente: uiux
+    objetivo: "Criar wireframe detalhado"
+    dependencias: [3]
+
+    tarefas:
+      - id: wireframe-mobile
+        nome: "Wireframe Mobile First"
+        especificacoes:
+          - Largura: 375px
+          - Grid: 4 colunas
+          - Margens: 20px
+          - Touch targets: min 44x44px
+
+      - id: wireframe-desktop
+        nome: "Wireframe Desktop"
+        especificacoes:
+          - Largura: 1440px (container 1200px)
+          - Grid: 12 colunas
+          - Margens: 80-120px
+
+      - id: componentes
+        nome: "Especificar Componentes"
+        por_secao:
+          hero:
+            - Navegacao simplificada
+            - Headline + Subheadline
+            - CTA button
+            - Hero image/video
+          social_proof:
+            - Logo grid (5-6 logos)
+            - Numero destacado
+          features:
+            - Icon + titulo + descricao
+            - Grid 3 colunas (desktop)
+          testimonial:
+            - Foto + nome + cargo
+            - Citacao
+            - Estrelas (opcional)
+          cta_section:
+            - Background destacado
+            - Headline de fechamento
+            - Botao grande
+
+    entregas:
+      - Wireframe mobile
+      - Wireframe desktop
+      - Especificacao de componentes
+
+    gates:
+      - "Mobile funciona bem?"
+      - "Desktop aproveita espaco?"
+      - "Componentes estao especificados?"
+
+  # ===================================================
+  # FASE 5: DESIGN
+  # ===================================================
+  - numero: 5
+    nome: DESIGN
+    agente: designer
+    objetivo: "Aplicar identidade visual"
+    dependencias: [4]
+
+    tarefas:
+      - id: aplicar-identidade
+        nome: "Aplicar Identidade Visual"
+        elementos:
+          - Cores da marca
+          - Tipografia definida
+          - Logo e elementos graficos
+          - Estilo de imagens
+
+      - id: design-componentes
+        nome: "Design de Componentes"
+        estados:
+          - Default
+          - Hover
+          - Active
+          - Focus
+          - Disabled
+
+      - id: responsividade
+        nome: "Garantir Responsividade"
+        breakpoints:
+          - Mobile: 320-767px
+          - Tablet: 768-1023px
+          - Desktop: 1024px+
+
+    entregas:
+      - Design completo mobile
+      - Design completo desktop
+      - Estados de componentes
+
+    gates:
+      - "Identidade esta aplicada?"
+      - "Design e consistente?"
+      - "Responsivo funciona?"
+
+  # ===================================================
+  # FASE 6: ESPECIFICACOES
+  # ===================================================
+  - numero: 6
+    nome: ESPECIFICACOES
+    agente: uiux
+    objetivo: "Documentar para desenvolvimento"
+    dependencias: [5]
+
+    tarefas:
+      - id: specs-tecnicas
+        nome: "Criar Especificacoes Tecnicas"
+        documentar:
+          - Breakpoints
+          - Espacamentos (8px grid)
+          - Tamanhos de fonte
+          - Cores (HEX/RGB)
+          - Shadows
+          - Border-radius
+
+      - id: interacoes
+        nome: "Especificar Interacoes"
+        elementos:
+          - Hover states
+          - Scroll behaviors
+          - Animacoes (se houver)
+          - Form validations
+
+      - id: assets
+        nome: "Preparar Assets"
+        formatos:
+          - Imagens (webp, jpg, png)
+          - Icones (SVG)
+          - Fontes (woff2)
+          - Favicon
+          - OG Image
+
+    entregas:
+      - Documento de especificacoes
+      - Assets exportados
+      - Checklist de desenvolvimento
+
+    gates:
+      - "Specs estao completas?"
+      - "Assets estao prontos?"
+      - "Dev consegue implementar?"
+
+# =====================================================
+# TEMPLATES DE ENTREGA
+# =====================================================
+
+templates:
+  wireframe_section:
+    formato: markdown
+    estrutura: |
+      ## Secao: [Nome]
+
+      **Objetivo:** [O que esta secao faz]
+
+      ### Mobile (375px)
+      ```
+      ┌─────────────────────────────────┐
+      │  [Elemento 1]                   │
+      │  [Elemento 2]                   │
+      │  [Elemento 3]                   │
+      └─────────────────────────────────┘
+      ```
+
+      ### Desktop (1440px)
+      ```
+      ┌─────────────────────────────────────────────────┐
+      │  [Elemento 1]     │    [Elemento 2]             │
+      │                   │    [Elemento 3]             │
+      └─────────────────────────────────────────────────┘
+      ```
+
+      ### Especificacoes
+      - Background: [cor]
+      - Padding: [valores]
+      - Gap: [valores]
+
+      ### Copy
+      - Headline: "[texto]"
+      - Body: "[texto]"
+      - CTA: "[texto]"
+
+  hero_section:
+    formato: markdown
+    estrutura: |
+      ## Hero Section
+
+      ### Layout
+      ```
+      ┌─────────────────────────────────────────────────┐
+      │  [Logo]                           [CTA Nav]     │
+      ├─────────────────────────────────────────────────┤
+      │                                                 │
+      │  [Kicker: Social proof]                         │
+      │                                                 │
+      │  [HEADLINE PRINCIPAL]                           │
+      │                                                 │
+      │  [Subheadline - expande o beneficio]            │
+      │                                                 │
+      │  [  CTA Primario  ]  [Link Secundario]          │
+      │                                                 │
+      │  [Imagem/Video Hero]                            │
+      │                                                 │
+      └─────────────────────────────────────────────────┘
+      ```
+
+      ### Copy
+      - **Kicker:** "[texto]"
+      - **Headline:** "[texto]"
+      - **Subheadline:** "[texto]"
+      - **CTA:** "[texto]"
+      - **Link:** "[texto]"
+
+      ### Specs
+      - Height: 100vh (min 600px)
+      - Padding: 80px 120px
+      - Headline: 48px/56px, font-weight 700
+      - Subheadline: 20px/28px, font-weight 400
+      - CTA: 16px, padding 16px 32px, radius 8px
+
+# =====================================================
+# METRICAS DE SUCESSO
+# =====================================================
+
+metricas:
+  pre_lancamento:
+    - Attention ratio 1:1
+    - Message match com anuncios
+    - Mobile-friendly (100%)
+    - Tempo de carregamento (<3s)
+    - CTA visivel above the fold
+
+  pos_lancamento:
+    - CTR do CTA: >5%
+    - Bounce rate: <50%
+    - Scroll depth: >70%
+    - Conversion rate: >3%
+    - Time on page: >60s
+
+# =====================================================
+# CHECKLIST FINAL
+# =====================================================
+
+checklist_final:
+  copy:
+    - [ ] Headline clara e com beneficio
+    - [ ] Subheadline suporta headline
+    - [ ] Beneficios > Features
+    - [ ] Prova social presente
+    - [ ] Objecoes endereacadas
+    - [ ] CTA com acao clara
+    - [ ] Urgencia/escassez (se aplicavel)
+
+  design:
+    - [ ] Hierarquia visual clara
+    - [ ] Cores da marca aplicadas
+    - [ ] Tipografia consistente
+    - [ ] Espacamento adequado
+    - [ ] Imagens de qualidade
+    - [ ] Mobile responsivo
+
+  ux:
+    - [ ] Fluxo logico
+    - [ ] Sem distractores
+    - [ ] Form simples
+    - [ ] Trust signals visiveis
+    - [ ] Footer com informacoes
+
+  tecnico:
+    - [ ] Carregamento <3s
+    - [ ] Imagens otimizadas
+    - [ ] Meta tags configuradas
+    - [ ] Favicon presente
+    - [ ] Analytics instalado

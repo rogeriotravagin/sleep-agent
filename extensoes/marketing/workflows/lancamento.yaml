@@ -1,0 +1,103 @@
+# Workflow: Lançamento
+
+id: lancamento
+nome: Preparar Lançamento
+descricao: Cria todos os elementos necessários para um lançamento de produto
+comando: /lancamento
+
+versao: "1.0"
+
+# Visão geral
+sobre: |
+  Este workflow guia você na criação de todos os elementos de copy
+  necessários para um lançamento de produto ou serviço.
+
+  Ao final, você terá:
+  - Oferta estruturada
+  - Headlines para página de vendas
+  - Sequência de emails de lançamento
+  - Conceitos de anúncios
+
+# Etapas
+etapas:
+  - numero: 1
+    nome: Definir a Oferta
+    agente: estrategista
+    tarefa: criar-oferta
+    descricao: Estruturar oferta irresistível com stack de valor
+    entregavel: Documento de oferta completo
+
+  - numero: 2
+    nome: Criar Headlines
+    agente: copywriter
+    tarefa: criar-headline
+    descricao: Headlines para página de vendas e anúncios
+    entregavel: 10 headlines com diferentes ângulos
+    depende_de: 1
+
+  - numero: 3
+    nome: Emails de Lançamento
+    agente: copywriter
+    tarefa: criar-email
+    descricao: Sequência de 5-7 emails para o lançamento
+    entregavel: Sequência completa de emails
+    depende_de: 1
+    detalhes:
+      emails:
+        - tipo: Abertura de carrinho
+          objetivo: Apresentar oferta
+        - tipo: Benefícios
+          objetivo: Conteúdo + vender
+        - tipo: Prova social
+          objetivo: Quebrar objeções
+        - tipo: Objeções
+          objetivo: Quebrar objeções
+        - tipo: Urgência
+          objetivo: Criar urgência
+        - tipo: Última chance
+          objetivo: Criar urgência
+        - tipo: Encerramento
+          objetivo: Criar urgência
+
+  - numero: 4
+    nome: Conceitos de Anúncios
+    agente: trafego
+    descricao: Criar 3 conceitos de anúncios para tráfego pago
+    entregavel: 3 anúncios com copy e direção visual
+    depende_de: [1, 2]
+
+# Perguntas iniciais
+perguntas_iniciais:
+  - O que você está lançando?
+  - Qual o preço do produto?
+  - Quando será o lançamento?
+  - Você já tem lista de leads? Quantos?
+  - Qual sua meta de vendas?
+
+# Progresso
+progresso_template: |
+  ## Lançamento: [nome do produto]
+
+  [x] Etapa 1: Definir Oferta - Concluída
+  [ ] Etapa 2: Criar Headlines - Em andamento
+  [ ] Etapa 3: Sequência de Emails - Pendente
+  [ ] Etapa 4: Conceitos de Anúncios - Pendente
+
+  Próximo: [próxima etapa]
+
+# Entrega final
+entrega_final:
+  formato: pasta
+  estrutura: |
+    projetos/lancamento-[nome]/
+    ├── 01-oferta.md
+    ├── 02-headlines.md
+    ├── 03-emails/
+    │   ├── email-01-abertura.md
+    │   ├── email-02-beneficios.md
+    │   ├── email-03-prova.md
+    │   ├── email-04-objecoes.md
+    │   ├── email-05-urgencia.md
+    │   ├── email-06-ultima-chance.md
+    │   └── email-07-encerramento.md
+    └── 04-anuncios.md

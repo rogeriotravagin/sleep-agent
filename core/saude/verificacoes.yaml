@@ -1,0 +1,212 @@
+# Verificacoes de Saude do Sleep Agent
+# Define o que verificar, como corrigir e qual nivel de severidade
+
+# ============================================================
+# CONFIGURACAO
+# ============================================================
+configuracao:
+  sleep_agent_yaml:
+    descricao: "Arquivo principal de configuracao existe"
+    caminho: "workspace/.config/sleep-agent.yaml"
+    nivel: 1
+    auto_correcao:
+      acao: criar_arquivo
+      template: |
+        versao: "4.0"
+        estrutura:
+          tipo: null
+          nome: null
+        extensoes: []
+        ultima_verificacao: null
+    mensagem_usuario: "Configurando seu espaco de trabalho..."
+
+  yaml_valido:
+    descricao: "Configuracao e YAML valido"
+    caminho: "workspace/.config/sleep-agent.yaml"
+    nivel: 3
+    auto_correcao: null
+    mensagem_usuario: |
+      O arquivo de configuracao parece ter um problema de formatacao.
+      Posso tentar identificar onde esta o erro para voce corrigir.
+
+  versao_compativel:
+    descricao: "Versao da configuracao e compativel"
+    caminho: "workspace/.config/sleep-agent.yaml"
+    nivel: 2
+    auto_correcao:
+      acao: migrar_versao
+      preservar_dados: true
+    mensagem_usuario: |
+      Sua configuracao esta em uma versao anterior.
+      Posso atualizar para a versao atual mantendo suas informacoes.
+
+# ============================================================
+# WORKSPACE
+# ============================================================
+workspace:
+  pasta_config:
+    descricao: "Pasta .config existe"
+    caminho: "workspace/.config"
+    nivel: 1
+    auto_correcao:
+      acao: criar_pasta
+    mensagem_usuario: null  # Silencioso
+
+  pasta_memoria:
+    descricao: "Pasta .memoria existe"
+    caminho: "workspace/.memoria"
+    nivel: 1
+    auto_correcao:
+      acao: criar_pasta_com_templates
+      templates:
+        - "core/memoria/templates/insights.yaml"
+        - "core/memoria/templates/decisoes.yaml"
+        - "core/memoria/templates/padroes.yaml"
+        - "core/memoria/templates/alertas.yaml"
+    mensagem_usuario: null  # Silencioso
+
+  pasta_status:
+    descricao: "Pasta .status existe"
+    caminho: "workspace/.status"
+    nivel: 1
+    auto_correcao:
+      acao: criar_pasta
+    mensagem_usuario: null  # Silencioso
+
+  estrutura_valida:
+    descricao: "Estrutura do workspace e valida"
+    verificar:
+      - "Pelo menos uma empresa/produto definido"
+      - "Pastas seguem padrao esperado"
+    nivel: 2
+    auto_correcao:
+      acao: sugerir_correcao
+    mensagem_usuario: |
+      A estrutura do seu workspace parece incompleta.
+      Posso ajudar a organizar melhor?
+
+# ============================================================
+# EXTENSOES
+# ============================================================
+extensoes:
+  manifesto_existe:
+    descricao: "extensao.yaml existe em cada extensao"
+    caminho: "extensoes/*/extensao.yaml"
+    nivel: 3
+    auto_correcao: null
+    mensagem_usuario: |
+      A extensao {nome} esta sem arquivo de manifesto.
+      Ela pode nao funcionar corretamente.
+
+  manifesto_valido:
+    descricao: "extensao.yaml e YAML valido"
+    nivel: 3
+    auto_correcao: null
+    mensagem_usuario: |
+      O manifesto da extensao {nome} tem erro de formatacao.
+
+  agentes_existem:
+    descricao: "Agentes referenciados no manifesto existem"
+    nivel: 2
+    auto_correcao:
+      acao: alertar
+    mensagem_usuario: |
+      A extensao {nome} referencia agentes que nao encontrei:
+      {lista_agentes}
+
+  conhecimento_existe:
+    descricao: "Arquivos de conhecimento referenciados existem"
+    nivel: 2
+    auto_correcao:
+      acao: alertar
+    mensagem_usuario: |
+      Alguns arquivos de conhecimento nao foram encontrados:
+      {lista_arquivos}
+
+# ============================================================
+# MEMORIA
+# ============================================================
+memoria:
+  arquivos_validos:
+    descricao: "Arquivos de memoria sao YAML valido"
+    caminhos:
+      - "workspace/.memoria/insights.yaml"
+      - "workspace/.memoria/decisoes.yaml"
+      - "workspace/.memoria/padroes.yaml"
+      - "workspace/.memoria/alertas.yaml"
+    nivel: 2
+    auto_correcao:
+      acao: backup_e_recriar
+      manter_backup: true
+    mensagem_usuario: |
+      Um dos arquivos de memoria esta com problema.
+      Fiz backup do arquivo original e criei um novo.
+      Backup salvo em: {caminho_backup}
+
+  sem_duplicatas:
+    descricao: "Entradas de memoria nao estao duplicadas"
+    nivel: 1
+    auto_correcao:
+      acao: remover_duplicatas
+    mensagem_usuario: null  # Silencioso
+
+# ============================================================
+# STATUS
+# ============================================================
+status:
+  arquivos_validos:
+    descricao: "Arquivos de status sao YAML valido"
+    nivel: 1
+    auto_correcao:
+      acao: recriar
+    mensagem_usuario: null  # Silencioso
+
+  limpar_antigos:
+    descricao: "Remover arquivos de status muito antigos"
+    criterio: "mais de 30 dias"
+    nivel: 1
+    auto_correcao:
+      acao: limpar
+    mensagem_usuario: null  # Silencioso
+
+# ============================================================
+# ACOES DE AUTO-CORRECAO
+# ============================================================
+acoes_disponiveis:
+  criar_arquivo:
+    descricao: "Cria arquivo com conteudo padrao"
+    risco: baixo
+
+  criar_pasta:
+    descricao: "Cria pasta se nao existe"
+    risco: baixo
+
+  criar_pasta_com_templates:
+    descricao: "Cria pasta e popula com arquivos template"
+    risco: baixo
+
+  migrar_versao:
+    descricao: "Migra configuracao para nova versao"
+    risco: medio
+    requer_confirmacao: true
+
+  backup_e_recriar:
+    descricao: "Faz backup e recria arquivo"
+    risco: medio
+    requer_confirmacao: true
+
+  remover_duplicatas:
+    descricao: "Remove entradas duplicadas"
+    risco: baixo
+
+  limpar:
+    descricao: "Remove arquivos desnecessarios"
+    risco: baixo
+
+  alertar:
+    descricao: "Apenas alerta o usuario, nao corrige"
+    risco: nenhum
+
+  sugerir_correcao:
+    descricao: "Sugere correcao mas nao executa"
+    risco: nenhum

@@ -1,0 +1,218 @@
+# Tarefa: Revisar Copy Existente
+
+id: revisar-copy
+nome: Revisar e Corrigir Copy
+descricao: Recebe texto existente, analisa contra Quality Gate PT-BR, identifica problemas e entrega versao corrigida
+agente: revisor-copy
+comando: /revisar-copy
+
+versao: "1.0"
+categoria: revisao
+
+# Entradas
+entradas:
+  obrigatorias:
+    - nome: texto
+      pergunta: "Cole aqui o texto que quer revisar:"
+      tipo: texto_longo
+      exemplo: "Gostaríamos de apresentar nossa solução inovadora..."
+
+  opcionais:
+    - nome: tipo
+      pergunta: "Que tipo de material é?"
+      tipo: escolha
+      opcoes:
+        - Email de venda
+        - Landing page
+        - Anúncio
+        - Post rede social
+        - Roteiro de vídeo/VSL
+        - Email transacional
+        - Outro
+      padrao: "Outro"
+
+    - nome: tom_desejado
+      pergunta: "Qual tom deseja?"
+      tipo: escolha
+      opcoes:
+        - Informal/conversacional
+        - Profissional acessível
+        - Formal educado
+        - Manter o tom atual
+      padrao: "Informal/conversacional"
+
+    - nome: nivel_revisao
+      pergunta: "Qual nível de revisão?"
+      tipo: escolha
+      opcoes:
+        - Leve (só gramática e pontuação)
+        - Média (gramática + tom + ritmo)
+        - Profunda (reescrita completa anti-IA)
+      padrao: "Profunda (reescrita completa anti-IA)"
+
+# Processo
+passos:
+  - numero: 1
+    acao: "Ler o texto completo e identificar tipo/contexto"
+    detalhes:
+      - "Entender o objetivo do texto"
+      - "Identificar público-alvo provável"
+      - "Notar tom atual"
+
+  - numero: 2
+    acao: "Aplicar Quality Gate — Fase 1: Gramática e Ortografia"
+    detalhes:
+      - "Verificar acentuação (TODA palavra)"
+      - "Verificar concordância verbal e nominal"
+      - "Checar erros graves (vírgula entre sujeito/verbo, mais/mas, mal/mau)"
+      - "Conferir crase nos casos básicos"
+    referencia: "conhecimento/pontuacao-copy-ptbr.md"
+
+  - numero: 3
+    acao: "Aplicar Quality Gate — Fase 2: Pontuação"
+    detalhes:
+      - "Contar variedade de sinais usados"
+      - "Identificar excesso de pontos finais seguidos"
+      - "Verificar se tem perguntas retóricas"
+      - "Checar uso de reticências e travessões"
+      - "Verificar abuso de exclamação"
+    referencia: "conhecimento/pontuacao-copy-ptbr.md"
+
+  - numero: 4
+    acao: "Aplicar Quality Gate — Fase 3: Naturalidade e Tom"
+    detalhes:
+      - "Aplicar teste do bar"
+      - "Verificar uso de contrações (pra, tá, né)"
+      - "Checar marcadores conversacionais"
+      - "Avaliar personalidade e opinião"
+    referencia: "conhecimento/escrita-natural-ptbr.md"
+
+  - numero: 5
+    acao: "Aplicar Quality Gate — Fase 4: Ritmo e Estrutura"
+    detalhes:
+      - "Verificar variação de tamanho de frases"
+      - "Checar tamanho dos parágrafos"
+      - "Avaliar cadência geral"
+      - "Ler em voz alta mentalmente"
+    referencia: "conhecimento/escrita-natural-ptbr.md"
+
+  - numero: 6
+    acao: "Aplicar Quality Gate — Fase 5: Antipatterns de IA"
+    detalhes:
+      - "Checar aberturas e fechamentos genéricos"
+      - "Identificar vocabulário robótico"
+      - "Verificar estrutura de ensaio"
+      - "Identificar qualificadores fracos"
+      - "Checar falsa empatia e repetições"
+    referencia: "conhecimento/vicios-linguagem-ia.md"
+
+  - numero: 7
+    acao: "Gerar relatório com score e problemas encontrados"
+    detalhes:
+      - "Score por fase"
+      - "Lista de problemas específicos com linha/trecho"
+      - "Classificação geral"
+
+  - numero: 8
+    acao: "Reescrever o texto corrigido"
+    detalhes:
+      - "Manter a mensagem e objetivo original"
+      - "Corrigir todos os problemas identificados"
+      - "Aplicar técnicas de escrita natural"
+      - "Respeitar tom desejado pelo usuário"
+
+  - numero: 9
+    acao: "Re-avaliar texto corrigido com Quality Gate"
+    detalhes:
+      - "Confirmar score >= 75/100"
+      - "Se não passou, ajustar e reavaliar"
+
+# Saída
+saida:
+  formato: markdown
+  template: |
+    ## Revisão de Copy — Relatório Completo
+
+    ---
+
+    ### DIAGNÓSTICO
+
+    **Tipo de material:** [tipo]
+    **Tom atual:** [tom identificado]
+    **Tom desejado:** [tom solicitado]
+
+    ---
+
+    ### SCORE — QUALITY GATE
+
+    | Fase | Score | Status |
+    |------|-------|--------|
+    | 1. Gramática e Ortografia | __/20 | ✅/❌ |
+    | 2. Pontuação | __/15 | ✅/❌ |
+    | 3. Naturalidade e Tom | __/25 | ✅/❌ |
+    | 4. Ritmo e Estrutura | __/20 | ✅/❌ |
+    | 5. Antipatterns de IA | __/20 | ✅/❌ |
+    | **TOTAL** | **__/100** | **[classificação]** |
+
+    ---
+
+    ### PROBLEMAS ENCONTRADOS
+
+    **Fase 1 — Gramática:**
+    - [problema]: "[trecho]" → "[correção]"
+
+    **Fase 2 — Pontuação:**
+    - [problema]: "[trecho]" → "[correção]"
+
+    **Fase 3 — Naturalidade:**
+    - [problema]: "[trecho]" → "[correção]"
+
+    **Fase 4 — Ritmo:**
+    - [problema]: "[trecho]" → "[correção]"
+
+    **Fase 5 — Antipatterns:**
+    - [problema]: "[trecho]" → "[correção]"
+
+    ---
+
+    ### TEXTO ORIGINAL
+    ```
+    [texto original]
+    ```
+
+    ---
+
+    ### TEXTO CORRIGIDO
+    ```
+    [texto reescrito]
+    ```
+
+    ---
+
+    ### SCORE APÓS CORREÇÃO: __/100
+
+    ---
+
+    ### O QUE MUDOU (resumo)
+    - [mudança 1]
+    - [mudança 2]
+    - [mudança 3]
+
+conhecimento:
+  - conhecimento/vicios-linguagem-ia.md
+  - conhecimento/pontuacao-copy-ptbr.md
+  - conhecimento/escrita-natural-ptbr.md
+  - conhecimento/escrita-natural-ia-ptbr.md
+  - frameworks/copy/checklists/qualidade-escrita-ptbr-checklist.md
+
+gates:
+  - Score final >= 75/100?
+  - Todos os erros de acentuação corrigidos?
+  - Zero vocabulário robótico restante?
+  - Tom consistente com solicitado?
+  - Leitura em voz alta flui naturalmente?
+
+proximos_passos:
+  - Aplicar revisão em outros materiais do mesmo projeto
+  - Criar versão HTML para Mautic (se email)
+  - Criar variações para teste A/B

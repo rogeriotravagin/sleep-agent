@@ -1,0 +1,530 @@
+# Workflow: Brand Completo
+# Framework Ralph de Execucao Visual
+
+id: brand-completo
+nome: Construcao de Marca Completa
+descricao: Processo completo de branding em 8 fases - da estrategia a aplicacao
+comando: /brand-completo
+
+versao: "1.0"
+
+# Baseado em: Marty Neumeier, David Aaker, Simon Sinek, Paul Rand
+
+duracao_estimada: "Processo completo"
+resultado_final: "Marca completa com identidade visual, verbal e posicionamento"
+
+# =====================================================
+# VISAO GERAL
+# =====================================================
+
+visao_geral: |
+  Este workflow guia a construcao completa de uma marca,
+  desde a descoberta estrategica ate a aplicacao final.
+
+  Cada fase e executada por um agente especializado,
+  garantindo profundidade e qualidade em cada etapa.
+
+# =====================================================
+# FASES DO WORKFLOW
+# =====================================================
+
+fases:
+  # ===================================================
+  # FASE 1: DESCOBERTA
+  # ===================================================
+  - numero: 1
+    nome: DESCOBERTA
+    agente: brand-strategist
+    objetivo: "Entender o cenario, mercado e oportunidades"
+    duracao: "Fase inicial"
+
+    tarefas:
+      - id: briefing-inicial
+        nome: "Coletar Briefing"
+        perguntas:
+          - "Qual o nome da empresa/marca?"
+          - "Qual o segmento de atuacao?"
+          - "O que voce vende/oferece?"
+          - "Quem sao seus principais concorrentes?"
+          - "Quem e seu cliente ideal?"
+          - "Qual o diferencial da sua oferta?"
+          - "Quais valores sao importantes para voce?"
+          - "Tem alguma referencia de marca que admira?"
+
+      - id: analise-mercado
+        nome: "Analisar Mercado"
+        acoes:
+          - Mapear concorrentes diretos e indiretos
+          - Identificar posicionamentos existentes
+          - Encontrar espacos vazios no mercado
+          - Analisar tendencias do setor
+
+      - id: analise-publico
+        nome: "Analisar Publico"
+        acoes:
+          - Definir perfil demografico
+          - Mapear dores e desejos
+          - Entender comportamento de compra
+          - Identificar influenciadores do setor
+
+    entregas:
+      - Documento de briefing completo
+      - Mapa de concorrentes
+      - Perfil inicial do publico
+      - Oportunidades identificadas
+
+    gates:
+      - "Briefing esta completo?"
+      - "Concorrentes foram mapeados?"
+      - "Publico foi identificado?"
+
+  # ===================================================
+  # FASE 2: ESTRATEGIA
+  # ===================================================
+  - numero: 2
+    nome: ESTRATEGIA
+    agente: brand-strategist
+    objetivo: "Definir posicionamento e diferenciacao"
+    dependencias: [1]
+
+    tarefas:
+      - id: golden-circle
+        nome: "Definir Golden Circle (Sinek)"
+        estrutura:
+          why: "Por que existimos? Qual nosso proposito?"
+          how: "Como fazemos diferente? Quais nossos valores?"
+          what: "O que oferecemos? Produtos e servicos"
+
+      - id: arquetipo
+        nome: "Escolher Brand Archetype"
+        opcoes:
+          - Inocente (seguranca, simplicidade)
+          - Explorador (liberdade, descoberta)
+          - Sabio (conhecimento, verdade)
+          - Heroi (coragem, maestria)
+          - Fora-da-Lei (revolucao, libertacao)
+          - Mago (transformacao)
+          - Cara Comum (pertencimento)
+          - Amante (intimidade, paixao)
+          - Bobo da Corte (alegria, diversao)
+          - Cuidador (servico, protecao)
+          - Criador (inovacao, expressao)
+          - Governante (controle, lideranca)
+
+      - id: positioning-statement
+        nome: "Criar Positioning Statement"
+        template: |
+          Para [publico-alvo]
+          que [necessidade/problema],
+          [nome da marca] e a [categoria]
+          que [beneficio principal]
+          porque [razao para crer].
+
+      - id: diferenciacao
+        nome: "Definir Diferenciacao"
+        elementos:
+          - Unique Value Proposition (UVP)
+          - Points of Difference (PODs)
+          - Points of Parity (POPs)
+          - Razoes para crer (RTBs)
+
+    entregas:
+      - Golden Circle documentado
+      - Arquetipo definido com justificativa
+      - Positioning Statement final
+      - Mapa de diferenciacao
+
+    gates:
+      - "WHY esta claro e inspirador?"
+      - "Arquetipo faz sentido para a marca?"
+      - "Posicionamento e unico no mercado?"
+
+  # ===================================================
+  # FASE 3: IDENTIDADE VERBAL
+  # ===================================================
+  - numero: 3
+    nome: IDENTIDADE VERBAL
+    agente: brand-strategist
+    objetivo: "Definir como a marca se comunica"
+    dependencias: [2]
+
+    tarefas:
+      - id: brand-voice
+        nome: "Definir Brand Voice"
+        elementos:
+          - Tom de voz (formal/informal, serio/divertido)
+          - Personalidade (adjetivos que descrevem)
+          - Vocabulario (palavras a usar/evitar)
+          - Estilo de escrita (curto/longo, simples/complexo)
+
+      - id: messaging-hierarchy
+        nome: "Criar Hierarquia de Mensagens"
+        niveis:
+          - Headline principal (promessa core)
+          - Subheadline (suporte)
+          - Supporting messages (provas)
+          - Boilerplate (texto padrao)
+
+      - id: tagline
+        nome: "Criar Tagline/Slogan"
+        criterios:
+          - Memoravel
+          - Diferenciador
+          - Atemporal
+          - Alinhado com posicionamento
+
+      - id: brand-story
+        nome: "Escrever Brand Story"
+        estrutura:
+          - Contexto (como surgiu)
+          - Conflito (problema identificado)
+          - Resolucao (solucao criada)
+          - Visao (futuro que busca)
+
+    entregas:
+      - Guia de Brand Voice
+      - Messaging Framework
+      - 3-5 opcoes de tagline
+      - Brand Story completa
+
+    gates:
+      - "Tom de voz esta consistente com arquetipo?"
+      - "Mensagens sao claras e diferenciadas?"
+      - "Tagline e memoravel?"
+
+  # ===================================================
+  # FASE 4: IDENTIDADE VISUAL
+  # ===================================================
+  - numero: 4
+    nome: IDENTIDADE VISUAL
+    agente: designer
+    objetivo: "Criar o sistema visual da marca"
+    dependencias: [3]
+
+    tarefas:
+      - id: conceito-visual
+        nome: "Definir Conceito Visual"
+        elementos:
+          - Moodboard com referencias
+          - Direcao estetica
+          - Simbolismo a explorar
+
+      - id: logo
+        nome: "Criar Logo"
+        processo:
+          - Sketches iniciais (10-20 opcoes)
+          - Refinamento (3-5 opcoes)
+          - Finalizacao (1 opcao escolhida)
+          - Versoes (colorido, mono, invertido)
+        tipos_considerar:
+          - Wordmark
+          - Lettermark
+          - Pictorial
+          - Abstract
+          - Combination
+
+      - id: paleta-cores
+        nome: "Definir Paleta de Cores"
+        estrutura:
+          primarias: "1-2 cores principais"
+          secundarias: "2-3 cores de suporte"
+          neutras: "Tons de cinza, preto, branco"
+          destaque: "Cor para CTAs e alertas"
+        especificacoes:
+          - HEX (web)
+          - RGB (digital)
+          - CMYK (impressao)
+          - Pantone (premium)
+
+      - id: tipografia
+        nome: "Selecionar Tipografia"
+        elementos:
+          - Fonte primaria (titulos)
+          - Fonte secundaria (corpo)
+          - Hierarquia de tamanhos
+          - Pesos e estilos
+
+      - id: elementos-graficos
+        nome: "Criar Elementos Graficos"
+        itens:
+          - Padroes e texturas
+          - Icones
+          - Ilustracoes
+          - Fotografia (direcao)
+
+    entregas:
+      - Logo finalizado (todas versoes)
+      - Paleta de cores completa
+      - Sistema tipografico
+      - Biblioteca de elementos
+
+    gates:
+      - "Logo e simples e memoravel?"
+      - "Funciona em todos os tamanhos?"
+      - "Cores transmitem a personalidade?"
+
+  # ===================================================
+  # FASE 5: DESIGN SYSTEM
+  # ===================================================
+  - numero: 5
+    nome: DESIGN SYSTEM
+    agente: designer
+    objetivo: "Sistematizar a identidade visual"
+    dependencias: [4]
+
+    tarefas:
+      - id: design-tokens
+        nome: "Definir Design Tokens"
+        tokens:
+          cores: "Variaveis de cor"
+          tipografia: "Variaveis de fonte"
+          espacamento: "Grid de 8px"
+          bordas: "Border-radius"
+          sombras: "Elevacoes"
+
+      - id: componentes-base
+        nome: "Criar Componentes Base"
+        atomic_design:
+          atoms:
+            - Botoes
+            - Inputs
+            - Labels
+            - Icones
+          molecules:
+            - Cards
+            - Form fields
+            - Navigation items
+          organisms:
+            - Headers
+            - Footers
+            - Sections
+
+      - id: guidelines
+        nome: "Documentar Guidelines"
+        secoes:
+          - Uso correto do logo
+          - Area de protecao
+          - Tamanhos minimos
+          - Do's and Don'ts
+          - Exemplos de aplicacao
+
+    entregas:
+      - Design tokens documentados
+      - Biblioteca de componentes
+      - Brand guidelines completo
+
+    gates:
+      - "Sistema e escalavel?"
+      - "Componentes sao consistentes?"
+      - "Guidelines sao claros?"
+
+  # ===================================================
+  # FASE 6: UI/UX
+  # ===================================================
+  - numero: 6
+    nome: UI/UX
+    agente: uiux
+    objetivo: "Aplicar identidade em interfaces"
+    dependencias: [5]
+
+    tarefas:
+      - id: wireframes
+        nome: "Criar Wireframes"
+        paginas:
+          - Homepage/Landing page
+          - Paginas internas
+          - Fluxos de conversao
+
+      - id: prototipo
+        nome: "Desenvolver Prototipo"
+        elementos:
+          - Layout responsivo
+          - Hierarquia visual
+          - Interacoes basicas
+
+      - id: especificacoes
+        nome: "Criar Especificacoes"
+        documentar:
+          - Breakpoints
+          - Espacamentos
+          - Comportamentos
+          - Estados de componentes
+
+    entregas:
+      - Wireframes de todas paginas
+      - Prototipo navegavel
+      - Specs para desenvolvimento
+
+    gates:
+      - "Hierarquia visual esta clara?"
+      - "UX e intuitiva?"
+      - "Specs estao completas?"
+
+  # ===================================================
+  # FASE 7: APLICACAO
+  # ===================================================
+  - numero: 7
+    nome: APLICACAO
+    agente: uiux
+    objetivo: "Criar aplicacoes praticas da marca"
+    dependencias: [6]
+
+    tarefas:
+      - id: landing-page
+        nome: "Criar Landing Page"
+        estrutura:
+          - Hero section
+          - Social proof
+          - Features/Benefits
+          - Testimonials
+          - CTA sections
+          - FAQ
+          - Footer
+
+      - id: materiais-marketing
+        nome: "Criar Materiais de Marketing"
+        itens:
+          - Templates de social media
+          - Apresentacao institucional
+          - Email templates
+          - Assinatura de email
+
+      - id: assets-digitais
+        nome: "Preparar Assets Digitais"
+        formatos:
+          - Favicon
+          - OG Images
+          - App icons
+          - Banners
+
+    entregas:
+      - Landing page completa
+      - Kit de marketing
+      - Assets para todas plataformas
+
+    gates:
+      - "Landing page converte?"
+      - "Materiais estao consistentes?"
+      - "Assets cobrem todos os usos?"
+
+  # ===================================================
+  # FASE 8: PERSONAL BRAND (OPCIONAL)
+  # ===================================================
+  - numero: 8
+    nome: PERSONAL BRAND
+    agente: brand-strategist
+    objetivo: "Posicionar o empresario/fundador"
+    dependencias: [2]
+    opcional: true
+
+    tarefas:
+      - id: posicionamento-pessoal
+        nome: "Definir Posicionamento Pessoal"
+        elementos:
+          - Nicho especifico
+          - Expertise unica
+          - Ponto de vista diferenciado
+          - Historia de origem
+
+      - id: presenca-digital
+        nome: "Planejar Presenca Digital"
+        definir:
+          - Plataformas prioritarias
+          - Pilares de conteudo
+          - Frequencia de publicacao
+          - Tipos de conteudo
+
+      - id: thought-leadership
+        nome: "Estrategia de Thought Leadership"
+        acoes:
+          - Temas de autoridade
+          - Formatos de conteudo
+          - Parcerias e colaboracoes
+          - Metas de visibilidade
+
+    entregas:
+      - Personal brand document
+      - Estrategia de conteudo
+      - Calendario editorial inicial
+
+    gates:
+      - "Posicionamento e diferenciado?"
+      - "Estrategia e sustentavel?"
+      - "Alinhado com marca da empresa?"
+
+# =====================================================
+# ENTREGA FINAL
+# =====================================================
+
+entrega_final:
+  formato: "Pasta completa do projeto"
+  estrutura: |
+    [Nome-da-Marca]/
+    ├── 01-Estrategia/
+    │   ├── briefing.md
+    │   ├── analise-mercado.md
+    │   ├── posicionamento.md
+    │   └── golden-circle.md
+    ├── 02-Identidade-Verbal/
+    │   ├── brand-voice.md
+    │   ├── messaging.md
+    │   ├── taglines.md
+    │   └── brand-story.md
+    ├── 03-Identidade-Visual/
+    │   ├── logo/
+    │   ├── cores/
+    │   ├── tipografia/
+    │   └── elementos/
+    ├── 04-Design-System/
+    │   ├── tokens.md
+    │   ├── componentes/
+    │   └── guidelines.md
+    ├── 05-Aplicacoes/
+    │   ├── landing-page/
+    │   ├── social-media/
+    │   └── assets/
+    └── 06-Personal-Brand/ (opcional)
+        ├── posicionamento.md
+        └── estrategia-conteudo.md
+
+# =====================================================
+# CHECKPOINTS
+# =====================================================
+
+checkpoints:
+  apos_fase_2:
+    nome: "Validacao Estrategica"
+    validar:
+      - Posicionamento aprovado pelo cliente
+      - Diferenciacao clara
+      - Arquetipo definido
+
+  apos_fase_4:
+    nome: "Validacao Visual"
+    validar:
+      - Logo aprovado
+      - Paleta de cores aprovada
+      - Sistema tipografico definido
+
+  apos_fase_7:
+    nome: "Validacao Final"
+    validar:
+      - Todos materiais entregues
+      - Guidelines completo
+      - Cliente satisfeito
+
+# =====================================================
+# METRICAS DE SUCESSO
+# =====================================================
+
+metricas:
+  qualidade:
+    - Posicionamento diferenciado no mercado
+    - Identidade visual memoravel
+    - Consistencia em todos touchpoints
+    - Mensagens claras e persuasivas
+
+  aplicacao:
+    - Landing page com CTR >5%
+    - Materiais prontos para uso
+    - Sistema escalavel para crescimento

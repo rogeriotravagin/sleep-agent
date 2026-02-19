@@ -1,0 +1,168 @@
+# =============================================================
+# AUTO-CALIBRACAO - Quality Gates que Aprendem
+# =============================================================
+# Monitora ajustes pedidos pelo usuario e cria novos gates
+# automaticamente quando detecta padroes recorrentes
+# =============================================================
+
+versao: 1.0
+
+calibracao:
+
+  # ---------------------------------------------------------
+  # COMO FUNCIONA
+  # ---------------------------------------------------------
+  descricao: |
+    O sistema monitora cada vez que o usuario pede ajustes apos
+    uma entrega. Quando o MESMO tipo de ajuste e pedido 3 ou mais
+    vezes para o mesmo tipo de tarefa, o sistema:
+    1. Detecta o padrao
+    2. Sugere criar um novo quality gate
+    3. Se aprovado, adiciona ao pipeline de validacao
+    4. Proximas entregas passam pelo novo gate automaticamente
+
+  # ---------------------------------------------------------
+  # TRACKING DE AJUSTES
+  # ---------------------------------------------------------
+  tracking:
+    habilitado: true
+    arquivo_metricas: "core/qualidade/tracking.yaml"
+
+    o_que_rastrear:
+      - tipo_tarefa: "Qual tipo de tarefa gerou o ajuste"
+      - agente: "Qual agente fez a entrega"
+      - extensao: "Qual extensao estava ativa"
+      - tipo_ajuste: "Categoria do ajuste pedido"
+      - descricao_ajuste: "O que exatamente o usuario pediu"
+      - timestamp: "Quando aconteceu"
+
+    categorias_ajuste:
+      tom:
+        descricao: "Ajustes de tom de voz"
+        exemplos:
+          - "mais informal"
+          - "mais direto"
+          - "menos corporativo"
+          - "mais conversacional"
+      tamanho:
+        descricao: "Ajustes de extensao do conteudo"
+        exemplos:
+          - "mais curto"
+          - "mais detalhado"
+          - "resumir"
+          - "expandir"
+      estilo:
+        descricao: "Ajustes de estilo de escrita"
+        exemplos:
+          - "sem jargao"
+          - "mais tecnico"
+          - "menos formal"
+          - "usar numeros concretos"
+      formato:
+        descricao: "Ajustes de formato ou estrutura"
+        exemplos:
+          - "usar bullets"
+          - "dividir em secoes"
+          - "adicionar exemplos"
+      conteudo:
+        descricao: "Ajustes de conteudo substantivo"
+        exemplos:
+          - "foco diferente"
+          - "angulo errado"
+          - "adicionar beneficio"
+          - "remover parte"
+
+  # ---------------------------------------------------------
+  # REGRAS DE APRENDIZADO
+  # ---------------------------------------------------------
+  aprendizado:
+
+    deteccao_padrao:
+      threshold: 3  # Ajustes do mesmo tipo
+      janela: "30 dias"  # Dentro de quanto tempo
+      mesmo_tipo_tarefa: true  # Mesmo tipo de tarefa
+
+    ao_detectar:
+      1: "Notificar usuario sobre o padrao detectado"
+      2: "Sugerir criacao de novo gate"
+      3: "Se aprovado, adicionar ao pipeline"
+      4: "Registrar na memoria semantica"
+
+    formato_sugestao: |
+      Percebi que nas ultimas {N} vezes que criamos {tipo_tarefa},
+      voce pediu para {ajuste}. Quer que eu adicione isso como
+      verificacao automatica? Assim as proximas entregas ja virao
+      com esse ajuste aplicado.
+
+    novo_gate:
+      nivel: 1  # Automatico (mais eficiente)
+      auto_correcao: true  # Tenta corrigir antes de entregar
+      criado_por: "auto-calibracao"
+      data_criacao: "automatico"
+      aprovado_por: "usuario"  # Sempre requer aprovacao
+
+  # ---------------------------------------------------------
+  # METRICAS DE QUALIDADE
+  # ---------------------------------------------------------
+  metricas:
+
+    taxa_aprovacao:
+      descricao: "Percentual de entregas aprovadas sem ajustes"
+      alvo: 90
+      formula: "(entregas_aprovadas / total_entregas) * 100"
+      acoes:
+        abaixo_80:
+          - "Revisar gates existentes"
+          - "Analisar padroes de ajuste mais frequentes"
+          - "Sugerir novos gates ao usuario"
+        entre_80_90:
+          - "Monitorar tendencias"
+          - "Ajustes finos nos gates existentes"
+        acima_90:
+          - "Sistema calibrado"
+          - "Revisar se gates nao estao frouxos demais"
+        acima_98:
+          - "Possivel que gates estejam muito frouxos"
+          - "Considerar adicionar verificacoes"
+
+    taxa_por_tipo:
+      descricao: "Taxa de aprovacao segmentada por tipo de tarefa"
+      util_para: "Identificar quais tipos de tarefa precisam de mais gates"
+
+    evolucao:
+      descricao: "Tendencia da taxa de aprovacao ao longo do tempo"
+      esperado: "Crescente (sistema melhora com feedback)"
+
+  # ---------------------------------------------------------
+  # EXEMPLOS DE GATES AUTO-GERADOS
+  # ---------------------------------------------------------
+  exemplos:
+
+    - padrao_detectado: "'tom mais informal' pedido 5x em headlines"
+      gate_sugerido:
+        nivel: 1
+        verificacao: "Tom informal? Sem palavras formais (portanto, entretanto, ademais, destarte)"
+        auto_correcao: "Substituir por equivalentes informais"
+        tipo_tarefa: criar-headline
+
+    - padrao_detectado: "'mais curta' pedido 4x em descricoes"
+      gate_sugerido:
+        nivel: 1
+        verificacao: "Descricao tem menos de 150 palavras?"
+        auto_correcao: "Resumir mantendo pontos principais"
+        tipo_tarefa: criar-descricao
+
+    - padrao_detectado: "'usar numeros concretos' pedido 3x em emails"
+      gate_sugerido:
+        nivel: 1
+        verificacao: "Email contem pelo menos 2 numeros/dados concretos?"
+        auto_correcao: "Adicionar dados concretos baseados no contexto"
+        tipo_tarefa: criar-email
+
+    - padrao_detectado: "'sem travessao' pedido 6x em copy"
+      gate_sugerido:
+        nivel: 1
+        verificacao: "Copy nao contem travessoes (— ou &mdash;)?"
+        auto_correcao: "Substituir travessoes por virgula, ponto ou dois-pontos"
+        tipo_tarefa: "*"  # Todas as tarefas de copy
+        nota: "Regra ja documentada em MEMORY.md como diretriz global"

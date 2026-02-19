@@ -1,0 +1,148 @@
+# =============================================================
+# CONTEXT MANAGER - Estrategia de Carregamento Progressivo
+# =============================================================
+# Define O QUE carregar em cada nivel e QUANDO carregar
+# Trabalha em conjunto com brackets.yaml (QUANTO carregar)
+# =============================================================
+
+estrategia:
+
+  # ---------------------------------------------------------
+  # NIVEL 0: Kernel (Permanente)
+  # Sempre carregado, independente da tarefa
+  # ---------------------------------------------------------
+  nivel_0_kernel:
+    tipo: permanente
+    descricao: "Nucleo do sistema, sempre ativo"
+    carregar:
+      - arquivo: ".claude/CLAUDE.md"
+        prioridade: critica
+        motivo: "Identidade e regras do sistema"
+      - arquivo: "workspace/.state/blackboard.yaml"
+        prioridade: critica
+        motivo: "Estado compartilhado entre agentes"
+      - arquivo: "kernel/constitution/constitution.yaml"
+        prioridade: critica
+        motivo: "Regras imutaveis com enforcement"
+    peso_estimado: "~3KB"
+    descarregar: nunca
+
+  # ---------------------------------------------------------
+  # NIVEL 1: Extensao (Sob Demanda)
+  # Carregado quando extensao e ativada
+  # ---------------------------------------------------------
+  nivel_1_extensao:
+    tipo: sob_demanda
+    descricao: "Contexto da extensao ativa"
+    trigger: "Matching identifica extensao para o pedido"
+    carregar:
+      - arquivo: "extensoes/{extensao}/.claude/CLAUDE.md"
+        prioridade: alta
+        motivo: "Instrucoes especificas da extensao"
+      - arquivo: "extensoes/{extensao}/core/orquestrador/delegacao.yaml"
+        prioridade: alta
+        motivo: "Regras de delegacao para agentes"
+    peso_estimado: "~2KB por extensao"
+    descarregar:
+      condicao: "Extensao inativa por 5+ turnos"
+      acao: "Descarregar se nao houver handoff ativo"
+
+  # ---------------------------------------------------------
+  # NIVEL 2: Agente (Sob Demanda)
+  # Carregado quando tarefa e delegada
+  # ---------------------------------------------------------
+  nivel_2_agente:
+    tipo: sob_demanda
+    descricao: "Instrucoes e conhecimento do agente ativo"
+    trigger: "Orquestrador delega tarefa a um agente"
+    carregar:
+      - arquivo: "extensoes/{extensao}/agentes/{agente}.md"
+        prioridade: alta
+        motivo: "Persona, processo e instrucoes do agente"
+      - arquivo: "extensoes/{extensao}/conhecimento/{relevante}.md"
+        prioridade: media
+        motivo: "Conhecimento relevante para a tarefa"
+        selecao: "Baseado em loading-rules.yaml"
+    peso_estimado: "~5KB por agente"
+    descarregar:
+      condicao: "Agente inativo por 3+ turnos"
+      acao: "Descarregar conhecimento primeiro, instrucoes depois"
+
+  # ---------------------------------------------------------
+  # NIVEL 3: Profundo (Lazy Load)
+  # Carregado sob demanda durante execucao
+  # ---------------------------------------------------------
+  nivel_3_profundo:
+    tipo: lazy_load
+    descricao: "Conhecimento adicional, frameworks, exemplos"
+    trigger: "Agente identifica necessidade durante execucao"
+    carregar:
+      - arquivo: "extensoes/{extensao}/conhecimento/{topico}.md"
+        prioridade: media
+        motivo: "Conhecimento especializado"
+      - arquivo: "extensoes/{extensao}/frameworks/{framework}.md"
+        prioridade: baixa
+        motivo: "Frameworks de referencia"
+      - arquivo: "extensoes/{extensao}/templates/{template}"
+        prioridade: baixa
+        motivo: "Templates de entrega"
+    peso_estimado: "variavel"
+    descarregar:
+      condicao: "Nao acessado nos ultimos 3 turnos"
+      acao: "Descarregar imediatamente"
+
+# =============================================================
+# DESCARREGAMENTO (EVICTION)
+# =============================================================
+descarregamento:
+  trigger: "contexto > 80% capacidade"
+  estrategia: LRU  # Least Recently Used
+
+  prioridade_descarte:
+    1: "Nivel 3 nao usado nos ultimos 3 turnos"
+    2: "Nivel 2 de agentes inativos"
+    3: "Nivel 1 de extensoes inativas"
+    4: "Historico de mensagens antigas (sumarizar)"
+
+  nunca_descarregar:
+    - "workspace/.state/blackboard.yaml"
+    - "kernel/constitution/constitution.yaml"
+    - "workspace/.memoria/trabalho.yaml"
+
+# =============================================================
+# SUMARIZACAO
+# =============================================================
+sumarizacao:
+  trigger: "contexto > 70% capacidade"
+
+  regras:
+    - tipo: conversa_longa
+      acao: "Sumarizar turnos antigos, manter ultimos 5 intactos"
+      formato: "## Resumo da conversa ate aqui\n{resumo}"
+
+    - tipo: conhecimento_carregado
+      acao: "Extrair apenas pontos relevantes para tarefa atual"
+      formato: "Pontos relevantes de {fonte}: {pontos}"
+
+    - tipo: resultados_anteriores
+      acao: "Manter conclusoes, descartar processo detalhado"
+      formato: "Resultado de {tarefa}: {conclusao}"
+
+# =============================================================
+# METRICAS
+# =============================================================
+metricas:
+  contexto_utilizado:
+    descricao: "Percentual do contexto total em uso"
+    alvo: "< 80%"
+    alerta: "> 80%"
+    critico: "> 90%"
+
+  niveis_carregados:
+    descricao: "Quantos niveis estao ativos simultaneamente"
+    alvo: "2-3"
+    alerta: "4 (todos)"
+
+  cache_hits:
+    descricao: "Vezes que reusou contexto ja carregado"
+    alvo: "> 70%"

@@ -1,0 +1,478 @@
+# ============================================
+# WORKFLOW: Modo Iniciante Educacional
+# ============================================
+# Caminho rápido para criar estrutura de curso
+# com integração ao Ralph para geração autônoma
+# ============================================
+
+id: modo-iniciante-educacional
+nome: Modo Iniciante - Criar Curso Rápido
+descricao: Criar estrutura completa de curso em 5 perguntas + geração autônoma via Ralph
+comando: /iniciante-curso
+versao: "1.0"
+
+# ============================================
+# VISÃO GERAL
+# ============================================
+
+visao_geral:
+  objetivo: "Criar estrutura de curso rapidamente para usuários iniciantes"
+  duracao_estimada: "10-15 minutos"
+  resultado: "Estrutura completa de curso + materiais base"
+
+  diferencial: |
+    Este modo simplifica o processo para quem está começando:
+    - Apenas 5 perguntas essenciais
+    - Sistema processa e expande automaticamente
+    - Ralph gera estrutura detalhada autonomamente
+
+  integracao_ralph: true
+
+# ============================================
+# FASES DO WORKFLOW
+# ============================================
+
+fases:
+  # ------------------------------------------
+  # FASE 1: BRIEFING EXPRESS
+  # ------------------------------------------
+  - numero: 1
+    nome: BRIEFING EXPRESS
+    descricao: "Coletar informações essenciais em 5 perguntas"
+    agente: designer-instrucional
+    tempo_estimado: "3-5 minutos"
+
+    etapas:
+      - id: coleta-rapida
+        nome: "5 Perguntas Essenciais"
+        descricao: "Briefing simplificado para iniciantes"
+
+        perguntas:
+          - pergunta: "📚 O que você quer ensinar? (tema do curso)"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Marketing Digital para Pequenos Negócios"
+            var: tema
+
+          - pergunta: "👤 Para quem é este curso? (público-alvo)"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Donos de pequenas lojas que querem vender online"
+            var: publico
+
+          - pergunta: "🎯 O que o aluno será capaz de fazer ao final?"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Criar e gerenciar campanhas de anúncios no Facebook e Instagram"
+            var: transformacao
+
+          - pergunta: "⏱️ Qual o tamanho do curso?"
+            tipo: escolha
+            opcoes:
+              - "Mini-curso (4-6 aulas, ~2 horas)"
+              - "Curso curto (8-12 aulas, ~4 horas)"
+              - "Curso médio (15-20 aulas, ~8 horas)"
+            obrigatorio: true
+            padrao: "Curso curto (8-12 aulas, ~4 horas)"
+            var: tamanho
+
+          - pergunta: "💡 Qual seu diferencial ou método único? (opcional)"
+            tipo: texto
+            obrigatorio: false
+            exemplo: "Método dos 3 Pilares que desenvolvi em 10 anos de experiência"
+            var: diferencial
+
+        entregavel: briefing-express.md
+
+    saida_fase: |
+      ## Briefing Express
+
+      - **Tema:** {{tema}}
+      - **Público:** {{publico}}
+      - **Transformação:** {{transformacao}}
+      - **Tamanho:** {{tamanho}}
+      - **Diferencial:** {{diferencial}}
+
+  # ------------------------------------------
+  # FASE 2: PROCESSAMENTO AUTOMÁTICO
+  # ------------------------------------------
+  - numero: 2
+    nome: PROCESSAMENTO
+    descricao: "Sistema processa e expande informações automaticamente"
+    agente: designer-instrucional
+    tempo_estimado: "2-3 minutos"
+    automatico: true
+
+    etapas:
+      - id: extrair-icp
+        nome: "Extrair ICP (Perfil do Aluno)"
+        descricao: "Criar perfil do aluno ideal baseado no briefing"
+        automatico: true
+
+        processo:
+          - "Analisar público informado"
+          - "Inferir dores e desejos"
+          - "Definir nível de conhecimento"
+          - "Mapear contexto de aprendizagem"
+
+        entregavel: icp-aluno.md
+
+      - id: estruturar-modulos
+        nome: "Estruturar Módulos"
+        descricao: "Criar estrutura de módulos baseada no tema e tamanho"
+        automatico: true
+
+        processo:
+          - "Dividir tema em módulos lógicos"
+          - "Sequenciar do básico ao avançado"
+          - "Definir objetivos por módulo"
+          - "Distribuir carga horária"
+
+        entregavel: estrutura-modulos.md
+
+      - id: gerar-objetivos
+        nome: "Gerar Objetivos"
+        descricao: "Criar objetivos de aprendizagem usando Bloom"
+        automatico: true
+
+        entregavel: objetivos-bloom.md
+
+      - id: criar-headlines
+        nome: "Criar Títulos de Aulas"
+        descricao: "Gerar títulos atrativos para as aulas"
+        automatico: true
+
+        entregavel: titulos-aulas.md
+
+    saida_fase: |
+      ## Processamento Completo
+
+      ✅ ICP do aluno definido
+      ✅ Estrutura de módulos criada
+      ✅ Objetivos de aprendizagem definidos
+      ✅ Títulos das aulas gerados
+
+  # ------------------------------------------
+  # FASE 3: PREPARAR RALPH
+  # ------------------------------------------
+  - numero: 3
+    nome: PREPARAR RALPH
+    descricao: "Montar PRD para execução autônoma do Ralph"
+    agente: designer-instrucional
+    tempo_estimado: "1-2 minutos"
+    automatico: true
+
+    etapas:
+      - id: montar-prd
+        nome: "Montar PRD"
+        descricao: "Criar documento de requisitos para o Ralph"
+        automatico: true
+
+        user_stories:
+          - id: US001
+            titulo: "Criar estrutura completa do curso"
+            descricao: "Como criador de curso, quero uma estrutura organizada para poder desenvolver o conteúdo"
+            criterios:
+              - "Grade curricular completa"
+              - "Objetivos por módulo"
+              - "Sequência lógica"
+
+          - id: US002
+            titulo: "Criar planos de aula"
+            descricao: "Como criador, quero planos detalhados de cada aula"
+            criterios:
+              - "Hook de abertura"
+              - "Conteúdo estruturado"
+              - "Exercício prático"
+              - "Resumo e CTA"
+
+          - id: US003
+            titulo: "Criar roteiros de vídeo"
+            descricao: "Como criador, quero roteiros prontos para gravação"
+            criterios:
+              - "Script completo"
+              - "Marcações de edição"
+              - "Duração estimada"
+
+          - id: US004
+            titulo: "Criar exercícios"
+            descricao: "Como criador, quero exercícios para cada módulo"
+            criterios:
+              - "Questões objetivas"
+              - "Atividades práticas"
+              - "Gabarito"
+
+          - id: US005
+            titulo: "Criar quizzes"
+            descricao: "Como criador, quero quizzes de fixação"
+            criterios:
+              - "5-10 questões por módulo"
+              - "Feedback por questão"
+              - "Pontuação"
+
+          - id: US006
+            titulo: "Criar projeto final"
+            descricao: "Como criador, quero um projeto integrador"
+            criterios:
+              - "Briefing claro"
+              - "Rubrica de avaliação"
+              - "Exemplo de entrega"
+
+          - id: US007
+            titulo: "Criar sistema de gamificação"
+            descricao: "Como criador, quero gamificação para engajamento"
+            criterios:
+              - "Sistema de pontos"
+              - "Badges"
+              - "Níveis"
+              - "Checklists"
+
+          - id: US008
+            titulo: "Criar materiais de apoio"
+            descricao: "Como criador, quero materiais complementares"
+            criterios:
+              - "Resumos por aula"
+              - "Checklists"
+              - "Templates"
+
+        entregavel: prd-curso.json
+
+      - id: gerar-prompt
+        nome: "Gerar Prompt para Ralph"
+        descricao: "Criar prompt otimizado para execução"
+        automatico: true
+
+        entregavel: prompt-ralph.md
+
+    saida_fase: |
+      ## PRD Preparado
+
+      📋 PRD com 8 user stories
+      🎯 Critérios de aceitação definidos
+      📝 Prompt otimizado gerado
+
+  # ------------------------------------------
+  # FASE 4: EXECUTAR RALPH
+  # ------------------------------------------
+  - numero: 4
+    nome: EXECUTAR RALPH
+    descricao: "Ralph executa geração autônoma do curso"
+    agente: ralph
+    tempo_estimado: "5-10 minutos"
+
+    execucao:
+      comando: "./frameworks/ralph/scripts/ralph.sh 30"
+
+      parametros:
+        prd: "output/cursos/{{slug}}/prd-curso.json"
+        prompt: "output/cursos/{{slug}}/prompt-ralph.md"
+        output: "output/cursos/{{slug}}/"
+        max_iteracoes: 30
+
+      monitoramento:
+        mostrar_progresso: true
+        intervalo: "a cada user story"
+
+    etapas:
+      - id: ralph-estrutura
+        nome: "Gerar Estrutura"
+        user_stories: ["US001"]
+
+      - id: ralph-aulas
+        nome: "Gerar Aulas"
+        user_stories: ["US002", "US003"]
+
+      - id: ralph-avaliacoes
+        nome: "Gerar Avaliações"
+        user_stories: ["US004", "US005", "US006"]
+
+      - id: ralph-gamificacao
+        nome: "Gerar Gamificação"
+        user_stories: ["US007"]
+
+      - id: ralph-materiais
+        nome: "Gerar Materiais"
+        user_stories: ["US008"]
+
+    saida_fase: |
+      ## Ralph Executado
+
+      ✅ Estrutura completa gerada
+      ✅ Planos de aula criados
+      ✅ Exercícios desenvolvidos
+      ✅ Gamificação configurada
+      ✅ Materiais de apoio prontos
+
+  # ------------------------------------------
+  # FASE 5: ENTREGA
+  # ------------------------------------------
+  - numero: 5
+    nome: ENTREGA
+    descricao: "Apresentar resultado e oferecer refinamentos"
+    agente: designer-instrucional
+    tempo_estimado: "2-3 minutos"
+
+    etapas:
+      - id: apresentar-resultado
+        nome: "Apresentar Resultado"
+        descricao: "Mostrar o que foi criado"
+
+        template_apresentacao: |
+          ## 🎉 Seu Curso Está Pronto!
+
+          ### {{tema}}
+
+          **Estrutura criada:**
+          - 📚 {{num_modulos}} módulos
+          - 📝 {{num_aulas}} aulas
+          - ✍️ {{num_exercicios}} exercícios
+          - 🎯 {{num_quizzes}} quizzes
+          - 🏆 1 projeto final
+          - 🎮 Sistema de gamificação completo
+
+          **Arquivos gerados:**
+          ```
+          output/cursos/{{slug}}/
+          ├── estrutura/
+          ├── aulas/
+          ├── exercicios/
+          ├── gamificacao/
+          └── materiais/
+          ```
+
+          ### Próximos Passos Sugeridos
+
+          1. 📖 Revisar estrutura e ajustar se necessário
+          2. 🎬 Gravar as vídeo-aulas usando os roteiros
+          3. 📱 Configurar na plataforma de cursos
+          4. 🚀 Criar página de vendas (`/iniciante`)
+          5. 📣 Lançar!
+
+      - id: oferecer-refinamentos
+        nome: "Oferecer Refinamentos"
+        descricao: "Perguntar se quer ajustar algo"
+
+        opcoes_refinamento:
+          - "Ajustar estrutura de módulos"
+          - "Refinar objetivos"
+          - "Adicionar mais exercícios"
+          - "Expandir gamificação"
+          - "Criar página de vendas"
+          - "Está perfeito!"
+
+        entregavel: resumo-final.md
+
+# ============================================
+# ENTREGA FINAL
+# ============================================
+
+entrega_final:
+  formato: pasta
+  local: output/cursos/{{slug}}/
+  estrutura: |
+    {{slug}}/
+    ├── briefing-express.md
+    ├── icp-aluno.md
+    ├── prd-curso.json
+    ├── estrutura/
+    │   ├── grade-curricular.md
+    │   ├── objetivos.md
+    │   └── trilha.md
+    ├── aulas/
+    │   ├── modulo-1/
+    │   │   ├── aula-1-1.md
+    │   │   ├── aula-1-2.md
+    │   │   └── ...
+    │   ├── modulo-2/
+    │   └── ...
+    ├── roteiros/
+    │   ├── roteiro-1-1.md
+    │   └── ...
+    ├── exercicios/
+    │   ├── modulo-1-exercicios.md
+    │   └── ...
+    ├── quizzes/
+    │   ├── quiz-modulo-1.md
+    │   └── ...
+    ├── projeto-final/
+    │   ├── briefing.md
+    │   └── rubrica.md
+    ├── gamificacao/
+    │   ├── sistema.yaml
+    │   └── badges.md
+    ├── materiais/
+    │   ├── resumos/
+    │   ├── checklists/
+    │   └── templates/
+    └── resumo-final.md
+
+# ============================================
+# INTEGRAÇÃO COM RALPH
+# ============================================
+
+ralph:
+  template_prd: frameworks/ralph/templates/prd-curso.json
+  template_prompt: frameworks/ralph/templates/prompt-curso.md
+
+  configuracao:
+    max_iteracoes: 30
+    paralelismo: false
+    validacao: true
+
+  fallback:
+    se_ralph_falhar:
+      acao: "gerar_manualmente"
+      mensagem: "Ralph encontrou dificuldade. Gerando manualmente..."
+
+# ============================================
+# EXECUÇÃO
+# ============================================
+
+execucao:
+  comando: /iniciante-curso
+
+  fluxo:
+    1: "Fazer 5 perguntas essenciais"
+    2: "Processar e expandir informações"
+    3: "Montar PRD para Ralph"
+    4: "Executar Ralph (geração autônoma)"
+    5: "Apresentar resultado"
+    6: "Oferecer refinamentos"
+
+  mensagem_inicial: |
+    ## 🎓 Modo Iniciante - Criar Curso
+
+    Vou te ajudar a criar a estrutura completa do seu curso em poucos minutos!
+
+    Preciso de apenas **5 informações** para começar. Depois, o sistema processa tudo automaticamente.
+
+    Vamos lá?
+
+  mensagem_final: |
+    ## ✅ Curso Criado com Sucesso!
+
+    Seu curso **{{tema}}** está pronto com:
+    - Estrutura completa de módulos e aulas
+    - Planos de aula detalhados
+    - Exercícios e quizzes
+    - Sistema de gamificação
+    - Materiais de apoio
+
+    **Quer criar a página de vendas?** Use `/iniciante` da extensão Marketing!
+
+# ============================================
+# FALLBACKS
+# ============================================
+
+fallbacks:
+  se_tema_vago:
+    acao: "pedir_clarificacao"
+    mensagem: "Pode ser mais específico sobre o tema? Por exemplo, em vez de 'marketing', seria 'marketing de conteúdo para Instagram'?"
+
+  se_transformacao_fraca:
+    acao: "sugerir"
+    mensagem: "A transformação ficou um pouco abstrata. Que tal algo mais concreto como 'Criar X que gera Y resultado'?"
+
+  se_curso_muito_grande:
+    acao: "sugerir_divisao"
+    mensagem: "Este tema é extenso! Sugiro dividir em uma trilha de 2-3 cursos. Quer que eu ajude?"

@@ -1,0 +1,324 @@
+# ============================================
+# EXTENSAO CUSTOMER SUCCESS - Sleep Agent
+# ============================================
+# Framework completo de Customer Success - do
+# onboarding a retencao e expansion revenue
+# ============================================
+
+nome: Customer Success
+slug: customer-success
+descricao: Framework completo de Customer Success - onboarding, retencao, health score, expansion e casos criticos com expertise juridica (CDC)
+versao: "2.0"
+status: ativo
+
+comando: /customer-success
+
+mensagem_ativacao: |
+  **Sleep Agent - Extensao Customer Success v2.0**
+
+  Framework completo baseado nas maiores referencias mundiais:
+  - Lincoln Murphy (Sixteen Ventures)
+  - Nick Mehta (Gainsight)
+  - Dan Steinman (Customer Success)
+  - Jason Lemkin (SaaStr)
+
+  **Agentes Disponiveis:**
+  - `@cs-estrategia` - Estrategista CS (metricas, health score, segmentacao)
+  - `@cs-onboarding` - Especialista Onboarding (ativacao, TTFV, playbooks)
+  - `@cs-retencao` - Especialista Retencao (anti-churn, expansion, NPS)
+  - `@cs-criticos` - Especialista Casos Criticos (CDC, riscos juridicos, de-escalation)
+
+  **Workflows Completos:**
+  - `/cs-completo` - Programa CS do zero (6 fases)
+  - `/iniciante-cs` - Criar programa rapidamente (5 perguntas)
+
+  **Tarefas Rapidas:**
+  - `/analise-clientes` - Analisar e segmentar base
+  - `/health-score` - Criar Health Score
+  - `/mapear-jornada` - Mapear jornada do cliente
+  - `/playbook-onboarding` - Criar playbook de onboarding
+  - `/checklist-ativacao` - Marcos de ativacao
+  - `/boas-vindas` - Sequencia de boas-vindas
+  - `/plano-retencao` - Estrategia anti-churn
+  - `/criar-qbr` - Business Review estruturado
+  - `/plano-risco` - Acao para clientes em risco
+
+  **Casos Criticos:**
+  - `/caso-critico` - Analise completa 360° (CS + Juridico + Negocio)
+  - `/risco-juridico` - Avaliacao legal profunda (CDC + riscos)
+  - `/plano-resolucao` - Estrategia de de-escalation + compensacoes
+  - `/documentar-caso` - Registro formal para protecao legal
+
+  O que voce gostaria de fazer?
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+agentes:
+  - id: cs-estrategista
+    arquivo: agentes/CS-ESTRATEGISTA.md
+    comando: "@cs-estrategia"
+    especialidades:
+      - Estrategia de Customer Success
+      - Health Score e metricas
+      - Segmentacao de clientes
+      - Planejamento de jornadas
+      - Analise de churn
+
+  - id: cs-onboarding
+    arquivo: agentes/CS-ONBOARDING.md
+    comando: "@cs-onboarding"
+    especialidades:
+      - Design de onboarding
+      - Time to First Value
+      - Playbooks de ativacao
+      - Marcos de sucesso
+      - Sequencias de comunicacao
+
+  - id: cs-retencao
+    arquivo: agentes/CS-RETENCAO.md
+    comando: "@cs-retencao"
+    especialidades:
+      - Estrategias anti-churn
+      - Prevencao de churn
+      - Expansion revenue
+      - NPS e pesquisas
+      - Reativacao de clientes
+
+  - id: cs-criticos
+    arquivo: agentes/CS-CRITICOS.md
+    comando: "@cs-criticos"
+    especialidades:
+      - Analise de casos criticos
+      - Codigo de Defesa do Consumidor (CDC)
+      - Analise de risco juridico
+      - Tecnicas de de-escalation
+      - Comunicacao em crise
+      - FBI Hostage Negotiation
+      - Compensacoes e acordos
+      - Prevencao de processos
+      - Documentacao legal
+
+# =====================================================
+# TAREFAS
+# =====================================================
+
+tarefas:
+  # Fase 1: Diagnostico
+  - id: analise-base-clientes
+    arquivo: tarefas/analise-base-clientes.yaml
+    comando: /analise-clientes
+    fase: diagnostico
+    agente: cs-estrategista
+
+  - id: criar-health-score
+    arquivo: tarefas/criar-health-score.yaml
+    comando: /health-score
+    fase: diagnostico
+    agente: cs-estrategista
+
+  - id: mapear-jornada
+    arquivo: tarefas/mapear-jornada.yaml
+    comando: /mapear-jornada
+    fase: diagnostico
+    agente: cs-estrategista
+
+  # Fase 2: Onboarding
+  - id: criar-playbook-onboarding
+    arquivo: tarefas/criar-playbook-onboarding.yaml
+    comando: /playbook-onboarding
+    fase: onboarding
+    agente: cs-onboarding
+
+  - id: criar-checklist-ativacao
+    arquivo: tarefas/criar-checklist-ativacao.yaml
+    comando: /checklist-ativacao
+    fase: onboarding
+    agente: cs-onboarding
+
+  - id: criar-sequencia-boas-vindas
+    arquivo: tarefas/criar-sequencia-boas-vindas.yaml
+    comando: /boas-vindas
+    fase: onboarding
+    agente: cs-onboarding
+
+  # Fase 3: Retencao
+  - id: criar-plano-retencao
+    arquivo: tarefas/criar-plano-retencao.yaml
+    comando: /plano-retencao
+    fase: retencao
+    agente: cs-retencao
+
+  - id: criar-qbr
+    arquivo: tarefas/criar-qbr.yaml
+    comando: /criar-qbr
+    fase: retencao
+    agente: cs-retencao
+
+  - id: criar-plano-risco
+    arquivo: tarefas/criar-plano-risco.yaml
+    comando: /plano-risco
+    fase: retencao
+    agente: cs-retencao
+
+  # Fase 4: Casos Criticos
+  - id: analisar-caso-critico
+    arquivo: tarefas/analisar-caso-critico.yaml
+    comando: /caso-critico
+    fase: casos-criticos
+    agente: cs-criticos
+
+  - id: avaliar-risco-juridico
+    arquivo: tarefas/avaliar-risco-juridico.yaml
+    comando: /risco-juridico
+    fase: casos-criticos
+    agente: cs-criticos
+
+  - id: criar-plano-resolucao
+    arquivo: tarefas/criar-plano-resolucao.yaml
+    comando: /plano-resolucao
+    fase: casos-criticos
+    agente: cs-criticos
+
+  - id: documentar-caso-critico
+    arquivo: tarefas/documentar-caso.yaml
+    comando: /documentar-caso
+    fase: casos-criticos
+    agente: cs-criticos
+
+# =====================================================
+# WORKFLOWS
+# =====================================================
+
+workflows:
+  - id: cs-completo
+    arquivo: workflows/cs-completo.yaml
+    comando: /cs-completo
+    descricao: Programa completo de Customer Success em 6 fases
+
+  - id: modo-iniciante-cs
+    arquivo: workflows/modo-iniciante-cs.yaml
+    comando: /iniciante-cs
+    descricao: Criar programa CS rapidamente (5 perguntas + Ralph)
+    integracao: ralph
+
+# =====================================================
+# BASE DE CONHECIMENTO
+# =====================================================
+
+conhecimento:
+  # Fundamentos
+  - fundamentos-cs.md
+  - metricas-cs.md
+  - jornada-cliente.md
+
+  # Praticas Avancadas
+  - onboarding-framework.md
+  - retencao-estrategias.md
+  - qbr-playbook.md
+
+  # Casos Criticos
+  - casos-criticos-framework.md
+  - cdc-completo.md
+  - analise-risco-juridico.md
+  - estrategias-deescalation.md
+
+
+# =====================================================
+# FRAMEWORK DE EXECUCAO (Ralph)
+# =====================================================
+
+framework_execucao:
+  arquivo: ../../core/FRAMEWORK-EXECUCAO.md
+
+  fases:
+    - numero: 1
+      nome: DIAGNOSTICO
+      tarefas: [analise-base-clientes, criar-health-score, mapear-jornada]
+      agente: cs-estrategista
+
+    - numero: 2
+      nome: ESTRATEGIA
+      tarefas: [definir-segmentos, criar-playbooks-base]
+      agente: cs-estrategista
+
+    - numero: 3
+      nome: ONBOARDING
+      tarefas: [criar-playbook-onboarding, criar-checklist-ativacao, criar-sequencia-boas-vindas]
+      agente: cs-onboarding
+
+    - numero: 4
+      nome: ACOMPANHAMENTO
+      tarefas: [criar-qbr, touchpoints-regulares]
+      agente: cs-retencao
+
+    - numero: 5
+      nome: RETENCAO
+      tarefas: [criar-plano-retencao, criar-plano-risco]
+      agente: cs-retencao
+
+    - numero: 6
+      nome: EXPANSION
+      tarefas: [estrategia-upsell, programa-advocacy]
+      agente: cs-retencao
+
+# =====================================================
+# REFERENCIAS INCLUIDAS
+# =====================================================
+
+referencias:
+  mestres_cs:
+    - Lincoln Murphy (Sixteen Ventures, Customer Success evangelist)
+    - Nick Mehta (CEO Gainsight, autor Customer Success)
+    - Dan Steinman (CCO Gainsight, co-autor Customer Success)
+    - Jason Lemkin (SaaStr, especialista SaaS CS)
+    - Wes Bush (Product-Led Growth)
+
+  casos_criticos_negociacao:
+    - Chris Voss (Ex-FBI, autor Never Split the Difference)
+    - Marshall Rosenberg (Nonviolent Communication)
+    - Harvard Negotiation Project
+    - FBI Hostage Negotiation Techniques
+
+  legal:
+    - Lei 8.078/1990 - Codigo de Defesa do Consumidor (CDC)
+    - STJ - Superior Tribunal de Justica (jurisprudencia)
+    - SENACON - Secretaria Nacional do Consumidor
+    - PROCON - Orientacoes praticas
+
+  frameworks:
+    - DEAR Framework (Gainsight) - Deployment, Engagement, Adoption, ROI
+    - LAER Model - Land, Adopt, Expand, Renew
+    - Time to First Value (TTFV)
+    - Customer Health Score
+    - Net Promoter Score (NPS)
+    - Customer Effort Score (CES)
+    - Tactical Empathy (Chris Voss)
+    - Calibrated Questions (Chris Voss)
+    - Nonviolent Communication (NVC)
+
+  plataformas:
+    - Gainsight
+    - ChurnZero
+    - Totango
+    - ClientSuccess
+    - Intercom
+
+# =====================================================
+# OUTPUT
+# =====================================================
+
+output:
+  playbooks: output/customer-success/playbooks/
+  health-scores: output/customer-success/health-scores/
+  jornadas: output/customer-success/jornadas/
+  qbrs: output/customer-success/qbrs/
+  planos: output/customer-success/planos/
+  casos-criticos: output/customer-success/casos-criticos/
+    analises: output/customer-success/casos-criticos/analises/
+    planos-acao: output/customer-success/casos-criticos/planos-acao/
+    documentacao: output/customer-success/casos-criticos/documentacao/
+    acordos: output/customer-success/casos-criticos/acordos/
+
+projetos: projetos/cs-[nome-empresa]/

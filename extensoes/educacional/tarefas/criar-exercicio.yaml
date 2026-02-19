@@ -1,0 +1,279 @@
+# ============================================
+# TAREFA: Criar Exercícios e Questões
+# ============================================
+
+id: criar-exercicio
+nome: Criar Exercícios e Questões
+descricao: Criar banco de questões e exercícios alinhados aos objetivos de aprendizagem
+agente: especialista-avaliacao
+comando: /criar-exercicio
+versao: "1.0"
+categoria: avaliacao
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: objetivo
+      pergunta: "Qual objetivo de aprendizagem os exercícios devem avaliar?"
+      tipo: texto
+      exemplo: "Identificar os elementos de uma headline persuasiva"
+
+    - nome: tipo
+      pergunta: "Qual tipo de questão?"
+      tipo: escolha
+      opcoes:
+        - "Múltipla escolha"
+        - "Verdadeiro ou Falso"
+        - "Associação/Correspondência"
+        - "Preencher lacunas"
+        - "Resposta curta"
+        - "Resposta dissertativa"
+        - "Mix (vários tipos)"
+      padrao: "Múltipla escolha"
+
+    - nome: quantidade
+      pergunta: "Quantas questões criar?"
+      tipo: numero
+      padrao: 5
+
+  opcionais:
+    - nome: nivel_bloom
+      pergunta: "Qual nível de Bloom?"
+      tipo: escolha
+      opcoes:
+        - "Lembrar"
+        - "Entender"
+        - "Aplicar"
+        - "Analisar"
+        - "Avaliar"
+        - "Criar"
+      padrao: "Aplicar"
+
+    - nome: contexto
+      pergunta: "Qual o contexto/tema dos exemplos?"
+      tipo: texto
+      exemplo: "Marketing para e-commerce de moda"
+
+    - nome: dificuldade
+      pergunta: "Qual a distribuição de dificuldade?"
+      tipo: escolha
+      opcoes:
+        - "Todas fáceis"
+        - "Todas médias"
+        - "Todas difíceis"
+        - "Mix (fácil/médio/difícil)"
+      padrao: "Mix (fácil/médio/difícil)"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Analisar objetivo"
+    detalhes:
+      - Identificar nível de Bloom
+      - Mapear conceitos-chave
+      - Definir o que deve ser demonstrado
+
+  - numero: 2
+    acao: "Criar questões"
+    detalhes:
+      - Redigir enunciados claros
+      - Criar alternativas (se objetiva)
+      - Incluir distratores plausíveis
+      - Variar dificuldade
+
+  - numero: 3
+    acao: "Elaborar justificativas"
+    detalhes:
+      - Explicar resposta correta
+      - Justificar por que outras estão erradas
+      - Conectar com conteúdo do curso
+
+  - numero: 4
+    acao: "Revisar qualidade"
+    detalhes:
+      - Verificar clareza
+      - Eliminar ambiguidades
+      - Checar alinhamento com objetivo
+
+# ============================================
+# SAÍDA
+# ============================================
+
+saida:
+  formato: markdown
+  local: output/exercicios/
+  template: |
+    # Banco de Questões: {{tema}}
+
+    ## Informações
+
+    | Item | Valor |
+    |------|-------|
+    | **Objetivo** | {{objetivo}} |
+    | **Nível Bloom** | {{nivel_bloom}} |
+    | **Quantidade** | {{quantidade}} questões |
+    | **Tipos** | {{tipo}} |
+
+    ---
+
+    ## Questões
+
+    ### Questão 1 (Nível: Fácil)
+
+    **Enunciado:**
+    [Texto da pergunta claro e contextualizado]
+
+    **Alternativas:**
+    a) [Alternativa A]
+    b) [Alternativa B]
+    c) [Alternativa C]
+    d) [Alternativa D]
+
+    **Resposta:** [Letra]
+
+    **Justificativa:**
+    A alternativa [X] está correta porque [explicação].
+    - A alternativa [Y] está incorreta porque [razão].
+    - A alternativa [Z] está incorreta porque [razão].
+
+    **Referência:** Aula X.X - [Tópico]
+
+    ---
+
+    ### Questão 2 (Nível: Médio)
+
+    **Enunciado:**
+    [Texto da pergunta]
+
+    **Alternativas:**
+    a) [Alternativa A]
+    b) [Alternativa B]
+    c) [Alternativa C]
+    d) [Alternativa D]
+
+    **Resposta:** [Letra]
+
+    **Justificativa:**
+    [Explicação detalhada]
+
+    ---
+
+    ### Questão 3 (Nível: Médio)
+
+    **Enunciado:**
+    [Texto da pergunta]
+
+    **Tipo:** Verdadeiro ou Falso
+
+    ( ) Verdadeiro
+    ( ) Falso
+
+    **Resposta:** [V/F]
+
+    **Justificativa:**
+    [Explicação]
+
+    ---
+
+    ### Questão 4 (Nível: Difícil)
+
+    **Enunciado:**
+    [Cenário/caso para análise]
+
+    Considerando o cenário acima, [pergunta].
+
+    **Alternativas:**
+    a) [Alternativa A]
+    b) [Alternativa B]
+    c) [Alternativa C]
+    d) [Alternativa D]
+
+    **Resposta:** [Letra]
+
+    **Justificativa:**
+    [Análise detalhada]
+
+    ---
+
+    ### Questão 5 (Nível: Difícil)
+
+    **Enunciado:**
+    [Pergunta que exige análise/aplicação]
+
+    **Tipo:** Resposta Curta
+
+    **Resposta Esperada:**
+    [Modelo de resposta]
+
+    **Critérios de Avaliação:**
+    - [Critério 1] - 1 ponto
+    - [Critério 2] - 1 ponto
+    - [Critério 3] - 1 ponto
+
+    ---
+
+    ## Gabarito Resumido
+
+    | Questão | Resposta | Dificuldade |
+    |---------|----------|-------------|
+    | 1 | [Letra] | Fácil |
+    | 2 | [Letra] | Médio |
+    | 3 | [V/F] | Médio |
+    | 4 | [Letra] | Difícil |
+    | 5 | [Aberta] | Difícil |
+
+    ---
+
+    ## Análise das Questões
+
+    ### Distribuição por Dificuldade
+    - Fácil: X questões (X%)
+    - Médio: X questões (X%)
+    - Difícil: X questões (X%)
+
+    ### Cobertura do Objetivo
+    As questões avaliam:
+    - [Aspecto 1 do objetivo]: Questões 1, 3
+    - [Aspecto 2 do objetivo]: Questões 2, 4
+    - [Aspecto 3 do objetivo]: Questão 5
+
+    ---
+
+    ## Uso Recomendado
+
+    - **Quiz de fixação:** Questões 1, 2, 3
+    - **Avaliação formativa:** Todas
+    - **Avaliação somativa:** Questões 4, 5
+
+# ============================================
+# CONHECIMENTO UTILIZADO
+# ============================================
+
+conhecimento:
+  - conhecimento/avaliacoes-aprendizagem.md
+  - conhecimento/taxonomia-bloom.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "O enunciado é claro e completo?"
+  - "Os distratores são plausíveis?"
+  - "A questão avalia o objetivo proposto?"
+  - "O nível de dificuldade está adequado?"
+  - "A justificativa é educativa?"
+
+# ============================================
+# PRÓXIMOS PASSOS SUGERIDOS
+# ============================================
+
+proximos_passos:
+  - "/criar-prova - Criar avaliação completa"
+  - "/criar-atividade - Criar atividades práticas"

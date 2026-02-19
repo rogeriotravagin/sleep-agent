@@ -1,0 +1,163 @@
+# Tarefa: Pesquisa de Mercado Profunda
+
+id: pesquisa-mercado
+nome: Pesquisa de Mercado Profunda
+descricao: Investigacao completa do mercado, publico e concorrencia
+agente: estrategista
+comando: /pesquisa
+
+versao: "2.0"
+categoria: descoberta
+
+# Baseado em: Stefan Georgi (RMBC), Eugene Schwartz, Alex Hormozi
+
+entradas:
+  obrigatorias:
+    - nome: produto
+      pergunta: "O que voce quer vender/promover?"
+      tipo: texto
+      exemplo: "Curso de marketing digital"
+
+    - nome: problema
+      pergunta: "Qual problema principal voce resolve?"
+      tipo: texto
+      exemplo: "Profissionais que nao conseguem vender online"
+
+    - nome: publico_inicial
+      pergunta: "Quem voce acredita ser seu publico? (aproximacao inicial)"
+      tipo: texto
+      exemplo: "Empreendedores 30-50 anos"
+
+  opcionais:
+    - nome: concorrentes
+      pergunta: "Conhece algum concorrente direto?"
+      tipo: texto
+      padrao: "A pesquisar"
+
+    - nome: clientes_atuais
+      pergunta: "Ja tem clientes? O que dizem sobre voce?"
+      tipo: texto
+      padrao: "Ainda nao tenho clientes"
+
+passos:
+  - numero: 1
+    acao: "Coletar informacoes basicas"
+    detalhes: Fazer as perguntas de entrada
+
+  - numero: 2
+    acao: "Pesquisa de Prospecto (RMBC)"
+    detalhes: |
+      - Quem sao demograficamente?
+      - Qual situacao atual (ANTES)?
+      - Qual situacao desejada (DEPOIS)?
+      - Quais emocoes sentem?
+      - Que linguagem usam?
+
+  - numero: 3
+    acao: "Pesquisa de Problema"
+    detalhes: |
+      - Qual problema #1?
+      - Quais problemas secundarios?
+      - O que ja tentaram?
+      - Por que nao funcionou?
+      - Quais objecoes terao?
+
+  - numero: 4
+    acao: "Pesquisa de Mercado"
+    fontes:
+      - Google Trends (tendencias de busca)
+      - Reddit/Foruns (conversas reais)
+      - Amazon Reviews (objecoes, desejos)
+      - YouTube Comments (duvidas)
+      - Grupos Facebook (linguagem)
+      - Quora (perguntas frequentes)
+      - AnswerThePublic (perguntas relacionadas)
+
+  - numero: 5
+    acao: "Analise de Concorrencia"
+    detalhes: |
+      - Listar 5-10 concorrentes
+      - Analisar ofertas
+      - Mapear precos
+      - Identificar gaps
+      - Encontrar oportunidades
+
+  - numero: 6
+    acao: "Compilar Relatorio"
+
+saida:
+  formato: markdown
+  template: |
+    # Pesquisa de Mercado: [Produto]
+
+    ## 1. Visao Geral do Mercado
+    [Tamanho, tendencias, oportunidades]
+
+    ## 2. Perfil do Prospecto
+
+    ### Demografico
+    - Idade:
+    - Genero:
+    - Localizacao:
+    - Renda:
+
+    ### Situacao Atual (ANTES)
+    [Descrever a dor atual]
+
+    ### Situacao Desejada (DEPOIS)
+    [Descrever o resultado desejado]
+
+    ### Linguagem do Publico
+    [Frases exatas que usam]
+
+    ## 3. Mapa de Dores
+
+    ### Dor Principal
+    [Descricao]
+
+    ### Dores Secundarias
+    1. [Dor]
+    2. [Dor]
+    3. [Dor]
+
+    ## 4. Objecoes Previsiveis
+    1. [Objecao]
+    2. [Objecao]
+    3. [Objecao]
+
+    ## 5. Solucoes Ja Tentadas
+    - [Solucao] - Por que falhou: [razao]
+    - [Solucao] - Por que falhou: [razao]
+
+    ## 6. Analise de Concorrencia
+
+    | Concorrente | Oferta | Preco | Ponto Forte | Ponto Fraco |
+    |-------------|--------|-------|-------------|-------------|
+    | | | | | |
+
+    ## 7. Gaps e Oportunidades
+    [O que esta faltando no mercado]
+
+    ## 8. Insights para Mecanismo Unico
+    [Como se diferenciar]
+
+    ## 9. Proximos Passos
+    - [ ] Definir ICP
+    - [ ] Criar Persona
+    - [ ] Definir Posicionamento
+
+conhecimento:
+  - mestres-copywriting.md
+  - ofertas-irresistiveis.md
+
+gates:
+  - Linguagem do publico foi capturada?
+  - Dores principais estao claras?
+  - Objecoes foram mapeadas?
+  - Concorrencia foi analisada?
+  - Gaps foram identificados?
+
+proximos_passos:
+  - Construir ICP (/icp)
+  - Criar Persona (/persona)
+  - Definir Posicionamento (/posicionamento)

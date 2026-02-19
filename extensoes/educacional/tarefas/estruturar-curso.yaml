@@ -1,0 +1,325 @@
+# ============================================
+# TAREFA: Estruturar Curso Completo
+# ============================================
+
+id: estruturar-curso
+nome: Estruturar Curso Completo
+descricao: Criar estrutura completa de um curso com módulos, objetivos e trilha de aprendizagem
+agente: designer-instrucional
+comando: /estruturar-curso
+versao: "1.0"
+categoria: planejamento
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: tema
+      pergunta: "Qual o tema/assunto do curso?"
+      tipo: texto
+      exemplo: "Marketing Digital para Iniciantes"
+
+    - nome: publico
+      pergunta: "Quem é o público-alvo? (nível de conhecimento, contexto)"
+      tipo: texto
+      exemplo: "Empreendedores iniciantes que querem vender online"
+
+    - nome: transformacao
+      pergunta: "Qual a transformação que o aluno terá? (O que será capaz de fazer?)"
+      tipo: texto
+      exemplo: "Criar e executar campanhas de marketing digital que geram vendas"
+
+    - nome: duracao
+      pergunta: "Qual a carga horária total estimada?"
+      tipo: escolha
+      opcoes:
+        - "Mini-curso (1-2 horas)"
+        - "Curso curto (3-5 horas)"
+        - "Curso médio (6-15 horas)"
+        - "Curso completo (16-40 horas)"
+        - "Formação (40+ horas)"
+      padrao: "Curso médio (6-15 horas)"
+
+  opcionais:
+    - nome: formato
+      pergunta: "Qual o formato principal?"
+      tipo: escolha
+      opcoes:
+        - "100% online assíncrono"
+        - "Online com aulas ao vivo"
+        - "Híbrido (online + presencial)"
+        - "100% presencial"
+      padrao: "100% online assíncrono"
+
+    - nome: pre_requisitos
+      pergunta: "Quais os pré-requisitos? (conhecimentos ou habilidades prévias)"
+      tipo: texto
+      exemplo: "Saber usar computador e internet básico"
+
+    - nome: resultados_especificos
+      pergunta: "Quais resultados específicos o aluno deve alcançar?"
+      tipo: lista
+      exemplo:
+        - "Criar conta de anúncios no Facebook"
+        - "Configurar pixel de rastreamento"
+        - "Criar primeira campanha"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Analisar contexto"
+    detalhes:
+      - Entender o tema e sua relevância
+      - Mapear o público-alvo
+      - Identificar gap de conhecimento (onde está → onde quer chegar)
+      - Verificar pré-requisitos necessários
+
+  - numero: 2
+    acao: "Definir objetivo geral"
+    detalhes:
+      - Criar objetivo usando Taxonomia de Bloom
+      - Garantir que é mensurável
+      - Alinhar com a transformação prometida
+
+  - numero: 3
+    acao: "Mapear competências"
+    detalhes:
+      - Listar conhecimentos necessários
+      - Listar habilidades a desenvolver
+      - Listar atitudes/comportamentos esperados
+
+  - numero: 4
+    acao: "Estruturar módulos"
+    detalhes:
+      - Dividir conteúdo em módulos lógicos
+      - Sequenciar do simples ao complexo
+      - Definir carga horária por módulo
+      - Criar objetivos específicos por módulo (Bloom)
+
+  - numero: 5
+    acao: "Detalhar aulas por módulo"
+    detalhes:
+      - Definir aulas de cada módulo
+      - Estimar duração de cada aula
+      - Mapear tipo de conteúdo (teórico, prático, misto)
+
+  - numero: 6
+    acao: "Planejar avaliações"
+    detalhes:
+      - Definir avaliação diagnóstica (início)
+      - Planejar avaliações formativas (durante)
+      - Definir avaliação somativa (final)
+      - Criar critérios de aprovação
+
+  - numero: 7
+    acao: "Criar trilha visual"
+    detalhes:
+      - Mapa da jornada do aluno
+      - Pontos de checkpoint
+      - Marcos de celebração
+
+# ============================================
+# SAÍDA
+# ============================================
+
+saida:
+  formato: markdown
+  local: output/cursos/
+  template: |
+    # Estrutura do Curso: {{tema}}
+
+    ## 1. Visão Geral
+
+    ### Informações Básicas
+    | Item | Descrição |
+    |------|-----------|
+    | **Tema** | {{tema}} |
+    | **Público-alvo** | {{publico}} |
+    | **Carga horária** | {{duracao}} |
+    | **Formato** | {{formato}} |
+    | **Pré-requisitos** | {{pre_requisitos}} |
+
+    ### Transformação Prometida
+    > {{transformacao}}
+
+    ### Objetivo Geral
+    Ao final deste curso, o aluno será capaz de:
+    > [Objetivo usando verbo de Bloom + objeto + condição]
+
+    ---
+
+    ## 2. Competências a Desenvolver
+
+    ### Conhecimentos (Saber)
+    - [ ] [Conhecimento 1]
+    - [ ] [Conhecimento 2]
+    - [ ] [Conhecimento 3]
+
+    ### Habilidades (Saber Fazer)
+    - [ ] [Habilidade 1]
+    - [ ] [Habilidade 2]
+    - [ ] [Habilidade 3]
+
+    ### Atitudes (Ser)
+    - [ ] [Atitude 1]
+    - [ ] [Atitude 2]
+
+    ---
+
+    ## 3. Grade Curricular
+
+    ### Módulo 1: [Nome do Módulo]
+    **Objetivo:** Ao final, o aluno será capaz de [verbo + objeto]
+    **Carga horária:** X horas
+
+    | Aula | Título | Tipo | Duração |
+    |------|--------|------|---------|
+    | 1.1 | [Título] | Teórica | XX min |
+    | 1.2 | [Título] | Prática | XX min |
+    | 1.3 | [Título] | Quiz | XX min |
+
+    ---
+
+    ### Módulo 2: [Nome do Módulo]
+    **Objetivo:** Ao final, o aluno será capaz de [verbo + objeto]
+    **Carga horária:** X horas
+
+    | Aula | Título | Tipo | Duração |
+    |------|--------|------|---------|
+    | 2.1 | [Título] | Teórica | XX min |
+    | 2.2 | [Título] | Prática | XX min |
+
+    ---
+
+    [Repetir para cada módulo...]
+
+    ---
+
+    ## 4. Sistema de Avaliação
+
+    ### Avaliação Diagnóstica (Início)
+    - **Formato:** Quiz inicial
+    - **Objetivo:** Medir conhecimento prévio
+    - **Peso:** Não conta para nota
+
+    ### Avaliações Formativas (Durante)
+    | Módulo | Tipo | Peso |
+    |--------|------|------|
+    | 1 | Quiz | 10% |
+    | 2 | Exercício | 15% |
+    | 3 | Projeto parcial | 20% |
+
+    ### Avaliação Somativa (Final)
+    - **Formato:** Projeto integrador
+    - **Peso:** 55%
+    - **Critérios:** [Rubrica resumida]
+
+    ### Critérios de Aprovação
+    - Mínimo: 70% de aproveitamento
+    - Presença/conclusão: 80% das aulas
+
+    ---
+
+    ## 5. Trilha de Aprendizagem
+
+    ```
+    [INÍCIO]
+        │
+        ▼
+    ┌─────────────┐
+    │  Módulo 1   │ → Quiz 1
+    └─────────────┘
+        │
+        ▼
+    ┌─────────────┐
+    │  Módulo 2   │ → Exercício
+    └─────────────┘
+        │
+        ▼
+    ┌─────────────┐
+    │  Módulo 3   │ → Projeto Parcial
+    └─────────────┘
+        │
+        ▼
+    ┌─────────────────┐
+    │ PROJETO FINAL   │
+    └─────────────────┘
+        │
+        ▼
+    [CERTIFICADO]
+    ```
+
+    ---
+
+    ## 6. Recursos Necessários
+
+    ### Materiais a Produzir
+    - [ ] Vídeo-aulas: X horas
+    - [ ] Material de apoio: X documentos
+    - [ ] Exercícios: X atividades
+    - [ ] Quizzes: X avaliações
+    - [ ] Projeto integrador: 1
+
+    ### Ferramentas
+    - Plataforma: [LMS/Plataforma]
+    - Gravação: [Ferramenta]
+    - Design: [Ferramenta]
+
+    ---
+
+    ## 7. Cronograma de Produção
+
+    | Fase | Atividade | Prazo |
+    |------|-----------|-------|
+    | 1 | Roteiros das aulas | [Data] |
+    | 2 | Gravação dos vídeos | [Data] |
+    | 3 | Materiais de apoio | [Data] |
+    | 4 | Configuração plataforma | [Data] |
+    | 5 | Testes e ajustes | [Data] |
+    | 6 | Lançamento | [Data] |
+
+    ---
+
+    ## 8. Próximos Passos
+
+    1. [ ] Validar estrutura com especialista/público
+    2. [ ] Criar roteiros detalhados das aulas
+    3. [ ] Desenvolver materiais de apoio
+    4. [ ] Criar avaliações e rubricas
+    5. [ ] Gravar conteúdo
+
+# ============================================
+# CONHECIMENTO UTILIZADO
+# ============================================
+
+conhecimento:
+  - conhecimento/design-instrucional.md
+  - conhecimento/taxonomia-bloom.md
+  - conhecimento/metodologias-ativas.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "O objetivo geral usa verbo de Bloom e é mensurável?"
+  - "Os módulos seguem sequência lógica (simples → complexo)?"
+  - "Cada módulo tem objetivo específico alinhado ao geral?"
+  - "A carga horária está adequada ao conteúdo?"
+  - "O sistema de avaliação está alinhado aos objetivos?"
+  - "A trilha de aprendizagem está clara?"
+
+# ============================================
+# PRÓXIMOS PASSOS SUGERIDOS
+# ============================================
+
+proximos_passos:
+  - "/criar-modulo - Detalhar cada módulo"
+  - "/criar-aula - Criar planos de aula"
+  - "/criar-atividade - Criar atividades práticas"
+  - "/gamificar - Adicionar sistema de gamificação"

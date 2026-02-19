@@ -1,0 +1,166 @@
+# =============================================================
+# PERMISSION MODES - Modos de Permissao de Agentes
+# =============================================================
+# Controle granular de autonomia por agente/extensao
+# 3 modos: Explorar (read-only), Confirmar (padrao), Autonomo
+# =============================================================
+
+versao: 1.0
+
+# ---------------------------------------------------------
+# DEFINICAO DOS 3 MODOS
+# ---------------------------------------------------------
+modos:
+
+  explorar:
+    descricao: "Agente so pode ler e analisar. Nao produz entregas."
+    permissoes:
+      ler_workspace: true
+      ler_memoria: true
+      ler_blackboard: true
+      escrever_entrega: false
+      escrever_memoria: false
+      escrever_blackboard: false
+      executar_api: false
+      executar_script: false
+    quando_usar: "Quando quer que o agente apenas estude algo"
+    exemplo: "Quero que o Estrategista analise meu mercado, mas nao defina nada ainda"
+
+  confirmar:
+    descricao: "Agente produz mas pede confirmacao. Padrao do sistema."
+    padrao: true
+    permissoes:
+      ler_workspace: true
+      ler_memoria: true
+      ler_blackboard: true
+      escrever_entrega: com_confirmacao
+      escrever_memoria: com_confirmacao
+      escrever_blackboard: com_confirmacao
+      executar_api: com_confirmacao
+      executar_script: com_confirmacao
+    quando_usar: "Uso normal. Agente propoe, voce aprova."
+
+  autonomo:
+    descricao: "Agente opera livremente. Produz, salva e segue."
+    permissoes:
+      ler_workspace: true
+      ler_memoria: true
+      ler_blackboard: true
+      escrever_entrega: true
+      escrever_memoria: true
+      escrever_blackboard: true
+      executar_api: true
+      executar_script: true
+    quando_usar: "Para tarefas repetitivas onde voce ja confia no agente"
+    exemplo: "O Copywriter ja acertou 10 headlines seguidas, pode operar livre"
+    restricoes:
+      - "Ainda respeita constituicao (artigos NON_NEGOTIABLE)"
+      - "Ainda registra no log de compliance"
+      - "Ainda atualiza blackboard"
+      - "Quality Gate nivel 1 (automatico) sempre roda"
+
+# ---------------------------------------------------------
+# ACOES SEMPRE COM CONFIRMACAO (independente do modo)
+# ---------------------------------------------------------
+acoes_protegidas:
+  descricao: "Acoes que SEMPRE requerem confirmacao, mesmo no modo autonomo"
+  protegidas_por: "Constituicao Artigo III (Privacidade e Seguranca)"
+  acoes:
+    - deletar_arquivo:
+        descricao: "Remover arquivo do workspace"
+        motivo: "Irreversivel"
+    - api_destrutiva:
+        descricao: "Cancelar assinatura, revogar acesso, deletar registro"
+        motivo: "Afeta usuario final"
+    - enviar_mensagem:
+        descricao: "Enviar email, WhatsApp ou mensagem a cliente"
+        motivo: "Comunicacao externa irreversivel"
+    - alterar_configuracao:
+        descricao: "Modificar configuracao do sistema"
+        motivo: "Afeta comportamento global"
+    - executar_script_destrutivo:
+        descricao: "Scripts que modificam dados externos"
+        motivo: "Efeitos colaterais em sistemas terceiros"
+
+# ---------------------------------------------------------
+# CONFIGURACAO PADRAO
+# ---------------------------------------------------------
+configuracao:
+  padrao_global: confirmar
+
+  # Configuracao por extensao (pode ser sobrescrita)
+  # Editavel via /modo ou em user-preferences.yaml
+  por_extensao:
+    marketing:
+      padrao: confirmar
+      # Exemplo de override por agente:
+      # MKT-COPYWRITER: autonomo
+      # MKT-ESTRATEGISTA: confirmar
+    branding:
+      padrao: confirmar
+    customer-success:
+      padrao: confirmar
+      # CS-CANCELAMENTO-AL: confirmar  # SEMPRE confirmar cancelamentos
+    educacional:
+      padrao: confirmar
+    produtos:
+      padrao: confirmar
+    deploy:
+      padrao: confirmar
+    criador:
+      padrao: confirmar
+    dados:
+      padrao: confirmar
+    ti:
+      padrao: confirmar
+    juridico:
+      padrao: confirmar
+    secretaria:
+      padrao: confirmar
+    criminal:
+      padrao: confirmar
+
+# ---------------------------------------------------------
+# RESOLUCAO DE MODO
+# ---------------------------------------------------------
+resolucao:
+  descricao: "Como determinar o modo ativo para um agente"
+  precedencia:
+    1: "Override de sessao (L4) - se existir"
+    2: "Preferencia do usuario (L3) - se existir"
+    3: "Configuracao por agente (acima) - se existir"
+    4: "Configuracao por extensao (acima) - se existir"
+    5: "Padrao global: confirmar"
+  regra: "Primeira configuracao encontrada (maior precedencia) vence"
+
+# ---------------------------------------------------------
+# INTEGRACAO COM QUALITY GATES
+# ---------------------------------------------------------
+quality_gates_por_modo:
+  explorar:
+    nivel_1: false  # Nao ha entregas
+    nivel_2: false
+    nivel_3: false
+  confirmar:
+    nivel_1: true   # Automatico
+    nivel_2: true   # Revisor
+    nivel_3: true   # Humano
+  autonomo:
+    nivel_1: true   # Automatico SEMPRE roda
+    nivel_2: false  # Pula revisao (opcional: configuravel)
+    nivel_3: false  # Pula aprovacao humana
+
+# ---------------------------------------------------------
+# COMANDOS
+# ---------------------------------------------------------
+comandos:
+  - comando: "/modo"
+    acao: "Ver modo atual de todos os agentes"
+  - comando: "/modo explorar {alvo}"
+    acao: "Mudar extensao ou agente para modo explorar"
+  - comando: "/modo confirmar {alvo}"
+    acao: "Mudar extensao ou agente para modo confirmar"
+  - comando: "/modo autonomo {alvo}"
+    acao: "Mudar extensao ou agente para modo autonomo"
+  - comando: "/modo confirmar"
+    acao: "Reset global para modo confirmar"

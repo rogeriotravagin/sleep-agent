@@ -1,0 +1,244 @@
+# Tarefa: Relatorio Executivo
+# Agente: Analista de Dados
+
+id: relatorio-executivo
+nome: Relatorio Executivo
+comando: /relatorio
+agente: analista-dados
+fase: comunicacao
+
+descricao: |
+  Cria um relatorio executivo claro e acionavel,
+  seguindo o framework So What para garantir que
+  cada dado apresentado gera compreensao e acao.
+
+# ============================================
+# ENTRADAS NECESSARIAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - id: tema
+      pergunta: "Qual o tema do relatorio?"
+      exemplo: "Performance de Q3 2024"
+
+    - id: audiencia
+      pergunta: "Quem vai ler? (CEO, diretoria, gerentes)"
+      exemplo: "Diretoria executiva"
+
+    - id: objetivo
+      pergunta: "Qual o objetivo? (informar, solicitar decisao, recomendar acao)"
+      exemplo: "Solicitar aprovacao de orcamento adicional"
+
+  opcionais:
+    - id: periodo
+      pergunta: "Qual o periodo de analise?"
+      default: "Ultimo mes/trimestre"
+
+    - id: formato
+      pergunta: "Formato preferido? (apresentacao, documento, email)"
+      default: "documento"
+
+    - id: tempo
+      pergunta: "Quanto tempo de apresentacao? (se aplicavel)"
+      exemplo: "10 minutos"
+
+# ============================================
+# PROCESSO DE EXECUCAO
+# ============================================
+
+passos:
+  1_definicao:
+    nome: "Definir Mensagem Principal"
+    acoes:
+      - Identificar a mensagem mais importante
+      - Definir acao esperada do leitor
+      - Escolher 3-5 pontos de suporte
+    output: "Mensagem e estrutura claras"
+
+  2_dados:
+    nome: "Selecionar Dados Relevantes"
+    acoes:
+      - Escolher metricas que suportam a mensagem
+      - Garantir comparacao (antes, meta, benchmark)
+      - Aplicar teste So What em cada dado
+    output: "Dados selecionados e contextualizados"
+
+  3_estrutura:
+    nome: "Estruturar Relatorio"
+    acoes:
+      - Usar piramide invertida (conclusao primeiro)
+      - Organizar argumentos logicamente
+      - Preparar visualizacoes claras
+    output: "Estrutura do relatorio"
+
+  4_revisao:
+    nome: "Revisar e Refinar"
+    acoes:
+      - Verificar clareza da mensagem
+      - Remover dados desnecessarios
+      - Garantir recomendacoes acionaveis
+    output: "Relatorio final"
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # {titulo_do_relatorio}
+
+  **Data:** {data}
+  **Autor:** {autor}
+  **Para:** {audiencia}
+
+  ---
+
+  ## Resumo Executivo
+
+  ### Mensagem Principal
+
+  {uma_frase_que_resume_a_conclusao_principal}
+
+  ### Principais Pontos
+
+  1. **{ponto_1}** - {numero_ou_fato_chave}
+  2. **{ponto_2}** - {numero_ou_fato_chave}
+  3. **{ponto_3}** - {numero_ou_fato_chave}
+
+  ### Recomendacao
+
+  {acao_principal_solicitada}
+
+  ---
+
+  ## Performance Geral
+
+  | Metrica | Atual | Meta | Var% | Status |
+  |---------|-------|------|------|--------|
+  | {metrica_1} | {valor} | {meta} | {var} | {status} |
+  | {metrica_2} | {valor} | {meta} | {var} | {status} |
+  | {metrica_3} | {valor} | {meta} | {var} | {status} |
+
+  **So What:** {por_que_esses_numeros_importam}
+
+  ---
+
+  ## Destaques Positivos
+
+  ### 1. {destaque_positivo_1}
+
+  **O que:** {descricao}
+  **Numero:** {metrica_e_valor}
+  **Comparacao:** {vs_periodo_anterior_ou_meta}
+  **Por que importa:** {impacto_no_negocio}
+
+  ### 2. {destaque_positivo_2}
+
+  [...]
+
+  ---
+
+  ## Pontos de Atencao
+
+  ### 1. {ponto_atencao_1}
+
+  **O que:** {descricao_do_problema}
+  **Numero:** {metrica_e_valor}
+  **Impacto:** {consequencia_se_nao_resolvido}
+  **Causa:** {analise_da_causa_raiz}
+  **Acao proposta:** {recomendacao}
+
+  ### 2. {ponto_atencao_2}
+
+  [...]
+
+  ---
+
+  ## Analise Detalhada
+
+  ### {area_1}
+
+  {analise_com_dados_e_contexto}
+
+  | Dimensao | Valor | Variacao | Insight |
+  |----------|-------|----------|---------|
+  | {dim_1}  | {val} | {var}    | {obs}   |
+
+  ### {area_2}
+
+  [...]
+
+  ---
+
+  ## Recomendacoes
+
+  ### Acoes Imediatas (esta semana)
+
+  | Acao | Responsavel | Prazo | Impacto Esperado |
+  |------|-------------|-------|------------------|
+  | {acao_1} | {quem} | {quando} | {resultado} |
+  | {acao_2} | {quem} | {quando} | {resultado} |
+
+  ### Acoes de Curto Prazo (30 dias)
+
+  | Acao | Responsavel | Prazo | Impacto Esperado |
+  |------|-------------|-------|------------------|
+  | {acao_3} | {quem} | {quando} | {resultado} |
+
+  ### Decisoes Necessarias
+
+  - {decisao_1}: {opcoes_e_recomendacao}
+  - {decisao_2}: {opcoes_e_recomendacao}
+
+  ---
+
+  ## Proximos Passos
+
+  1. {proximo_passo_1}
+  2. {proximo_passo_2}
+  3. {proximo_passo_3}
+
+  ---
+
+  ## Apendice
+
+  ### Metodologia
+  - Periodo: {periodo}
+  - Fontes: {fontes}
+  - Limitacoes: {limitacoes}
+
+  ### Dados Adicionais
+  {tabelas_ou_analises_de_suporte}
+
+# ============================================
+# FRAMEWORK SO WHAT
+# ============================================
+
+so_what_checklist:
+  - pergunta: "Por que esse dado importa para a audiencia?"
+    teste: "Se nao muda nenhuma decisao, remova."
+
+  - pergunta: "Estou comparando com algo?"
+    teste: "Numero isolado nao significa nada. Compare."
+
+  - pergunta: "Expliquei a causa?"
+    teste: "Nao basta mostrar o que mudou, explique por que."
+
+  - pergunta: "Ha uma acao clara?"
+    teste: "O leitor sabe o que fazer depois de ler?"
+
+# ============================================
+# QUALIDADE
+# ============================================
+
+gates_qualidade:
+  - Mensagem principal clara em 1 frase
+  - Todo numero comparado com baseline
+  - Cada secao responde "so what"
+  - Recomendacoes com responsavel e prazo
+  - Adaptado para audiencia executiva
+
+output:
+  formato: md
+  destino: output/{produto}/relatorios/
+  nome_arquivo: relatorio-{tema_slug}-{data}.md

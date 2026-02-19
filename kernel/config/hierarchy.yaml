@@ -1,0 +1,172 @@
+# =============================================================
+# CONFIG HIERARCHY - Configuracao em 5 Camadas
+# =============================================================
+# Define a hierarquia de configuracao com precedencia clara
+# L0 (imutavel) → L1 (padrao) → L2 (workspace) → L3 (usuario) → L4 (sessao)
+# =============================================================
+
+versao: 1.0
+
+# ---------------------------------------------------------
+# DEFINICAO DAS CAMADAS
+# ---------------------------------------------------------
+camadas:
+
+  L0_constituicao:
+    descricao: "Regras imutaveis do sistema"
+    arquivo: "kernel/constitution/constitution.yaml"
+    precedencia: absoluta
+    editavel: false
+    escopo: "Todas as sessoes, todos os workspaces"
+    duracao: permanente
+    sobrescrevivel: false
+    nota: "NUNCA sobrescrita por nenhuma outra camada"
+
+  L1_framework:
+    descricao: "Configuracao padrao do Sleep Agent"
+    precedencia: base
+    editavel: false
+    escopo: "Padrao global"
+    duracao: permanente
+    sobrescrevivel: true
+    valores_padrao:
+      quality_gates:
+        nivel_1: true
+        nivel_2: true
+        nivel_3: true
+      memoria:
+        hierarquica: true
+        decaimento: exponencial
+        promocao_threshold: 3
+        cleanup_dias: 30
+      matching:
+        confianca_minima: 60
+      context_brackets:
+        habilitado: true
+      tool_registry:
+        descoberta_automatica: true
+        validacao_credenciais: true
+      permissoes:
+        padrao_global: confirmar
+      auto_calibracao:
+        habilitado: true
+        threshold_padrao: 3
+        taxa_alvo: 90
+
+  L2_workspace:
+    descricao: "Configuracao do workspace (persistente)"
+    arquivo: "workspace/.config/sleep-agent.yaml"
+    precedencia: sobrescreve_L1
+    editavel: true
+    escopo: "Este workspace"
+    duracao: "Enquanto workspace existir"
+    sobrescrevivel: true
+    editavel_via:
+      - "/setup"
+      - "/config workspace"
+      - "Edicao manual do arquivo"
+    conteudo_tipico:
+      - extensoes_ativas
+      - estrutura_workspace
+      - ferramentas_configuradas
+      - quality_gates_customizados
+
+  L3_usuario:
+    descricao: "Preferencias pessoais do usuario"
+    arquivo: "workspace/.config/user-preferences.yaml"
+    precedencia: sobrescreve_L2
+    editavel: true
+    escopo: "Este usuario"
+    duracao: "Persiste entre sessoes"
+    sobrescrevivel: true
+    editavel_via:
+      - "/preferencias"
+      - "Edicao manual do arquivo"
+    conteudo_tipico:
+      - tom_interacao
+      - modos_permissao
+      - nivel_detalhe
+      - emojis
+
+  L4_sessao:
+    descricao: "Overrides temporarios (dura uma sessao)"
+    arquivo: "workspace/.state/session-overrides.yaml"
+    precedencia: sobrescreve_tudo_exceto_L0
+    editavel: true
+    escopo: "Apenas esta sessao"
+    duracao: "Ate encerrar conversa"
+    sobrescrevivel: false
+    expira: "Ao encerrar sessao"
+    editavel_via:
+      - "/override"
+      - "Automatico (sistema cria quando necessario)"
+
+# ---------------------------------------------------------
+# RESOLUCAO DE CONFIGURACAO
+# ---------------------------------------------------------
+resolucao:
+  metodo: deep_merge
+  ordem: "L1 <- L2 <- L3 <- L4 (L0 nunca sobrescrito)"
+  descricao: |
+    Para cada chave de configuracao, o sistema busca na ordem
+    L4 -> L3 -> L2 -> L1 -> L0. O primeiro valor encontrado
+    e usado, exceto L0 que sempre prevalece.
+
+  regras:
+    - "L0 NUNCA e sobrescrito (enforcement BLOCK)"
+    - "L4 tem maior precedencia (exceto sobre L0)"
+    - "Se chave nao existe em nenhuma camada, usa valor hardcoded"
+    - "Deep merge: chaves nao definidas herdam do nivel inferior"
+
+  conflitos:
+    estrategia: "Camada mais alta vence"
+    excecao: "L0 sempre vence"
+    log: "Registrar conflitos no health-log"
+
+# ---------------------------------------------------------
+# CICLO DE VIDA
+# ---------------------------------------------------------
+ciclo_de_vida:
+
+  ao_iniciar_sessao:
+    1: "Carregar L0 (constituicao)"
+    2: "Aplicar L1 (defaults)"
+    3: "Merge L2 (workspace config)"
+    4: "Merge L3 (user preferences)"
+    5: "Merge L4 (session overrides, se existir)"
+    6: "Configuracao resolvida disponivel"
+
+  durante_sessao:
+    - "Override via /override → atualiza L4"
+    - "Mudanca de modo via /modo → atualiza L3 ou L4"
+    - "Reconfigurar via /setup → atualiza L2"
+
+  ao_encerrar_sessao:
+    1: "Limpar L4 (session-overrides.yaml)"
+    2: "L3 persiste para proxima sessao"
+    3: "L2 persiste no workspace"
+
+# ---------------------------------------------------------
+# EXEMPLOS DE RESOLUCAO
+# ---------------------------------------------------------
+exemplos:
+
+  - cenario: "Quality Gate nivel 2 desabilitado no workspace"
+    L1: "quality_gates.nivel_2 = true"
+    L2: "quality_gates.nivel_2 = false"
+    resultado: "false (L2 sobrescreve L1)"
+
+  - cenario: "Override temporario para teste"
+    L1: "quality_gates.nivel_1 = true"
+    L4: "quality_gates.nivel_1 = false"
+    resultado: "false (apenas esta sessao)"
+
+  - cenario: "Tentativa de violar constituicao"
+    L0: "privacidade = NON_NEGOTIABLE"
+    L4: "privacidade = false"
+    resultado: "NON_NEGOTIABLE (L0 BLOQUEADO)"
+
+  - cenario: "Preferencia pessoal de modo"
+    L1: "permissoes.padrao = confirmar"
+    L3: "permissoes.copywriter = autonomo"
+    resultado: "copywriter = autonomo, demais = confirmar"

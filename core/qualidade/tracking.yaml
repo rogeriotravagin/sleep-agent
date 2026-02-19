@@ -1,0 +1,117 @@
+# =============================================================
+# TRACKING DE QUALIDADE - Metricas por Tipo de Tarefa
+# =============================================================
+# Registra historico de ajustes pedidos pelo usuario
+# Alimenta o sistema de auto-calibracao
+# =============================================================
+# Este arquivo e atualizado automaticamente pelo sistema
+# NAO editar manualmente (a menos que queira resetar metricas)
+# =============================================================
+
+ultima_atualizacao: "2026-02-19"
+
+# ---------------------------------------------------------
+# METRICAS GLOBAIS
+# ---------------------------------------------------------
+global:
+  total_entregas: 0
+  total_aprovadas_direto: 0
+  total_com_ajustes: 0
+  taxa_aprovacao: 0  # percentual
+  gates_auto_criados: 0
+
+# ---------------------------------------------------------
+# METRICAS POR TIPO DE TAREFA
+# ---------------------------------------------------------
+por_tarefa:
+
+  criar-headline:
+    total_execucoes: 0
+    aprovadas_direto: 0
+    com_ajustes: 0
+    taxa_aprovacao: 0
+    ajustes_frequentes: {}
+    # Formato: { "tipo_ajuste": contagem }
+    # Exemplo: { "tom mais informal": 5, "mais curta": 3 }
+
+  criar-email:
+    total_execucoes: 0
+    aprovadas_direto: 0
+    com_ajustes: 0
+    taxa_aprovacao: 0
+    ajustes_frequentes: {}
+
+  criar-landing:
+    total_execucoes: 0
+    aprovadas_direto: 0
+    com_ajustes: 0
+    taxa_aprovacao: 0
+    ajustes_frequentes: {}
+
+  criar-anuncio:
+    total_execucoes: 0
+    aprovadas_direto: 0
+    com_ajustes: 0
+    taxa_aprovacao: 0
+    ajustes_frequentes: {}
+
+  definir-marca:
+    total_execucoes: 0
+    aprovadas_direto: 0
+    com_ajustes: 0
+    taxa_aprovacao: 0
+    ajustes_frequentes: {}
+
+  criar-oferta:
+    total_execucoes: 0
+    aprovadas_direto: 0
+    com_ajustes: 0
+    taxa_aprovacao: 0
+    ajustes_frequentes: {}
+
+  processar-cancelamento:
+    total_execucoes: 0
+    aprovadas_direto: 0
+    com_ajustes: 0
+    taxa_aprovacao: 0
+    ajustes_frequentes: {}
+
+# ---------------------------------------------------------
+# HISTORICO DE AJUSTES (Ultimos 30 dias)
+# ---------------------------------------------------------
+historico_ajustes: []
+  # Formato de cada entrada:
+  # - timestamp: "2026-02-19T10:30:00"
+  #   tipo_tarefa: "criar-headline"
+  #   agente: "MKT-COPYWRITER"
+  #   extensao: "marketing"
+  #   categoria_ajuste: "tom"
+  #   descricao: "mais informal"
+
+# ---------------------------------------------------------
+# GATES AUTO-GERADOS (Aprovados pelo usuario)
+# ---------------------------------------------------------
+gates_auto_gerados: []
+  # Formato de cada entrada:
+  # - id: "auto_001"
+  #   criado_em: "2026-02-19"
+  #   padrao_detectado: "'tom mais informal' pedido 5x"
+  #   nivel: 1
+  #   verificacao: "Tom informal?"
+  #   auto_correcao: true
+  #   tipos_tarefa: ["criar-headline"]
+  #   aprovado_por: "usuario"
+  #   eficacia: 0  # % de vezes que evitou o ajuste
+
+# ---------------------------------------------------------
+# PADROES PENDENTES (Detectados mas nao aprovados)
+# ---------------------------------------------------------
+padroes_pendentes: []
+  # Formato:
+  # - ajuste: "mais curta"
+  #   contagem: 3
+  #   tipo_tarefa: "criar-descricao"
+  #   primeira_ocorrencia: "2026-02-01"
+  #   ultima_ocorrencia: "2026-02-19"
+  #   sugestao_gate: "Descricao < 150 palavras?"
+  #   status: "pendente_aprovacao"

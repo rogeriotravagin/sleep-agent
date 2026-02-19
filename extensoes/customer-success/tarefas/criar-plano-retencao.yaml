@@ -1,0 +1,422 @@
+# ============================================
+# TAREFA: Criar Plano de Retencao
+# ============================================
+
+id: criar-plano-retencao
+nome: Criar Plano de Retencao
+descricao: Desenvolver estrategia de retencao para reduzir churn e aumentar NRR
+agente: retention-expert
+comando: /plano-retencao
+versao: "1.0"
+categoria: retencao
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: churn_atual
+      pergunta: "Qual o churn atual? (mensal ou anual)"
+      tipo: texto
+      exemplo: "5% mensal ou 45% anual"
+
+    - nome: principais_motivos
+      pergunta: "Quais os principais motivos de churn conhecidos?"
+      tipo: lista
+      exemplo:
+        - "Nao ve valor no produto"
+        - "Mudou para concorrente"
+        - "Cortou custos"
+        - "Nao usa mais"
+
+    - nome: segmentos_afetados
+      pergunta: "Quais segmentos tem maior churn?"
+      tipo: lista
+      exemplo:
+        - "Clientes SMB"
+        - "Clientes com menos de 6 meses"
+        - "Clientes do plano basico"
+
+  opcionais:
+    - nome: sinais_risco
+      pergunta: "Quais sinais de risco voce ja identifica?"
+      tipo: lista
+      exemplo:
+        - "Uso declinando"
+        - "Tickets de reclamacao"
+        - "Stakeholder principal saiu"
+
+    - nome: acoes_atuais
+      pergunta: "Quais acoes de retencao ja fazem hoje?"
+      tipo: lista
+      exemplo:
+        - "QBRs trimestrais"
+        - "Desconto na renovacao"
+        - "Call quando pede cancelamento"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Analisar situacao de churn"
+    detalhes:
+      - "Diagnosticar churn atual"
+      - "Identificar padroes"
+      - "Mapear causas raiz"
+      - "Quantificar impacto"
+
+  - numero: 2
+    acao: "Criar sistema de early warning"
+    detalhes:
+      - "Definir sinais de risco"
+      - "Criar alertas automaticos"
+      - "Estabelecer triggers"
+      - "Definir responsaveis"
+
+  - numero: 3
+    acao: "Desenvolver playbooks de save"
+    detalhes:
+      - "Playbook por tipo de risco"
+      - "Scripts de abordagem"
+      - "Ofertas de retencao"
+      - "Processo de escalacao"
+
+  - numero: 4
+    acao: "Planejar acoes proativas"
+    detalhes:
+      - "Programa de engajamento"
+      - "Demonstracao de valor"
+      - "Multi-threading"
+      - "Expansion como retencao"
+
+  - numero: 5
+    acao: "Definir metricas e metas"
+    detalhes:
+      - "KPIs de retencao"
+      - "Metas por segmento"
+      - "Dashboard de acompanhamento"
+      - "Rituais de revisao"
+
+# ============================================
+# SAIDA
+# ============================================
+
+saida:
+  formato: markdown
+  template: |
+    # Plano de Retencao
+
+    ---
+
+    ## Diagnostico Atual
+
+    ### Situacao de Churn
+
+    | Metrica | Atual | Benchmark | Gap |
+    |---------|-------|-----------|-----|
+    | Churn Mensal | {{churn_mensal}} | <2% | {{gap_mensal}} |
+    | Churn Anual | {{churn_anual}} | <20% | {{gap_anual}} |
+    | GRR | {{grr}} | >90% | {{gap_grr}} |
+    | NRR | {{nrr}} | >100% | {{gap_nrr}} |
+
+    ### Analise de Causas
+
+    | Motivo | % do Churn | Acionavel? | Prioridade |
+    |--------|------------|------------|------------|
+    {{#each motivos_churn}}
+    | {{this.motivo}} | {{this.percentual}} | {{this.acionavel}} | {{this.prioridade}} |
+    {{/each}}
+
+    ### Segmentos de Risco
+
+    | Segmento | Churn | vs Media | Acao |
+    |----------|-------|----------|------|
+    {{#each segmentos_risco}}
+    | {{this.segmento}} | {{this.churn}} | {{this.vs_media}} | {{this.acao}} |
+    {{/each}}
+
+    ---
+
+    ## Sistema de Early Warning
+
+    ### Sinais de Risco
+
+    | Sinal | Peso | Fonte | Frequencia |
+    |-------|------|-------|------------|
+    {{#each sinais_risco}}
+    | {{this.sinal}} | {{this.peso}} | {{this.fonte}} | {{this.frequencia}} |
+    {{/each}}
+
+    ### Matriz de Alertas
+
+    | Nivel | Criterio | Acao | SLA |
+    |-------|----------|------|-----|
+    | Critico | Score <40 OU Pediu cancel | Save play imediato | 4h |
+    | Alto | Score 40-60 OU -20pts/semana | Intervencao planejada | 24h |
+    | Medio | Score 60-70 | Monitorar de perto | 48h |
+    | Baixo | Score 70-80 | Engajar proativamente | 1 semana |
+
+    ### Triggers Automaticos
+
+    ```
+    IF uso_declinando_30% AND ultimo_login > 7_dias THEN
+      → Alerta para CSM
+      → Email automatico de reengajamento
+      → Agendar call automaticamente
+
+    IF nps < 7 AND tickets_abertos > 2 THEN
+      → Alerta critico
+      → Escalar para Manager
+      → Bloquear upsell
+
+    IF champion_saiu THEN
+      → Alerta imediato
+      → Identificar novo champion
+      → Agendar reuniao executiva
+    ```
+
+    ---
+
+    ## Playbooks de Save
+
+    ### Playbook 1: Cliente Pediu Cancelamento
+
+    **Trigger:** Pedido de cancelamento recebido
+    **SLA:** 4 horas
+    **Owner:** CSM + Manager
+
+    **Processo:**
+    1. **Hora 1:** Ligar imediatamente
+       - Escutar sem defender
+       - Entender motivo real
+       - Documentar feedback
+
+    2. **Hora 4:** Analise interna
+       - Revisar historico completo
+       - Identificar opcoes
+       - Preparar proposta
+
+    3. **Dia 1:** Proposta de retencao
+       - Abordar causa raiz
+       - Oferta de valor (nao desconto)
+       - Plano de acao concreto
+
+    4. **Dia 3:** Follow-up
+       - Verificar decisao
+       - Se ficou: criar Success Plan
+       - Se saiu: exit interview
+
+    **Script de Abordagem:**
+    ```
+    "Recebi o pedido de cancelamento e queria entender
+    melhor o que aconteceu. Nos ultimos meses, vi que
+    [observacao do uso]. O que mudou do seu lado?"
+
+    [ESCUTAR]
+
+    "Entendo. Se pudessemos [resolver problema], faria
+    sentido continuar?"
+    ```
+
+    **Ofertas de Retencao (em ordem):**
+    1. Resolver o problema diretamente
+    2. Treinamento/consultoria gratuita
+    3. Feature/servico adicional
+    4. Pausa temporaria (3 meses)
+    5. Downgrade de plano (ultimo recurso)
+    6. Desconto (evitar - nao resolve causa)
+
+    ---
+
+    ### Playbook 2: Uso Declinando
+
+    **Trigger:** Uso caiu >30% em 30 dias
+    **SLA:** 48 horas
+    **Owner:** CSM
+
+    **Semana 1:**
+    - [ ] Analisar dados de uso detalhados
+    - [ ] Email personalizado
+    - [ ] Propor call de check-in
+
+    **Semana 2:**
+    - [ ] Call de diagnostico
+    - [ ] Entender mudancas
+    - [ ] Criar plano de reengajamento
+
+    **Semana 3-4:**
+    - [ ] Executar plano
+    - [ ] Monitorar progresso
+    - [ ] Ajustar se necessario
+
+    ---
+
+    ### Playbook 3: Champion Saiu
+
+    **Trigger:** Stakeholder principal mudou
+    **SLA:** 24 horas
+    **Owner:** CSM + Executivo
+
+    **Acoes Imediatas:**
+    - [ ] Identificar novo decisor
+    - [ ] Agendar reuniao de apresentacao
+    - [ ] Preparar business case atualizado
+    - [ ] Envolver executivo interno
+
+    **Reuniao com Novo Stakeholder:**
+    - Apresentar valor entregue
+    - Entender novos objetivos
+    - Revalidar necessidades
+    - Criar novo Success Plan
+
+    ---
+
+    ## Estrategia Proativa
+
+    ### 1. Programa de Engajamento
+
+    | Tier | Cadencia | Touchpoint | Objetivo |
+    |------|----------|------------|----------|
+    | Enterprise | Mensal | QBR | Demonstrar valor |
+    | Mid-Market | Bimestral | Check-in | Manter relacionamento |
+    | SMB | Trimestral | Email + In-app | Educar e engajar |
+
+    ### 2. Demonstracao de Valor Continua
+
+    **Mensal:**
+    - [ ] Email de valor automatico (metricas de uso)
+    - [ ] Highlights de features utilizadas
+    - [ ] ROI estimado
+
+    **Trimestral:**
+    - [ ] Business Review
+    - [ ] Comparativo com benchmarks
+    - [ ] Roadmap relevante
+
+    ### 3. Multi-threading
+
+    **Objetivo:** Nunca depender de 1 pessoa
+
+    | Conta | Minimo Contatos | Niveis |
+    |-------|-----------------|--------|
+    | Enterprise | 5 | Exec + Manager + Users |
+    | Mid-Market | 3 | Manager + Users |
+    | SMB | 2 | Owner + User |
+
+    ### 4. Expansion como Retencao
+
+    Clientes que expandem tem 3x menos churn.
+
+    **Estrategia:**
+    - Identificar oportunidades de expansion
+    - Propor antes de problemas
+    - Usar expansion para aprofundar relacionamento
+
+    ---
+
+    ## Metricas e Metas
+
+    ### KPIs de Retencao
+
+    | Metrica | Atual | Meta 30d | Meta 90d | Meta Anual |
+    |---------|-------|----------|----------|------------|
+    | Churn Rate | {{churn_atual}} | {{meta_30d}} | {{meta_90d}} | {{meta_anual}} |
+    | GRR | {{grr}} | {{grr_30}} | {{grr_90}} | {{grr_anual}} |
+    | NRR | {{nrr}} | {{nrr_30}} | {{nrr_90}} | {{nrr_anual}} |
+    | Save Rate | {{save_atual}} | >30% | >40% | >50% |
+    | At-Risk % | {{risk_atual}} | -20% | -40% | -60% |
+
+    ### Dashboard
+
+    ```
+    ┌─────────────────────────────────────────────────┐
+    │            RETENTION DASHBOARD                   │
+    ├─────────────────────────────────────────────────┤
+    │                                                  │
+    │  Churn MTD: {{churn_mtd}} (Meta: <2%)           │
+    │  GRR: {{grr}}%    NRR: {{nrr}}%                 │
+    │                                                  │
+    │  Clientes em Risco: {{qtd_risco}}               │
+    │  ├── Critico: {{qtd_critico}}                   │
+    │  ├── Alto: {{qtd_alto}}                         │
+    │  └── Medio: {{qtd_medio}}                       │
+    │                                                  │
+    │  Saves este mes: {{saves}}/{{pedidos}} ({{save_rate}}%) │
+    │                                                  │
+    │  Alertas Ativos: {{alertas}}                    │
+    │                                                  │
+    └─────────────────────────────────────────────────┘
+    ```
+
+    ---
+
+    ## Plano de Implementacao
+
+    ### Fase 1: Quick Wins (30 dias)
+
+    - [ ] Configurar alertas de risco
+    - [ ] Treinar time em playbooks
+    - [ ] Implementar email de valor mensal
+    - [ ] Criar dashboard de retencao
+
+    ### Fase 2: Estruturacao (60 dias)
+
+    - [ ] Implementar Health Score completo
+    - [ ] Automatizar triggers
+    - [ ] Criar programa de multi-threading
+    - [ ] Estabelecer rituais de revisao
+
+    ### Fase 3: Otimizacao (90 dias+)
+
+    - [ ] Analisar efetividade de saves
+    - [ ] Otimizar playbooks
+    - [ ] Implementar analise preditiva
+    - [ ] Escalar melhores praticas
+
+    ---
+
+    ## Rituais de Retencao
+
+    | Ritual | Frequencia | Participantes | Objetivo |
+    |--------|------------|---------------|----------|
+    | Risk Review | Semanal | CSMs + Manager | Revisar clientes em risco |
+    | Churn Analysis | Mensal | CS + Produto | Analisar churns do mes |
+    | Save Wins | Quinzenal | Time CS | Compartilhar saves bem-sucedidos |
+    | NRR Review | Mensal | Leadership | Acompanhar metricas |
+
+    ---
+
+    ## Proximos Passos
+
+    1. [ ] Aprovar plano com lideranca
+    2. [ ] Configurar ferramentas
+    3. [ ] Treinar time
+    4. [ ] Lancar Fase 1
+    5. [ ] Monitorar resultados
+    6. [ ] Iterar baseado em dados
+
+  arquivo: output/customer-success/planos/plano-retencao-{{slug_empresa}}-{{data}}.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "O diagnostico reflete a realidade?"
+  - "Os playbooks sao acionaveis?"
+  - "Os alertas sao configuravel?"
+  - "As metas sao realistas?"
+  - "O plano de implementacao e viavel?"
+
+# ============================================
+# PROXIMOS PASSOS
+# ============================================
+
+proximos_passos:
+  - tarefa: criar-plano-risco
+    se: "Precisa detalhar acao para clientes em risco"
+  - tarefa: criar-qbr
+    se: "Precisa estruturar acompanhamento"

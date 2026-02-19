@@ -1,0 +1,224 @@
+# ============================================
+# TAREFA: Criar Módulo do Curso
+# ============================================
+
+id: criar-modulo
+nome: Criar Módulo do Curso
+descricao: Detalhar um módulo completo com aulas, objetivos e atividades
+agente: designer-instrucional
+comando: /criar-modulo
+versao: "1.0"
+categoria: estrutura
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: nome_modulo
+      pergunta: "Qual o nome/título do módulo?"
+      tipo: texto
+      exemplo: "Fundamentos de Marketing Digital"
+
+    - nome: objetivo_modulo
+      pergunta: "Qual o objetivo do módulo? (O que o aluno será capaz de fazer ao final?)"
+      tipo: texto
+      exemplo: "Criar uma estratégia básica de marketing digital"
+
+    - nome: topicos
+      pergunta: "Quais os principais tópicos a serem abordados?"
+      tipo: lista
+      exemplo:
+        - "O que é marketing digital"
+        - "Canais de marketing"
+        - "Funil de vendas"
+        - "Métricas básicas"
+
+  opcionais:
+    - nome: duracao
+      pergunta: "Qual a duração estimada do módulo?"
+      tipo: texto
+      padrao: "2-3 horas"
+
+    - nome: nivel_bloom
+      pergunta: "Qual o nível principal de Bloom para este módulo?"
+      tipo: escolha
+      opcoes:
+        - "Lembrar/Entender (conceitual)"
+        - "Aplicar (prático)"
+        - "Analisar/Avaliar (analítico)"
+        - "Criar (produtivo)"
+      padrao: "Aplicar (prático)"
+
+    - nome: pre_requisitos
+      pergunta: "Quais módulos/conhecimentos são pré-requisitos?"
+      tipo: texto
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Analisar objetivo e tópicos"
+    detalhes:
+      - Verificar alinhamento com objetivo geral do curso
+      - Mapear conhecimentos prévios necessários
+      - Identificar conceitos-chave
+
+  - numero: 2
+    acao: "Estruturar aulas"
+    detalhes:
+      - Dividir tópicos em aulas
+      - Sequenciar logicamente
+      - Definir tipo de cada aula (teórica, prática, mista)
+      - Estimar duração
+
+  - numero: 3
+    acao: "Definir objetivos por aula"
+    detalhes:
+      - Criar objetivo específico para cada aula
+      - Usar verbos de Bloom apropriados
+      - Garantir progressão de complexidade
+
+  - numero: 4
+    acao: "Planejar atividades"
+    detalhes:
+      - Definir exercícios por aula
+      - Criar quiz de fixação
+      - Planejar atividade prática do módulo
+
+  - numero: 5
+    acao: "Mapear recursos"
+    detalhes:
+      - Listar materiais necessários
+      - Identificar exemplos e casos
+      - Definir leituras complementares
+
+# ============================================
+# SAÍDA
+# ============================================
+
+saida:
+  formato: markdown
+  local: output/modulos/
+  template: |
+    # Módulo: {{nome_modulo}}
+
+    ## Visão Geral
+
+    | Item | Descrição |
+    |------|-----------|
+    | **Duração** | {{duracao}} |
+    | **Nível Bloom** | {{nivel_bloom}} |
+    | **Pré-requisitos** | {{pre_requisitos}} |
+
+    ### Objetivo do Módulo
+    > Ao final deste módulo, o aluno será capaz de {{objetivo_modulo}}.
+
+    ---
+
+    ## Estrutura de Aulas
+
+    ### Aula 1: [Título]
+    **Objetivo:** O aluno será capaz de [verbo + objeto]
+    **Duração:** XX minutos
+    **Tipo:** Teórica/Prática
+
+    **Conteúdo:**
+    - Tópico 1.1
+    - Tópico 1.2
+    - Tópico 1.3
+
+    **Atividade:** [Descrição breve]
+
+    ---
+
+    ### Aula 2: [Título]
+    **Objetivo:** O aluno será capaz de [verbo + objeto]
+    **Duração:** XX minutos
+    **Tipo:** Teórica/Prática
+
+    **Conteúdo:**
+    - Tópico 2.1
+    - Tópico 2.2
+
+    **Atividade:** [Descrição breve]
+
+    ---
+
+    [Repetir para cada aula...]
+
+    ---
+
+    ## Avaliação do Módulo
+
+    ### Quiz de Fixação
+    - **Questões:** 10
+    - **Tipos:** Múltipla escolha + V/F
+    - **Peso:** 20%
+
+    ### Atividade Prática
+    - **Descrição:** [O que o aluno deve fazer]
+    - **Entregável:** [O que deve entregar]
+    - **Peso:** 30%
+
+    ### Critérios de Conclusão
+    - [ ] Assistir 100% das aulas
+    - [ ] Quiz com mínimo 70%
+    - [ ] Atividade entregue e aprovada
+
+    ---
+
+    ## Recursos
+
+    ### Materiais de Apoio
+    - [ ] [Material 1]
+    - [ ] [Material 2]
+
+    ### Leituras Complementares
+    - [Recurso 1]
+    - [Recurso 2]
+
+    ### Ferramentas
+    - [Ferramenta 1]
+    - [Ferramenta 2]
+
+    ---
+
+    ## Checklist de Produção
+
+    - [ ] Roteiros das aulas escritos
+    - [ ] Vídeos gravados
+    - [ ] Quiz criado na plataforma
+    - [ ] Atividade prática documentada
+    - [ ] Materiais de apoio prontos
+
+# ============================================
+# CONHECIMENTO UTILIZADO
+# ============================================
+
+conhecimento:
+  - conhecimento/design-instrucional.md
+  - conhecimento/taxonomia-bloom.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "O objetivo do módulo está claro e mensurável?"
+  - "As aulas seguem sequência lógica?"
+  - "Cada aula tem objetivo específico?"
+  - "Há equilíbrio entre teoria e prática?"
+  - "A avaliação está alinhada aos objetivos?"
+
+# ============================================
+# PRÓXIMOS PASSOS SUGERIDOS
+# ============================================
+
+proximos_passos:
+  - "/criar-aula - Detalhar cada aula"
+  - "/criar-exercicio - Criar exercícios"
+  - "/criar-roteiro - Criar roteiros de vídeo"

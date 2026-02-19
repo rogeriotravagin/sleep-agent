@@ -1,0 +1,273 @@
+# =============================================================
+# EVENT BUS - Tipos de Evento do Sistema
+# =============================================================
+# Define todos os eventos que o Sleep Agent pode emitir e
+# consumir. Permite reatividade: o sistema reage a mudancas
+# sem precisar de comando explicito do usuario.
+# =============================================================
+
+versao: 1.0
+
+event_bus:
+  descricao: |
+    O Sleep Agent v4 so agia quando o usuario pedia. O Event Bus
+    permite reatividade: eventos do ambiente (arquivo criado, tarefa
+    concluida, insight detectado) disparam acoes automaticamente.
+
+  # ---------------------------------------------------------
+  # TIPOS DE EVENTO
+  # ---------------------------------------------------------
+  eventos:
+
+    arquivo:
+      - nome: "arquivo.criado"
+        descricao: "Novo arquivo criado no workspace"
+        payload: {caminho: null, tipo: null, tamanho: null}
+        prioridade: baixa
+
+      - nome: "arquivo.modificado"
+        descricao: "Arquivo existente modificado"
+        payload: {caminho: null, tipo: null, diff_resumo: null}
+        prioridade: baixa
+
+      - nome: "arquivo.deletado"
+        descricao: "Arquivo removido do workspace"
+        payload: {caminho: null, tipo: null}
+        prioridade: normal
+
+    tarefa:
+      - nome: "tarefa.criada"
+        descricao: "Nova tarefa adicionada a fila"
+        payload: {id: null, agente: null, prioridade: null, extensao: null}
+        prioridade: normal
+
+      - nome: "tarefa.iniciada"
+        descricao: "Agente comecou a executar tarefa"
+        payload: {id: null, agente: null, extensao: null}
+        prioridade: normal
+
+      - nome: "tarefa.concluida"
+        descricao: "Tarefa finalizada com sucesso"
+        payload: {id: null, agente: null, resultado: null, duracao: null}
+        prioridade: alta
+
+      - nome: "tarefa.falhou"
+        descricao: "Tarefa encontrou erro"
+        payload: {id: null, agente: null, erro: null, tentativa: null, max_tentativas: null}
+        prioridade: alta
+
+      - nome: "tarefa.timeout"
+        descricao: "Tarefa excedeu tempo maximo"
+        payload: {id: null, agente: null, timeout: null}
+        prioridade: alta
+
+      - nome: "tarefa.pausada"
+        descricao: "Tarefa interrompida e checkpoint salvo"
+        payload: {id: null, agente: null, progresso: null}
+        prioridade: normal
+
+    memoria:
+      - nome: "insight.novo"
+        descricao: "Novo insight capturado pela memoria"
+        payload: {categoria: null, conteudo: null, fonte: null}
+        prioridade: normal
+
+      - nome: "padrao.detectado"
+        descricao: "Padrao recorrente identificado"
+        payload: {tipo: null, descricao: null, confianca: null, ocorrencias: null}
+        prioridade: alta
+
+      - nome: "memoria.promovida"
+        descricao: "Item promovido de episodica para semantica"
+        payload: {item_id: null, categoria: null, motivo: null}
+        prioridade: baixa
+
+      - nome: "memoria.expirada"
+        descricao: "Item episodico removido por decaimento"
+        payload: {item_id: null, dias_inativo: null}
+        prioridade: baixa
+
+    qualidade:
+      - nome: "gate.passou"
+        descricao: "Entrega aprovada pelo quality gate"
+        payload: {nivel: null, verificacao: null, tarefa_id: null}
+        prioridade: normal
+
+      - nome: "gate.falhou"
+        descricao: "Entrega reprovada pelo quality gate"
+        payload: {nivel: null, verificacao: null, motivo: null, tarefa_id: null}
+        prioridade: alta
+
+      - nome: "gate.calibrado"
+        descricao: "Novo gate auto-gerado pela calibracao"
+        payload: {gate_id: null, regra: null, motivo: null}
+        prioridade: normal
+
+      - nome: "circuit_breaker.abriu"
+        descricao: "Circuit breaker aberto para um gate"
+        payload: {gate: null, falhas: null, motivo: null}
+        prioridade: alta
+
+      - nome: "circuit_breaker.fechou"
+        descricao: "Circuit breaker restaurado"
+        payload: {gate: null, tempo_aberto: null}
+        prioridade: normal
+
+    agente:
+      - nome: "agente.inicializado"
+        descricao: "Agente carregou instrucoes e esta pronto"
+        payload: {agente_id: null, extensao: null}
+        prioridade: normal
+
+      - nome: "agente.ativado"
+        descricao: "Agente comecou a executar"
+        payload: {agente_id: null, tarefa_id: null}
+        prioridade: normal
+
+      - nome: "agente.concluiu"
+        descricao: "Agente finalizou com sucesso"
+        payload: {agente_id: null, tarefa_id: null, duracao: null}
+        prioridade: normal
+
+      - nome: "agente.falhou"
+        descricao: "Agente encontrou erro irrecuperavel"
+        payload: {agente_id: null, tarefa_id: null, erro: null}
+        prioridade: alta
+
+    blackboard:
+      - nome: "blackboard.atualizado"
+        descricao: "Campo do blackboard foi modificado"
+        payload: {campo: null, valor_anterior: null, valor_novo: null, agente: null}
+        prioridade: normal
+
+      - nome: "blackboard.conflito"
+        descricao: "Dois agentes tentaram modificar mesmo campo"
+        payload: {campo: null, agente_1: null, agente_2: null}
+        prioridade: alta
+
+    externo:
+      - nome: "webhook.recebido"
+        descricao: "Webhook externo recebido"
+        payload: {fonte: null, tipo: null, dados: null}
+        prioridade: normal
+
+      - nome: "timer.disparado"
+        descricao: "Timer agendado disparou"
+        payload: {id: null, agendamento: null}
+        prioridade: normal
+
+    sistema:
+      - nome: "sessao.iniciada"
+        descricao: "Nova sessao do Sleep Agent comecou"
+        payload: {timestamp: null}
+        prioridade: normal
+
+      - nome: "sessao.encerrada"
+        descricao: "Sessao do Sleep Agent finalizou"
+        payload: {timestamp: null, tarefas_concluidas: null, duracao: null}
+        prioridade: normal
+
+      - nome: "health_check.concluido"
+        descricao: "Health check executou"
+        payload: {problemas: null, corrigidos: null, pendentes: null}
+        prioridade: baixa
+
+  # ---------------------------------------------------------
+  # ASSINATURAS (quem escuta o que)
+  # ---------------------------------------------------------
+  assinaturas:
+
+    # Scheduler reage a tarefas
+    - evento: "tarefa.concluida"
+      assinante: "scheduler"
+      acao: "escalonar_proxima"
+      descricao: "Quando tarefa termina, escalonar proxima da fila"
+
+    - evento: "tarefa.falhou"
+      assinante: "scheduler"
+      acao: "avaliar_retry"
+      descricao: "Quando tarefa falha, decidir se tenta novamente"
+
+    - evento: "tarefa.timeout"
+      assinante: "scheduler"
+      acao: "cancelar_e_notificar"
+      descricao: "Quando tarefa estoura timeout, cancelar e avisar"
+
+    # Blackboard reage a conclusoes
+    - evento: "tarefa.concluida"
+      assinante: "blackboard"
+      acao: "atualizar_estado"
+      descricao: "Resultado da tarefa vai pro blackboard"
+
+    # Memoria reage a insights
+    - evento: "insight.novo"
+      assinante: "memoria"
+      acao: "persistir_e_indexar"
+      descricao: "Novo insight salvo e indexado"
+
+    - evento: "padrao.detectado"
+      assinante: "memoria"
+      acao: "avaliar_promocao"
+      descricao: "Padrao recorrente pode virar semantico"
+
+    # Qualidade reage a falhas
+    - evento: "gate.falhou"
+      assinante: "qualidade"
+      acao: "registrar_e_sugerir_correcao"
+      descricao: "Gate falhou, registrar e sugerir correcao"
+
+    - evento: "gate.falhou"
+      assinante: "auto_calibracao"
+      acao: "incrementar_contador"
+      descricao: "Alimentar metricas de calibracao"
+
+    # Circuit breaker reage a falhas repetidas
+    - evento: "gate.falhou"
+      assinante: "circuit_breaker"
+      acao: "avaliar_abertura"
+      descricao: "Verificar se precisa abrir circuit breaker"
+
+    # Lifecycle reage a agentes
+    - evento: "agente.falhou"
+      assinante: "lifecycle"
+      acao: "transicionar_para_falha"
+      descricao: "Mover agente para estado de falha"
+
+    # Asset Engine reage a aprovacoes
+    - evento: "gate.passou"
+      assinante: "asset_engine"
+      acao: "indexar_ativo"
+      condicao: "evento.payload.nivel == 3"
+      descricao: "Entrega aprovada pelo usuario vira ativo reusavel"
+
+    # Observabilidade registra tudo
+    - evento: "*"
+      assinante: "metricas"
+      acao: "registrar"
+      descricao: "Todo evento alimenta metricas do dashboard"
+
+  # ---------------------------------------------------------
+  # CONFIGURACAO
+  # ---------------------------------------------------------
+  configuracao:
+    max_assinantes_por_evento: 10
+    timeout_processamento: "2s"
+    ordem_processamento: "prioridade_assinante"
+    log_eventos: true
+    log_arquivo: "workspace/.status/event-log.yaml"
+    buffer_maximo: 100  # Eventos na fila de processamento
+    descarte_quando_cheio: "eventos_baixa_prioridade"
+
+  # ---------------------------------------------------------
+  # PRIORIDADE DE PROCESSAMENTO
+  # ---------------------------------------------------------
+  prioridade_assinantes:
+    scheduler: 100      # Sempre primeiro (gerencia fila)
+    circuit_breaker: 90  # Protecao contra cascata
+    lifecycle: 80        # Gerencia estado de agentes
+    blackboard: 70       # Atualiza estado compartilhado
+    qualidade: 60        # Registra e sugere
+    memoria: 50          # Persiste aprendizados
+    auto_calibracao: 40  # Aprende com padroes
+    asset_engine: 30     # Indexa ativos
+    metricas: 10         # Observabilidade (pode atrasar)

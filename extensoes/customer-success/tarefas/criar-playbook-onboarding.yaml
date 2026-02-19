@@ -1,0 +1,415 @@
+# ============================================
+# TAREFA: Criar Playbook de Onboarding
+# ============================================
+
+id: criar-playbook-onboarding
+nome: Criar Playbook de Onboarding
+descricao: Desenvolver playbook completo de onboarding para garantir ativacao e primeiro valor
+agente: onboarding-specialist
+comando: /playbook-onboarding
+versao: "1.0"
+categoria: onboarding
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: produto
+      pergunta: "Qual o produto/servico que o cliente esta adquirindo?"
+      tipo: texto
+      exemplo: "Plataforma de gestao de projetos SaaS"
+
+    - nome: primeiro_valor
+      pergunta: "Qual o 'Aha Moment' - quando o cliente percebe valor pela primeira vez?"
+      tipo: texto
+      exemplo: "Quando cria o primeiro projeto e atribui tarefas ao time"
+
+    - nome: duracao_onboarding
+      pergunta: "Qual a duracao ideal do onboarding?"
+      tipo: escolha
+      opcoes:
+        - 7 dias
+        - 14 dias
+        - 30 dias
+        - 45 dias
+        - 60 dias
+        - 90 dias
+      exemplo: "30 dias"
+
+    - nome: modelo_atendimento
+      pergunta: "Qual o modelo de atendimento durante onboarding?"
+      tipo: escolha
+      opcoes:
+        - High-touch (reunioes frequentes)
+        - Mid-touch (algumas reunioes)
+        - Tech-touch (self-service + automacao)
+        - Hibrido
+      exemplo: "Mid-touch"
+
+  opcionais:
+    - nome: requisitos_tecnicos
+      pergunta: "Quais configuracoes tecnicas sao necessarias?"
+      tipo: lista
+      exemplo:
+        - "Integracao com sistema existente"
+        - "Import de dados"
+        - "Configuracao de usuarios"
+
+    - nome: stakeholders
+      pergunta: "Quem participa do onboarding no lado do cliente?"
+      tipo: lista
+      exemplo:
+        - "Sponsor executivo"
+        - "Admin principal"
+        - "Usuarios finais"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Definir objetivos e marcos"
+    detalhes:
+      - "Estabelecer objetivo final do onboarding"
+      - "Definir marcos intermediarios"
+      - "Criar criterios de sucesso"
+      - "Estabelecer timeline"
+
+  - numero: 2
+    acao: "Estruturar fases do onboarding"
+    detalhes:
+      - "Fase de boas-vindas"
+      - "Fase de setup"
+      - "Fase de primeiro valor"
+      - "Fase de treinamento"
+      - "Fase de handoff"
+
+  - numero: 3
+    acao: "Criar checklists por fase"
+    detalhes:
+      - "Tarefas para o CSM"
+      - "Tarefas para o cliente"
+      - "Validacoes necessarias"
+      - "Recursos de apoio"
+
+  - numero: 4
+    acao: "Desenvolver comunicacao"
+    detalhes:
+      - "Templates de email"
+      - "Scripts de reuniao"
+      - "Materiais de apoio"
+      - "FAQs"
+
+  - numero: 5
+    acao: "Definir metricas e alertas"
+    detalhes:
+      - "KPIs de onboarding"
+      - "Gatilhos de intervencao"
+      - "Criterios de sucesso"
+      - "Red flags"
+
+# ============================================
+# SAIDA
+# ============================================
+
+saida:
+  formato: markdown
+  template: |
+    # Playbook de Onboarding
+
+    ## Produto: {{produto}}
+
+    ---
+
+    ## Visao Geral
+
+    | Elemento | Descricao |
+    |----------|-----------|
+    | **Duracao** | {{duracao_onboarding}} |
+    | **Modelo** | {{modelo_atendimento}} |
+    | **Objetivo Final** | {{objetivo_final}} |
+    | **Aha Moment** | {{primeiro_valor}} |
+    | **TTFV Target** | {{ttfv_target}} |
+
+    ---
+
+    ## Marcos de Sucesso
+
+    | Marco | Timing | Criterio | Validacao |
+    |-------|--------|----------|-----------|
+    {{#each marcos}}
+    | {{this.nome}} | Dia {{this.dia}} | {{this.criterio}} | {{this.validacao}} |
+    {{/each}}
+
+    ---
+
+    ## Fase 1: Boas-vindas (Dia 0-1)
+
+    ### Objetivo
+    Criar empolgacao e preparar para o sucesso.
+
+    ### Checklist CSM
+    - [ ] Enviar email de boas-vindas personalizado
+    - [ ] Liberar acesso a plataforma
+    - [ ] Enviar credenciais e instrucoes
+    - [ ] Agendar kickoff meeting
+    - [ ] Preparar materiais de kickoff
+
+    ### Checklist Cliente
+    - [ ] Acessar plataforma pela primeira vez
+    - [ ] Confirmar kickoff meeting
+    - [ ] Identificar usuarios a serem treinados
+
+    ### Recursos
+    - Template: Email de boas-vindas
+    - Documento: Guia de primeiros passos
+    - Video: Tour da plataforma
+
+    ---
+
+    ## Fase 2: Kickoff (Dia 1-3)
+
+    ### Objetivo
+    Alinhar expectativas e definir plano de sucesso.
+
+    ### Agenda Kickoff ({{duracao_kickoff}} min)
+    ```
+    00-05: Apresentacoes
+    05-15: Revisao de objetivos
+    15-25: Visao geral do onboarding
+    25-35: Definicao de sucesso
+    35-45: Timeline e responsabilidades
+    45-55: Duvidas e proximos passos
+    ```
+
+    ### Checklist CSM
+    - [ ] Conduzir kickoff meeting
+    - [ ] Documentar objetivos do cliente
+    - [ ] Criar Success Plan
+    - [ ] Enviar resumo e proximos passos
+    - [ ] Agendar sessao de setup
+
+    ### Perguntas Essenciais
+    {{#each perguntas_kickoff}}
+    - {{this}}
+    {{/each}}
+
+    ### Entregavel
+    - Success Plan documentado
+
+    ---
+
+    ## Fase 3: Setup (Dia 3-{{dia_fim_setup}})
+
+    ### Objetivo
+    Configurar plataforma para uso.
+
+    ### Checklist Tecnico
+    {{#each checklist_setup}}
+    - [ ] {{this.item}} - Owner: {{this.owner}}
+    {{/each}}
+
+    ### Checklist CSM
+    - [ ] Acompanhar progresso do setup
+    - [ ] Resolver blockers
+    - [ ] Validar configuracoes
+    - [ ] Agendar treinamento
+
+    ### Checklist Cliente
+    - [ ] Completar configuracoes basicas
+    - [ ] Criar usuarios iniciais
+    - [ ] Importar dados (se aplicavel)
+    - [ ] Testar acesso
+
+    ### Red Flags
+    - Setup nao iniciado em 3 dias
+    - Blocker tecnico nao resolvido em 48h
+    - Cliente sem responder em 2 dias
+
+    ---
+
+    ## Fase 4: Primeiro Valor (Dia {{dia_inicio_valor}}-{{dia_fim_valor}})
+
+    ### Objetivo
+    Levar cliente ao Aha Moment.
+
+    ### Aha Moment
+    > {{primeiro_valor}}
+
+    ### Checklist CSM
+    - [ ] Guiar cliente ate primeiro valor
+    - [ ] Confirmar que valor foi percebido
+    - [ ] Celebrar conquista
+    - [ ] Coletar feedback inicial
+
+    ### Checklist Cliente
+    - [ ] Completar acao principal
+    - [ ] Experimentar feature core
+    - [ ] Envolver time inicial
+
+    ### Validacao de Primeiro Valor
+    - [ ] Cliente completou: {{acao_primeiro_valor}}
+    - [ ] Cliente confirmou perceber valor
+    - [ ] NPS pos-primeiro valor coletado
+
+    ---
+
+    ## Fase 5: Treinamento (Dia {{dia_inicio_treino}}-{{dia_fim_treino}})
+
+    ### Objetivo
+    Capacitar time para uso autonomo.
+
+    ### Sessoes de Treinamento
+    {{#each sessoes_treinamento}}
+    | Sessao | Duracao | Publico | Conteudo |
+    |--------|---------|---------|----------|
+    | {{this.nome}} | {{this.duracao}} | {{this.publico}} | {{this.conteudo}} |
+    {{/each}}
+
+    ### Checklist CSM
+    - [ ] Conduzir sessoes de treinamento
+    - [ ] Disponibilizar gravacoes
+    - [ ] Enviar materiais de apoio
+    - [ ] Validar compreensao
+
+    ### Checklist Cliente
+    - [ ] Participar de treinamentos
+    - [ ] Praticar features aprendidas
+    - [ ] Treinar outros usuarios
+
+    ### Recursos de Treinamento
+    - Videos tutoriais
+    - Documentacao
+    - Central de ajuda
+    - FAQs
+
+    ---
+
+    ## Fase 6: Handoff (Dia {{dia_inicio_handoff}}-{{duracao_onboarding}})
+
+    ### Objetivo
+    Transicionar para relacionamento ongoing.
+
+    ### Checklist CSM Onboarding
+    - [ ] Validar todos os marcos alcancados
+    - [ ] Coletar NPS de onboarding
+    - [ ] Documentar learnings
+    - [ ] Fazer handoff para CSM ongoing
+
+    ### Checklist CSM Ongoing
+    - [ ] Receber contexto do onboarding
+    - [ ] Agendar check-in pos-onboarding
+    - [ ] Revisar Health Score
+    - [ ] Planejar proximos touchpoints
+
+    ### Criterios de Handoff
+    - [ ] Setup 100% completo
+    - [ ] Primeiro valor alcancado
+    - [ ] Time treinado
+    - [ ] Health Score >70
+    - [ ] NPS onboarding coletado
+
+    ---
+
+    ## Comunicacao
+
+    ### Email: Boas-vindas
+    ```
+    Assunto: Bem-vindo(a) a {{produto}} - Vamos comecar!
+
+    Ola {{nome}},
+
+    Seja muito bem-vindo(a) a {{produto}}!
+
+    Estou animado(a) em ajuda-lo(a) a {{objetivo_cliente}}.
+
+    Seus primeiros passos:
+    1. Acesse: {{link_acesso}}
+    2. Complete o tour inicial
+    3. Prepare-se para nosso kickoff: {{data_kickoff}}
+
+    Qualquer duvida, estou a disposicao!
+
+    {{assinatura_csm}}
+    ```
+
+    ### Email: Pos-Kickoff
+    ```
+    Assunto: Resumo do nosso kickoff + proximos passos
+
+    Ola {{nome}},
+
+    Obrigado pelo otimo kickoff!
+
+    Resumo do que alinhamos:
+    - Objetivo principal: {{objetivo}}
+    - Timeline: {{timeline}}
+    - Proximo passo: {{proximo_passo}}
+
+    Anexo o Success Plan que criamos juntos.
+
+    Falo com voce em {{data_proximo_contato}}!
+
+    {{assinatura_csm}}
+    ```
+
+    ---
+
+    ## Metricas de Onboarding
+
+    | Metrica | Meta | Medicao |
+    |---------|------|---------|
+    | TTFV (Time to First Value) | <{{meta_ttfv}} dias | Data first value - Data inicio |
+    | Activation Rate | >{{meta_activation}}% | Clientes ativados / Total |
+    | Setup Completion | >{{meta_setup}}% | Setups completos / Total |
+    | Training Attendance | >{{meta_treino}}% | Presentes / Convidados |
+    | Onboarding NPS | >{{meta_nps}} | Pesquisa dia 30 |
+    | Time to Handoff | <{{meta_handoff}} dias | Data handoff - Data inicio |
+
+    ---
+
+    ## Alertas e Intervencoes
+
+    | Situacao | Trigger | Acao | Responsavel |
+    |----------|---------|------|-------------|
+    | Sem login D+3 | Nenhum acesso | Email + Call | CSM |
+    | Setup parado | 5 dias sem progresso | Call diagnostico | CSM |
+    | Kickoff remarcado 2x | Baixa prioridade | Escalar | CSM + Manager |
+    | First value atrasado | D+14 sem aha moment | Intervencao | CSM |
+    | Treinamento incompleto | <50% participacao | Sessao extra | CSM |
+
+    ---
+
+    ## Recursos Adicionais
+
+    - [Guia de Primeiros Passos](link)
+    - [Videos Tutoriais](link)
+    - [Central de Ajuda](link)
+    - [FAQs](link)
+    - [Contato Suporte](link)
+
+  arquivo: output/customer-success/playbooks/playbook-onboarding-{{slug_produto}}.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "Todas as fases tem objetivos claros?"
+  - "Os checklists sao completos e acionaveis?"
+  - "Os marcos de sucesso sao mensuraveis?"
+  - "A comunicacao esta pronta para uso?"
+  - "Os alertas e intervencoes estao definidos?"
+
+# ============================================
+# PROXIMOS PASSOS
+# ============================================
+
+proximos_passos:
+  - tarefa: criar-checklist-ativacao
+    se: "Precisa detalhar marcos de ativacao"
+  - tarefa: criar-sequencia-boas-vindas
+    se: "Precisa criar emails automatizados"

@@ -1,0 +1,124 @@
+# Regras de Delegacao - Extensao Branding
+# Define qual agente atende cada tipo de pedido
+
+# =====================================================
+# CONFIGURACAO DE OUTPUT
+# =====================================================
+
+output:
+  extensao: branding
+  tipos:
+    - logos
+    - paletas
+    - tipografias
+    - design-systems
+    - landing-pages
+    - styleguides
+    - analises
+    - identidades
+  auto_criar: true
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+# Agente Design Analyst
+design_analyst:
+  agente: agentes/DESIGN-ANALYST.md
+  gatilhos:
+    - analisar referencia
+    - analisar print
+    - analisar screenshot
+    - analisar pagina
+    - analisar site
+    - extrair design
+    - extrair diretrizes
+    - extrair padroes
+    - criar style guide
+    - criar styleguide
+    - diretrizes de design
+    - reverse engineering
+    - desconstruir design
+    - copiar design
+    - replicar design
+  tarefas:
+    - analisar-referencia
+    - extrair-diretrizes
+    - criar-styleguide
+
+# Agente Designer
+designer:
+  agente: agentes/DESIGNER.md
+  gatilhos:
+    - logo
+    - identidade visual
+    - paleta de cores
+    - tipografia
+    - design grafico
+    - elementos visuais
+    - marca visual
+  tarefas:
+    - criar-logo
+    - paleta-cores
+
+# Agente UI/UX
+uiux:
+  agente: agentes/UI-UX.md
+  gatilhos:
+    - landing page
+    - interface
+    - wireframe
+    - prototipo
+    - design system
+    - componentes
+    - UI
+    - UX
+  tarefas:
+    - criar-landing
+    - design-system
+
+# Agente Brand Strategist
+brand_strategist:
+  agente: agentes/BRAND-STRATEGIST.md
+  gatilhos:
+    - estrategia de marca
+    - posicionamento
+    - brand voice
+    - arquetipo
+    - golden circle
+    - personal branding
+    - marca pessoal
+  tarefas:
+    - posicionamento-marca
+    - personal-branding
+    - definir-marca
+
+# =====================================================
+# REGRAS DE PRIORIDADE
+# =====================================================
+
+prioridade:
+  ordem:
+    - design_analyst     # Primeiro: analise de referencias
+    - brand_strategist   # Segundo: estrategia
+    - designer           # Terceiro: identidade visual
+    - uiux               # Quarto: interfaces
+
+# =====================================================
+# CASOS ESPECIAIS
+# =====================================================
+
+casos_especiais:
+  multi_agente:
+    - gatilho: "brand completo"
+      workflow: workflows/brand-completo.yaml
+    - gatilho: "identidade completa"
+      workflow: workflows/identidade-visual.yaml
+    - gatilho: "analisar e criar"
+      workflow: workflows/analise-design.yaml
+
+  explorar_primeiro:
+    - "quero criar uma marca"
+    - "preciso de identidade visual"
+    - "quero copiar esse design"
+    - "fazer igual a essa pagina"

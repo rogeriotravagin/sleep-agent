@@ -1,0 +1,554 @@
+# Workflow: Identidade Visual
+# Framework Ralph de Execucao
+
+id: identidade-visual
+nome: Sistema de Identidade Visual
+descricao: Criar sistema completo de identidade visual para uma marca
+comando: /identidade-visual
+
+versao: "1.0"
+
+# Baseado em: Paul Rand, Massimo Vignelli, Pentagram, IDEO
+
+duracao_estimada: "Processo completo"
+resultado_final: "Sistema de identidade visual completo com logo, cores, tipografia e guidelines"
+
+# =====================================================
+# VISAO GERAL
+# =====================================================
+
+visao_geral: |
+  Este workflow cria um sistema completo de identidade visual,
+  desde a conceituacao ate as guidelines de uso.
+
+  Aplica os principios dos maiores designers da historia
+  para criar identidades memoraveis e atemporais.
+
+# =====================================================
+# FASES DO WORKFLOW
+# =====================================================
+
+fases:
+  # ===================================================
+  # FASE 1: BRIEFING & PESQUISA
+  # ===================================================
+  - numero: 1
+    nome: BRIEFING & PESQUISA
+    agente: designer
+    objetivo: "Entender a marca e seu contexto visual"
+
+    tarefas:
+      - id: briefing-visual
+        nome: "Coletar Briefing Visual"
+        perguntas:
+          - "Qual o nome da marca?"
+          - "Qual o posicionamento? (luxo, acessivel, tecnico, etc)"
+          - "Quem e o publico-alvo?"
+          - "Quais os valores da marca?"
+          - "Tem algum arquetipo definido?"
+          - "Quais cores voce gosta/nao gosta?"
+          - "Tem referencias visuais que admira?"
+          - "Tem restricoes ou requisitos especificos?"
+
+      - id: analise-concorrentes
+        nome: "Analisar Concorrentes Visuais"
+        analisar:
+          - Tipos de logo usados
+          - Paletas de cores do setor
+          - Tipografias comuns
+          - Estilos graficos
+          - Oportunidades de diferenciacao
+
+      - id: moodboard
+        nome: "Criar Moodboard"
+        elementos:
+          - Referencias de logo
+          - Paletas de inspiracao
+          - Tipografias de referencia
+          - Estilos fotograficos
+          - Texturas e padroes
+          - Mood/atmosfera desejada
+
+    entregas:
+      - Briefing documentado
+      - Analise de concorrentes visual
+      - Moodboard de referencias
+
+    gates:
+      - "Briefing esta completo?"
+      - "Direcao visual esta clara?"
+      - "Referencias foram coletadas?"
+
+  # ===================================================
+  # FASE 2: CONCEITUACAO
+  # ===================================================
+  - numero: 2
+    nome: CONCEITUACAO
+    agente: designer
+    objetivo: "Desenvolver conceito visual"
+    dependencias: [1]
+
+    tarefas:
+      - id: conceito-criativo
+        nome: "Desenvolver Conceito Criativo"
+        processo:
+          - Brainstorming de associacoes
+          - Mapeamento de simbolismos
+          - Exploracao de metaforas visuais
+          - Definicao de direcao criativa
+
+      - id: direcao-estetica
+        nome: "Definir Direcao Estetica"
+        espectros:
+          - Moderno ←→ Classico
+          - Minimalista ←→ Maximalista
+          - Geometrico ←→ Organico
+          - Serio ←→ Divertido
+          - Premium ←→ Acessivel
+
+      - id: tipo-logo
+        nome: "Escolher Tipo de Logo"
+        opcoes:
+          wordmark:
+            descricao: "Nome em tipografia customizada"
+            quando: "Nome curto, unico, memoravel"
+            exemplos: "Google, Coca-Cola, Disney"
+          lettermark:
+            descricao: "Iniciais ou monograma"
+            quando: "Nome longo, iniciais fortes"
+            exemplos: "IBM, HBO, CNN"
+          pictorial:
+            descricao: "Simbolo ou icone reconhecivel"
+            quando: "Marca global, conceito claro"
+            exemplos: "Apple, Twitter, Target"
+          abstract:
+            descricao: "Forma geometrica abstrata"
+            quando: "Tecnologia, conceito complexo"
+            exemplos: "Nike, Pepsi, Adidas"
+          combination:
+            descricao: "Texto + simbolo"
+            quando: "Marca nova, flexibilidade"
+            exemplos: "Burger King, Lacoste"
+          emblem:
+            descricao: "Texto dentro de simbolo"
+            quando: "Tradicao, autoridade"
+            exemplos: "Starbucks, Harley"
+
+    entregas:
+      - Conceito criativo documentado
+      - Direcao estetica definida
+      - Tipo de logo escolhido
+
+    gates:
+      - "Conceito e original?"
+      - "Alinhado com valores da marca?"
+      - "Tipo de logo faz sentido?"
+
+  # ===================================================
+  # FASE 3: LOGO
+  # ===================================================
+  - numero: 3
+    nome: LOGO
+    agente: designer
+    objetivo: "Criar o logo da marca"
+    dependencias: [2]
+
+    tarefas:
+      - id: sketches
+        nome: "Criar Sketches"
+        quantidade: "15-25 opcoes iniciais"
+        explorar:
+          - Variacoes do conceito
+          - Diferentes abordagens
+          - Combinacoes inesperadas
+          - Versoes simplificadas
+
+      - id: refinamento
+        nome: "Refinar Opcoes"
+        processo:
+          - Selecionar 5-7 melhores
+          - Digitalizar e limpar
+          - Testar em diferentes tamanhos
+          - Avaliar contra criterios
+        criterios_paul_rand:
+          - Distintivo?
+          - Visivel?
+          - Adaptavel?
+          - Universal?
+          - Atemporal?
+          - Simples?
+          - Memoravel?
+
+      - id: selecao-final
+        nome: "Selecionar Final"
+        apresentar: "3 opcoes finais com racional"
+        por_opcao:
+          - Conceito e significado
+          - Por que funciona
+          - Onde brilha
+          - Possíveis versoes
+
+      - id: finalizacao
+        nome: "Finalizar Logo"
+        versoes:
+          principal:
+            - Colorido horizontal
+            - Colorido vertical (se aplicavel)
+          monocromaticas:
+            - Preto
+            - Branco
+            - Escala de cinza
+          simplificadas:
+            - Favicon (quadrado)
+            - Icone de app
+            - Versao minima
+
+    entregas:
+      - Sketches documentados
+      - 3 opcoes refinadas
+      - Logo final em todas versoes
+      - Arquivos fonte editaveis
+
+    gates:
+      - "Passa no teste de Paul Rand?"
+      - "Funciona em 16x16px?"
+      - "Memoravel apos 1 exposicao?"
+
+  # ===================================================
+  # FASE 4: PALETA DE CORES
+  # ===================================================
+  - numero: 4
+    nome: PALETA DE CORES
+    agente: designer
+    objetivo: "Definir sistema de cores"
+    dependencias: [3]
+
+    tarefas:
+      - id: cores-primarias
+        nome: "Definir Cores Primarias"
+        quantidade: "1-2 cores"
+        papel: "Identidade principal, logo"
+        considerar:
+          - Psicologia da cor
+          - Diferenciacao no setor
+          - Versatilidade
+          - Acessibilidade
+
+      - id: cores-secundarias
+        nome: "Definir Cores Secundarias"
+        quantidade: "2-3 cores"
+        papel: "Suporte, variacoes, categorias"
+        relacao: "Complementar ou analogo as primarias"
+
+      - id: cores-neutras
+        nome: "Definir Cores Neutras"
+        incluir:
+          - Preto (ou quase-preto)
+          - Branco (ou quase-branco)
+          - 2-3 tons de cinza
+        papel: "Texto, backgrounds, espacos"
+
+      - id: cores-funcionais
+        nome: "Definir Cores Funcionais"
+        tipos:
+          sucesso: "Verde para confirmacoes"
+          alerta: "Amarelo para avisos"
+          erro: "Vermelho para erros"
+          info: "Azul para informacoes"
+
+      - id: especificacoes
+        nome: "Documentar Especificacoes"
+        por_cor:
+          - Nome da cor
+          - HEX (web)
+          - RGB (digital)
+          - CMYK (impressao)
+          - Pantone (opcional)
+          - Uso recomendado
+
+    entregas:
+      - Paleta completa documentada
+      - Combinacoes recomendadas
+      - Proporcoes de uso
+      - Acessibilidade verificada
+
+    gates:
+      - "Contraste WCAG AA minimo?"
+      - "Paleta e versatil?"
+      - "Diferencia do concorrente?"
+
+  # ===================================================
+  # FASE 5: TIPOGRAFIA
+  # ===================================================
+  - numero: 5
+    nome: TIPOGRAFIA
+    agente: designer
+    objetivo: "Definir sistema tipografico"
+    dependencias: [3]
+
+    tarefas:
+      - id: fonte-primaria
+        nome: "Selecionar Fonte Primaria"
+        uso: "Headlines, titulos, destaque"
+        criterios:
+          - Personalidade alinhada com marca
+          - Legibilidade em tamanhos grandes
+          - Variedade de pesos
+          - Licenca adequada
+
+      - id: fonte-secundaria
+        nome: "Selecionar Fonte Secundaria"
+        uso: "Corpo de texto, paragrafos"
+        criterios:
+          - Alta legibilidade
+          - Funciona em tamanhos pequenos
+          - Combina com primaria
+          - Suporte a caracteres especiais
+
+      - id: hierarquia
+        nome: "Definir Hierarquia"
+        niveis:
+          display:
+            uso: "Hero headlines"
+            tamanho: "48-72px"
+            peso: "Bold/Black"
+          h1:
+            uso: "Titulos de pagina"
+            tamanho: "36-48px"
+            peso: "Bold"
+          h2:
+            uso: "Secoes"
+            tamanho: "28-36px"
+            peso: "Semibold"
+          h3:
+            uso: "Subsecoes"
+            tamanho: "22-28px"
+            peso: "Medium"
+          body:
+            uso: "Texto corrido"
+            tamanho: "16-18px"
+            peso: "Regular"
+          small:
+            uso: "Legendas, labels"
+            tamanho: "12-14px"
+            peso: "Regular"
+
+      - id: regras-uso
+        nome: "Definir Regras de Uso"
+        especificar:
+          - Line-height por nivel
+          - Letter-spacing
+          - Alinhamento preferido
+          - Pesos permitidos
+
+    entregas:
+      - Fontes selecionadas com licenca
+      - Escala tipografica
+      - Regras de uso
+      - Combinacoes exemplo
+
+    gates:
+      - "Fontes sao legiveis?"
+      - "Combinacao funciona?"
+      - "Hierarquia e clara?"
+
+  # ===================================================
+  # FASE 6: ELEMENTOS GRAFICOS
+  # ===================================================
+  - numero: 6
+    nome: ELEMENTOS GRAFICOS
+    agente: designer
+    objetivo: "Criar elementos visuais de suporte"
+    dependencias: [4, 5]
+
+    tarefas:
+      - id: padroes
+        nome: "Criar Padroes"
+        tipos:
+          - Padrao derivado do logo
+          - Texturas sutis
+          - Backgrounds decorativos
+
+      - id: iconografia
+        nome: "Definir Iconografia"
+        estilo:
+          - Outline vs Solid vs Duo-tone
+          - Espessura de linha
+          - Border-radius
+          - Tamanho padrao
+        biblioteca: "16-24 icones iniciais"
+
+      - id: fotografia
+        nome: "Definir Direcao Fotografica"
+        especificar:
+          - Estilo (lifestyle, produto, editorial)
+          - Iluminacao preferida
+          - Tratamento de cor
+          - Enquadramentos
+          - Mood/atmosfera
+
+      - id: ilustracao
+        nome: "Definir Estilo de Ilustracao"
+        se_aplicavel:
+          - Estilo (flat, outline, 3D)
+          - Paleta de cores
+          - Nivel de detalhe
+          - Personagens (se houver)
+
+    entregas:
+      - Biblioteca de padroes
+      - Set de icones base
+      - Guia de fotografia
+      - Exemplos de aplicacao
+
+    gates:
+      - "Elementos sao coerentes?"
+      - "Complementam o logo?"
+      - "Sao versateis?"
+
+  # ===================================================
+  # FASE 7: GUIDELINES
+  # ===================================================
+  - numero: 7
+    nome: GUIDELINES
+    agente: designer
+    objetivo: "Documentar tudo em manual"
+    dependencias: [6]
+
+    tarefas:
+      - id: manual-logo
+        nome: "Documentar Uso do Logo"
+        incluir:
+          - Versoes oficiais
+          - Area de protecao
+          - Tamanho minimo
+          - Uso sobre fundos
+          - Variacoes permitidas
+          - O que NAO fazer
+
+      - id: manual-cores
+        nome: "Documentar Cores"
+        incluir:
+          - Paleta completa
+          - Especificacoes tecnicas
+          - Combinacoes permitidas
+          - Proporcoes de uso
+          - Acessibilidade
+
+      - id: manual-tipografia
+        nome: "Documentar Tipografia"
+        incluir:
+          - Fontes e licencas
+          - Escala tipografica
+          - Regras de uso
+          - Exemplos de aplicacao
+
+      - id: manual-aplicacoes
+        nome: "Documentar Aplicacoes"
+        exemplos:
+          - Cartao de visita
+          - Papel timbrado
+          - Assinatura de email
+          - Social media
+          - Apresentacao
+          - Website
+
+    entregas:
+      - Brand Guidelines completo
+      - Versao PDF para compartilhamento
+      - Pasta de assets organizada
+
+    gates:
+      - "Manual esta completo?"
+      - "Qualquer pessoa consegue aplicar?"
+      - "Do's and Don'ts claros?"
+
+# =====================================================
+# ENTREGA FINAL
+# =====================================================
+
+entrega_final:
+  formato: "Pasta organizada"
+  estrutura: |
+    [Nome-da-Marca]-Identidade-Visual/
+    ├── 01-Logo/
+    │   ├── Principal/
+    │   │   ├── logo-colorido.svg
+    │   │   ├── logo-colorido.png
+    │   │   └── logo-colorido.pdf
+    │   ├── Monocromatico/
+    │   │   ├── logo-preto.svg
+    │   │   ├── logo-branco.svg
+    │   │   └── ...
+    │   ├── Simplificado/
+    │   │   ├── favicon.svg
+    │   │   ├── icone-app.svg
+    │   │   └── ...
+    │   └── Fonte/
+    │       └── logo.ai (ou .figma)
+    ├── 02-Cores/
+    │   ├── paleta-cores.pdf
+    │   └── cores.ase (swatches)
+    ├── 03-Tipografia/
+    │   ├── fontes/
+    │   └── escala-tipografica.pdf
+    ├── 04-Elementos/
+    │   ├── padroes/
+    │   ├── icones/
+    │   └── guia-fotografia.pdf
+    ├── 05-Aplicacoes/
+    │   ├── cartao-visita.pdf
+    │   ├── papel-timbrado.pdf
+    │   ├── assinatura-email.html
+    │   └── social-media/
+    └── Brand-Guidelines.pdf
+
+# =====================================================
+# CHECKPOINTS DE VALIDACAO
+# =====================================================
+
+checkpoints:
+  apos_conceito:
+    nome: "Aprovacao de Direcao"
+    validar:
+      - Cliente aprova moodboard
+      - Direcao estetica definida
+      - Tipo de logo escolhido
+
+  apos_logo:
+    nome: "Aprovacao de Logo"
+    validar:
+      - Logo final aprovado
+      - Versoes criadas
+      - Testes de tamanho OK
+
+  apos_sistema:
+    nome: "Aprovacao de Sistema"
+    validar:
+      - Paleta de cores OK
+      - Tipografia OK
+      - Elementos graficos OK
+
+  final:
+    nome: "Entrega Final"
+    validar:
+      - Guidelines completo
+      - Assets entregues
+      - Cliente satisfeito
+
+# =====================================================
+# METRICAS DE QUALIDADE
+# =====================================================
+
+metricas:
+  logo:
+    - Passa nos 7 criterios de Paul Rand
+    - Funciona em todos os tamanhos
+    - Memoravel apos 1 exposicao
+    - Atemporal (nao segue tendencia)
+
+  sistema:
+    - Coerente em todas aplicacoes
+    - Diferenciado da concorrencia
+    - Flexivel para crescimento
+    - Facil de aplicar por terceiros

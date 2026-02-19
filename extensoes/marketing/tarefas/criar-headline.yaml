@@ -1,0 +1,142 @@
+# Tarefa: Criar Headlines
+
+id: criar-headline
+nome: Criar Headlines que Convertem
+descricao: Gera múltiplas headlines usando fórmulas comprovadas
+agente: copywriter
+comando: /criar-headline
+
+versao: "1.0"
+categoria: criacao
+
+# Entradas
+entradas:
+  obrigatorias:
+    - nome: produto
+      pergunta: "O que você está vendendo ou promovendo?"
+      tipo: texto
+      exemplo: "Curso de confeitaria"
+
+    - nome: publico
+      pergunta: "Quem é seu público-alvo?"
+      tipo: texto
+      exemplo: "Mulheres que querem renda extra com doces"
+
+    - nome: beneficio
+      pergunta: "Qual o principal benefício ou resultado?"
+      tipo: texto
+      exemplo: "Faturar R$ 5.000/mês vendendo bolos"
+
+  opcionais:
+    - nome: diferencial
+      pergunta: "O que torna único? (método, velocidade, garantia)"
+      tipo: texto
+      padrao: ""
+
+    - nome: quantidade
+      pergunta: "Quantas headlines você quer?"
+      tipo: numero
+      padrao: 5
+
+    - nome: tipo
+      pergunta: "Onde será usada? (página de vendas, anúncio, email)"
+      tipo: escolha
+      opcoes:
+        - página de vendas
+        - anúncio
+        - email
+        - post redes sociais
+      padrao: "página de vendas"
+
+# Processo
+passos:
+  - numero: 1
+    acao: "Coletar informações essenciais"
+
+  - numero: 2
+    acao: "Carregar fórmulas de headlines (conhecimento/formulas.md)"
+
+  - numero: 3
+    acao: "Identificar ângulos: benefício, curiosidade, problema, prova"
+
+  - numero: 4
+    acao: "Gerar headlines usando diferentes fórmulas"
+
+  - numero: 5
+    acao: "Selecionar as melhores e explicar por que funcionam"
+
+  - numero: 6
+    acao: "Indicar favorita com justificativa"
+
+# Saída
+saida:
+  formato: markdown
+  template: |
+    ## Headlines Criadas
+
+    ### Contexto
+    - **Produto:** [produto]
+    - **Público:** [público]
+    - **Benefício:** [benefício]
+
+    ---
+
+    ### Headlines
+
+    **1. [Categoria: Benefício Direto]**
+    > [headline]
+
+    Por que funciona: [explicação breve]
+
+    **2. [Categoria: Curiosidade]**
+    > [headline]
+
+    Por que funciona: [explicação breve]
+
+    **3. [Categoria: Problema-Solução]**
+    > [headline]
+
+    Por que funciona: [explicação breve]
+
+    **4. [Categoria: Prova Social]**
+    > [headline]
+
+    Por que funciona: [explicação breve]
+
+    **5. [Categoria: Urgência]**
+    > [headline]
+
+    Por que funciona: [explicação breve]
+
+    ---
+
+    ### Minha Recomendação
+
+    A headline **#X** é a mais forte porque [razão].
+
+    Para testes A/B, sugiro comparar:
+    - Opção A: #X
+    - Opção B: #Y
+
+    ---
+
+    ### Quer Ajustes?
+    Me diga se quer:
+    - Mais opções
+    - Tom diferente (mais urgente, mais suave)
+    - Foco em outro ângulo
+
+conhecimento:
+  - conhecimento/formulas.md
+  - conhecimento/copywriting.md
+
+gates:
+  - Cada headline tem uma ideia clara?
+  - Evitou clichês e termos genéricos?
+  - Benefício está explícito ou implícito?
+  - Tamanho adequado (5-15 palavras)?
+
+proximos_passos:
+  - Criar variações para teste A/B
+  - Desenvolver subheadline
+  - Criar lead/abertura baseada na headline

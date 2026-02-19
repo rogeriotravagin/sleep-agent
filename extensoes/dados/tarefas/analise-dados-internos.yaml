@@ -1,0 +1,190 @@
+# Tarefa: Analise de Dados Internos
+# Agente: Analista de Dados
+
+id: analise-dados-internos
+nome: Analise de Dados Internos
+comando: /analisar
+agente: analista-dados
+fase: analise
+
+descricao: |
+  Analisa dados internos da empresa para gerar insights
+  sobre performance, comportamento de usuarios, vendas,
+  ou qualquer outra metrica de negocio.
+
+# ============================================
+# ENTRADAS NECESSARIAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - id: area
+      pergunta: "Qual area ou aspecto voce quer analisar?"
+      exemplo: "Vendas do ultimo trimestre"
+      opcoes:
+        - Vendas e Receita
+        - Comportamento de Usuarios
+        - Funil de Conversao
+        - Retencao e Churn
+        - Performance de Campanhas
+        - Outro (especificar)
+
+    - id: objetivo
+      pergunta: "Qual o objetivo da analise? Que pergunta quer responder?"
+      exemplo: "Entender por que vendas cairam em Marco"
+
+  opcionais:
+    - id: periodo
+      pergunta: "Qual o periodo de analise?"
+      exemplo: "Ultimos 6 meses"
+      default: "Ultimo trimestre"
+
+    - id: segmentos
+      pergunta: "Quer segmentar por algum criterio?"
+      exemplo: "Por regiao, por produto, por canal"
+
+    - id: comparacao
+      pergunta: "Com o que comparar? (periodo anterior, meta, benchmark)"
+      default: "Periodo anterior equivalente"
+
+# ============================================
+# PROCESSO DE EXECUCAO
+# ============================================
+
+passos:
+  1_entendimento:
+    nome: "Entender o Problema"
+    acoes:
+      - Clarificar pergunta de negocio
+      - Identificar metricas relevantes
+      - Definir periodo e segmentacao
+      - Estabelecer baseline de comparacao
+    output: "Escopo da analise definido"
+
+  2_coleta:
+    nome: "Coletar e Preparar Dados"
+    acoes:
+      - Identificar fontes de dados
+      - Coletar dados necessarios
+      - Limpar e validar qualidade
+      - Calcular metricas derivadas
+    output: "Dataset preparado"
+
+  3_analise:
+    nome: "Analisar Dados"
+    acoes:
+      - Estatisticas descritivas
+      - Analise de tendencias
+      - Comparacao com baseline
+      - Identificar anomalias
+      - Segmentar e aprofundar
+    output: "Analise completa"
+
+  4_sintese:
+    nome: "Sintetizar e Recomendar"
+    acoes:
+      - Extrair principais insights
+      - Responder pergunta original
+      - Identificar acoes
+      - Preparar visualizacoes
+    output: "Relatorio com recomendacoes"
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Analise: {area}
+
+  ## Resumo Executivo
+
+  **Periodo:** {periodo}
+  **Objetivo:** {objetivo}
+
+  ### Principais Insights
+
+  | Insight | Impacto | Acao Sugerida |
+  |---------|---------|---------------|
+  | {insight_1} | {impacto_1} | {acao_1} |
+  | {insight_2} | {impacto_2} | {acao_2} |
+  | {insight_3} | {impacto_3} | {acao_3} |
+
+  ---
+
+  ## Visao Geral
+
+  ### Metricas Principais
+
+  | Metrica | Atual | Anterior | Variacao | Status |
+  |---------|-------|----------|----------|--------|
+  | {metrica_1} | {valor_1} | {anterior_1} | {var_1} | {status_1} |
+  | {metrica_2} | {valor_2} | {anterior_2} | {var_2} | {status_2} |
+
+  ### Tendencia
+
+  {descricao_tendencia_com_grafico_ascii_ou_tabela}
+
+  ---
+
+  ## Analise Detalhada
+
+  ### Por {segmento_1}
+
+  {analise_segmentada}
+
+  | {segmento} | {metrica_1} | {metrica_2} | Destaque |
+  |------------|-------------|-------------|----------|
+  | {item_1}   | {valor}     | {valor}     | {obs}    |
+
+  ### Por {segmento_2}
+
+  {analise_segmentada_2}
+
+  ---
+
+  ## Pontos de Atencao
+
+  ### Alertas
+  - {alerta_1}: {descricao_e_impacto}
+  - {alerta_2}: {descricao_e_impacto}
+
+  ### Oportunidades
+  - {oportunidade_1}: {descricao_e_potencial}
+  - {oportunidade_2}: {descricao_e_potencial}
+
+  ---
+
+  ## Recomendacoes
+
+  ### Acoes Imediatas
+  1. **{acao_1}** - {descricao} - Responsavel: {quem}
+  2. **{acao_2}** - {descricao} - Responsavel: {quem}
+
+  ### Investigacoes Adicionais
+  - {investigacao_1}
+  - {investigacao_2}
+
+  ---
+
+  ## Metodologia
+
+  - **Fontes:** {fontes_de_dados}
+  - **Periodo:** {periodo}
+  - **Segmentacao:** {criterios}
+  - **Limitacoes:** {limitacoes}
+
+# ============================================
+# QUALIDADE
+# ============================================
+
+gates_qualidade:
+  - Pergunta de negocio claramente respondida
+  - Dados comparados com baseline
+  - Insights conectados a acoes
+  - Segmentacao quando relevante
+  - Metodologia documentada
+
+output:
+  formato: md
+  destino: output/{produto}/analises/
+  nome_arquivo: analise-{area_slug}-{data}.md

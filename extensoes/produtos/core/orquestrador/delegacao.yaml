@@ -1,0 +1,113 @@
+# Regras de Delegacao - Extensao Produtos
+# Define qual agente atende cada tipo de pedido
+
+# =====================================================
+# CONFIGURACAO DE OUTPUT
+# =====================================================
+
+output:
+  extensao: produtos
+  tipos:
+    - estrategias
+    - okrs
+    - discovery
+    - metricas
+    - priorizacoes
+    - roadmaps
+  auto_criar: true
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+# Agente Product Strategist
+product_strategist:
+  agente: agentes/PRODUCT-STRATEGIST.md
+  gatilhos:
+    - estrategia de produto
+    - visao de produto
+    - missao do produto
+    - OKR
+    - OKRs
+    - product-market fit
+    - PMF
+    - posicionamento de produto
+    - go-to-market
+    - GTM
+    - product operating model
+    - SVPG
+  tarefas:
+    - definir-visao
+    - criar-okrs
+    - validar-pmf
+
+# Agente Discovery Lead
+discovery_lead:
+  agente: agentes/DISCOVERY-LEAD.md
+  gatilhos:
+    - discovery
+    - continuous discovery
+    - opportunity solution tree
+    - OST
+    - entrevistas de usuario
+    - jobs to be done
+    - JTBD
+    - validacao de hipotese
+    - Teresa Torres
+    - dual-track
+  tarefas:
+    - mapear-oportunidades
+    - planejar-entrevistas
+    - analisar-jobs
+
+# Agente Delivery Manager
+delivery_manager:
+  agente: agentes/DELIVERY-MANAGER.md
+  gatilhos:
+    - priorizacao
+    - RICE
+    - Kano
+    - MoSCoW
+    - backlog
+    - roadmap
+    - metricas de produto
+    - North Star
+    - AARRR
+    - HEART
+    - pirate metrics
+    - funil de metricas
+  tarefas:
+    - priorizar-backlog
+    - criar-roadmap
+    - definir-metricas
+
+# =====================================================
+# REGRAS DE PRIORIDADE
+# =====================================================
+
+prioridade:
+  ordem:
+    - product_strategist  # Primeiro: visao estrategica
+    - discovery_lead      # Segundo: discovery e validacao
+    - delivery_manager    # Terceiro: priorizacao e execucao
+
+# =====================================================
+# CASOS ESPECIAIS
+# =====================================================
+
+casos_especiais:
+  multi_agente:
+    - gatilho: "estruturar produto completo"
+      workflow: workflows/produto-completo.yaml
+    - gatilho: "produto do zero"
+      workflow: workflows/produto-completo.yaml
+    - gatilho: "discovery sprint"
+      workflow: workflows/discovery-sprint.yaml
+
+  explorar_primeiro:
+    - "quero estruturar meu produto"
+    - "preciso de estrategia de produto"
+    - "gestao de produto"
+    - "product management"
+    - "criar roadmap"
+    - "definir metricas"

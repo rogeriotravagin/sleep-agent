@@ -1,0 +1,287 @@
+# ============================================
+# TAREFA: Mapear Jornada do Cliente
+# ============================================
+
+id: mapear-jornada
+nome: Mapear Jornada do Cliente
+descricao: Mapear jornada completa do cliente desde onboarding ate renovacao/expansion
+agente: csm-estrategista
+comando: /mapear-jornada
+versao: "1.0"
+categoria: diagnostico
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: tipo_cliente
+      pergunta: "Qual o perfil principal dos seus clientes?"
+      tipo: texto
+      exemplo: "Empresas de medio porte, 50-200 funcionarios, area de RH"
+
+    - nome: ciclo_vida
+      pergunta: "Qual o ciclo de vida medio do cliente? (tempo de contrato)"
+      tipo: escolha
+      opcoes:
+        - Mensal
+        - Trimestral
+        - Semestral
+        - Anual
+        - Plurianual
+      exemplo: "Anual"
+
+    - nome: touchpoints_atuais
+      pergunta: "Quais pontos de contato voce tem com o cliente hoje?"
+      tipo: lista
+      exemplo:
+        - "Email de boas-vindas"
+        - "Call de kickoff"
+        - "Treinamento inicial"
+        - "Suporte quando solicitado"
+        - "Email de renovacao"
+
+  opcionais:
+    - nome: dores_conhecidas
+      pergunta: "Quais as principais reclamacoes ou dores dos clientes?"
+      tipo: lista
+      exemplo:
+        - "Onboarding confuso"
+        - "Falta de acompanhamento"
+        - "Dificuldade em ver valor"
+
+    - nome: momentos_criticos
+      pergunta: "Quais momentos voce considera mais criticos na jornada?"
+      tipo: lista
+      exemplo:
+        - "Primeira semana"
+        - "Primeiro mes"
+        - "Pre-renovacao"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Definir fases da jornada"
+    detalhes:
+      - "Identificar fases principais"
+      - "Definir duracao de cada fase"
+      - "Estabelecer objetivos por fase"
+      - "Mapear transicoes"
+
+  - numero: 2
+    acao: "Mapear touchpoints atuais"
+    detalhes:
+      - "Listar todos os pontos de contato"
+      - "Classificar por tipo (high/mid/tech touch)"
+      - "Identificar responsaveis"
+      - "Avaliar efetividade"
+
+  - numero: 3
+    acao: "Identificar gaps e oportunidades"
+    detalhes:
+      - "Onde faltam touchpoints?"
+      - "Onde ha friccao?"
+      - "Quais momentos sao ignorados?"
+      - "Onde clientes se perdem?"
+
+  - numero: 4
+    acao: "Desenhar jornada ideal"
+    detalhes:
+      - "Definir touchpoints ideais"
+      - "Estabelecer cadencia"
+      - "Criar momentos de valor"
+      - "Antecipar necessidades"
+
+  - numero: 5
+    acao: "Planejar implementacao"
+    detalhes:
+      - "Priorizar melhorias"
+      - "Definir recursos necessarios"
+      - "Criar timeline"
+      - "Estabelecer metricas"
+
+# ============================================
+# SAIDA
+# ============================================
+
+saida:
+  formato: markdown
+  template: |
+    # Mapeamento de Jornada do Cliente
+
+    ## Contexto
+
+    - **Perfil do Cliente:** {{tipo_cliente}}
+    - **Ciclo de Vida:** {{ciclo_vida}}
+    - **Mapeamento realizado em:** {{data}}
+
+    ---
+
+    ## Jornada Atual vs Ideal
+
+    ### Visao Geral das Fases
+
+    | Fase | Duracao | Objetivo | Status Atual |
+    |------|---------|----------|--------------|
+    {{#each fases}}
+    | {{this.nome}} | {{this.duracao}} | {{this.objetivo}} | {{this.status}} |
+    {{/each}}
+
+    ---
+
+    ## Mapa Completo da Jornada
+
+    ```
+    JORNADA DO CLIENTE - {{nome_empresa}}
+
+    ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐
+    │ONBOARD- │→ │ ADOCAO  │→ │  VALOR  │→ │ CRESCI- │→ │RENOVACAO│→ │ADVOCACY │
+    │  ING    │  │         │  │         │  │  MENTO  │  │         │  │         │
+    │ 0-30d   │  │ 30-90d  │  │ 90d+    │  │ Ongoing │  │ Pre-ren │  │ Pos-ren │
+    └─────────┘  └─────────┘  └─────────┘  └─────────┘  └─────────┘  └─────────┘
+         │            │            │            │            │            │
+         ▼            ▼            ▼            ▼            ▼            ▼
+    [Touchpoints] [Touchpoints] [Touchpoints] [Touchpoints] [Touchpoints] [Touchpoints]
+    ```
+
+    ---
+
+    {{#each fases}}
+    ## Fase {{this.numero}}: {{this.nome}}
+
+    **Duracao:** {{this.duracao}}
+    **Objetivo:** {{this.objetivo}}
+    **Responsavel:** {{this.responsavel}}
+
+    ### Touchpoints Atuais
+    {{#each this.touchpoints_atuais}}
+    - {{this.tipo}}: {{this.descricao}} ({{this.frequencia}})
+    {{/each}}
+
+    ### Gaps Identificados
+    {{#each this.gaps}}
+    - {{this}}
+    {{/each}}
+
+    ### Touchpoints Ideais (Recomendados)
+    | Dia | Touchpoint | Tipo | Objetivo | Owner |
+    |-----|------------|------|----------|-------|
+    {{#each this.touchpoints_ideais}}
+    | {{this.dia}} | {{this.nome}} | {{this.tipo}} | {{this.objetivo}} | {{this.owner}} |
+    {{/each}}
+
+    ### Emocao do Cliente
+    - **Inicio da fase:** {{this.emocao_inicio}}
+    - **Ideal no fim:** {{this.emocao_fim}}
+
+    ### Metricas da Fase
+    {{#each this.metricas}}
+    - {{this.nome}}: {{this.meta}}
+    {{/each}}
+
+    ---
+    {{/each}}
+
+    ## Momentos da Verdade
+
+    Momentos criticos que definem o sucesso ou fracasso do relacionamento:
+
+    {{#each momentos_verdade}}
+    ### {{this.numero}}. {{this.nome}}
+
+    - **Quando:** {{this.quando}}
+    - **Por que e critico:** {{this.porque}}
+    - **Acao recomendada:** {{this.acao}}
+    - **Red flag:** {{this.red_flag}}
+    {{/each}}
+
+    ---
+
+    ## Analise de Gaps
+
+    ### Gaps Criticos (Prioridade Alta)
+    {{#each gaps_criticos}}
+    - **{{this.fase}}:** {{this.descricao}}
+      - Impacto: {{this.impacto}}
+      - Solucao: {{this.solucao}}
+    {{/each}}
+
+    ### Gaps Moderados (Prioridade Media)
+    {{#each gaps_moderados}}
+    - **{{this.fase}}:** {{this.descricao}}
+    {{/each}}
+
+    ### Oportunidades de Melhoria
+    {{#each oportunidades}}
+    - {{this}}
+    {{/each}}
+
+    ---
+
+    ## Plano de Implementacao
+
+    ### Fase 1: Quick Wins (30 dias)
+    {{#each quick_wins}}
+    - [ ] {{this.acao}} - {{this.impacto}}
+    {{/each}}
+
+    ### Fase 2: Melhorias Estruturais (60-90 dias)
+    {{#each melhorias_estruturais}}
+    - [ ] {{this.acao}}
+    {{/each}}
+
+    ### Fase 3: Otimizacao (Ongoing)
+    {{#each otimizacoes}}
+    - [ ] {{this.acao}}
+    {{/each}}
+
+    ---
+
+    ## Metricas de Sucesso da Jornada
+
+    | Metrica | Atual | Meta 30d | Meta 90d |
+    |---------|-------|----------|----------|
+    | TTFV (Time to First Value) | {{ttfv_atual}} | {{ttfv_30}} | {{ttfv_90}} |
+    | Activation Rate | {{activation_atual}} | {{activation_30}} | {{activation_90}} |
+    | NPS por fase | {{nps_atual}} | {{nps_30}} | {{nps_90}} |
+    | Churn por fase | {{churn_atual}} | {{churn_30}} | {{churn_90}} |
+
+    ---
+
+    ## Proximos Passos
+
+    1. [ ] Validar mapeamento com time interno
+    2. [ ] Priorizar gaps a resolver
+    3. [ ] Criar playbooks para cada fase
+    4. [ ] Implementar touchpoints faltantes
+    5. [ ] Configurar automacoes
+    6. [ ] Treinar time
+
+  arquivo: output/customer-success/jornadas/jornada-{{slug_empresa}}-{{data}}.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "Todas as fases estao claramente definidas?"
+  - "Os gaps identificados sao reais e acionaveis?"
+  - "Os touchpoints ideais sao viaveis?"
+  - "As metricas sao mensuraveis?"
+  - "O plano de implementacao e realista?"
+
+# ============================================
+# PROXIMOS PASSOS
+# ============================================
+
+proximos_passos:
+  - tarefa: criar-playbook-onboarding
+    se: "Gaps identificados no onboarding"
+  - tarefa: criar-qbr
+    se: "Falta estrutura de acompanhamento"
+  - tarefa: criar-plano-retencao
+    se: "Gaps criticos na retencao"

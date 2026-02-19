@@ -1,0 +1,139 @@
+# Tarefa: Criar Oferta Irresistível
+
+id: criar-oferta
+nome: Criar Oferta Irresistível
+descricao: Guia passo a passo para construir uma oferta que vende
+agente: estrategista
+comando: /criar-oferta
+
+versao: "1.0"
+categoria: estrategia
+
+# Entradas
+entradas:
+  obrigatorias:
+    - nome: produto
+      pergunta: "O que você está vendendo? (produto, serviço, curso, etc.)"
+      tipo: texto
+      exemplo: "Curso de marketing digital para iniciantes"
+
+    - nome: publico
+      pergunta: "Quem é seu cliente ideal? (seja específico)"
+      tipo: texto
+      exemplo: "Empreendedores 30-45 anos que querem vender online"
+
+    - nome: problema
+      pergunta: "Qual o maior problema que você resolve?"
+      tipo: texto
+      exemplo: "Não conseguem vender seus produtos na internet"
+
+    - nome: resultado
+      pergunta: "Qual resultado concreto o cliente pode esperar?"
+      tipo: texto
+      exemplo: "Fazer as primeiras vendas online em 30 dias"
+
+  opcionais:
+    - nome: preco_atual
+      pergunta: "Quanto você cobra atualmente? (se já vende)"
+      tipo: texto
+      padrao: "A definir"
+
+    - nome: concorrentes
+      pergunta: "Quem são seus principais concorrentes?"
+      tipo: texto
+      padrao: "Não informado"
+
+# Processo
+passos:
+  - numero: 1
+    acao: "Coletar informações com as perguntas acima"
+
+  - numero: 2
+    acao: "Analisar o problema e identificar dores secundárias"
+
+  - numero: 3
+    acao: "Definir transformação clara (antes → depois)"
+
+  - numero: 4
+    acao: "Construir stack de valor (o que está incluído)"
+
+  - numero: 5
+    acao: "Criar bônus que aumentam valor percebido"
+
+  - numero: 6
+    acao: "Definir garantia que elimina risco"
+
+  - numero: 7
+    acao: "Sugerir preço e ancoragem"
+
+  - numero: 8
+    acao: "Criar elemento de urgência/escassez"
+
+# Saída
+saida:
+  formato: markdown
+  template: |
+    ## Oferta: [Nome da Oferta]
+
+    ### Proposta de Valor
+    [Uma frase poderosa que resume a transformação]
+
+    ---
+
+    ### O Problema
+    [Descrição do problema e suas consequências]
+
+    ### A Solução
+    [Como seu produto resolve o problema]
+
+    ### A Transformação
+    **Antes:** [situação atual do cliente]
+    **Depois:** [situação após usar seu produto]
+
+    ---
+
+    ### O Que Está Incluído
+
+    **Produto Principal:**
+    - [item 1]
+    - [item 2]
+    - [item 3]
+
+    **Bônus:**
+    - [Bônus 1] - Valor: R$ X
+    - [Bônus 2] - Valor: R$ X
+    - [Bônus 3] - Valor: R$ X
+
+    ---
+
+    ### Garantia
+    [Tipo de garantia e condições]
+
+    ### Preço
+    **Valor total:** R$ X
+    **Preço promocional:** R$ Y
+    **Condições:** [parcelamento, etc.]
+
+    ### Urgência
+    [Motivo para comprar agora]
+
+    ---
+
+    ### Próximos Passos
+    1. [ação 1]
+    2. [ação 2]
+
+conhecimento:
+  - conhecimento/copywriting.md
+  - conhecimento/gatilhos.md
+
+gates:
+  - A proposta de valor está clara?
+  - O stack de valor é maior que o preço?
+  - A garantia elimina o risco?
+  - Há motivo claro para agir agora?
+
+proximos_passos:
+  - Criar headline para a oferta (/criar-headline)
+  - Criar página de vendas
+  - Criar sequência de emails (/criar-email)

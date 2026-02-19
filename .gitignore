@@ -1,0 +1,71 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+__MACOSX/
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+# Temp files
+*.tmp
+*.temp
+.temp/
+tmp/
+
+# Python
+__pycache__/
+*.pyc
+
+# Windows artifacts
+nul
+
+# Vercel
+.vercel/
+
+# Sleep Agent workspace data (user-specific)
+workspace/.config/*.yaml
+workspace/.config/.env
+workspace/.memoria/**/*.yaml
+workspace/.status/**/*.yaml
+workspace/.state/blackboard.yaml
+workspace/.state/session-overrides.yaml
+!workspace/**/.gitkeep
+
+# Claude Code settings (may contain credentials)
+.claude/settings.local.json
+
+# Package manager locks
+# yarn.lock
+# pnpm-lock.yaml

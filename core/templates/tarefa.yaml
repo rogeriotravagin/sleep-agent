@@ -1,0 +1,82 @@
+# Template de Tarefa
+# Use este modelo para criar novas tarefas
+
+# Identificação
+id: nome-da-tarefa
+nome: Nome Descritivo da Tarefa
+descricao: O que esta tarefa faz e qual resultado produz
+agente: qual-agente   # copywriter, estrategista, trafego
+
+# Configuração
+versao: "1.0"
+categoria: categoria   # criacao, analise, estrategia, automacao
+
+# Entradas necessárias
+entradas:
+  obrigatorias:
+    - nome: entrada1
+      pergunta: "Qual pergunta fazer ao usuário?"
+      tipo: texto   # texto, lista, escolha
+      exemplo: "Exemplo de resposta"
+
+    - nome: entrada2
+      pergunta: "Segunda pergunta?"
+      tipo: texto
+      exemplo: "Outro exemplo"
+
+  opcionais:
+    - nome: entrada_opcional
+      pergunta: "Pergunta opcional?"
+      tipo: texto
+      padrao: "Valor padrão se não informado"
+
+# Processo de execução
+passos:
+  - numero: 1
+    acao: "Descrição do primeiro passo"
+
+  - numero: 2
+    acao: "Descrição do segundo passo"
+
+  - numero: 3
+    acao: "Descrição do terceiro passo"
+
+# Formato de saída
+saida:
+  formato: markdown   # markdown, yaml, json, texto
+  template: |
+    ## Resultado da Tarefa
+
+    ### Seção 1
+    [Conteúdo gerado]
+
+    ### Seção 2
+    [Mais conteúdo]
+
+# Conhecimento a carregar
+conhecimento:
+  - caminho/para/arquivo1.md
+  - caminho/para/arquivo2.md
+
+# Qualidade (3 Niveis)
+# Ver: core/qualidade/QUALITY-GATES.md
+gates:
+  # Nivel 1: Verificacao automatica (Sleep Agent verifica sozinho)
+  nivel_1_automatico:
+    - verificacao: "Formato do arquivo esta correto?"
+      tipo: formato
+    - verificacao: "Campos obrigatorios preenchidos?"
+      tipo: completude
+
+  # Nivel 2: Validacao por agente (outro agente revisa)
+  # Deixe vazio se nao precisar de revisao por agente
+  nivel_2_agente: []
+
+  # Nivel 3: Aprovacao humana (usuario decide)
+  nivel_3_humano:
+    - verificacao: "O resultado atende suas expectativas?"
+
+# Próximos passos sugeridos
+proximos_passos:
+  - Sugestão 1 de continuação
+  - Sugestão 2 de continuação

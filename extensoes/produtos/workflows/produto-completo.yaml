@@ -1,0 +1,295 @@
+# ============================================
+# WORKFLOW: Produto Completo
+# ============================================
+
+id: produto-completo
+nome: Estruturar Produto do Zero
+descricao: Processo completo para estruturar produto com metodologia profissional
+comando: /produto-completo
+versao: "1.0"
+
+# ============================================
+# VISAO GERAL
+# ============================================
+
+visao_geral:
+  objetivo: "Estruturar produto completo com visao, estrategia, discovery, metricas e roadmap"
+  resultado: "Produto estruturado profissionalmente com documentacao completa"
+
+  diferenciais:
+    - Baseado em frameworks de referencia (SVPG, Teresa Torres)
+    - Processo passo-a-passo guiado
+    - Documentacao profissional
+
+  publico:
+    - Product Managers estruturando novo produto
+    - Empreendedores profissionalizando gestao
+    - Times migrando para modelo de produto
+
+# ============================================
+# FASES
+# ============================================
+
+fases:
+  # ------------------------------------------
+  # FASE 1: DESCOBERTA
+  # ------------------------------------------
+  - numero: 1
+    nome: DESCOBERTA
+    descricao: "Entender contexto, mercado e usuarios"
+    agente: product-strategist
+
+    etapas:
+      - id: contexto
+        nome: "Levantar Contexto"
+        descricao: "Entender situacao atual do produto/negocio"
+        perguntas:
+          - "Qual o nome do produto?"
+          - "Em que estagio esta? (ideia, MVP, produto)"
+          - "Qual o modelo de negocio?"
+
+      - id: mercado
+        nome: "Mapear Mercado"
+        descricao: "Identificar concorrentes e alternativas"
+        perguntas:
+          - "Quem sao os principais concorrentes?"
+          - "Quais alternativas os usuarios usam hoje?"
+          - "Qual o tamanho do mercado?"
+
+      - id: usuarios
+        nome: "Entender Usuarios"
+        descricao: "Identificar publico-alvo e necessidades"
+        perguntas:
+          - "Quem sao os usuarios ideais (ICP)?"
+          - "Quais problemas eles enfrentam?"
+          - "Como resolvem hoje?"
+
+    entregaveis:
+      - "Briefing do produto"
+      - "Mapa de concorrentes"
+      - "Perfil de usuario (ICP)"
+
+  # ------------------------------------------
+  # FASE 2: ESTRATEGIA
+  # ------------------------------------------
+  - numero: 2
+    nome: ESTRATEGIA
+    descricao: "Definir visao, missao e posicionamento"
+    agente: product-strategist
+
+    etapas:
+      - id: visao
+        nome: "Definir Visao"
+        tarefa: /definir-visao
+        descricao: "Criar visao de longo prazo do produto"
+
+      - id: diferenciacao
+        nome: "Articular Diferenciacao"
+        descricao: "Definir o que torna unico"
+
+      - id: pmf
+        nome: "Avaliar PMF"
+        tarefa: /validar-pmf
+        descricao: "Avaliar product-market fit atual"
+
+    entregaveis:
+      - "Documento de Visao"
+      - "Proposta de valor"
+      - "Avaliacao de PMF"
+
+  # ------------------------------------------
+  # FASE 3: OKRS
+  # ------------------------------------------
+  - numero: 3
+    nome: OKRS
+    descricao: "Definir objetivos e resultados-chave"
+    agente: product-strategist
+
+    etapas:
+      - id: okrs
+        nome: "Criar OKRs"
+        tarefa: /criar-okrs
+        descricao: "Definir OKRs trimestrais alinhados a visao"
+
+      - id: alinhamento
+        nome: "Alinhar OKRs"
+        descricao: "Garantir alinhamento com empresa/time"
+
+    entregaveis:
+      - "OKRs do trimestre"
+      - "Mapa de alinhamento"
+
+  # ------------------------------------------
+  # FASE 4: DISCOVERY
+  # ------------------------------------------
+  - numero: 4
+    nome: DISCOVERY
+    descricao: "Descobrir oportunidades e validar hipoteses"
+    agente: discovery-lead
+
+    etapas:
+      - id: ost
+        nome: "Mapear Oportunidades"
+        tarefa: /mapear-oportunidades
+        descricao: "Criar Opportunity Solution Tree"
+
+      - id: entrevistas
+        nome: "Planejar Entrevistas"
+        tarefa: /planejar-entrevistas
+        descricao: "Estruturar roteiro de discovery"
+
+      - id: jtbd
+        nome: "Analisar Jobs"
+        tarefa: /analisar-jobs
+        descricao: "Mapear Jobs to Be Done"
+
+    entregaveis:
+      - "Opportunity Solution Tree"
+      - "Guia de entrevistas"
+      - "Mapa de JTBD"
+
+  # ------------------------------------------
+  # FASE 5: PRIORIZACAO
+  # ------------------------------------------
+  - numero: 5
+    nome: PRIORIZACAO
+    descricao: "Priorizar backlog e iniciativas"
+    agente: delivery-manager
+
+    etapas:
+      - id: backlog
+        nome: "Priorizar Backlog"
+        tarefa: /priorizar-backlog
+        descricao: "Aplicar RICE ao backlog"
+
+      - id: decisoes
+        nome: "Documentar Decisoes"
+        descricao: "Registrar criterios e trade-offs"
+
+    entregaveis:
+      - "Backlog priorizado (RICE)"
+      - "Documentacao de decisoes"
+
+  # ------------------------------------------
+  # FASE 6: METRICAS
+  # ------------------------------------------
+  - numero: 6
+    nome: METRICAS
+    descricao: "Definir framework de metricas"
+    agente: delivery-manager
+
+    etapas:
+      - id: nsm
+        nome: "Definir North Star"
+        tarefa: /definir-metricas
+        descricao: "Estabelecer metrica principal"
+
+      - id: funil
+        nome: "Mapear Funil"
+        descricao: "Configurar AARRR metrics"
+
+    entregaveis:
+      - "North Star Metric definida"
+      - "Dashboard AARRR"
+
+  # ------------------------------------------
+  # FASE 7: ROADMAP
+  # ------------------------------------------
+  - numero: 7
+    nome: ROADMAP
+    descricao: "Criar roadmap outcome-driven"
+    agente: delivery-manager
+
+    etapas:
+      - id: roadmap
+        nome: "Criar Roadmap"
+        tarefa: /criar-roadmap
+        descricao: "Montar roadmap Now/Next/Later"
+
+      - id: comunicacao
+        nome: "Preparar Comunicacao"
+        descricao: "Versoes para diferentes audiencias"
+
+    entregaveis:
+      - "Roadmap do produto"
+      - "Material de comunicacao"
+
+# ============================================
+# ENTREGA FINAL
+# ============================================
+
+entrega_final:
+  formato: "Pasta com documentacao completa"
+  local: "output/{{produto}}/produtos/"
+
+  estrutura: |
+    {{produto}}/produtos/
+      estrategias/
+        visao-produto.md
+        proposta-valor.md
+      okrs/
+        okrs-{{trimestre}}.md
+      discovery/
+        ost-principal.md
+        guia-entrevistas.md
+        mapa-jtbd.md
+      priorizacoes/
+        priorizacao-rice.md
+      metricas/
+        framework-metricas.md
+      roadmaps/
+        roadmap-{{ano}}.md
+
+# ============================================
+# EXECUCAO
+# ============================================
+
+execucao:
+  comando: /produto-completo
+
+  fluxo:
+    1: "Descoberta - Entender contexto"
+    2: "Estrategia - Definir visao"
+    3: "OKRs - Alinhar objetivos"
+    4: "Discovery - Mapear oportunidades"
+    5: "Priorizacao - Ordenar backlog"
+    6: "Metricas - Definir KPIs"
+    7: "Roadmap - Planejar execucao"
+
+  mensagem_inicial: |
+    ## Estruturar Produto Completo
+
+    Vou te guiar pelo processo completo de estruturacao de produto,
+    baseado nas melhores praticas do mercado (SVPG, Teresa Torres).
+
+    **7 Fases:**
+    1. Descoberta
+    2. Estrategia
+    3. OKRs
+    4. Discovery
+    5. Priorizacao
+    6. Metricas
+    7. Roadmap
+
+    Vamos comecar pela **Descoberta**.
+
+    Qual o nome do seu produto?
+
+  mensagem_final: |
+    ## Produto Estruturado!
+
+    Seu produto **{{nome_produto}}** agora tem:
+
+    - Visao e estrategia documentadas
+    - OKRs definidos
+    - Opportunity Solution Tree
+    - Backlog priorizado
+    - Metricas configuradas
+    - Roadmap outcome-driven
+
+    **Proximos passos:**
+    - Iniciar ciclo de discovery com entrevistas
+    - Acompanhar metricas semanalmente
+    - Atualizar roadmap mensalmente
+
+    Quer refinar alguma parte?

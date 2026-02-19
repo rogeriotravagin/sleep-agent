@@ -1,0 +1,151 @@
+# Tarefa: Construcao de Persona
+
+id: criar-persona
+nome: Construir Persona
+descricao: Criar personagem ficticio que representa o cliente ideal
+agente: estrategista
+comando: /persona
+
+versao: "1.0"
+categoria: publico
+
+entradas:
+  obrigatorias:
+    - nome: icp
+      pergunta: "Descreva seu ICP (ou use /icp primeiro)"
+      tipo: texto
+
+    - nome: dores
+      pergunta: "Quais as 3 principais dores desse publico?"
+      tipo: texto
+
+    - nome: desejos
+      pergunta: "Quais os 3 principais desejos/objetivos?"
+      tipo: texto
+
+passos:
+  - numero: 1
+    acao: "Definir dados basicos"
+    detalhes: Nome, idade, profissao, situacao
+
+  - numero: 2
+    acao: "Criar 'Um dia na vida'"
+    detalhes: Como e a rotina dessa pessoa
+
+  - numero: 3
+    acao: "Mapear dores e frustracoes"
+    detalhes: O que tira o sono, o que frustra
+
+  - numero: 4
+    acao: "Mapear desejos e aspiracoes"
+    detalhes: O que sonha, como seria vida ideal
+
+  - numero: 5
+    acao: "Identificar objecoes"
+    detalhes: Por que nao compraria
+
+  - numero: 6
+    acao: "Definir gatilhos de compra"
+    detalhes: O que faria agir AGORA
+
+saida:
+  formato: markdown
+  template: |
+    # Persona: [Nome]
+
+    ## Foto Mental
+    [Descricao visual da pessoa]
+
+    ## Dados Basicos
+    - **Nome:** [Nome ficticio]
+    - **Idade:** [Idade]
+    - **Profissao:** [Cargo/Funcao]
+    - **Renda:** [Faixa]
+    - **Localizacao:** [Cidade/Regiao]
+    - **Familia:** [Situacao familiar]
+    - **Educacao:** [Nivel]
+
+    ## Um Dia na Vida
+
+    ### Manha
+    [Descricao da rotina matinal]
+
+    ### Tarde
+    [Descricao da rotina da tarde]
+
+    ### Noite
+    [Descricao da rotina noturna]
+
+    ### Fim de Semana
+    [O que faz nos fins de semana]
+
+    ## Consumo de Conteudo
+    - **Redes Sociais:** [Quais usa, quanto tempo]
+    - **Sites/Blogs:** [O que le]
+    - **YouTube:** [O que assiste]
+    - **Podcasts:** [O que ouve]
+    - **Influenciadores:** [Quem segue]
+
+    ## Dores e Frustracoes
+
+    ### Dor #1: [Nome]
+    > "[Frase que a persona diria]"
+    [Descricao da dor]
+
+    ### Dor #2: [Nome]
+    > "[Frase que a persona diria]"
+    [Descricao da dor]
+
+    ### Dor #3: [Nome]
+    > "[Frase que a persona diria]"
+    [Descricao da dor]
+
+    ## Desejos e Aspiracoes
+
+    ### Desejo #1: [Nome]
+    > "[Frase que a persona diria]"
+    [Descricao do desejo]
+
+    ### Desejo #2: [Nome]
+    > "[Frase que a persona diria]"
+    [Descricao do desejo]
+
+    ### Desejo #3: [Nome]
+    > "[Frase que a persona diria]"
+    [Descricao do desejo]
+
+    ## Objecoes Previsiveis
+
+    ### Objecao #1: [Nome]
+    - **O que pensa:** "[Frase]"
+    - **Como quebrar:** [Estrategia]
+
+    ### Objecao #2: [Nome]
+    - **O que pensa:** "[Frase]"
+    - **Como quebrar:** [Estrategia]
+
+    ### Objecao #3: [Nome]
+    - **O que pensa:** "[Frase]"
+    - **Como quebrar:** [Estrategia]
+
+    ## Gatilhos de Compra
+    1. [Evento/Situacao que desencadeia decisao]
+    2. [Evento/Situacao que desencadeia decisao]
+    3. [Evento/Situacao que desencadeia decisao]
+
+    ## Frases que Usa
+    - "[Frase tipica sobre o problema]"
+    - "[Frase tipica sobre o desejo]"
+    - "[Frase tipica sobre frustracao]"
+
+    ## Como Se Sente Hoje vs. Como Quer Se Sentir
+
+    | Hoje | Futuro Desejado |
+    |------|-----------------|
+    | [Emocao] | [Emocao] |
+    | [Emocao] | [Emocao] |
+    | [Emocao] | [Emocao] |
+
+proximos_passos:
+  - Definir Posicionamento (/posicionamento)
+  - Criar Oferta (/criar-oferta)

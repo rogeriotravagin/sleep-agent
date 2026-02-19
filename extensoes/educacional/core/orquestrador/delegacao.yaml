@@ -1,0 +1,111 @@
+# Regras de Delegacao - Extensao Educacional
+# Define qual agente atende cada tipo de pedido
+
+# =====================================================
+# CONFIGURACAO DE OUTPUT
+# =====================================================
+
+output:
+  extensao: educacional
+  tipos:
+    - cursos
+    - modulos
+    - aulas
+    - roteiros
+    - materiais
+    - atividades
+    - avaliacoes
+    - gamificacao
+  auto_criar: true
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+# Agente Designer Instrucional
+designer_instrucional:
+  agente: agentes/DESIGNER-INSTRUCIONAL.md
+  gatilhos:
+    - curso
+    - estrutura de curso
+    - grade curricular
+    - modulo
+    - trilha de aprendizagem
+    - objetivos de aprendizagem
+    - bloom
+    - design instrucional
+    - plano de ensino
+  tarefas:
+    - estruturar-curso
+    - criar-modulo
+    - criar-trilha
+    - definir-objetivos
+
+# Agente Conteudista
+conteudista:
+  agente: agentes/CONTEUDISTA.md
+  gatilhos:
+    - aula
+    - plano de aula
+    - roteiro
+    - video-aula
+    - material didatico
+    - apostila
+    - apresentacao
+    - slides
+    - conteudo educacional
+  tarefas:
+    - criar-aula
+    - criar-roteiro
+    - criar-material
+    - criar-apresentacao
+
+# Agente Especialista em Avaliacao
+especialista_avaliacao:
+  agente: agentes/ESPECIALISTA-AVALIACAO.md
+  gatilhos:
+    - exercicio
+    - atividade
+    - prova
+    - quiz
+    - teste
+    - avaliacao
+    - rubrica
+    - checklist
+    - gamificacao
+    - badge
+    - pontos
+  tarefas:
+    - criar-atividade
+    - criar-exercicio
+    - criar-prova
+    - criar-rubrica
+    - criar-checklist
+    - gamificar
+
+# =====================================================
+# REGRAS DE PRIORIDADE
+# =====================================================
+
+prioridade:
+  ordem:
+    - designer_instrucional  # Primeiro: visao estrutural
+    - conteudista            # Segundo: criacao de conteudo
+    - especialista_avaliacao # Terceiro: avaliacoes e engajamento
+
+# =====================================================
+# CASOS ESPECIAIS
+# =====================================================
+
+casos_especiais:
+  multi_agente:
+    - gatilho: "criar curso completo"
+      workflow: workflows/curso-completo.yaml
+    - gatilho: "curso do zero"
+      workflow: workflows/curso-completo.yaml
+
+  explorar_primeiro:
+    - "quero ensinar"
+    - "criar um curso"
+    - "montar treinamento"
+    - "capacitar equipe"

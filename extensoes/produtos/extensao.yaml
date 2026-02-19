@@ -1,0 +1,310 @@
+# ============================================
+# EXTENSAO PRODUTOS - Sleep Agent
+# ============================================
+# Framework completo para Gestao de Produto
+# baseado nas melhores praticas do mercado:
+# Marty Cagan (SVPG), Teresa Torres, RICE,
+# Jobs to Be Done, OKRs, Dual-Track Agile
+# ============================================
+
+nome: Produtos
+slug: produtos
+versao: "1.0"
+comando: /produtos
+status: ativo
+descricao: |
+  Extensao para gestao de produtos digitais e fisicos.
+  Baseada no Product Operating Model (Marty Cagan/SVPG),
+  Continuous Discovery (Teresa Torres), e frameworks
+  consagrados de priorizacao, metricas e estrategia.
+
+  Foco em profissionais nao-tecnicos que precisam
+  estruturar e gerenciar produtos com metodologia.
+
+tipo: area  # Extensao de area especifica
+
+# ============================================
+# PUBLICO-ALVO
+# ============================================
+
+publico:
+  primario:
+    - Product Managers iniciantes e intermediarios
+    - Empreendedores que gerenciam produtos
+    - Gestores migrando para produto
+    - Founders de startups
+  secundario:
+    - Product Owners em transicao
+    - Gerentes de projeto evoluindo para produto
+    - Profissionais de negocio com produtos digitais
+
+# ============================================
+# PROBLEMAS QUE RESOLVE
+# ============================================
+
+problemas:
+  - Falta de metodologia estruturada para gestao de produto
+  - Dificuldade em priorizar features e backlog
+  - Desconexao entre estrategia e execucao (OKRs)
+  - Discovery feito de forma intuitiva, sem processo
+  - Metricas erradas ou inexistentes
+  - Roadmaps baseados em opinioes, nao em dados
+  - Falta de product-market fit claro
+  - Times de produto trabalhando como "feature factories"
+
+# ============================================
+# RESULTADOS QUE ENTREGA
+# ============================================
+
+resultados:
+  - Estrategia de produto clara e documentada
+  - OKRs bem definidos conectando visao e execucao
+  - Processo de discovery estruturado
+  - Priorizacao baseada em frameworks (RICE, Kano, JTBD)
+  - Roadmap outcome-driven (nao feature-driven)
+  - Metricas North Star e funil AARRR configurados
+  - Product-Market Fit validado ou plano para alcancar
+  - Times empoderados (modelo SVPG)
+
+# ============================================
+# AGENTES ESPECIALIZADOS
+# ============================================
+
+agentes:
+  - id: prod-estrategista
+    arquivo: agentes/PROD-ESTRATEGISTA.md
+    comando: @prod-estrategia
+    especialidades:
+      - Estrategia de produto (Visao, Missao, Estrategia)
+      - OKRs e planejamento estrategico
+      - Product-Market Fit e validacao
+      - Posicionamento e diferenciacao
+      - Go-to-Market strategy
+      - Product Operating Model (SVPG)
+
+  - id: prod-discovery
+    arquivo: agentes/PROD-DISCOVERY.md
+    comando: @prod-discovery
+    especialidades:
+      - Continuous Discovery (Teresa Torres)
+      - Opportunity Solution Trees
+      - Entrevistas com usuarios
+      - Jobs to Be Done (JTBD)
+      - Validacao de hipoteses
+      - Dual-Track Agile (discovery + delivery)
+
+  - id: prod-delivery
+    arquivo: agentes/PROD-DELIVERY.md
+    comando: @prod-delivery
+    especialidades:
+      - Priorizacao (RICE, MoSCoW, Kano)
+      - Roadmap management
+      - Metricas de produto (North Star, AARRR, HEART)
+      - Backlog refinement
+      - Sprint planning e delivery
+      - Gestao de stakeholders
+
+# ============================================
+# TAREFAS DISPONIVEIS
+# ============================================
+
+tarefas:
+  # Fase: Estrategia
+  - fase: estrategia
+    comando: /definir-visao
+    arquivo: tarefas/definir-visao.yaml
+    agente: prod-estrategista
+    descricao: Definir visao e missao do produto
+
+  - fase: estrategia
+    comando: /criar-okrs
+    arquivo: tarefas/criar-okrs.yaml
+    agente: prod-estrategista
+    descricao: Criar OKRs de produto alinhados a estrategia
+
+  - fase: estrategia
+    comando: /validar-pmf
+    arquivo: tarefas/validar-pmf.yaml
+    agente: prod-estrategista
+    descricao: Validar Product-Market Fit
+
+  # Fase: Discovery
+  - fase: discovery
+    comando: /mapear-oportunidades
+    arquivo: tarefas/mapear-oportunidades.yaml
+    agente: prod-discovery
+    descricao: Criar Opportunity Solution Tree
+
+  - fase: discovery
+    comando: /planejar-entrevistas
+    arquivo: tarefas/planejar-entrevistas.yaml
+    agente: prod-discovery
+    descricao: Planejar entrevistas de discovery
+
+  - fase: discovery
+    comando: /analisar-jobs
+    arquivo: tarefas/analisar-jobs.yaml
+    agente: prod-discovery
+    descricao: Analisar Jobs to Be Done dos usuarios
+
+  # Fase: Delivery
+  - fase: delivery
+    comando: /priorizar-backlog
+    arquivo: tarefas/priorizar-backlog.yaml
+    agente: prod-delivery
+    descricao: Priorizar backlog com RICE ou Kano
+
+  - fase: delivery
+    comando: /criar-roadmap
+    arquivo: tarefas/criar-roadmap.yaml
+    agente: prod-delivery
+    descricao: Criar roadmap outcome-driven
+
+  - fase: delivery
+    comando: /definir-metricas
+    arquivo: tarefas/definir-metricas.yaml
+    agente: prod-delivery
+    descricao: Definir North Star e metricas do produto
+
+# ============================================
+# WORKFLOWS DISPONIVEIS
+# ============================================
+
+workflows:
+  - id: produto-completo
+    comando: /produto-completo
+    arquivo: workflows/produto-completo.yaml
+    descricao: Estruturar produto do zero (7 fases)
+    fases:
+      - DESCOBERTA
+      - ESTRATEGIA
+      - DISCOVERY
+      - PRIORIZACAO
+      - ROADMAP
+      - METRICAS
+      - EXECUCAO
+
+  - id: modo-iniciante-produtos
+    comando: /iniciante-produtos
+    arquivo: workflows/modo-iniciante-produtos.yaml
+    descricao: Estruturar produto rapidamente (5 perguntas + Ralph)
+    integracao: ralph
+
+  - id: discovery-sprint
+    comando: /discovery-sprint
+    arquivo: workflows/discovery-sprint.yaml
+    descricao: Sprint de discovery de 1 semana
+
+# ============================================
+# BASE DE CONHECIMENTO
+# ============================================
+
+conhecimento:
+  # Frameworks principais
+  - product-operating-model.md      # SVPG / Marty Cagan
+  - continuous-discovery.md         # Teresa Torres
+  - prioritization-frameworks.md    # RICE, Kano, MoSCoW, JTBD
+  - product-metrics.md              # North Star, AARRR, HEART
+  - okrs-produto.md                 # OKRs aplicados a produto
+  - product-market-fit.md           # PMF e validacao
+  - dual-track-agile.md             # Discovery + Delivery
+  - roadmap-estrategico.md          # Outcome-driven roadmaps
+
+# ============================================
+# REFERENCIAS E FONTES
+# ============================================
+
+referencias:
+  livros:
+    - titulo: "Inspired"
+      autor: "Marty Cagan"
+      tema: "Product Management fundamentals"
+    - titulo: "Empowered"
+      autor: "Marty Cagan"
+      tema: "Building empowered product teams"
+    - titulo: "Transformed"
+      autor: "Marty Cagan"
+      tema: "Product Operating Model"
+    - titulo: "Continuous Discovery Habits"
+      autor: "Teresa Torres"
+      tema: "Discovery framework"
+    - titulo: "The Lean Startup"
+      autor: "Eric Ries"
+      tema: "MVP e validacao"
+    - titulo: "Jobs to Be Done"
+      autor: "Anthony Ulwick"
+      tema: "Outcome-Driven Innovation"
+
+  frameworks:
+    - "Product Operating Model (SVPG)"
+    - "Opportunity Solution Trees"
+    - "RICE Prioritization"
+    - "Kano Model"
+    - "Jobs to Be Done (JTBD)"
+    - "OKRs (Objectives & Key Results)"
+    - "North Star Metric"
+    - "AARRR Pirate Metrics"
+    - "HEART Framework (Google)"
+    - "Dual-Track Agile"
+
+  fontes_online:
+    - url: "https://www.svpg.com"
+      descricao: "Silicon Valley Product Group"
+    - url: "https://www.producttalk.org"
+      descricao: "Teresa Torres - Product Talk"
+    - url: "https://productschool.com"
+      descricao: "Product School Resources"
+
+# ============================================
+# INTEGRACOES
+# ============================================
+
+integracoes:
+  ralph:
+    ativo: true
+    templates:
+      - prd-produto.json
+      - prompt-produto.md
+
+  outras_extensoes:
+    - extensao: marketing
+      conexao: "Go-to-Market, posicionamento"
+    - extensao: customer-success
+      conexao: "Retencao, feedback, health score"
+
+# ============================================
+# SAIDAS
+# ============================================
+
+output:
+  pasta: output/[produto]/produtos/
+  tipos:
+    - estrategias/
+    - okrs/
+    - roadmaps/
+    - discovery/
+    - metricas/
+    - priorizacoes/
+
+# ============================================
+# VALIDACOES
+# ============================================
+
+validacoes:
+  estrategia:
+    - "Visao clara e inspiradora"
+    - "Missao definida"
+    - "Estrategia documentada"
+    - "OKRs com 3-5 objetivos"
+
+  discovery:
+    - "Opportunity Solution Tree criada"
+    - "Oportunidades priorizadas"
+    - "Hipoteses documentadas"
+    - "Plano de validacao"
+
+  delivery:
+    - "Backlog priorizado"
+    - "Roadmap outcome-driven"
+    - "Metricas definidas"
+    - "North Star identificada"

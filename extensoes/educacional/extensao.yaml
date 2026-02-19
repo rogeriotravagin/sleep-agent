@@ -1,0 +1,293 @@
+# ============================================
+# EXTENSÃO EDUCACIONAL - Sleep Agent
+# ============================================
+# Especializada em criação de cursos, aulas,
+# atividades e conteúdo educacional de resultado
+# ============================================
+
+nome: Educacional
+slug: educacional
+versao: "1.0"
+comando: /educacional
+status: ativo
+descricao: |
+  Extensão completa para criação de cursos, aulas, atividades e materiais
+  educacionais. Inclui metodologias pedagógicas, design instrucional,
+  gamificação e sistemas de avaliação.
+
+# ============================================
+# AGENTES ESPECIALIZADOS
+# ============================================
+
+agentes:
+  - id: edu-arquiteto
+    arquivo: agentes/EDU-ARQUITETO.md
+    comando: "@edu-arquiteto"
+    especialidades:
+      - Arquitetura de cursos
+      - Design de aprendizagem
+      - Estrutura curricular
+      - Objetivos de aprendizagem
+      - Taxonomia de Bloom
+      - Metodologias ativas
+      - Microlearning
+      - Trilhas de aprendizagem
+
+  - id: edu-conteudista
+    arquivo: agentes/EDU-CONTEUDISTA.md
+    comando: "@edu-conteudo"
+    especialidades:
+      - Criação de aulas
+      - Roteiros de vídeo-aulas
+      - Material didático
+      - Apresentações
+      - E-books educacionais
+      - Infográficos
+      - Recursos de apoio
+
+  - id: edu-avaliador
+    arquivo: agentes/EDU-AVALIADOR.md
+    comando: "@edu-avaliacao"
+    especialidades:
+      - Provas e testes
+      - Exercícios práticos
+      - Estudos de caso
+      - Projetos aplicados
+      - Rubricas de avaliação
+      - Feedback formativo
+      - Gamificação
+      - Certificação
+
+# ============================================
+# TAREFAS DISPONÍVEIS
+# ============================================
+
+tarefas:
+  # Fase: Planejamento
+  - fase: planejamento
+    comando: /estruturar-curso
+    arquivo: tarefas/estruturar-curso.yaml
+    agente: designer-instrucional
+    descricao: Criar estrutura completa do curso
+
+  - fase: planejamento
+    comando: /criar-trilha
+    arquivo: tarefas/criar-trilha.yaml
+    agente: designer-instrucional
+    descricao: Criar trilha de aprendizagem
+
+  - fase: planejamento
+    comando: /definir-objetivos
+    arquivo: tarefas/definir-objetivos.yaml
+    agente: designer-instrucional
+    descricao: Definir objetivos de aprendizagem (Bloom)
+
+  # Fase: Estrutura
+  - fase: estrutura
+    comando: /criar-modulo
+    arquivo: tarefas/criar-modulo.yaml
+    agente: designer-instrucional
+    descricao: Criar módulo do curso
+
+  - fase: estrutura
+    comando: /criar-aula
+    arquivo: tarefas/criar-aula.yaml
+    agente: conteudista
+    descricao: Criar plano de aula completo
+
+  # Fase: Conteúdo
+  - fase: conteudo
+    comando: /criar-roteiro
+    arquivo: tarefas/criar-roteiro.yaml
+    agente: conteudista
+    descricao: Criar roteiro de vídeo-aula
+
+  - fase: conteudo
+    comando: /criar-material
+    arquivo: tarefas/criar-material.yaml
+    agente: conteudista
+    descricao: Criar material didático
+
+  - fase: conteudo
+    comando: /criar-apresentacao
+    arquivo: tarefas/criar-apresentacao.yaml
+    agente: conteudista
+    descricao: Criar apresentação/slides
+
+  # Fase: Avaliação
+  - fase: avaliacao
+    comando: /criar-atividade
+    arquivo: tarefas/criar-atividade.yaml
+    agente: especialista-avaliacao
+    descricao: Criar atividade prática
+
+  - fase: avaliacao
+    comando: /criar-exercicio
+    arquivo: tarefas/criar-exercicio.yaml
+    agente: especialista-avaliacao
+    descricao: Criar exercícios e questões
+
+  - fase: avaliacao
+    comando: /criar-prova
+    arquivo: tarefas/criar-prova.yaml
+    agente: especialista-avaliacao
+    descricao: Criar avaliação/prova
+
+  - fase: avaliacao
+    comando: /criar-rubrica
+    arquivo: tarefas/criar-rubrica.yaml
+    agente: especialista-avaliacao
+    descricao: Criar rubrica de avaliação
+
+  # Fase: Engajamento
+  - fase: engajamento
+    comando: /criar-checklist
+    arquivo: tarefas/criar-checklist.yaml
+    agente: especialista-avaliacao
+    descricao: Criar checklist de progresso
+
+  - fase: engajamento
+    comando: /gamificar
+    arquivo: tarefas/gamificar-curso.yaml
+    agente: especialista-avaliacao
+    descricao: Aplicar gamificação ao curso
+
+# ============================================
+# WORKFLOWS DISPONÍVEIS
+# ============================================
+
+workflows:
+  - id: curso-completo
+    comando: /curso-completo
+    arquivo: workflows/curso-completo.yaml
+    descricao: Criar curso completo do zero (6 fases)
+    fases:
+      - DESCOBERTA
+      - ARQUITETURA
+      - CONTEÚDO
+      - ATIVIDADES
+      - GAMIFICAÇÃO
+      - ENTREGA
+
+  - id: modo-iniciante-educacional
+    comando: /iniciante-curso
+    arquivo: workflows/modo-iniciante-educacional.yaml
+    descricao: Criar estrutura básica de curso em 5 perguntas
+    integracao: ralph
+
+  - id: modulo-rapido
+    comando: /modulo-rapido
+    arquivo: workflows/modulo-rapido.yaml
+    descricao: Criar módulo completo rapidamente
+
+  - id: aula-completa
+    comando: /aula-completa
+    arquivo: workflows/aula-completa.yaml
+    descricao: Criar aula com todos os materiais
+
+# ============================================
+# BASE DE CONHECIMENTO
+# ============================================
+
+conhecimento:
+  - design-instrucional.md
+  - taxonomia-bloom.md
+  - metodologias-ativas.md
+  - microlearning.md
+  - gamificacao-educacional.md
+  - avaliacoes-aprendizagem.md
+  - engajamento-alunos.md
+  - roteiros-videoaulas.md
+
+# ============================================
+# REFERÊNCIAS E MESTRES
+# ============================================
+
+referencias:
+  design_instrucional:
+    classicos:
+      - Robert Gagné (9 Events of Instruction)
+      - Benjamin Bloom (Taxonomia de Bloom)
+      - David Merrill (First Principles)
+      - Ruth Clark (e-Learning and the Science of Instruction)
+    modernos:
+      - Cathy Moore (Action Mapping)
+      - Julie Dirksen (Design for How People Learn)
+      - Karl Kapp (Gamification of Learning)
+      - Will Thalheimer (Learning Research)
+
+  metodologias:
+    ativas:
+      - Aprendizagem Baseada em Problemas (PBL)
+      - Sala de Aula Invertida (Flipped Classroom)
+      - Aprendizagem Baseada em Projetos
+      - Peer Instruction
+      - Think-Pair-Share
+    frameworks:
+      - ADDIE (Analysis, Design, Development, Implementation, Evaluation)
+      - SAM (Successive Approximation Model)
+      - Backward Design (Wiggins & McTighe)
+      - 4C/ID (van Merriënboer)
+
+  gamificacao:
+    referencias:
+      - Yu-kai Chou (Octalysis Framework)
+      - Jane McGonigal (Reality is Broken)
+      - Gabe Zichermann (Gamification by Design)
+    elementos:
+      - Pontos, Badges, Leaderboards
+      - Progressão e Níveis
+      - Desafios e Missões
+      - Feedback Imediato
+      - Narrativa e Storytelling
+
+  avaliacoes:
+    tipos:
+      - Diagnóstica (início)
+      - Formativa (durante)
+      - Somativa (final)
+    instrumentos:
+      - Questões objetivas
+      - Questões dissertativas
+      - Estudos de caso
+      - Projetos práticos
+      - Portfólios
+      - Autoavaliação
+
+# ============================================
+# INTEGRAÇÕES
+# ============================================
+
+integracoes:
+  ralph:
+    ativo: true
+    templates:
+      - prd-curso.json
+      - prd-modulo.json
+      - prompt-curso.md
+    scripts:
+      - ralph-curso.sh
+
+  marketing:
+    ativo: true
+    uso: "Criar páginas de vendas para cursos"
+    comando: /iniciante
+
+  branding:
+    ativo: true
+    uso: "Criar identidade visual para cursos"
+    comando: /brand-completo
+
+# ============================================
+# SAÍDAS
+# ============================================
+
+output:
+  cursos: output/cursos/
+  modulos: output/modulos/
+  aulas: output/aulas/
+  atividades: output/atividades/
+  materiais: output/materiais/
+  avaliacoes: output/avaliacoes/
+
+projetos: projetos/curso-[nome]/

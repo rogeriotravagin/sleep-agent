@@ -1,0 +1,198 @@
+# Workflow: Pesquisa Completa
+# Do briefing ao relatorio final
+
+id: pesquisa-completa
+nome: Pesquisa Completa
+comando: /pesquisa-completa
+descricao: Pesquisa de mercado do zero ao relatorio final
+
+# ============================================
+# VISAO GERAL
+# ============================================
+
+objetivo: |
+  Conduzir uma pesquisa completa sobre um tema,
+  combinando dados internos e externos para gerar
+  um relatorio executivo com insights acionaveis.
+
+resultado_final: |
+  Relatorio de pesquisa completo com:
+  - Analise de mercado/tema
+  - Dados quantitativos e qualitativos
+  - Insights acionaveis
+  - Recomendacoes estrategicas
+
+# ============================================
+# FASES DO WORKFLOW
+# ============================================
+
+fases:
+  - numero: 1
+    nome: BRIEFING
+    agente: cientista-dados
+    descricao: Entender o problema e definir escopo
+    duracao_estimada: "30 min"
+
+    perguntas:
+      - "Qual o tema ou pergunta central da pesquisa?"
+      - "Qual o objetivo? Que decisao sera tomada?"
+      - "Qual o escopo? (geografia, periodo, segmento)"
+      - "Que hipoteses iniciais voce tem?"
+      - "Ha restricoes de tempo ou recursos?"
+
+    entregavel: |
+      ## Briefing de Pesquisa
+
+      **Tema:** {tema}
+      **Pergunta central:** {pergunta}
+      **Objetivo:** {objetivo}
+      **Escopo:** {escopo}
+      **Hipoteses iniciais:** {hipoteses}
+      **Prazo:** {prazo}
+
+    criterio_avanco: "Briefing aprovado pelo usuario"
+
+  - numero: 2
+    nome: DESK RESEARCH
+    agente: pesquisador-mercado
+    descricao: Pesquisa secundaria em fontes publicas
+    duracao_estimada: "2-4h"
+
+    tarefas:
+      - Pesquisar relatorios de mercado
+      - Coletar dados publicos (IBGE, industria)
+      - Mapear concorrentes e benchmarks
+      - Identificar tendencias relevantes
+      - Consolidar fontes e dados
+
+    entregavel: |
+      ## Desk Research
+
+      ### Fontes Consultadas
+      {lista_de_fontes}
+
+      ### Dados de Mercado
+      {tamanho_crescimento_principais_players}
+
+      ### Benchmarks
+      {comparativos_relevantes}
+
+      ### Tendencias Identificadas
+      {principais_tendencias}
+
+    criterio_avanco: "Dados secundarios coletados e organizados"
+
+  - numero: 3
+    nome: ANALISE DE DADOS
+    agente: cientista-dados
+    descricao: Analise profunda dos dados coletados
+    duracao_estimada: "2-4h"
+
+    tarefas:
+      - Consolidar dados internos e externos
+      - Realizar analise exploratoria
+      - Testar hipoteses iniciais
+      - Identificar padroes e anomalias
+      - Gerar insights preliminares
+
+    entregavel: |
+      ## Analise de Dados
+
+      ### Metodologia
+      {como_dados_foram_analisados}
+
+      ### Principais Descobertas
+      1. {descoberta_1}
+      2. {descoberta_2}
+      3. {descoberta_3}
+
+      ### Padroes Identificados
+      {padroes_relevantes}
+
+      ### Hipoteses Validadas/Refutadas
+      {resultado_das_hipoteses}
+
+    criterio_avanco: "Analise completa com insights extraidos"
+
+  - numero: 4
+    nome: SINTESE
+    agente: analista-dados
+    descricao: Sintetizar descobertas em insights acionaveis
+    duracao_estimada: "1-2h"
+
+    tarefas:
+      - Priorizar descobertas por relevancia
+      - Conectar insights com decisoes de negocio
+      - Formular recomendacoes
+      - Identificar riscos e oportunidades
+
+    entregavel: |
+      ## Sintese
+
+      ### Insights Principais
+      | Insight | Implicacao | Recomendacao |
+      |---------|------------|--------------|
+      | {insight_1} | {impacto} | {acao} |
+
+      ### Oportunidades
+      {oportunidades_identificadas}
+
+      ### Riscos
+      {riscos_identificados}
+
+    criterio_avanco: "Sintese pronta para relatorio"
+
+  - numero: 5
+    nome: RELATORIO
+    agente: analista-dados
+    descricao: Criar relatorio executivo final
+    duracao_estimada: "1-2h"
+
+    tarefas:
+      - Estruturar relatorio para audiencia
+      - Aplicar framework So What
+      - Criar visualizacoes
+      - Revisar clareza e acao
+
+    entregavel: |
+      ## Relatorio Final de Pesquisa
+
+      [Documento completo seguindo template de relatorio-executivo]
+
+    criterio_avanco: "Relatorio entregue e aprovado"
+
+# ============================================
+# CHECKPOINTS
+# ============================================
+
+checkpoints:
+  - apos_fase: 1
+    validacao: "Usuario aprova briefing antes de prosseguir"
+
+  - apos_fase: 3
+    validacao: "Revisar descobertas antes de sintetizar"
+
+  - apos_fase: 5
+    validacao: "Usuario aprova relatorio final"
+
+# ============================================
+# OUTPUT
+# ============================================
+
+output:
+  formato: md
+  destino: output/{produto}/pesquisas/
+  arquivos:
+    - briefing-{tema}.md
+    - desk-research-{tema}.md
+    - analise-{tema}.md
+    - relatorio-pesquisa-{tema}.md
+
+# ============================================
+# INTEGRACAO RALPH
+# ============================================
+
+ralph_integration:
+  ativo: false
+  prd_template: null
+  prompt_template: null

@@ -1,0 +1,335 @@
+# Sistema de Matching Inteligente
+# Entende pedidos do usuario mesmo com linguagem imprecisa
+
+# ============================================================
+# NIVEIS DE CONFIANCA
+# ============================================================
+niveis:
+  exato:
+    confianca_minima: 95
+    acao: executar
+    descricao: "Match perfeito - executa diretamente"
+    exemplo:
+      entrada: "/marketing"
+      resultado: "Carrega extensao Marketing"
+
+  alto:
+    confianca_minima: 80
+    acao: confirmar
+    descricao: "Match alto - pede confirmacao rapida"
+    exemplo:
+      entrada: "criar copy"
+      resultado: "Entendi que voce quer criar copy. E isso mesmo?"
+    template_confirmacao: |
+      Entendi que voce quer **{acao_identificada}**.
+      E isso mesmo?
+
+  medio:
+    confianca_minima: 60
+    acao: clarificar
+    descricao: "Match medio - oferece opcoes"
+    exemplo:
+      entrada: "fazer propaganda"
+      resultado: "Voce quer: 1) Criar anuncio 2) Criar email 3) Outro"
+    template_opcoes: |
+      Voce pode estar querendo:
+
+      {lista_opcoes}
+
+      Qual desses?
+
+  baixo:
+    confianca_minima: 0
+    acao: listar
+    descricao: "Match baixo - mostra comandos disponiveis"
+    exemplo:
+      entrada: "xyz123"
+      resultado: "Nao entendi. Veja os comandos disponiveis:"
+    template_ajuda: |
+      Nao entendi bem o que voce precisa.
+
+      Comandos disponiveis:
+      {lista_comandos}
+
+      Pode reformular ou escolher um comando?
+
+# ============================================================
+# DICIONARIO DE SINONIMOS (Portugues BR)
+# ============================================================
+sinonimos:
+  # Marketing / Copy
+  copy:
+    - texto
+    - redacao
+    - escrita
+    - conteudo
+    - propaganda
+    - publicidade
+
+  headline:
+    - titulo
+    - chamada
+    - manchete
+    - cabecalho
+
+  email:
+    - email
+    - e-mail
+    - mensagem
+    - carta
+    - newsletter
+
+  landing:
+    - pagina
+    - site
+    - landing
+    - lp
+    - "pagina de vendas"
+    - "pagina de captura"
+
+  anuncio:
+    - ad
+    - ads
+    - propaganda
+    - publicidade
+    - criativo
+    - "anuncio pago"
+
+  oferta:
+    - proposta
+    - produto
+    - servico
+    - "pacote"
+    - bundle
+
+  # Branding
+  logo:
+    - logotipo
+    - logomarca
+    - marca
+    - simbolo
+
+  identidade:
+    - branding
+    - marca
+    - visual
+    - "identidade visual"
+
+  cores:
+    - paleta
+    - "paleta de cores"
+    - cromatico
+    - colorido
+
+  # Acoes
+  criar:
+    - fazer
+    - gerar
+    - produzir
+    - desenvolver
+    - construir
+    - elaborar
+    - montar
+
+  analisar:
+    - avaliar
+    - revisar
+    - verificar
+    - checar
+    - examinar
+    - estudar
+
+  melhorar:
+    - otimizar
+    - aprimorar
+    - refinar
+    - ajustar
+    - corrigir
+
+  # Publico
+  cliente:
+    - publico
+    - audiencia
+    - avatar
+    - persona
+    - consumidor
+    - comprador
+
+  # Estrategia
+  estrategia:
+    - plano
+    - planejamento
+    - abordagem
+    - tática
+
+  posicionamento:
+    - diferencial
+    - "proposta de valor"
+    - "unico"
+
+# ============================================================
+# MAPEAMENTO DE INTENCOES
+# ============================================================
+intencoes:
+  criar_headline:
+    gatilhos:
+      - "criar headline"
+      - "fazer titulo"
+      - "gerar chamada"
+      - "escrever headline"
+    extensao: marketing
+    tarefa: criar-headline
+    confianca_base: 90
+
+  criar_email:
+    gatilhos:
+      - "criar email"
+      - "escrever email"
+      - "fazer email"
+      - "email de vendas"
+      - "sequencia de email"
+    extensao: marketing
+    tarefa: criar-email
+    confianca_base: 90
+
+  criar_landing:
+    gatilhos:
+      - "criar landing"
+      - "fazer pagina"
+      - "landing page"
+      - "pagina de vendas"
+      - "pagina de captura"
+    extensao: marketing
+    tarefa: criar-landing
+    confianca_base: 90
+
+  criar_anuncio:
+    gatilhos:
+      - "criar anuncio"
+      - "fazer ad"
+      - "criar ads"
+      - "anuncio facebook"
+      - "anuncio google"
+    extensao: marketing
+    tarefa: criar-anuncio
+    confianca_base: 90
+
+  criar_oferta:
+    gatilhos:
+      - "criar oferta"
+      - "montar oferta"
+      - "estruturar oferta"
+      - "proposta de valor"
+    extensao: marketing
+    tarefa: criar-oferta
+    confianca_base: 90
+
+  criar_logo:
+    gatilhos:
+      - "criar logo"
+      - "fazer logo"
+      - "desenvolver logo"
+      - "logotipo"
+      - "logomarca"
+    extensao: branding
+    tarefa: criar-logo
+    confianca_base: 90
+
+  criar_paleta:
+    gatilhos:
+      - "criar paleta"
+      - "definir cores"
+      - "paleta de cores"
+      - "escolher cores"
+    extensao: branding
+    tarefa: paleta-cores
+    confianca_base: 90
+
+  definir_persona:
+    gatilhos:
+      - "definir persona"
+      - "criar avatar"
+      - "publico alvo"
+      - "quem e meu cliente"
+    extensao: marketing
+    tarefa: persona
+    confianca_base: 90
+
+  pesquisar_mercado:
+    gatilhos:
+      - "pesquisar mercado"
+      - "analise de mercado"
+      - "estudar concorrentes"
+      - "pesquisa"
+    extensao: marketing
+    tarefa: pesquisa
+    confianca_base: 85
+
+# ============================================================
+# REGRAS DE CALCULO DE CONFIANCA
+# ============================================================
+calculo_confianca:
+  # Bonus de confianca
+  bonus:
+    - condicao: "Pedido contem comando exato (ex: /marketing)"
+      bonus: 100  # Vai direto para exato
+
+    - condicao: "Pedido contem nome exato de tarefa"
+      bonus: 20
+
+    - condicao: "Contexto anterior indica mesma extensao"
+      bonus: 10
+
+    - condicao: "Usuario ja usou esse comando antes"
+      bonus: 5
+
+  # Penalidades de confianca
+  penalidades:
+    - condicao: "Pedido muito curto (menos de 3 palavras)"
+      penalidade: 15
+
+    - condicao: "Multiplas extensoes poderiam atender"
+      penalidade: 20
+
+    - condicao: "Pedido contem negacao (nao, nunca, sem)"
+      penalidade: 10
+
+# ============================================================
+# EXEMPLOS DE MATCHING
+# ============================================================
+exemplos:
+  nivel_exato:
+    - entrada: "/marketing"
+      confianca: 100
+      resultado: "Carregar extensao Marketing"
+
+    - entrada: "criar-headline"
+      confianca: 95
+      resultado: "Executar tarefa criar-headline"
+
+  nivel_alto:
+    - entrada: "quero fazer um titulo que converte"
+      confianca: 85
+      resultado: "Criar headline - confirma?"
+
+    - entrada: "preciso de um email de vendas"
+      confianca: 88
+      resultado: "Criar email de vendas - confirma?"
+
+  nivel_medio:
+    - entrada: "fazer propaganda"
+      confianca: 65
+      resultado: "Voce quer: anuncio, email, landing?"
+
+    - entrada: "melhorar minha comunicacao"
+      confianca: 60
+      resultado: "Opcoes: copy, branding, estrategia?"
+
+  nivel_baixo:
+    - entrada: "ajuda ai"
+      confianca: 30
+      resultado: "Lista de comandos disponiveis"
+
+    - entrada: "opa"
+      confianca: 20
+      resultado: "Como posso ajudar? Comandos disponiveis..."

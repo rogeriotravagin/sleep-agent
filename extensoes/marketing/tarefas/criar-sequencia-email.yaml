@@ -1,0 +1,175 @@
+# Tarefa: Criar Sequencia de Email
+
+id: criar-sequencia-email
+nome: Criar Sequencia de Email
+descricao: Criar sequencias de email completas baseadas nas metodologias dos mestres
+agente: copywriter
+comando: /sequencia-email
+
+versao: "2.0"
+categoria: email
+
+# Baseado em: Andre Chaperon (Soap Opera), Ben Settle (Seinfeld), Frank Kern
+
+entradas:
+  obrigatorias:
+    - nome: tipo_sequencia
+      pergunta: "Qual tipo de sequencia voce precisa?"
+      tipo: escolha
+      opcoes:
+        - Welcome/Soap Opera (novos leads)
+        - Sales/Launch (venda direta)
+        - Nurture (nutrição)
+        - Cart Abandonment (carrinho abandonado)
+        - Re-engagement (reativacao)
+      exemplo: "Welcome/Soap Opera"
+
+    - nome: oferta
+      pergunta: "O que voce esta vendendo?"
+      tipo: texto
+
+    - nome: persona
+      pergunta: "Quem e seu publico? (ou use /persona primeiro)"
+      tipo: texto
+
+  opcionais:
+    - nome: historia
+      pergunta: "Tem uma historia pessoal relacionada ao produto?"
+      tipo: texto
+      padrao: "Criar historia baseada no contexto"
+
+    - nome: prazo
+      pergunta: "Quantos dias deve durar a sequencia?"
+      tipo: numero
+      padrao: 7
+
+passos:
+  - numero: 1
+    acao: "Definir tipo e estrutura"
+
+  - numero: 2
+    acao: "Aplicar framework adequado"
+    frameworks:
+      welcome:
+        nome: Soap Opera Sequence (Andre Chaperon)
+        estrutura:
+          - Email 1: Boas-vindas + entrega + open loop
+          - Email 2: Historia pessoal + vulnerabilidade
+          - Email 3: Revelar conflito/obstaculos
+          - Email 4: Jornada de superacao
+          - Email 5: Solucao descoberta
+          - Email 6: Oferta + urgencia
+          - Email 7: Ultimo lembrete
+
+      sales:
+        nome: Launch Sequence
+        estrutura:
+          - Email 1: Abertura de carrinho
+          - Email 2: Beneficios principais
+          - Email 3: Prova social
+          - Email 4: Quebra de objecoes
+          - Email 5: Escassez/Urgencia
+          - Email 6: Ultima chance
+          - Email 7: Encerramento
+
+      cart_abandonment:
+        nome: Recuperacao de Carrinho
+        estrutura:
+          - Email 1 (1-3h): Lembrete amigavel
+          - Email 2 (24h): Beneficios + incentivo
+          - Email 3 (48h): Urgencia + escassez
+          - Email 4 (72h): Prova social
+          - Email 5 (5-7d): Ultima chance
+
+  - numero: 3
+    acao: "Escrever cada email"
+    elementos_por_email:
+      - Subject line principal
+      - Subject line alternativa
+      - Preview text
+      - Corpo do email
+      - CTA
+      - PS (quando aplicavel)
+
+  - numero: 4
+    acao: "Adicionar open loops"
+    tecnica: Cada email termina com gancho para o proximo
+
+  - numero: 5
+    acao: "Revisar e entregar"
+
+saida:
+  formato: markdown
+  template: |
+    # Sequencia de Email: [Tipo]
+
+    ## Visao Geral
+    - **Tipo:** [Welcome/Sales/etc]
+    - **Duracao:** [X] dias
+    - **Objetivo:** [Conversao/Nutrição/etc]
+    - **Framework:** [Nome do framework]
+
+    ---
+
+    ## Email 1: [Titulo]
+
+    **Dia de Envio:** Dia 1 / Imediato
+    **Objetivo:** [Objetivo especifico]
+
+    ### Subject Lines
+    - **Principal:** [subject]
+    - **Alternativa A:** [subject]
+    - **Alternativa B:** [subject]
+
+    ### Preview Text
+    [preview text]
+
+    ### Corpo do Email
+
+    ---
+
+    [Corpo completo do email]
+
+    ---
+
+    ### CTA
+    [Botao/Link: Texto]
+
+    ### Open Loop para Proximo
+    [Como termina criando expectativa]
+
+    ---
+
+    ## Email 2: [Titulo]
+    [Repetir estrutura]
+
+    ---
+
+    ## Metricas Esperadas
+
+    | Metrica | Benchmark | Meta |
+    |---------|-----------|------|
+    | Open Rate | 20-25% | 30%+ |
+    | Click Rate | 2-3% | 5%+ |
+    | Conversion | 1-2% | 3%+ |
+
+    ## Dicas de Implementacao
+    1. [Dica]
+    2. [Dica]
+    3. [Dica]
+
+conhecimento:
+  - email-marketing.md
+  - copywriting.md
+  - gatilhos.md
+
+gates:
+  - Cada email tem open loop?
+  - Subject lines geram curiosidade?
+  - CTAs estao claros?
+  - Sequencia conta uma historia?
+
+proximos_passos:
+  - Implementar no provedor de email
+  - Configurar automacao
+  - Monitorar metricas

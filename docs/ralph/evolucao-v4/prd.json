@@ -1,0 +1,247 @@
+{
+  "project": "Sleep Agent v4 - Evolucao Natural",
+  "mode": "content",
+  "gitEnabled": true,
+  "branchName": "feature/sleep-agent-v4-evolution",
+  "description": "Evolucao do Sleep Agent para v4 com melhorias de memoria, contexto, qualidade e resiliencia. Mantendo a essencia de ajudar profissionais nao-tecnicos.",
+  "outputDir": ".",
+  "parallelization": {
+    "enabled": false,
+    "maxConcurrent": 1
+  },
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Criar sistema de Memoria Persistente",
+      "description": "Como usuario do Sleep Agent, quero que o sistema lembre de decisoes, insights e padroes entre sessoes para nao precisar repetir informacoes.",
+      "acceptanceCriteria": [
+        "Criar estrutura workspace/.memoria/ com arquivos YAML",
+        "Arquivo insights.yaml para aprendizados capturados",
+        "Arquivo decisoes.yaml para historico de decisoes",
+        "Arquivo padroes.yaml para padroes identificados",
+        "Arquivo alertas.yaml para armadilhas a evitar",
+        "Documentar em core/memoria/MEMORIA.md como funciona",
+        "Atualizar CLAUDE.md principal com instrucoes de uso da memoria"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Criar template de Contexto Completo para tarefas",
+      "description": "Como agente do Sleep Agent, quero tarefas com contexto completo e autocritica para executar sem ambiguidades.",
+      "acceptanceCriteria": [
+        "Criar core/templates/contexto-completo.yaml com estrutura rica",
+        "Incluir secao de requisitos detalhados",
+        "Incluir secao de decisoes ja tomadas",
+        "Incluir secao de restricoes e limitacoes",
+        "Incluir subtarefas com pontos de verificacao (autocritica)",
+        "Incluir secao de progresso com checkboxes",
+        "Incluir secao de memoria (insights e alertas relevantes)",
+        "Documentar em core/templates/README.md"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-001"]
+    },
+    {
+      "id": "US-003",
+      "title": "Implementar Quality Gates em 3 niveis",
+      "description": "Como Sleep Agent, quero validar entregas em 3 niveis (automatico, agente, humano) para garantir qualidade.",
+      "acceptanceCriteria": [
+        "Criar core/qualidade/QUALITY-GATES.md com documentacao",
+        "Definir Nivel 1: verificacoes automaticas (formato, completude)",
+        "Definir Nivel 2: validacao por outro agente (consistencia)",
+        "Definir Nivel 3: aprovacao humana (satisfacao)",
+        "Criar core/qualidade/gates-padrao.yaml com gates reutilizaveis",
+        "Atualizar core/templates/tarefa.yaml para incluir gates em 3 niveis",
+        "Atualizar ORQUESTRADOR.md com passo de validacao em 3 niveis"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-002"]
+    },
+    {
+      "id": "US-004",
+      "title": "Criar sistema de Health Check e Auto-Correcao",
+      "description": "Como Sleep Agent, quero detectar e corrigir problemas automaticamente para ser mais resiliente.",
+      "acceptanceCriteria": [
+        "Criar core/saude/HEALTH-CHECK.md com documentacao",
+        "Criar core/saude/verificacoes.yaml com lista de checks",
+        "Definir acoes de auto-correcao seguras (criar configs, limpar cache)",
+        "Definir acoes que precisam confirmacao (atualizar estrutura)",
+        "Definir problemas que precisam intervencao humana",
+        "Atualizar SETUP.md para executar health check no inicio",
+        "Criar mensagens amigaveis para cada tipo de problema"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-001"]
+    },
+    {
+      "id": "US-005",
+      "title": "Implementar Matching Inteligente de comandos",
+      "description": "Como usuario do Sleep Agent, quero que o sistema entenda meus pedidos mesmo com erros de digitacao ou linguagem imprecisa.",
+      "acceptanceCriteria": [
+        "Criar core/orquestrador/matching.yaml com regras de matching",
+        "Definir nivel Exato (100%): executa direto",
+        "Definir nivel Parcial (80%): pede confirmacao",
+        "Definir nivel Aproximado (60%): oferece opcoes",
+        "Definir nivel Baixo (<60%): lista comandos disponiveis",
+        "Criar dicionario de sinonimos em portugues",
+        "Atualizar ORQUESTRADOR.md com logica de matching",
+        "Exemplos de matching para cada nivel"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": "",
+      "dependencies": []
+    },
+    {
+      "id": "US-006",
+      "title": "Criar sistema de Maturidade de Agentes",
+      "description": "Como mantenedor do Sleep Agent, quero medir a completude de cada agente para identificar gaps.",
+      "acceptanceCriteria": [
+        "Criar core/agentes/MATURIDADE.md com documentacao",
+        "Definir Nivel 1: Basico (persona + processo)",
+        "Definir Nivel 2: Intermediario (+ tarefas + conhecimento)",
+        "Definir Nivel 3: Completo (+ templates + exemplos + gates)",
+        "Criar core/agentes/checklist-maturidade.yaml",
+        "Atualizar formato de extensao.yaml para incluir nivel de cada agente",
+        "Criar comando /maturidade para ver status de todos agentes"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": "",
+      "dependencies": []
+    },
+    {
+      "id": "US-007",
+      "title": "Criar sistema de Status e Observabilidade",
+      "description": "Como usuario do Sleep Agent, quero ver o progresso das tarefas em tempo real.",
+      "acceptanceCriteria": [
+        "Criar estrutura workspace/.status/ para estado atual",
+        "Arquivo atual.yaml com tarefa em andamento",
+        "Arquivo historico.yaml com execucoes anteriores",
+        "Arquivo metricas.yaml com estatisticas agregadas",
+        "Documentar em core/status/STATUS.md",
+        "Atualizar comando /status para mostrar informacoes ricas",
+        "Incluir tempo decorrido, passos completados, proxima acao"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-001"]
+    },
+    {
+      "id": "US-008",
+      "title": "Criar sistema de Registro Central (Registry)",
+      "description": "Como Sleep Agent, quero um registro centralizado de extensoes e capacidades para descoberta rapida.",
+      "acceptanceCriteria": [
+        "Criar workspace/.config/registry.yaml como cache de extensoes",
+        "Incluir lista de extensoes com status, versao, agentes",
+        "Incluir mapeamento de comandos para extensoes",
+        "Incluir capacidades agregadas do sistema",
+        "Atualizar SETUP.md para popular registry no setup",
+        "Atualizar descoberta de extensoes para usar registry",
+        "Comando para atualizar registry manualmente"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-006"]
+    },
+    {
+      "id": "US-009",
+      "title": "Criar suporte a Workflows Paralelos",
+      "description": "Como usuario do Sleep Agent, quero que tarefas independentes executem em paralelo para maior eficiencia.",
+      "acceptanceCriteria": [
+        "Atualizar formato de workflow para suportar fases paralelas",
+        "Adicionar campo 'paralelo: true/false' em fases",
+        "Adicionar campo 'fork' com lista de tarefas paralelas",
+        "Adicionar campo 'join' com estrategia de merge",
+        "Documentar em core/workflows/PARALELO.md",
+        "Exemplo de workflow com fase paralela",
+        "Atualizar ORQUESTRADOR.md com logica de execucao paralela"
+      ],
+      "priority": 9,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-003"]
+    },
+    {
+      "id": "US-010",
+      "title": "Atualizar extensao Marketing com novos padroes",
+      "description": "Como exemplo de evolucao, atualizar extensao Marketing para usar novos padroes v4.",
+      "acceptanceCriteria": [
+        "Atualizar extensoes/marketing/extensao.yaml com niveis de maturidade",
+        "Adicionar gates em 3 niveis na tarefa criar-headline",
+        "Adicionar pontos de autocritica na tarefa criar-email",
+        "Atualizar workflow oferta-completa com fase paralela",
+        "Testar que extensao continua funcionando",
+        "Documentar mudancas em extensoes/marketing/CHANGELOG.md"
+      ],
+      "priority": 10,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-003", "US-006", "US-009"]
+    },
+    {
+      "id": "US-011",
+      "title": "Atualizar extensao Branding com novos padroes",
+      "description": "Como exemplo de evolucao, atualizar extensao Branding para usar novos padroes v4.",
+      "acceptanceCriteria": [
+        "Atualizar extensoes/branding/extensao.yaml com niveis de maturidade",
+        "Adicionar gates em 3 niveis na tarefa criar-logo",
+        "Adicionar pontos de autocritica na tarefa design-system",
+        "Atualizar workflow brand-completo com fase paralela",
+        "Testar que extensao continua funcionando",
+        "Documentar mudancas em extensoes/branding/CHANGELOG.md"
+      ],
+      "priority": 11,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-003", "US-006", "US-009"]
+    },
+    {
+      "id": "US-012",
+      "title": "Atualizar CLAUDE.md principal com todas as novidades",
+      "description": "Como usuario do Sleep Agent, quero documentacao atualizada que reflita todas as novas capacidades.",
+      "acceptanceCriteria": [
+        "Atualizar .claude/CLAUDE.md com secao Sistema de Memoria",
+        "Adicionar secao Quality Gates",
+        "Adicionar secao Health Check",
+        "Adicionar secao Matching Inteligente",
+        "Adicionar secao Maturidade de Agentes",
+        "Atualizar comandos globais disponiveis",
+        "Manter tom acessivel para nao-tecnicos",
+        "Incrementar versao para v4.0"
+      ],
+      "priority": 12,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-001", "US-003", "US-004", "US-005", "US-006", "US-007", "US-008"]
+    },
+    {
+      "id": "US-013",
+      "title": "Criar guia de migracao v3 para v4",
+      "description": "Como usuario existente, quero um guia claro de como migrar meu workspace para v4.",
+      "acceptanceCriteria": [
+        "Criar docs/MIGRACAO-V4.md com passo a passo",
+        "Listar mudancas quebram compatibilidade (se houver)",
+        "Script ou comandos para migrar workspace",
+        "Checklist de verificacao pos-migracao",
+        "FAQ com problemas comuns",
+        "Manter backward compatibility onde possivel"
+      ],
+      "priority": 13,
+      "passes": false,
+      "notes": "",
+      "dependencies": ["US-012"]
+    }
+  ]
+}

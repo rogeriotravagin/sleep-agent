@@ -1,0 +1,415 @@
+# ============================================
+# WORKFLOW: Modo Iniciante - Customer Success
+# ============================================
+# Caminho rapido para criar programa CS com
+# 5 perguntas + geracao automatica via Ralph
+# ============================================
+
+id: modo-iniciante-cs
+nome: Modo Iniciante - Customer Success
+descricao: Criar programa CS rapidamente em 5 perguntas + geracao automatica via Ralph
+comando: /iniciante-cs
+versao: "1.0"
+
+# ============================================
+# VISAO GERAL
+# ============================================
+
+visao_geral:
+  objetivo: "Criar programa CS rapidamente para quem esta comecando"
+  duracao_estimada: "15-20 minutos"
+  resultado: "Programa CS basico funcional com Health Score e playbooks"
+
+  diferencial: |
+    Este modo simplifica a criacao de um programa CS:
+    - Apenas 5 perguntas essenciais
+    - Sistema processa e expande automaticamente
+    - Ralph gera todos os componentes
+
+  integracao_ralph: true
+
+# ============================================
+# FASES
+# ============================================
+
+fases:
+  # ------------------------------------------
+  # FASE 1: BRIEFING EXPRESS
+  # ------------------------------------------
+  - numero: 1
+    nome: BRIEFING EXPRESS
+    descricao: "Coletar informacoes essenciais em 5 perguntas"
+    agente: csm-estrategista
+    tempo_estimado: "3-5 minutos"
+
+    etapas:
+      - id: 5-perguntas
+        nome: "5 Perguntas Essenciais"
+        descricao: "Briefing simplificado de CS"
+
+        perguntas:
+          - pergunta: "Qual seu produto/servico e para quem?"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Software de gestao de projetos para empresas de tecnologia"
+            var: produto
+
+          - pergunta: "Quantos clientes ativos e qual o ticket medio?"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "150 clientes, ticket medio R$ 500/mes"
+            var: clientes
+
+          - pergunta: "Qual seu maior desafio com clientes hoje?"
+            tipo: escolha
+            obrigatorio: true
+            opcoes:
+              - Alto churn/cancelamentos
+              - Onboarding confuso/demorado
+              - Falta de engajamento
+              - Dificuldade de demonstrar valor
+              - Clientes nao expandem
+              - Outro
+            var: desafio
+
+          - pergunta: "Como voce mede sucesso do cliente hoje?"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Apenas olhamos churn e tickets de suporte"
+            var: metricas_atuais
+
+          - pergunta: "Qual resultado mais urgente voce precisa?"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Reduzir churn de 5% para 2% em 3 meses"
+            var: resultado_urgente
+
+        entregavel: briefing-express-cs.md
+
+    saida_fase: |
+      ## Briefing Express Coletado
+
+      - **Produto:** {{produto}}
+      - **Clientes:** {{clientes}}
+      - **Maior Desafio:** {{desafio}}
+      - **Metricas Atuais:** {{metricas_atuais}}
+      - **Resultado Urgente:** {{resultado_urgente}}
+
+  # ------------------------------------------
+  # FASE 2: PROCESSAMENTO
+  # ------------------------------------------
+  - numero: 2
+    nome: PROCESSAMENTO
+    descricao: "Sistema processa e expande informacoes automaticamente"
+    agente: csm-estrategista
+    tempo_estimado: "2-3 minutos"
+    automatico: true
+
+    etapas:
+      - id: definir-health-score
+        nome: "Definir Health Score"
+        descricao: "Sugerir componentes de Health Score baseado no produto"
+        automatico: true
+
+        processo:
+          - "Analisar tipo de produto"
+          - "Identificar indicadores mensuraveis"
+          - "Sugerir pesos e thresholds"
+          - "Criar formula de calculo"
+
+        entregavel: health-score-sugerido.md
+
+      - id: definir-onboarding
+        nome: "Definir Onboarding"
+        descricao: "Sugerir estrutura de onboarding"
+        automatico: true
+
+        processo:
+          - "Identificar primeiro valor"
+          - "Definir marcos de ativacao"
+          - "Criar timeline sugerida"
+          - "Listar touchpoints"
+
+        entregavel: onboarding-sugerido.md
+
+      - id: definir-retencao
+        nome: "Definir Retencao"
+        descricao: "Sugerir estrategia de retencao baseada no desafio"
+        automatico: true
+
+        processo:
+          - "Analisar desafio principal"
+          - "Identificar sinais de risco"
+          - "Sugerir intervencoes"
+          - "Criar playbook base"
+
+        entregavel: retencao-sugerida.md
+
+    saida_fase: |
+      ## Processamento Completo
+
+      ✅ Health Score definido
+      ✅ Onboarding estruturado
+      ✅ Estrategia de retencao criada
+      ✅ Metricas estabelecidas
+
+  # ------------------------------------------
+  # FASE 3: PREPARAR RALPH
+  # ------------------------------------------
+  - numero: 3
+    nome: PREPARAR RALPH
+    descricao: "Montar PRD para execucao automatica do Ralph"
+    agente: csm-estrategista
+    tempo_estimado: "1-2 minutos"
+    automatico: true
+
+    etapas:
+      - id: montar-prd
+        nome: "Montar PRD"
+        descricao: "Criar documento de requisitos para o Ralph"
+        automatico: true
+
+        user_stories:
+          - id: US001
+            titulo: "Criar Health Score completo"
+            descricao: "Gerar documento de Health Score personalizado"
+            criterios:
+              - "Componentes definidos com pesos"
+              - "Thresholds estabelecidos"
+              - "Acoes por nivel"
+              - "Dashboard sugerido"
+
+          - id: US002
+            titulo: "Criar Playbook de Onboarding"
+            descricao: "Gerar playbook completo de onboarding"
+            criterios:
+              - "Fases documentadas"
+              - "Checklists completos"
+              - "Timeline definida"
+              - "Templates de email"
+
+          - id: US003
+            titulo: "Criar Checklist de Ativacao"
+            descricao: "Gerar checklist de marcos de ativacao"
+            criterios:
+              - "Marcos definidos"
+              - "Criterios de sucesso"
+              - "Metricas de acompanhamento"
+
+          - id: US004
+            titulo: "Criar Plano de Retencao"
+            descricao: "Gerar estrategia de retencao focada no desafio"
+            criterios:
+              - "Sinais de risco listados"
+              - "Alertas definidos"
+              - "Playbooks de save"
+              - "Metricas de sucesso"
+
+          - id: US005
+            titulo: "Criar Dashboard de Metricas"
+            descricao: "Consolidar metricas e metas"
+            criterios:
+              - "KPIs definidos"
+              - "Metas estabelecidas"
+              - "Visualizacao sugerida"
+
+        entregavel: prd-cs.json
+
+    saida_fase: |
+      ## PRD Preparado
+
+      📋 PRD com 5 user stories
+      🎯 Criterios de aceitacao definidos
+      📝 Pronto para execucao
+
+  # ------------------------------------------
+  # FASE 4: GERAR PROGRAMA
+  # ------------------------------------------
+  - numero: 4
+    nome: GERAR PROGRAMA
+    descricao: "Gerar programa CS completo"
+    agente: csm-estrategista
+    tempo_estimado: "5-10 minutos"
+
+    etapas:
+      - id: gerar-health-score
+        nome: "Gerar Health Score"
+        tarefa: criar-health-score
+        user_stories: ["US001"]
+
+      - id: gerar-onboarding
+        nome: "Gerar Onboarding"
+        tarefa: criar-playbook-onboarding
+        user_stories: ["US002"]
+
+      - id: gerar-ativacao
+        nome: "Gerar Checklist Ativacao"
+        tarefa: criar-checklist-ativacao
+        user_stories: ["US003"]
+
+      - id: gerar-retencao
+        nome: "Gerar Plano Retencao"
+        tarefa: criar-plano-retencao
+        user_stories: ["US004"]
+
+      - id: consolidar
+        nome: "Consolidar Programa"
+        descricao: "Criar visao unificada do programa"
+        user_stories: ["US005"]
+
+    saida_fase: |
+      ## Programa CS Gerado
+
+      ✅ Health Score personalizado
+      ✅ Playbook de onboarding
+      ✅ Checklist de ativacao
+      ✅ Plano de retencao
+      ✅ Dashboard de metricas
+
+  # ------------------------------------------
+  # FASE 5: ENTREGA
+  # ------------------------------------------
+  - numero: 5
+    nome: ENTREGA
+    descricao: "Apresentar resultado e oferecer refinamentos"
+    agente: csm-estrategista
+    tempo_estimado: "2-3 minutos"
+
+    etapas:
+      - id: apresentar
+        nome: "Apresentar Resultado"
+        descricao: "Mostrar o que foi criado"
+
+        template_apresentacao: |
+          ## Programa CS Criado!
+
+          ### Para: {{produto}}
+
+          **Health Score**
+          - {{num_componentes}} componentes
+          - Alertas configurados
+          - Dashboard pronto
+
+          **Onboarding**
+          - {{num_fases}} fases
+          - Checklists completos
+          - Templates de email
+
+          **Retencao**
+          - Sinais de risco mapeados
+          - Playbooks de save
+          - Metricas de sucesso
+
+          ### Arquivos Gerados
+          ```
+          output/customer-success/{{slug}}/
+          ├── health-score.md
+          ├── playbook-onboarding.md
+          ├── checklist-ativacao.md
+          ├── plano-retencao.md
+          └── dashboard-metricas.md
+          ```
+
+      - id: refinamentos
+        nome: "Oferecer Refinamentos"
+        descricao: "Perguntar se quer ajustar algo"
+
+        opcoes_refinamento:
+          - "Detalhar mais o Health Score"
+          - "Expandir playbook de onboarding"
+          - "Adicionar mais playbooks de save"
+          - "Refinar metricas"
+          - "Esta otimo, obrigado!"
+
+        entregavel: resumo-final.md
+
+# ============================================
+# ENTREGA FINAL
+# ============================================
+
+entrega_final:
+  formato: pasta
+  local: output/customer-success/{{slug}}/
+
+  estrutura: |
+    {{slug}}/
+    ├── README.md               # Resumo do programa
+    ├── health-score.md         # Health Score personalizado
+    ├── playbook-onboarding.md  # Playbook de onboarding
+    ├── checklist-ativacao.md   # Marcos de ativacao
+    ├── plano-retencao.md       # Estrategia de retencao
+    └── dashboard-metricas.md   # KPIs e metas
+
+# ============================================
+# INTEGRACAO RALPH
+# ============================================
+
+ralph:
+  template_prd: frameworks/ralph/templates/prd-cs.json
+  template_prompt: frameworks/ralph/templates/prompt-cs.md
+
+  configuracao:
+    max_iteracoes: 20
+    paralelismo: false
+    validacao: true
+
+  fallback:
+    se_ralph_falhar:
+      acao: "gerar_manualmente"
+      mensagem: "Gerando programa CS manualmente..."
+
+# ============================================
+# EXECUCAO
+# ============================================
+
+execucao:
+  comando: /iniciante-cs
+
+  fluxo:
+    1: "Fazer 5 perguntas essenciais"
+    2: "Processar e expandir informacoes"
+    3: "Montar PRD para geracao"
+    4: "Gerar programa CS completo"
+    5: "Apresentar resultado"
+    6: "Oferecer refinamentos"
+
+  mensagem_inicial: |
+    ## Modo Iniciante - Customer Success
+
+    Vou te ajudar a criar um programa de Customer Success rapidamente!
+
+    Preciso de apenas **5 informacoes** para comecar. Depois, o sistema gera tudo automaticamente.
+
+    Vamos la?
+
+  mensagem_final: |
+    ## Programa CS Criado com Sucesso!
+
+    Seu programa de Customer Success esta pronto com:
+    - Health Score personalizado
+    - Playbook de onboarding
+    - Estrategia de retencao
+    - Dashboard de metricas
+
+    **Para acessar:** `output/customer-success/{{slug}}/`
+
+    **Para usar a extensao completa:** `/customer-success`
+
+    Quer criar mais alguma coisa?
+
+# ============================================
+# FALLBACKS
+# ============================================
+
+fallbacks:
+  se_produto_vago:
+    acao: "pedir_clarificacao"
+    mensagem: "Pode ser mais especifico sobre o produto? Por exemplo, 'software de RH para PMEs' e mais claro que 'sistema de gestao'."
+
+  se_desafio_multiplo:
+    acao: "priorizar"
+    mensagem: "Voce mencionou varios desafios. Qual e o mais urgente para resolver primeiro?"
+
+  se_metricas_inexistentes:
+    acao: "sugerir"
+    mensagem: "Sem problema nao ter metricas ainda! Vou sugerir as principais para voce comecar a acompanhar."

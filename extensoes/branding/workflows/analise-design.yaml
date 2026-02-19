@@ -1,0 +1,147 @@
+id: analise-design
+nome: Analise de Design Completa
+descricao: Workflow completo para analisar referencias visuais e criar diretrizes de design para o produto
+comando: /analise-design
+versao: "1.0"
+
+fases:
+  - numero: 1
+    nome: CAPTURA
+    agente: design-analyst
+    objetivo: Receber e analisar a referencia visual fornecida
+    tarefas:
+      - analisar-referencia
+    entregas:
+      - Documento de analise de referencia
+      - Mapeamento de elementos visuais
+      - Paleta de cores extraida
+      - Especificacoes tipograficas
+      - Sistema de espacamento identificado
+    gates:
+      - Referencia foi processada completamente
+      - Todos os elementos principais foram identificados
+      - Valores extraidos com precisao (HEX, px, fontes)
+      - Estrutura de layout documentada
+    dependencias: []
+
+  - numero: 2
+    nome: EXTRACAO
+    agente: design-analyst
+    objetivo: Transformar a analise em diretrizes formais de design
+    tarefas:
+      - extrair-diretrizes
+    entregas:
+      - Documento de diretrizes de design
+      - Sistema de cores com tokens
+      - Sistema tipografico completo
+      - Sistema de espacamento
+      - Especificacoes de componentes base
+    gates:
+      - Padroes recorrentes identificados
+      - Regras formais definidas
+      - Tokens de design nomeados
+      - Especificacoes tecnicas completas
+    dependencias:
+      - 1
+
+  - numero: 3
+    nome: DOCUMENTACAO
+    agente: design-analyst
+    objetivo: Criar style guide completo e pronto para uso
+    tarefas:
+      - criar-styleguide
+    entregas:
+      - Style Guide completo em markdown
+      - Variaveis CSS documentadas
+      - Exemplos de aplicacao
+      - Checklists de implementacao
+    gates:
+      - Todas as secoes preenchidas
+      - Valores CSS validos
+      - Exemplos praticos incluidos
+      - Acessibilidade contemplada
+    dependencias:
+      - 2
+
+checkpoints:
+  - apos_fase: 1
+    validacao: Analise completa e precisa
+    criterios:
+      - Todos os elementos principais identificados
+      - Valores exatos extraidos
+      - Estrutura documentada
+
+  - apos_fase: 2
+    validacao: Diretrizes coerentes e aplicaveis
+    criterios:
+      - Sistema de cores consistente
+      - Tipografia bem definida
+      - Espacamento padronizado
+      - Componentes especificados
+
+  - apos_fase: 3
+    validacao: Style Guide pronto para uso
+    criterios:
+      - Documento completo
+      - Facil de consultar
+      - Especificacoes tecnicas claras
+
+metricas_sucesso:
+  - Style guide completo e documentado
+  - Todos os sistemas definidos (cores, tipografia, espacamento)
+  - Pronto para implementacao em codigo
+  - Consistencia entre analise e diretrizes
+
+integracao_ralph:
+  modo: content
+  output_dir: output/{produto}/
+  arquivos_gerados:
+    - analises/analise-referencia.md
+    - diretrizes/diretrizes-design.md
+    - style-guide/style-guide.md
+
+perguntas_iniciais:
+  - pergunta: "Qual a referencia a ser analisada?"
+    campo: referencia
+    obrigatoria: true
+
+  - pergunta: "Qual o nome do produto?"
+    campo: produto
+    obrigatoria: true
+
+  - pergunta: "Qual o objetivo principal?"
+    campo: objetivo
+    obrigatoria: true
+    opcoes:
+      - Replicar design existente
+      - Inspirar-se para novo design
+      - Documentar sistema existente
+      - Criar consistencia entre produtos
+
+mensagem_inicio: |
+  **Workflow: Analise de Design Completa**
+
+  Este workflow guia voce atraves de 3 fases:
+
+  1. **CAPTURA** - Analisar a referencia visual
+  2. **EXTRACAO** - Criar diretrizes formais
+  3. **DOCUMENTACAO** - Gerar style guide completo
+
+  Ao final, voce tera um Style Guide profissional pronto para
+  implementacao em codigo.
+
+  Vamos comecar!
+
+mensagem_conclusao: |
+  **Analise de Design Concluida!**
+
+  Foram gerados os seguintes arquivos:
+
+  - `output/{produto}/analises/analise-referencia.md`
+  - `output/{produto}/diretrizes/diretrizes-design.md`
+  - `output/{produto}/style-guide/style-guide.md`
+
+  Proximos passos recomendados:
+  - Implementar design tokens em codigo
+  - Criar componentes baseados no style guide
+  - Desenvolver landing page ou interface

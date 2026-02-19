@@ -1,0 +1,393 @@
+# Workflow: Modo Iniciante - Primeira Pagina de Vendas
+# Integracao com Ralph para execucao autonoma
+
+id: modo-iniciante
+nome: Primeira Pagina de Vendas
+descricao: Workflow rapido para criar sua primeira pagina de vendas
+comando: /iniciante
+
+versao: "1.0"
+
+# =====================================================
+# SOBRE ESTE MODO
+# =====================================================
+
+sobre: |
+  Este e o modo mais rapido para sair do zero.
+
+  Voce responde 5 perguntas simples e o sistema:
+  1. Define seu publico e oferta
+  2. Cria a estrutura de copy
+  3. Gera a pagina de vendas completa via Ralph
+
+  Ideal para:
+  - Quem nunca criou uma pagina de vendas
+  - Quem quer validar uma ideia rapido
+  - Quem precisa de um MVP de oferta
+
+  Resultado: Pagina HTML completa pronta para usar
+
+# =====================================================
+# CONFIGURACAO RALPH
+# =====================================================
+
+ralph:
+  habilitado: true
+  modo: content
+  output_dir: output/landing-pages/
+  template_prd: frameworks/ralph/templates/prd-pagina-vendas.json
+  prompt: frameworks/ralph/templates/prompt-pagina-vendas.md
+  max_iteracoes: 10
+
+# =====================================================
+# FASE 1: BRIEFING EXPRESS (5 perguntas)
+# =====================================================
+
+fases:
+  - numero: 1
+    nome: BRIEFING EXPRESS
+    descricao: Coletar o essencial em 5 perguntas
+    tempo: 5 minutos
+
+    etapas:
+      - id: 1.1
+        nome: Coleta Rapida
+        agente: estrategista
+        descricao: Fazer as 5 perguntas essenciais
+
+        perguntas:
+          - id: p1
+            pergunta: "O que voce vende? (produto, servico, curso, consultoria...)"
+            tipo: texto
+            exemplo: "Curso de Excel para iniciantes"
+            obrigatorio: true
+
+          - id: p2
+            pergunta: "Para quem? (seja especifico: profissao, situacao, dor)"
+            tipo: texto
+            exemplo: "Profissionais de escritorio que perdem tempo com planilhas"
+            obrigatorio: true
+
+          - id: p3
+            pergunta: "Qual o principal resultado que voce entrega?"
+            tipo: texto
+            exemplo: "Dominar Excel em 30 dias e economizar 2h por dia"
+            obrigatorio: true
+
+          - id: p4
+            pergunta: "Qual o preco? (pode ser aproximado)"
+            tipo: texto
+            exemplo: "R$ 297"
+            obrigatorio: true
+
+          - id: p5
+            pergunta: "Tem algum diferencial ou metodo proprio? (opcional)"
+            tipo: texto
+            exemplo: "Metodo 3P: Pratico, Progressivo, Profissional"
+            obrigatorio: false
+
+        entregavel: briefing-express.md
+
+        template_entregavel: |
+          # Briefing Express
+
+          **Produto/Servico:** {{p1}}
+          **Publico-Alvo:** {{p2}}
+          **Resultado Principal:** {{p3}}
+          **Preco:** {{p4}}
+          **Diferencial:** {{p5}}
+
+          ---
+          Gerado em: {{data}}
+
+# =====================================================
+# FASE 2: PROCESSAMENTO AUTOMATICO
+# =====================================================
+
+  - numero: 2
+    nome: PROCESSAMENTO
+    descricao: Sistema processa e gera contexto automaticamente
+    tempo: automatico
+
+    etapas:
+      - id: 2.1
+        nome: Gerar ICP Rapido
+        agente: estrategista
+        automatico: true
+        descricao: Criar perfil do cliente ideal baseado nas respostas
+
+        template: |
+          ## ICP (Cliente Ideal)
+
+          **Quem e:** {{publico_processado}}
+          **Dor principal:** {{dor_extraida}}
+          **Desejo:** {{desejo_extraido}}
+          **Objecao provavel:** {{objecao_inferida}}
+          **Gatilho de compra:** {{gatilho_inferido}}
+
+        entregavel: icp-rapido.md
+
+      - id: 2.2
+        nome: Estruturar Oferta
+        agente: estrategista
+        automatico: true
+        descricao: Montar estrutura basica da oferta
+        depende_de: ["2.1"]
+
+        template: |
+          ## Estrutura da Oferta
+
+          **Nome:** {{nome_produto}}
+          **Promessa:** {{promessa_principal}}
+          **Para quem:** {{icp_resumido}}
+          **Entrega:** {{o_que_recebe}}
+          **Preco:** {{preco}}
+          **Garantia:** 7 dias (padrao)
+
+        entregavel: oferta-rapida.md
+
+      - id: 2.3
+        nome: Gerar Headlines
+        agente: copywriter
+        automatico: true
+        descricao: Criar 3 opcoes de headline
+        depende_de: ["2.2"]
+
+        formulas:
+          - tipo: beneficio
+            template: "{{resultado}} em {{tempo}} {{sem_objecao}}"
+          - tipo: curiosidade
+            template: "O {{metodo}} que {{publico}} esta usando para {{resultado}}"
+          - tipo: dor
+            template: "{{publico}}: Pare de {{dor}} e comece a {{beneficio}}"
+
+        entregavel: headlines.md
+
+# =====================================================
+# FASE 3: GERACAO PRD RALPH
+# =====================================================
+
+  - numero: 3
+    nome: PREPARAR RALPH
+    descricao: Gerar PRD para execucao autonoma
+    tempo: automatico
+
+    etapas:
+      - id: 3.1
+        nome: Montar PRD
+        agente: orquestrador
+        automatico: true
+        descricao: Criar prd.json com todas as stories
+        depende_de: ["2.3"]
+
+        stories:
+          - id: US-001
+            titulo: Criar estrutura HTML base
+            descricao: Montar HTML com head, meta tags, e estrutura semantica
+            criterios:
+              - HTML5 semantico
+              - Meta tags SEO basicas
+              - Viewport mobile configurado
+              - Tailwind CSS via CDN
+            prioridade: 1
+
+          - id: US-002
+            titulo: Criar secao Hero
+            descricao: Headline principal, subheadline e CTA primario
+            criterios:
+              - Headline principal destacada
+              - Subheadline com beneficio
+              - Botao CTA visivel
+              - Responsivo mobile-first
+            prioridade: 2
+
+          - id: US-003
+            titulo: Criar secao Problema
+            descricao: Apresentar a dor do publico de forma empática
+            criterios:
+              - 3 dores principais listadas
+              - Tom empatico
+              - Transicao para solucao
+            prioridade: 3
+
+          - id: US-004
+            titulo: Criar secao Solucao
+            descricao: Apresentar o produto como a solucao
+            criterios:
+              - Conexao clara problema-solucao
+              - Beneficios principais
+              - Diferencial destacado
+            prioridade: 4
+
+          - id: US-005
+            titulo: Criar secao O Que Voce Recebe
+            descricao: Listar entregaveis com valor percebido
+            criterios:
+              - Lista de modulos/itens
+              - Valor de cada item
+              - Visual de stack de valor
+            prioridade: 5
+
+          - id: US-006
+            titulo: Criar secao Preco e CTA
+            descricao: Apresentar preco com ancoragem e CTA final
+            criterios:
+              - Ancoragem de valor
+              - Preco destacado
+              - Botao CTA grande
+              - Garantia visivel
+            prioridade: 6
+
+          - id: US-007
+            titulo: Criar secao FAQ
+            descricao: Responder 5 objecoes comuns
+            criterios:
+              - 5 perguntas frequentes
+              - Respostas objetivas
+              - Quebra de objecoes
+            prioridade: 7
+
+          - id: US-008
+            titulo: Criar footer
+            descricao: Footer com informacoes legais
+            criterios:
+              - Copyright
+              - Links de politica
+              - Contato
+            prioridade: 8
+
+        entregavel: prd.json
+
+# =====================================================
+# FASE 4: EXECUCAO RALPH
+# =====================================================
+
+  - numero: 4
+    nome: EXECUTAR RALPH
+    descricao: Ralph constroi a pagina autonomamente
+    tempo: automatico
+
+    etapas:
+      - id: 4.1
+        nome: Iniciar Ralph
+        agente: ralph
+        automatico: true
+        descricao: Executar loop autonomo do Ralph
+        depende_de: ["3.1"]
+
+        comando: |
+          cd frameworks/ralph && ./scripts/ralph.sh 10
+
+        monitoramento:
+          arquivo_progress: progress.txt
+          verificar_cada: 30s
+          timeout: 10min
+
+      - id: 4.2
+        nome: Validar Saida
+        agente: orquestrador
+        automatico: true
+        descricao: Verificar se pagina foi gerada corretamente
+        depende_de: ["4.1"]
+
+        validacoes:
+          - arquivo_existe: output/landing-pages/{{slug}}/index.html
+          - html_valido: true
+          - secoes_minimas: 6
+
+        entregavel: pagina-validada.html
+
+# =====================================================
+# FASE 5: ENTREGA
+# =====================================================
+
+  - numero: 5
+    nome: ENTREGA
+    descricao: Apresentar resultado e proximos passos
+    tempo: 2 minutos
+
+    etapas:
+      - id: 5.1
+        nome: Apresentar Resultado
+        agente: orquestrador
+        descricao: Mostrar pagina gerada e opcoes
+        depende_de: ["4.2"]
+
+        mensagem: |
+          ## Sua Pagina de Vendas Esta Pronta!
+
+          **Arquivo:** output/landing-pages/{{slug}}/index.html
+
+          ### O que foi criado:
+          - Headline otimizada para conversao
+          - Secao de problema e solucao
+          - Stack de valor completo
+          - CTA com ancoragem de preco
+          - FAQ com quebra de objecoes
+          - Design responsivo (mobile-first)
+
+          ### Proximos passos:
+          1. **Revisar** - Abra o arquivo e veja se o tom esta correto
+          2. **Personalizar** - Ajuste detalhes especificos
+          3. **Publicar** - Suba em seu servidor ou use Netlify/Vercel
+
+          ### Quer melhorar?
+          - `/headlines` - Gerar mais opcoes de headline
+          - `/copy` - Reescrever secoes especificas
+          - `/oferta-completa` - Processo completo de oferta
+
+        entregavel: resumo-entrega.md
+
+# =====================================================
+# ESTRUTURA DE SAIDA
+# =====================================================
+
+entrega_final:
+  formato: pasta
+  local: output/landing-pages/{{slug}}/
+  estrutura: |
+    output/landing-pages/{{slug}}/
+    ├── index.html          # Pagina de vendas completa
+    ├── briefing.md         # Briefing original
+    ├── copy.md             # Textos extraidos
+    └── prd.json            # PRD usado pelo Ralph
+
+# =====================================================
+# COMO EXECUTAR
+# =====================================================
+
+execucao:
+  comando: /iniciante
+
+  fluxo:
+    1: Usuario digita /iniciante
+    2: Sistema faz 5 perguntas
+    3: Sistema processa respostas (automatico)
+    4: Ralph gera pagina (automatico)
+    5: Sistema entrega resultado
+
+  interacao_usuario:
+    - fase: 1
+      tipo: responder_perguntas
+    - fase: 5
+      tipo: receber_entrega
+
+# =====================================================
+# FALLBACKS
+# =====================================================
+
+fallbacks:
+  se_ralph_falhar:
+    acao: gerar_template_basico
+    mensagem: "Ralph encontrou problemas. Gerando template basico..."
+
+  se_timeout:
+    acao: entregar_parcial
+    mensagem: "Processo demorou mais que esperado. Entregando o que foi gerado..."
+
+  se_resposta_incompleta:
+    acao: usar_defaults
+    defaults:
+      garantia: "7 dias"
+      metodo: "Metodo Exclusivo"
+      bonus: "Suporte por email"

@@ -1,0 +1,381 @@
+# ============================================
+# TAREFA: Criar Plano de Risco
+# ============================================
+
+id: criar-plano-risco
+nome: Criar Plano de Acao para Cliente em Risco
+descricao: Desenvolver plano de recuperacao para cliente em risco de churn
+agente: retention-expert
+comando: /plano-risco
+versao: "1.0"
+categoria: retencao
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: cliente
+      pergunta: "Qual o nome do cliente em risco?"
+      tipo: texto
+      exemplo: "Empresa XYZ"
+
+    - nome: sinais_risco
+      pergunta: "Quais sinais de risco foram identificados?"
+      tipo: lista
+      exemplo:
+        - "Uso caiu 50% nos ultimos 30 dias"
+        - "NPS de 4 no ultimo survey"
+        - "Champion saiu da empresa"
+        - "3 tickets criticos abertos"
+
+    - nome: mrr_cliente
+      pergunta: "Qual o MRR/valor do cliente?"
+      tipo: texto
+      exemplo: "R$ 5.000/mes"
+
+  opcionais:
+    - nome: health_score
+      pergunta: "Qual o Health Score atual?"
+      tipo: numero
+      exemplo: "35"
+
+    - nome: historico
+      pergunta: "Ha quanto tempo e cliente? Algum historico relevante?"
+      tipo: texto
+      exemplo: "Cliente ha 18 meses, expandiu 2x, sempre foi promotor ate Q3"
+
+    - nome: causa_provavel
+      pergunta: "Qual a causa provavel do risco?"
+      tipo: texto
+      exemplo: "Mudanca de gestao + novo sistema concorrente sendo avaliado"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Diagnosticar situacao"
+    detalhes:
+      - "Analisar sinais de risco em detalhe"
+      - "Revisar historico do cliente"
+      - "Identificar causa raiz"
+      - "Avaliar severidade"
+
+  - numero: 2
+    acao: "Classificar nivel de risco"
+    detalhes:
+      - "Definir urgencia"
+      - "Avaliar probabilidade de churn"
+      - "Calcular impacto financeiro"
+      - "Determinar nivel de esforco"
+
+  - numero: 3
+    acao: "Criar plano de acao"
+    detalhes:
+      - "Acoes imediatas (24-48h)"
+      - "Acoes de curto prazo (1-2 semanas)"
+      - "Acoes de medio prazo (30 dias)"
+      - "Metricas de sucesso"
+
+  - numero: 4
+    acao: "Definir recursos"
+    detalhes:
+      - "Responsaveis"
+      - "Stakeholders a envolver"
+      - "Recursos necessarios"
+      - "Escalacao se necessario"
+
+# ============================================
+# SAIDA
+# ============================================
+
+saida:
+  formato: markdown
+  template: |
+    # Plano de Acao - Cliente em Risco
+
+    ## Cliente: {{cliente}}
+
+    ---
+
+    ## Resumo Executivo
+
+    | Item | Detalhe |
+    |------|---------|
+    | **Cliente** | {{cliente}} |
+    | **MRR em Risco** | {{mrr_cliente}} |
+    | **Health Score** | {{health_score}} |
+    | **Nivel de Risco** | {{nivel_risco}} |
+    | **Urgencia** | {{urgencia}} |
+    | **Data Identificacao** | {{data_identificacao}} |
+
+    ---
+
+    ## Diagnostico
+
+    ### Sinais de Risco Identificados
+
+    | Sinal | Severidade | Desde Quando |
+    |-------|------------|--------------|
+    {{#each sinais_detalhados}}
+    | {{this.sinal}} | {{this.severidade}} | {{this.desde}} |
+    {{/each}}
+
+    ### Analise de Causa Raiz
+
+    **Causa Provavel:** {{causa_provavel}}
+
+    **Contexto:**
+    {{contexto_detalhado}}
+
+    ### Historico do Cliente
+
+    - **Tempo como cliente:** {{tempo_cliente}}
+    - **Expansoes anteriores:** {{expansoes}}
+    - **NPS historico:** {{nps_historico}}
+    - **Ultimos touchpoints:** {{ultimos_touchpoints}}
+
+    ### Matriz de Risco
+
+    ```
+    ┌───────────────────────────────────────┐
+    │         AVALIACAO DE RISCO            │
+    ├───────────────────────────────────────┤
+    │                                        │
+    │  Probabilidade de Churn: {{prob_churn}}│
+    │  [{{barra_prob}}]                     │
+    │                                        │
+    │  Impacto Financeiro: {{impacto}}      │
+    │  - MRR perdido: {{mrr_cliente}}       │
+    │  - ARR em risco: {{arr_risco}}        │
+    │  - LTV restante: {{ltv_restante}}     │
+    │                                        │
+    │  Nivel: {{nivel_risco}} ({{score_risco}}/10) │
+    │                                        │
+    └───────────────────────────────────────┘
+    ```
+
+    ---
+
+    ## Plano de Acao
+
+    ### Fase 1: Acoes Imediatas (24-48 horas)
+
+    | Prioridade | Acao | Responsavel | Prazo | Status |
+    |------------|------|-------------|-------|--------|
+    {{#each acoes_imediatas}}
+    | {{this.prioridade}} | {{this.acao}} | {{this.responsavel}} | {{this.prazo}} | Pendente |
+    {{/each}}
+
+    **Script de Primeiro Contato:**
+    ```
+    "Ola [Nome], tudo bem?
+
+    Estou entrando em contato porque percebi que [observacao
+    especifica]. Queria entender melhor o que esta acontecendo
+    e como posso ajudar.
+
+    Voce teria [tempo] para conversarmos [quando]?
+
+    [Se urgente] Posso ligar agora? Quero garantir que
+    possamos resolver isso juntos."
+    ```
+
+    ### Fase 2: Acoes de Curto Prazo (1-2 semanas)
+
+    | Acao | Objetivo | Responsavel | Prazo |
+    |------|----------|-------------|-------|
+    {{#each acoes_curto_prazo}}
+    | {{this.acao}} | {{this.objetivo}} | {{this.responsavel}} | {{this.prazo}} |
+    {{/each}}
+
+    ### Fase 3: Acoes de Medio Prazo (30 dias)
+
+    | Acao | Objetivo | Responsavel | Prazo |
+    |------|----------|-------------|-------|
+    {{#each acoes_medio_prazo}}
+    | {{this.acao}} | {{this.objetivo}} | {{this.responsavel}} | {{this.prazo}} |
+    {{/each}}
+
+    ---
+
+    ## Estrategia de Recuperacao
+
+    ### Abordagem Principal
+
+    {{estrategia_principal}}
+
+    ### Proposta de Valor Reforçada
+
+    Elementos a enfatizar:
+    {{#each elementos_valor}}
+    - **{{this.elemento}}:** {{this.como_demonstrar}}
+    {{/each}}
+
+    ### Ofertas de Retencao (se necessario)
+
+    Em ordem de preferencia:
+    1. {{oferta_1}}
+    2. {{oferta_2}}
+    3. {{oferta_3}}
+    4. {{oferta_4}} (ultimo recurso)
+
+    **Nota:** Desconto deve ser ULTIMA opcao. Resolver a causa raiz e mais efetivo.
+
+    ---
+
+    ## Stakeholders
+
+    ### Cliente
+
+    | Nome | Cargo | Influencia | Status | Acao |
+    |------|-------|------------|--------|------|
+    {{#each stakeholders_cliente}}
+    | {{this.nome}} | {{this.cargo}} | {{this.influencia}} | {{this.status}} | {{this.acao}} |
+    {{/each}}
+
+    ### Interno
+
+    | Nome | Papel | Responsabilidade |
+    |------|-------|------------------|
+    {{#each stakeholders_interno}}
+    | {{this.nome}} | {{this.papel}} | {{this.responsabilidade}} |
+    {{/each}}
+
+    ### Escalacao
+
+    Se necessario escalar:
+    - **Nivel 1:** {{escalacao_nivel_1}}
+    - **Nivel 2:** {{escalacao_nivel_2}}
+    - **Nivel 3:** {{escalacao_nivel_3}}
+
+    ---
+
+    ## Metricas de Sucesso
+
+    ### Criterios de Recuperacao
+
+    O cliente sera considerado recuperado quando:
+
+    - [ ] Health Score >60
+    - [ ] Uso estabilizado/crescendo
+    - [ ] NPS >7
+    - [ ] Tickets criticos resolvidos
+    - [ ] Novo champion identificado (se aplicavel)
+    - [ ] Compromisso de continuidade
+
+    ### Checkpoints de Acompanhamento
+
+    | Data | Checkpoint | Metrica a Validar |
+    |------|------------|-------------------|
+    {{#each checkpoints}}
+    | {{this.data}} | {{this.checkpoint}} | {{this.metrica}} |
+    {{/each}}
+
+    ---
+
+    ## Cenarios
+
+    ### Cenario A: Recuperacao Bem-sucedida
+
+    Se acoes funcionarem:
+    - Criar Success Plan renovado
+    - Agendar QBR em 30 dias
+    - Monitorar de perto por 90 dias
+    - Documentar learnings
+
+    ### Cenario B: Recuperacao Parcial
+
+    Se melhorar mas ainda em risco:
+    - Intensificar acompanhamento
+    - Envolver mais stakeholders
+    - Considerar ofertas adicionais
+    - Revisar estrategia
+
+    ### Cenario C: Churn Inevitavel
+
+    Se nao conseguir recuperar:
+    - Conduzir exit interview
+    - Documentar motivos
+    - Manter porta aberta
+    - Planejar win-back futuro
+
+    ---
+
+    ## Timeline Visual
+
+    ```
+    SEMANA 1            SEMANA 2            SEMANA 3            SEMANA 4
+    ─────────────────────────────────────────────────────────────────────
+    D1: Contato         D8: Check-in        D15: Revisao        D22: Avaliacao
+    urgente             progresso           plano               final
+    │                   │                   │                   │
+    D2: Diagnostico     D10: Resolver       D17: QBR            D25: Health
+    detalhado           tickets             especial            check
+    │                   │                   │                   │
+    D5: Plano           D12: Demo           D20: Novo           D28: Decisao
+    apresentado         features            champion            go/no-go
+    ```
+
+    ---
+
+    ## Documentacao
+
+    ### Registro de Interacoes
+
+    | Data | Tipo | Participantes | Resumo | Proximos Passos |
+    |------|------|---------------|--------|-----------------|
+    | | | | | |
+
+    ### Notas Importantes
+
+    {{notas_importantes}}
+
+    ---
+
+    ## Checklist de Execucao
+
+    **Antes do Primeiro Contato:**
+    - [ ] Revisar todo historico do cliente
+    - [ ] Analisar dados de uso em detalhe
+    - [ ] Preparar talking points
+    - [ ] Alinhar com time interno
+    - [ ] Ter aprovacao de ofertas
+
+    **Durante Execucao:**
+    - [ ] Documentar toda interacao
+    - [ ] Atualizar status diariamente
+    - [ ] Comunicar progresso
+    - [ ] Escalar quando necessario
+
+    **Apos Resolucao:**
+    - [ ] Documentar learnings
+    - [ ] Atualizar playbooks
+    - [ ] Compartilhar com time
+    - [ ] Planejar prevencao futura
+
+  arquivo: output/customer-success/planos/plano-risco-{{slug_cliente}}-{{data}}.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "O diagnostico esta completo?"
+  - "As acoes sao especificas e tem owner?"
+  - "Os prazos sao realistas?"
+  - "Os stakeholders estao mapeados?"
+  - "Os cenarios estao previstos?"
+
+# ============================================
+# PROXIMOS PASSOS
+# ============================================
+
+proximos_passos:
+  - tarefa: criar-qbr
+    se: "Cliente estabilizado, precisa QBR"
+  - tarefa: criar-plano-retencao
+    se: "Precisa estrategia mais ampla"

@@ -1,0 +1,456 @@
+# ============================================
+# TAREFA: Criar Sequencia de Boas-vindas
+# ============================================
+
+id: criar-sequencia-boas-vindas
+nome: Criar Sequencia de Boas-vindas
+descricao: Desenvolver sequencia de emails de boas-vindas para novos clientes
+agente: onboarding-specialist
+comando: /boas-vindas
+versao: "1.0"
+categoria: onboarding
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: produto
+      pergunta: "Qual o produto/servico?"
+      tipo: texto
+      exemplo: "Plataforma de gestao financeira"
+
+    - nome: objetivo_principal
+      pergunta: "Qual o principal objetivo que o cliente quer alcancar?"
+      tipo: texto
+      exemplo: "Organizar financas e ter visao clara do fluxo de caixa"
+
+    - nome: primeiros_passos
+      pergunta: "Quais os 3 primeiros passos mais importantes?"
+      tipo: lista
+      exemplo:
+        - "Conectar conta bancaria"
+        - "Categorizar primeiras transacoes"
+        - "Ver dashboard financeiro"
+
+  opcionais:
+    - nome: tom_voz
+      pergunta: "Qual o tom de voz da comunicacao?"
+      tipo: escolha
+      opcoes:
+        - Profissional e formal
+        - Amigavel e acessivel
+        - Tecnico e direto
+        - Inspirador e motivacional
+      exemplo: "Amigavel e acessivel"
+
+    - nome: duracao_sequencia
+      pergunta: "Quantos dias deve durar a sequencia?"
+      tipo: numero
+      exemplo: "14"
+
+    - nome: frequencia
+      pergunta: "Qual a frequencia dos emails?"
+      tipo: texto
+      exemplo: "A cada 2-3 dias"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Definir objetivos da sequencia"
+    detalhes:
+      - "Objetivo de cada email"
+      - "Acao esperada do cliente"
+      - "Progressao logica"
+      - "Conexao com ativacao"
+
+  - numero: 2
+    acao: "Estruturar sequencia"
+    detalhes:
+      - "Numero de emails"
+      - "Timing de cada um"
+      - "Gatilhos de envio"
+      - "Condicoes de saida"
+
+  - numero: 3
+    acao: "Criar conteudo"
+    detalhes:
+      - "Assunto atrativo"
+      - "Corpo do email"
+      - "Call to action"
+      - "Recursos complementares"
+
+  - numero: 4
+    acao: "Definir logica de automacao"
+    detalhes:
+      - "Triggers de entrada"
+      - "Condicoes de envio"
+      - "Branches por comportamento"
+      - "Exit conditions"
+
+# ============================================
+# SAIDA
+# ============================================
+
+saida:
+  formato: markdown
+  template: |
+    # Sequencia de Boas-vindas
+
+    ## Produto: {{produto}}
+
+    ---
+
+    ## Visao Geral
+
+    | Elemento | Descricao |
+    |----------|-----------|
+    | **Objetivo** | Guiar novos clientes ate o primeiro valor |
+    | **Duracao** | {{duracao_sequencia}} dias |
+    | **Emails** | {{numero_emails}} emails |
+    | **Frequencia** | {{frequencia}} |
+    | **Tom** | {{tom_voz}} |
+
+    ---
+
+    ## Fluxo da Sequencia
+
+    ```
+    [Signup] → Email 1 → Email 2 → Email 3 → Email 4 → Email 5 → [Ativado]
+       ↓         ↓         ↓         ↓         ↓         ↓
+      D0        D0        D2        D4        D7        D10
+    ```
+
+    ---
+
+    ## Email 1: Boas-vindas Imediato
+
+    **Timing:** Imediato apos signup
+    **Objetivo:** Criar empolgacao e dar primeiro passo
+
+    ### Assunto
+    > {{assunto_email_1}}
+
+    ### Corpo
+
+    ```
+    Ola {{nome}},
+
+    Seja muito bem-vindo(a) a {{produto}}!
+
+    Estamos animados em te ajudar a {{objetivo_principal}}.
+
+    Para comecar agora mesmo, seu primeiro passo e simples:
+
+    👉 {{primeiro_passo}}
+
+    [BOTAO: {{cta_email_1}}]
+
+    Esse unico passo vai te colocar no caminho certo.
+
+    Qualquer duvida, estamos aqui!
+
+    {{assinatura}}
+
+    P.S. {{ps_email_1}}
+    ```
+
+    ### Metricas
+    - Open rate esperado: >50%
+    - Click rate esperado: >20%
+
+    ---
+
+    ## Email 2: Primeiro Passo
+
+    **Timing:** D+2 (se nao completou passo 1) OU D+1 (se completou)
+    **Objetivo:** Garantir primeiro passo completado
+
+    ### Versao A: Nao completou passo 1
+
+    **Assunto:**
+    > {{assunto_email_2a}}
+
+    **Corpo:**
+    ```
+    Ola {{nome}},
+
+    Notei que voce ainda nao deu o primeiro passo.
+
+    Sei que comecar algo novo pode parecer muito,
+    mas prometo: leva apenas {{tempo_passo_1}}.
+
+    {{beneficio_passo_1}}
+
+    [BOTAO: {{cta_email_2a}}]
+
+    Se estiver com alguma dificuldade, me conta!
+    Posso te ajudar.
+
+    {{assinatura}}
+    ```
+
+    ### Versao B: Completou passo 1
+
+    **Assunto:**
+    > {{assunto_email_2b}}
+
+    **Corpo:**
+    ```
+    Ola {{nome}},
+
+    Parabens por dar o primeiro passo! 🎉
+
+    Agora que voce {{confirmacao_passo_1}}, o proximo
+    passo e ainda mais interessante:
+
+    👉 {{segundo_passo}}
+
+    [BOTAO: {{cta_email_2b}}]
+
+    Voce esta no caminho certo!
+
+    {{assinatura}}
+    ```
+
+    ---
+
+    ## Email 3: Valor em Acao
+
+    **Timing:** D+4
+    **Objetivo:** Mostrar valor concreto
+
+    ### Assunto
+    > {{assunto_email_3}}
+
+    ### Corpo
+
+    ```
+    Ola {{nome}},
+
+    Sabe o que clientes como voce conseguem com {{produto}}?
+
+    {{historia_sucesso}}
+
+    Para voce chegar la tambem, o proximo passo e:
+
+    👉 {{terceiro_passo}}
+
+    [BOTAO: {{cta_email_3}}]
+
+    {{motivacao}}
+
+    {{assinatura}}
+
+    P.S. {{ps_email_3}}
+    ```
+
+    ---
+
+    ## Email 4: Superando Obstaculos
+
+    **Timing:** D+7
+    **Objetivo:** Antecipar e resolver duvidas
+
+    ### Assunto
+    > {{assunto_email_4}}
+
+    ### Corpo
+
+    ```
+    Ola {{nome}},
+
+    Nessa primeira semana, e normal ter algumas duvidas.
+
+    As 3 perguntas mais comuns que recebemos:
+
+    ❓ {{pergunta_1}}
+    → {{resposta_1}}
+
+    ❓ {{pergunta_2}}
+    → {{resposta_2}}
+
+    ❓ {{pergunta_3}}
+    → {{resposta_3}}
+
+    Se sua duvida nao esta aqui:
+    - [Central de Ajuda](link)
+    - [Agendar call com especialista](link)
+
+    Estamos aqui para ajudar!
+
+    {{assinatura}}
+    ```
+
+    ---
+
+    ## Email 5: Celebracao ou Resgate
+
+    **Timing:** D+10
+    **Objetivo:** Celebrar ativacao ou resgatar
+
+    ### Versao A: Cliente ativado
+
+    **Assunto:**
+    > {{assunto_email_5a}}
+
+    **Corpo:**
+    ```
+    Ola {{nome}},
+
+    Voce conseguiu! 🎉
+
+    Em apenas {{dias_ativacao}} dias, voce:
+    {{lista_conquistas}}
+
+    Agora que voce domina o basico, que tal explorar:
+    {{proximo_nivel}}
+
+    [BOTAO: {{cta_email_5a}}]
+
+    Continue assim!
+
+    {{assinatura}}
+    ```
+
+    ### Versao B: Cliente nao ativado
+
+    **Assunto:**
+    > {{assunto_email_5b}}
+
+    **Corpo:**
+    ```
+    Ola {{nome}},
+
+    Percebi que voce ainda nao teve a chance de
+    explorar tudo que {{produto}} oferece.
+
+    Entendo que a correria do dia a dia atrapalha.
+
+    Que tal agendarmos 15 minutos para eu te mostrar
+    o caminho mais rapido para {{objetivo_principal}}?
+
+    [BOTAO: Agendar Horario]
+
+    Estou aqui para ajudar!
+
+    {{assinatura}}
+
+    P.S. Se preferir, responda esse email me contando
+    o que esta te impedindo. Prometo ajudar!
+    ```
+
+    ---
+
+    ## Logica de Automacao
+
+    ### Diagrama
+
+    ```
+    [Signup]
+        │
+        ▼
+    [Email 1: Boas-vindas]
+        │
+        ├── Completou passo 1? ──→ [Email 2B: Proximo passo]
+        │                              │
+        └── Nao completou ──────→ [Email 2A: Lembrete]
+                                       │
+                                       ▼
+                              [Espera D+2]
+                                       │
+                                       ▼
+                              [Email 3: Valor]
+                                       │
+                                       ▼
+                              [Email 4: FAQ]
+                                       │
+                                       ├── Ativado? ──→ [Email 5A: Celebrar]
+                                       │
+                                       └── Nao ──────→ [Email 5B: Resgate]
+    ```
+
+    ### Exit Conditions
+
+    O cliente sai da sequencia se:
+    - Completou ativacao (score >80)
+    - Cancelou/churned
+    - Pediu para sair
+    - Passou 30 dias
+
+    ---
+
+    ## Configuracao Tecnica
+
+    ### Trigger de Entrada
+    ```
+    evento: 'user_signup'
+    condicao: status = 'active'
+    ```
+
+    ### Tags
+    - `onboarding_sequence`
+    - `new_customer`
+    - `{{segmento}}`
+
+    ### Personalizacao
+    | Variavel | Fonte | Fallback |
+    |----------|-------|----------|
+    | {{nome}} | CRM | "Voce" |
+    | {{empresa}} | CRM | "" |
+    | {{plano}} | Sistema | "seu plano" |
+
+    ---
+
+    ## Metricas da Sequencia
+
+    | Email | Open Rate | Click Rate | Conversao |
+    |-------|-----------|------------|-----------|
+    | Email 1 | Meta: 50% | Meta: 20% | Passo 1 |
+    | Email 2 | Meta: 40% | Meta: 15% | Passo 2 |
+    | Email 3 | Meta: 35% | Meta: 12% | Passo 3 |
+    | Email 4 | Meta: 30% | Meta: 10% | FAQ view |
+    | Email 5 | Meta: 35% | Meta: 15% | Ativacao/Call |
+
+    ### KPIs Gerais
+    - Taxa de ativacao da sequencia: Meta >40%
+    - Unsubscribe rate: Meta <2%
+    - Reply rate: Meta >5%
+
+    ---
+
+    ## Proximos Passos
+
+    1. [ ] Aprovar conteudo dos emails
+    2. [ ] Configurar automacao na ferramenta
+    3. [ ] Testar fluxo completo
+    4. [ ] Configurar tracking
+    5. [ ] Lancar para cohort piloto
+    6. [ ] Monitorar e otimizar
+
+  arquivo: output/customer-success/playbooks/sequencia-boas-vindas-{{slug_produto}}.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "Cada email tem objetivo claro?"
+  - "Os CTAs sao especificos e acionaveis?"
+  - "A progressao faz sentido logico?"
+  - "O tom e consistente com a marca?"
+  - "As versoes A/B estao completas?"
+
+# ============================================
+# PROXIMOS PASSOS
+# ============================================
+
+proximos_passos:
+  - tarefa: criar-playbook-onboarding
+    se: "Precisa playbook completo"
+  - tarefa: criar-checklist-ativacao
+    se: "Precisa definir marcos de ativacao"

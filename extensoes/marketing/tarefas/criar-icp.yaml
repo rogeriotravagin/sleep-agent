@@ -1,0 +1,126 @@
+# Tarefa: Construcao de ICP
+
+id: criar-icp
+nome: Construir ICP (Ideal Customer Profile)
+descricao: Definir o perfil exato do cliente ideal
+agente: estrategista
+comando: /icp
+
+versao: "1.0"
+categoria: publico
+
+# Baseado em: Dan Kennedy, Alex Hormozi
+
+entradas:
+  obrigatorias:
+    - nome: produto
+      pergunta: "O que voce vende?"
+      tipo: texto
+
+    - nome: problema
+      pergunta: "Qual problema voce resolve?"
+      tipo: texto
+
+    - nome: melhores_clientes
+      pergunta: "Se ja tem clientes, descreva seus 3 melhores (os que mais gostam de voce)"
+      tipo: texto
+
+  opcionais:
+    - nome: piores_clientes
+      pergunta: "Quem voce NAO quer como cliente?"
+      tipo: texto
+
+passos:
+  - numero: 1
+    acao: "Coletar informacoes"
+
+  - numero: 2
+    acao: "Aplicar filtros de ICP"
+    criterios:
+      - Tem o problema que voce resolve?
+      - Reconhece que tem o problema?
+      - Tem capacidade de pagar?
+      - Tem urgencia em resolver?
+      - E facil de alcancar?
+      - Gera bons resultados para voce?
+
+  - numero: 3
+    acao: "Definir caracteristicas"
+    categorias:
+      - Demografico
+      - Profissional
+      - Comportamental
+      - Situacional
+
+  - numero: 4
+    acao: "Aplicar perguntas de Dan Kennedy"
+    perguntas:
+      - "Se pudesse atender apenas UM tipo de cliente, qual seria?"
+      - "O que seus melhores clientes tem em comum?"
+      - "Quem voce recusaria mesmo se quisesse pagar?"
+
+saida:
+  formato: markdown
+  template: |
+    # ICP: Cliente Ideal para [Produto]
+
+    ## Resumo em Uma Frase
+    [Descricao concisa do cliente ideal]
+
+    ## Criterios de Qualificacao
+
+    ### Tem o Problema
+    [Descricao especifica do problema]
+
+    ### Reconhece o Problema
+    [Como sabemos que reconhece]
+
+    ### Capacidade de Pagar
+    - Renda minima:
+    - Cargo/posicao:
+    - Orcamento disponivel:
+
+    ### Urgencia
+    [O que indica urgencia em resolver]
+
+    ### Facilidade de Alcance
+    - Onde estao:
+    - Como encontra-los:
+
+    ## Perfil Detalhado
+
+    ### Demografico
+    - Idade:
+    - Genero:
+    - Localizacao:
+    - Renda:
+    - Escolaridade:
+
+    ### Profissional
+    - Cargo:
+    - Industria:
+    - Tamanho da empresa:
+    - Anos de experiencia:
+
+    ### Comportamental
+    - Onde passa tempo online:
+    - O que consome:
+    - Como toma decisoes:
+    - Influenciadores que segue:
+
+    ### Situacional
+    - Momento de vida:
+    - Gatilhos de compra:
+    - Eventos que desencadeiam decisao:
+
+    ## Quem NAO e ICP
+    [Caracteristicas de quem evitar]
+
+    ## Onde Encontrar
+    1. [Canal/Plataforma]
+    2. [Canal/Plataforma]
+    3. [Canal/Plataforma]
+
+proximos_passos:
+  - Criar Persona detalhada (/persona)
+  - Mapear Jornada (/jornada)

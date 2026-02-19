@@ -1,0 +1,302 @@
+# ============================================
+# TAREFA: Criar Plano de Aula
+# ============================================
+
+id: criar-aula
+nome: Criar Plano de Aula Completo
+descricao: Criar plano detalhado de aula com estrutura, conteúdo e atividades
+agente: conteudista
+comando: /criar-aula
+versao: "1.0"
+categoria: conteudo
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: titulo
+      pergunta: "Qual o título da aula?"
+      tipo: texto
+      exemplo: "Introdução ao Funil de Vendas"
+
+    - nome: objetivo
+      pergunta: "Qual o objetivo de aprendizagem? (O que o aluno será capaz de fazer?)"
+      tipo: texto
+      exemplo: "Identificar as etapas do funil de vendas e sua função"
+
+    - nome: conteudo_principal
+      pergunta: "Quais os pontos principais a serem abordados?"
+      tipo: lista
+      exemplo:
+        - "O que é funil de vendas"
+        - "As 4 etapas (atração, interesse, desejo, ação)"
+        - "Métricas de cada etapa"
+
+  opcionais:
+    - nome: duracao
+      pergunta: "Qual a duração da aula?"
+      tipo: texto
+      padrao: "15-20 minutos"
+
+    - nome: formato
+      pergunta: "Qual o formato principal?"
+      tipo: escolha
+      opcoes:
+        - "Vídeo-aula"
+        - "Aula expositiva"
+        - "Workshop prático"
+        - "Estudo de caso"
+      padrao: "Vídeo-aula"
+
+    - nome: nivel_aluno
+      pergunta: "Qual o nível do aluno?"
+      tipo: escolha
+      opcoes:
+        - "Iniciante"
+        - "Intermediário"
+        - "Avançado"
+      padrao: "Iniciante"
+
+    - nome: exemplos_contexto
+      pergunta: "Qual o contexto dos exemplos? (área do aluno)"
+      tipo: texto
+      exemplo: "E-commerce de moda feminina"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Estruturar abertura (9 Eventos de Gagné)"
+    detalhes:
+      - Criar hook para ganhar atenção
+      - Definir como apresentar objetivo
+      - Planejar ativação de conhecimento prévio
+
+  - numero: 2
+    acao: "Desenvolver conteúdo"
+    detalhes:
+      - Organizar conceitos em blocos
+      - Criar exemplos para cada conceito
+      - Identificar analogias úteis
+      - Planejar demonstrações
+
+  - numero: 3
+    acao: "Criar momentos de interação"
+    detalhes:
+      - Perguntas de reflexão
+      - Pausas para prática
+      - Verificações de entendimento
+
+  - numero: 4
+    acao: "Planejar fechamento"
+    detalhes:
+      - Resumo dos pontos-chave
+      - Exercício de aplicação
+      - Conexão com próxima aula
+
+  - numero: 5
+    acao: "Definir materiais"
+    detalhes:
+      - Slides/visuais necessários
+      - Material de apoio
+      - Exercício da aula
+
+# ============================================
+# SAÍDA
+# ============================================
+
+saida:
+  formato: markdown
+  local: output/aulas/
+  template: |
+    # Plano de Aula: {{titulo}}
+
+    ## Informações Gerais
+
+    | Item | Descrição |
+    |------|-----------|
+    | **Duração** | {{duracao}} |
+    | **Formato** | {{formato}} |
+    | **Nível** | {{nivel_aluno}} |
+
+    ### Objetivo de Aprendizagem
+    > Ao final desta aula, o aluno será capaz de {{objetivo}}.
+
+    ---
+
+    ## Estrutura da Aula
+
+    ### 1. ABERTURA (2-3 min)
+
+    #### Hook (Ganhar Atenção)
+    ```
+    [Pergunta provocativa ou estatística]
+
+    Exemplo: "Você sabia que 79% dos leads nunca se tornam clientes?
+    Hoje vou mostrar por que isso acontece e como evitar."
+    ```
+
+    #### Objetivo (Informar)
+    ```
+    "Nesta aula, você vai aprender [objetivo em linguagem simples].
+    Ao final, você será capaz de [resultado prático]."
+    ```
+
+    #### Ativação (Conhecimento Prévio)
+    ```
+    "Antes de começar, pense: [pergunta que conecta com o que já sabe]"
+    ```
+
+    ---
+
+    ### 2. DESENVOLVIMENTO (10-15 min)
+
+    #### Bloco 1: [Conceito 1]
+    **Tempo:** X minutos
+
+    **Conceito:**
+    [Explicação clara e direta]
+
+    **Exemplo:**
+    [Caso prático ilustrativo]
+
+    **Visual:**
+    [Descrição do que mostrar na tela]
+
+    ---
+
+    #### Bloco 2: [Conceito 2]
+    **Tempo:** X minutos
+
+    **Conceito:**
+    [Explicação]
+
+    **Exemplo:**
+    [Caso prático]
+
+    **Interação:**
+    ```
+    "Pause o vídeo e pense: [pergunta para reflexão]"
+    ```
+
+    ---
+
+    #### Bloco 3: [Conceito 3]
+    **Tempo:** X minutos
+
+    **Conceito:**
+    [Explicação]
+
+    **Demonstração:**
+    [Passo a passo do que mostrar]
+
+    **Erro comum:**
+    "Muita gente [erro]. Evite isso porque [razão]."
+
+    ---
+
+    ### 3. PRÁTICA GUIADA (3-5 min)
+
+    #### Exercício
+    ```
+    "Agora é sua vez. [Instrução clara do que fazer]"
+
+    Passo 1: [Ação]
+    Passo 2: [Ação]
+    Passo 3: [Ação]
+    ```
+
+    ---
+
+    ### 4. FECHAMENTO (2-3 min)
+
+    #### Resumo
+    ```
+    "Vamos recapitular os 3 pontos principais:
+
+    1. [Ponto 1]
+    2. [Ponto 2]
+    3. [Ponto 3]
+
+    O mais importante: [síntese em uma frase]"
+    ```
+
+    #### Exercício Pós-Aula
+    ```
+    "Seu desafio: [tarefa específica para aplicar]"
+    ```
+
+    #### Teaser
+    ```
+    "Na próxima aula, vamos ver [preview do próximo tema].
+    Isso vai permitir que você [benefício]."
+    ```
+
+    ---
+
+    ## Materiais Necessários
+
+    ### Visuais/Slides
+    - [ ] Slide 1: [Descrição]
+    - [ ] Slide 2: [Descrição]
+    - [ ] Slide 3: [Descrição]
+
+    ### Exemplos a Preparar
+    - [ ] [Exemplo 1]
+    - [ ] [Exemplo 2]
+
+    ### Material de Apoio
+    - [ ] [Checklist/Template/Resumo]
+
+    ---
+
+    ## Pontos de Verificação
+
+    Durante a aula, verificar se o aluno:
+    - [ ] Entendeu o conceito principal
+    - [ ] Consegue identificar exemplos
+    - [ ] Sabe quando aplicar
+    - [ ] Conhece erros comuns a evitar
+
+    ---
+
+    ## Notas para Gravação/Apresentação
+
+    - Tom: [Conversacional/Formal/Energético]
+    - Ritmo: [Pausado/Médio/Dinâmico]
+    - Ênfases: [Momentos para destacar]
+    - Cuidados: [O que evitar]
+
+# ============================================
+# CONHECIMENTO UTILIZADO
+# ============================================
+
+conhecimento:
+  - conhecimento/design-instrucional.md
+  - conhecimento/roteiros-videoaulas.md
+  - conhecimento/engajamento-alunos.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "O objetivo está claro e é alcançável na duração?"
+  - "O hook captura atenção nos primeiros 30 segundos?"
+  - "Cada conceito tem exemplo prático?"
+  - "Há interações a cada 3-5 minutos?"
+  - "O resumo tem no máximo 3 pontos?"
+  - "O exercício é aplicável imediatamente?"
+
+# ============================================
+# PRÓXIMOS PASSOS SUGERIDOS
+# ============================================
+
+proximos_passos:
+  - "/criar-roteiro - Criar roteiro para vídeo"
+  - "/criar-exercicio - Detalhar exercícios"
+  - "/criar-apresentacao - Criar slides"

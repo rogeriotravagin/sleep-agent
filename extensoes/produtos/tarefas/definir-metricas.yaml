@@ -1,0 +1,235 @@
+# ============================================
+# TAREFA: Definir Metricas de Produto
+# ============================================
+
+id: definir-metricas
+nome: Definir North Star e Metricas
+comando: /definir-metricas
+agente: delivery-manager
+fase: delivery
+
+descricao: |
+  Definir framework de metricas incluindo
+  North Star Metric e funil AARRR.
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: nome_produto
+      descricao: Nome do produto
+      tipo: texto
+
+    - nome: tipo_produto
+      descricao: Tipo de produto (SaaS, E-commerce, etc)
+      tipo: texto
+
+    - nome: valor_principal
+      descricao: Valor principal entregue ao usuario
+      tipo: texto
+
+  opcionais:
+    - nome: metricas_atuais
+      descricao: Metricas ja acompanhadas
+      tipo: lista
+
+    - nome: ferramentas_analytics
+      descricao: Ferramentas disponiveis
+      tipo: lista
+
+# ============================================
+# PERGUNTAS GUIA
+# ============================================
+
+perguntas:
+  - "Qual o tipo do produto? (SaaS, E-commerce, etc)"
+  - "Qual o valor principal que entrega aos usuarios?"
+  - "Que metricas ja sao acompanhadas hoje?"
+  - "Quais ferramentas de analytics estao disponiveis?"
+  - "Qual o modelo de negocio? (Subscription, one-time, freemium)"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    nome: "Identificar Valor Central"
+    descricao: "Entender o valor principal do produto"
+    acoes:
+      - Definir valor entregue ao usuario
+      - Identificar momento de valor
+      - Conectar com modelo de negocio
+
+  - numero: 2
+    nome: "Definir North Star"
+    descricao: "Escolher metrica principal"
+    acoes:
+      - Gerar candidatas a NSM
+      - Avaliar criterios
+      - Selecionar e documentar
+
+  - numero: 3
+    nome: "Mapear Funil AARRR"
+    descricao: "Definir metricas por etapa"
+    acoes:
+      - Acquisition metricas
+      - Activation metricas
+      - Retention metricas
+      - Revenue metricas
+      - Referral metricas
+
+  - numero: 4
+    nome: "Identificar Inputs"
+    descricao: "Definir metricas de input da NSM"
+    acoes:
+      - Breadth (quantos usuarios)
+      - Depth (quanto engajamento)
+      - Frequency (quao frequente)
+
+  - numero: 5
+    nome: "Definir Targets"
+    descricao: "Estabelecer metas e benchmarks"
+    acoes:
+      - Pesquisar benchmarks do setor
+      - Definir targets realistas
+      - Estabelecer alertas
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Framework de Metricas - {{nome_produto}}
+
+  ## Valor Central
+  {{descricao_valor}}
+
+  ---
+
+  ## North Star Metric
+
+  ### Definicao
+  **Metrica:** {{north_star}}
+  **Descricao:** {{nsm_descricao}}
+  **Formula:** {{nsm_formula}}
+
+  ### Por que esta metrica?
+  {{justificativa_nsm}}
+
+  ### Inputs da North Star
+  | Input | Metrica | Atual | Target |
+  |-------|---------|-------|--------|
+  | Breadth | {{breadth_metrica}} | {{breadth_atual}} | {{breadth_target}} |
+  | Depth | {{depth_metrica}} | {{depth_atual}} | {{depth_target}} |
+  | Frequency | {{freq_metrica}} | {{freq_atual}} | {{freq_target}} |
+
+  ---
+
+  ## Funil AARRR
+
+  ### Acquisition (Aquisicao)
+  | Metrica | Descricao | Atual | Target |
+  |---------|-----------|-------|--------|
+  | {{acq_1}} | {{acq_1_desc}} | {{acq_1_atual}} | {{acq_1_target}} |
+  | {{acq_2}} | {{acq_2_desc}} | {{acq_2_atual}} | {{acq_2_target}} |
+
+  ### Activation (Ativacao)
+  | Metrica | Descricao | Atual | Target |
+  |---------|-----------|-------|--------|
+  | {{act_1}} | {{act_1_desc}} | {{act_1_atual}} | {{act_1_target}} |
+  | {{act_2}} | {{act_2_desc}} | {{act_2_atual}} | {{act_2_target}} |
+
+  **Aha Moment:** {{aha_moment}}
+
+  ### Retention (Retencao)
+  | Metrica | Descricao | Atual | Target |
+  |---------|-----------|-------|--------|
+  | {{ret_1}} | {{ret_1_desc}} | {{ret_1_atual}} | {{ret_1_target}} |
+  | {{ret_2}} | {{ret_2_desc}} | {{ret_2_atual}} | {{ret_2_target}} |
+
+  ### Revenue (Receita)
+  | Metrica | Descricao | Atual | Target |
+  |---------|-----------|-------|--------|
+  | {{rev_1}} | {{rev_1_desc}} | {{rev_1_atual}} | {{rev_1_target}} |
+  | {{rev_2}} | {{rev_2_desc}} | {{rev_2_atual}} | {{rev_2_target}} |
+
+  ### Referral (Indicacao)
+  | Metrica | Descricao | Atual | Target |
+  |---------|-----------|-------|--------|
+  | {{ref_1}} | {{ref_1_desc}} | {{ref_1_atual}} | {{ref_1_target}} |
+  | {{ref_2}} | {{ref_2_desc}} | {{ref_2_atual}} | {{ref_2_target}} |
+
+  ---
+
+  ## Unit Economics
+
+  | Metrica | Valor | Benchmark |
+  |---------|-------|-----------|
+  | CAC | {{cac}} | {{cac_bench}} |
+  | LTV | {{ltv}} | {{ltv_bench}} |
+  | LTV:CAC | {{ltv_cac}} | > 3:1 |
+  | Payback | {{payback}} | < 12 meses |
+
+  ---
+
+  ## Dashboard Recomendado
+
+  ### Nivel Executivo
+  - North Star Metric
+  - MRR/ARR
+  - Churn Rate
+  - NPS
+
+  ### Nivel Time de Produto
+  - Funil AARRR completo
+  - Retention curves por cohort
+  - Feature adoption
+
+  ---
+
+  ## Alertas Configurar
+
+  | Metrica | Threshold | Acao |
+  |---------|-----------|------|
+  | {{alerta_1_metrica}} | {{alerta_1_threshold}} | {{alerta_1_acao}} |
+  | {{alerta_2_metrica}} | {{alerta_2_threshold}} | {{alerta_2_acao}} |
+
+  ---
+
+  ## Ferramentas
+
+  | Tipo | Ferramenta | Uso |
+  |------|------------|-----|
+  | Analytics | {{tool_analytics}} | {{uso_analytics}} |
+  | Experimentation | {{tool_exp}} | {{uso_exp}} |
+  | Feedback | {{tool_feedback}} | {{uso_feedback}} |
+
+  ---
+  *Criado em: {{data}}*
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+qualidade:
+  criterios:
+    - "North Star expressa valor ao usuario?"
+    - "NSM e mensuravel e acionavel?"
+    - "Funil AARRR esta completo?"
+    - "Targets sao baseados em dados/benchmarks?"
+    - "Alertas estao configurados?"
+
+  validacao:
+    - "Time consegue acompanhar metricas?"
+    - "Ferramentas estao disponiveis?"
+
+# ============================================
+# OUTPUT
+# ============================================
+
+output:
+  arquivo: "metricas-produto.md"
+  pasta: "output/{{produto}}/produtos/metricas/"

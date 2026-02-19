@@ -1,0 +1,339 @@
+# Extensao: Marketing
+# Versao: 2.0 - Framework Ralph de Execucao
+
+nome: Marketing
+slug: marketing
+descricao: Framework completo de marketing - da pesquisa a execucao
+versao: "2.0"
+status: ativo
+
+comando: /marketing
+
+mensagem_ativacao: |
+  **Sleep Agent - Extensao Marketing v2.0**
+
+  Framework completo baseado nas maiores referencias mundiais:
+  - Alex Hormozi ($100M Offers)
+  - Russell Brunson (ClickFunnels)
+  - Stefan Georgi (RMBC Method)
+  - Andre Chaperon (Soap Opera Sequence)
+  - E mais 20+ especialistas
+
+  **Agentes Disponiveis:**
+  - `@mkt-copy` - Copywriter (headlines, emails, paginas)
+  - `@mkt-estrategia` - Estrategista (pesquisa, oferta, posicionamento)
+  - `@mkt-trafego` - Trafego Pago (anuncios, campanhas)
+
+  **Workflows Completos:**
+  - `/oferta-completa` - Do zero ao lancamento (7 fases)
+  - `/lancamento` - Preparar lancamento
+  - `/campanha` - Criar campanha
+
+  **Tarefas Rapidas:**
+  - `/pesquisa` - Pesquisa de mercado profunda
+  - `/icp` - Definir cliente ideal
+  - `/persona` - Criar persona
+  - `/criar-oferta` - Construir oferta (Metodo Hormozi)
+  - `/criar-headline` - Headlines que convertem
+  - `/criar-email` - Emails de venda
+  - `/sequencia-email` - Sequencias completas
+  - `/criar-anuncio` - Anuncios de trafego
+
+  **Email Builder (Mautic 5):**
+  - `@mkt-email-builder` - Agente de emails HTML
+  - `/criar-email-mautic` - Email HTML pronto pro Mautic
+  - `/sequencia-mautic` - Sequencia de emails pro Mautic
+
+  O que voce gostaria de fazer?
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+agentes:
+  - id: mkt-copywriter
+    arquivo: agentes/MKT-COPYWRITER.md
+    comando: "@mkt-copy"
+    maturidade: 3  # Completo
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: true
+      exemplos: true
+      gates: true
+    especialidades:
+      - Headlines e titulos
+      - Emails de venda
+      - Paginas de vendas
+      - Bullets e fascinations
+      - VSLs e scripts
+
+  - id: mkt-estrategista
+    arquivo: agentes/MKT-ESTRATEGISTA.md
+    comando: "@mkt-estrategia"
+    maturidade: 2  # Intermediario
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: false
+      exemplos: false
+      gates: false
+    especialidades:
+      - Pesquisa de mercado
+      - Definicao de ICP e Persona
+      - Posicionamento
+      - Construcao de ofertas
+      - Funis de vendas
+
+  - id: mkt-trafego
+    arquivo: agentes/MKT-TRAFEGO.md
+    comando: "@mkt-trafego"
+    maturidade: 2  # Intermediario
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: false
+      exemplos: false
+      gates: false
+    especialidades:
+      - Meta Ads
+      - Google Ads
+      - YouTube Ads
+      - Estrutura de campanhas
+      - Otimizacao
+
+  - id: mkt-email-builder
+    arquivo: agentes/MKT-EMAIL-BUILDER.md
+    comando: "@mkt-email-builder"
+    maturidade: 3  # Completo
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: true
+      exemplos: true
+      gates: true
+    especialidades:
+      - Emails HTML inline CSS para Mautic 5
+      - Templates responsivos
+      - Personalizacao com tokens Mautic
+      - Deliverability
+      - Sequencias automatizadas
+    plataforma_primaria: mautic-5
+
+# =====================================================
+# TAREFAS
+# =====================================================
+
+tarefas:
+  # Fase 1: Descoberta
+  - id: pesquisa-mercado
+    arquivo: tarefas/pesquisa-mercado.yaml
+    comando: /pesquisa
+    fase: descoberta
+
+  # Fase 2: Publico
+  - id: criar-icp
+    arquivo: tarefas/criar-icp.yaml
+    comando: /icp
+    fase: publico
+
+  - id: criar-persona
+    arquivo: tarefas/criar-persona.yaml
+    comando: /persona
+    fase: publico
+
+  # Fase 4: Oferta
+  - id: criar-oferta
+    arquivo: tarefas/criar-oferta.yaml
+    comando: /criar-oferta
+    fase: oferta
+
+  # Fase 5: Copy
+  - id: criar-headline
+    arquivo: tarefas/criar-headline.yaml
+    comando: /criar-headline
+    fase: copy
+
+  - id: criar-email
+    arquivo: tarefas/criar-email.yaml
+    comando: /criar-email
+    fase: copy
+
+  - id: criar-sequencia-email
+    arquivo: tarefas/criar-sequencia-email.yaml
+    comando: /sequencia-email
+    fase: funil
+
+  # Email Builder (Mautic)
+  - id: criar-email-mautic
+    arquivo: workflows/email-mautic.yaml
+    comando: /criar-email-mautic
+    fase: copy
+    plataforma: mautic-5
+
+  - id: sequencia-mautic
+    arquivo: workflows/sequencia-email-mautic.yaml
+    comando: /sequencia-mautic
+    fase: funil
+    plataforma: mautic-5
+
+  # Fase 7: Trafego
+  - id: criar-anuncio
+    arquivo: tarefas/criar-anuncio.yaml
+    comando: /criar-anuncio
+    fase: trafego
+
+# =====================================================
+# WORKFLOWS
+# =====================================================
+
+workflows:
+  - id: oferta-completa
+    arquivo: workflows/oferta-completa.yaml
+    comando: /oferta-completa
+    descricao: Processo completo em 7 fases
+
+  - id: lancamento
+    arquivo: workflows/lancamento.yaml
+    comando: /lancamento
+    descricao: Preparar lancamento de produto
+
+  - id: campanha
+    arquivo: workflows/campanha.yaml
+    comando: /campanha
+    descricao: Criar campanha de marketing
+
+  - id: email-mautic
+    arquivo: workflows/email-mautic.yaml
+    comando: /criar-email-mautic
+    descricao: Criar email MJML para Mautic 5
+
+  - id: sequencia-email-mautic
+    arquivo: workflows/sequencia-email-mautic.yaml
+    comando: /sequencia-mautic
+    descricao: Criar sequencia de emails para Mautic 5
+
+# =====================================================
+# BASE DE CONHECIMENTO
+# =====================================================
+
+conhecimento:
+  # Frameworks e Tecnicas
+  - copywriting.md
+  - gatilhos.md
+  - formulas.md
+
+  # Referencias Mundiais
+  - mestres-copywriting.md
+  - funis-vendas.md
+  - email-marketing.md
+  - trafego-pago.md
+  - ofertas-irresistiveis.md
+
+  # Email Builder (Mautic)
+  - mautic-email-html.md
+
+exemplos:
+  - headline-exemplo.md
+  - email-exemplo.md
+
+# =====================================================
+# FRAMEWORK DE EXECUCAO (Ralph)
+# =====================================================
+
+framework_execucao:
+  arquivo: ../../core/FRAMEWORK-EXECUCAO.md
+
+  fases:
+    - numero: 1
+      nome: DESCOBERTA
+      tarefas: [pesquisa-mercado]
+      agente: estrategista
+
+    - numero: 2
+      nome: PUBLICO
+      tarefas: [criar-icp, criar-persona]
+      agente: estrategista
+
+    - numero: 3
+      nome: ESTRATEGIA
+      tarefas: [posicionamento, mecanismo-unico, big-idea]
+      agente: estrategista
+
+    - numero: 4
+      nome: OFERTA
+      tarefas: [criar-oferta]
+      agente: estrategista
+
+    - numero: 5
+      nome: COPY
+      tarefas: [criar-headline, criar-email, copy-vendas]
+      agente: copywriter
+
+    - numero: 6
+      nome: FUNIL
+      tarefas: [criar-sequencia-email]
+      agente: copywriter
+
+    - numero: 7
+      nome: TRAFEGO
+      tarefas: [criar-anuncio, estrutura-campanhas]
+      agente: trafego
+
+# =====================================================
+# REFERENCIAS INCLUIDAS
+# =====================================================
+
+referencias:
+  copywriting:
+    lendas:
+      - Gary Halbert (Boron Letters)
+      - Eugene Schwartz (Breakthrough Advertising)
+      - David Ogilvy (Pai da Publicidade)
+      - Claude Hopkins (Scientific Advertising)
+      - Dan Kennedy (No BS Marketing)
+      - Gary Bencivenga (Marketing Bullets)
+      - John Carlton (Simple Writing System)
+      - Joe Sugarman (24 Gatilhos)
+    modernos:
+      - Stefan Georgi (RMBC Method)
+      - Kevin Rogers (60-Second Sales Hook)
+      - Ray Edwards (PASTOR)
+      - Joanna Wiebe (Copyhackers)
+
+  funis:
+    - Russell Brunson (ClickFunnels, Value Ladder, Perfect Webinar)
+    - Jeff Walker (Product Launch Formula)
+    - Todd Brown (E5 Method)
+    - Pedro Adao (Challenge Secrets)
+    - Ryan Deiss (Customer Value Journey)
+
+  email:
+    - Andre Chaperon (Soap Opera Sequence)
+    - Ben Settle (Seinfeld Emails, Email Players)
+    - Frank Kern (4-Day Cash Machine, Mass Control)
+    - Daniel Throssell (Parallel Welcome Sequence)
+    - Ian Stanley (Hollywood Email Tricks)
+
+  trafego:
+    - Nicholas Kusmich (4M Framework)
+    - Depesh Mandalia (BPM Method)
+    - Perry Marshall (80/20 Google Ads)
+    - Tom Breeze (YouTube Ads, ADUCATE)
+    - Dennis Yu (Dollar a Day, 3x3 Grid)
+
+  ofertas:
+    - Alex Hormozi ($100M Offers, Equacao de Valor)
+    - Jay Abraham (Strategy of Preeminence)

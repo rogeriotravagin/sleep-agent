@@ -1,0 +1,180 @@
+# Tarefa: Pesquisa Profunda de Dados
+# Agente: Cientista de Dados
+
+id: pesquisa-profunda
+nome: Pesquisa Profunda
+comando: /pesquisar
+agente: cientista-dados
+fase: pesquisa
+
+descricao: |
+  Realiza uma pesquisa exaustiva sobre qualquer tema,
+  coletando dados de multiplas fontes, analisando padroes
+  e gerando insights acionaveis.
+
+# ============================================
+# ENTRADAS NECESSARIAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - id: tema
+      pergunta: "Qual o tema ou pergunta que voce quer pesquisar?"
+      exemplo: "Como funciona o mercado de EdTech no Brasil"
+
+    - id: objetivo
+      pergunta: "Qual o objetivo da pesquisa? Que decisao sera tomada?"
+      exemplo: "Decidir se entramos nesse mercado"
+
+  opcionais:
+    - id: escopo
+      pergunta: "Qual o escopo geografico e temporal?"
+      exemplo: "Brasil, ultimos 2 anos"
+
+    - id: fontes
+      pergunta: "Alguma fonte especifica que devo considerar?"
+      exemplo: "Relatorios da Bain, Statista"
+
+    - id: profundidade
+      pergunta: "Qual nivel de profundidade? (visao geral, detalhada, exaustiva)"
+      default: detalhada
+
+# ============================================
+# PROCESSO DE EXECUCAO
+# ============================================
+
+passos:
+  1_definicao:
+    nome: "Definir Escopo"
+    acoes:
+      - Entender claramente a pergunta de pesquisa
+      - Definir limites do escopo
+      - Identificar hipoteses iniciais
+    output: "Escopo claro da pesquisa"
+
+  2_coleta:
+    nome: "Coletar Dados"
+    acoes:
+      - Pesquisa em fontes secundarias (relatorios, artigos, dados publicos)
+      - Identificar dados quantitativos disponiveis
+      - Coletar exemplos e casos relevantes
+    output: "Dados brutos coletados"
+
+  3_analise:
+    nome: "Analisar Dados"
+    acoes:
+      - Organizar e categorizar informacoes
+      - Identificar padroes e tendencias
+      - Triangular fontes para validacao
+      - Quantificar quando possivel
+    output: "Analise estruturada"
+
+  4_sintese:
+    nome: "Sintetizar Insights"
+    acoes:
+      - Extrair principais descobertas
+      - Identificar implicacoes para o negocio
+      - Formular recomendacoes
+      - Documentar limitacoes
+    output: "Insights acionaveis"
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Pesquisa: {tema}
+
+  ## Resumo Executivo
+
+  **Pergunta de pesquisa:** {pergunta}
+
+  **Principais descobertas:**
+  1. {descoberta_1}
+  2. {descoberta_2}
+  3. {descoberta_3}
+
+  **Recomendacao principal:** {recomendacao}
+
+  ---
+
+  ## Contexto
+
+  ### Objetivo
+  {objetivo_da_pesquisa}
+
+  ### Metodologia
+  - Fontes consultadas: {lista_fontes}
+  - Periodo de analise: {periodo}
+  - Escopo: {escopo}
+
+  ---
+
+  ## Principais Descobertas
+
+  ### 1. {titulo_descoberta_1}
+
+  {descricao_detalhada}
+
+  **Evidencias:**
+  - {dado_1}
+  - {dado_2}
+
+  **Implicacao:** {implicacao}
+
+  ### 2. {titulo_descoberta_2}
+
+  [...]
+
+  ### 3. {titulo_descoberta_3}
+
+  [...]
+
+  ---
+
+  ## Analise Detalhada
+
+  {analise_profunda_com_dados}
+
+  ---
+
+  ## Limitacoes
+
+  - {limitacao_1}
+  - {limitacao_2}
+
+  ---
+
+  ## Recomendacoes
+
+  ### Acoes de Curto Prazo
+  1. {acao_1}
+  2. {acao_2}
+
+  ### Acoes de Medio Prazo
+  1. {acao_3}
+  2. {acao_4}
+
+  ---
+
+  ## Fontes
+
+  1. {fonte_1}
+  2. {fonte_2}
+  [...]
+
+# ============================================
+# QUALIDADE
+# ============================================
+
+gates_qualidade:
+  - Pergunta de pesquisa claramente respondida
+  - Minimo de 3 fontes diferentes trianguladas
+  - Dados quantitativos quando disponiveis
+  - Limitacoes explicitadas
+  - Recomendacoes acionaveis
+
+output:
+  formato: md
+  destino: output/{produto}/pesquisas/
+  nome_arquivo: pesquisa-{tema_slug}-{data}.md

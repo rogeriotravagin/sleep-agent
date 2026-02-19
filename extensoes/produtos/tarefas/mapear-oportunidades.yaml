@@ -1,0 +1,196 @@
+# ============================================
+# TAREFA: Mapear Oportunidades (OST)
+# ============================================
+
+id: mapear-oportunidades
+nome: Criar Opportunity Solution Tree
+comando: /mapear-oportunidades
+agente: discovery-lead
+fase: discovery
+
+descricao: |
+  Criar Opportunity Solution Tree conectando
+  outcome desejado com oportunidades identificadas
+  em entrevistas e solucoes potenciais.
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: outcome
+      descricao: Resultado desejado (metrica)
+      tipo: texto
+
+    - nome: contexto_produto
+      descricao: Contexto do produto/feature
+      tipo: texto
+
+  opcionais:
+    - nome: entrevistas
+      descricao: Resumo de entrevistas realizadas
+      tipo: texto
+
+    - nome: dados_uso
+      descricao: Dados de uso do produto
+      tipo: objeto
+
+# ============================================
+# PERGUNTAS GUIA
+# ============================================
+
+perguntas:
+  - "Qual o outcome desejado? (metrica que quer mover)"
+  - "Quais entrevistas foram feitas? (resumo)"
+  - "Quais dores/necessidades surgiram?"
+  - "Quais solucoes ja foram consideradas?"
+  - "Quais dados de uso temos disponiveis?"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    nome: "Definir Outcome"
+    descricao: "Clarificar resultado desejado"
+    acoes:
+      - Definir metrica principal
+      - Conectar com OKRs
+      - Estabelecer baseline e target
+
+  - numero: 2
+    nome: "Extrair Oportunidades"
+    descricao: "Identificar oportunidades de entrevistas"
+    acoes:
+      - Revisar notas de entrevistas
+      - Extrair dores e necessidades
+      - Categorizar oportunidades
+
+  - numero: 3
+    nome: "Organizar Arvore"
+    descricao: "Estruturar OST hierarquicamente"
+    acoes:
+      - Colocar outcome no topo
+      - Agrupar oportunidades relacionadas
+      - Identificar gaps
+
+  - numero: 4
+    nome: "Mapear Solucoes"
+    descricao: "Gerar solucoes para cada oportunidade"
+    acoes:
+      - Brainstorm 3+ solucoes por oportunidade
+      - Considerar variedade de abordagens
+      - Documentar assumptions
+
+  - numero: 5
+    nome: "Priorizar"
+    descricao: "Escolher oportunidade para explorar"
+    acoes:
+      - Avaliar impacto no outcome
+      - Considerar viabilidade
+      - Selecionar foco
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Opportunity Solution Tree
+
+  ## Outcome Desejado
+  **Metrica:** {{outcome}}
+  **Baseline:** {{baseline}}
+  **Target:** {{target}}
+  **Prazo:** {{prazo}}
+
+  ---
+
+  ## Arvore de Oportunidades
+
+  ```
+                      [{{outcome}}]
+                           |
+          +----------------+----------------+
+          |                |                |
+    [{{oport_1}}]   [{{oport_2}}]   [{{oport_3}}]
+          |                |                |
+      +---+---+        +---+---+        +---+---+
+      |       |        |       |        |       |
+   [Sol A] [Sol B]  [Sol C] [Sol D]  [Sol E] [Sol F]
+  ```
+
+  ---
+
+  ## Oportunidades Detalhadas
+
+  ### Oportunidade 1: {{oport_1}}
+
+  **Fonte:** {{fonte_1}}
+  **Frequencia:** Apareceu em {{n}} de {{total}} entrevistas
+  **Citacao:** "{{citacao_1}}"
+
+  **Solucoes Possiveis:**
+
+  | Solucao | Descricao | Assumptions |
+  |---------|-----------|-------------|
+  | A | {{sol_a_desc}} | {{sol_a_assumptions}} |
+  | B | {{sol_b_desc}} | {{sol_b_assumptions}} |
+
+  **Score de Priorizacao:**
+  - Impacto no outcome: [Alto/Medio/Baixo]
+  - Frequencia do problema: [Alta/Media/Baixa]
+  - Viabilidade: [Alta/Media/Baixa]
+
+  ---
+
+  ### Oportunidade 2: {{oport_2}}
+  [Mesmo formato]
+
+  ---
+
+  ### Oportunidade 3: {{oport_3}}
+  [Mesmo formato]
+
+  ---
+
+  ## Oportunidade Selecionada para Explorar
+
+  **Escolha:** {{oport_escolhida}}
+
+  **Justificativa:**
+  {{justificativa_escolha}}
+
+  **Proximos Passos:**
+  1. {{proximo_passo_1}}
+  2. {{proximo_passo_2}}
+  3. {{proximo_passo_3}}
+
+  ---
+  *Criado em: {{data}}*
+  *Baseado em {{n_entrevistas}} entrevistas*
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+qualidade:
+  criterios:
+    - "Outcome esta claramente definido com metrica?"
+    - "Oportunidades vieram de entrevistas reais?"
+    - "Ha 3+ solucoes por oportunidade?"
+    - "Assumptions estao documentadas?"
+    - "Ha priorizacao clara?"
+
+  validacao:
+    - "OST esta visual e compreensivel?"
+    - "Time concorda com priorizacao?"
+
+# ============================================
+# OUTPUT
+# ============================================
+
+output:
+  arquivo: "ost-{{feature}}.md"
+  pasta: "output/{{produto}}/produtos/discovery/"

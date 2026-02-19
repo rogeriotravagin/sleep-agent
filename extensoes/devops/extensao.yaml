@@ -1,0 +1,437 @@
+nome: DevOps
+slug: devops
+versao: "1.0"
+comando: /devops
+status: ativo
+descricao: |
+  Time de DevOps especializado em infraestrutura cloud, gerenciamento de servidores
+  e orquestracao de containers. Capacidade generica para qualquer provider, com
+  modulos especializados para Hetzner Cloud e Portainer/Docker Swarm.
+  Foco absoluto em seguranca, auditoria e melhores praticas.
+
+tipo: infraestrutura
+
+publico_alvo: |
+  Profissionais que precisam gerenciar servidores, containers e infraestrutura
+  cloud de forma segura. Tanto tecnicos quanto nao-tecnicos que precisam
+  provisionar, monitorar e manter ambientes de producao.
+
+problemas_resolvidos:
+  - Provisionar servidores cloud de forma segura e padronizada
+  - Gerenciar containers e stacks Docker via Portainer
+  - Manter seguranca de servidores e APIs
+  - Automatizar deploys e atualizacoes de stacks
+  - Monitorar saude de servicos e infraestrutura
+  - Configurar firewalls, SSH, SSL/TLS e redes
+  - Documentar infraestrutura de forma clara
+  - Backup e disaster recovery
+  - Gerenciar custos de infraestrutura cloud
+
+objetivo: |
+  Gerenciar infraestrutura cloud e containers com seguranca, automacao e
+  documentacao clara. Todas as operacoes seguem principio de menor privilegio,
+  auditoria completa e zero credenciais hardcoded.
+
+# ============================================================
+# SEGURANCA - REGRAS INVIOLAVEIS
+# ============================================================
+seguranca:
+  principios:
+    - "NUNCA armazenar credenciais em codigo, YAML ou markdown"
+    - "SEMPRE usar variaveis de ambiente para tokens e senhas"
+    - "SEMPRE validar SSL/TLS em chamadas de API"
+    - "SEMPRE usar principio de menor privilegio"
+    - "SEMPRE auditar operacoes destrutivas"
+    - "NUNCA executar operacoes destrutivas sem confirmacao explicita"
+    - "SEMPRE verificar .gitignore antes de commits"
+    - "NUNCA logar credenciais, tokens ou senhas em outputs"
+
+  variaveis_ambiente:
+    hetzner:
+      - HETZNER_API_TOKEN
+      - HETZNER_SSH_KEY_NAME
+      - HETZNER_FIREWALL_ID
+    portainer:
+      - PORTAINER_URL
+      - PORTAINER_USER
+      - PORTAINER_PASSWORD
+      - PORTAINER_API_TOKEN
+    genericas:
+      - SSH_PRIVATE_KEY_PATH
+      - BACKUP_ENCRYPTION_KEY
+      - ALERT_WEBHOOK_URL
+
+  auditoria:
+    - "Toda operacao destrutiva gera log com timestamp, usuario e acao"
+    - "Logs de auditoria NUNCA contem credenciais"
+    - "Historico de mudancas mantido em workspace/.devops/audit.log"
+
+# ============================================================
+# AGENTES
+# ============================================================
+agentes:
+  - id: devops-estrategista
+    arquivo: agentes/DEVOPS-ESTRATEGISTA.md
+    comando: "@devops-estrategista"
+    especialidades:
+      - Analise de infraestrutura e arquitetura
+      - Planejamento de capacidade e custos
+      - Comunicacao com nao-tecnicos
+      - Documentacao de infraestrutura
+      - Avaliacao de riscos
+      - Definicao de SLAs e metricas
+
+  - id: devops-hetzner
+    arquivo: agentes/DEVOPS-HETZNER.md
+    comando: "@devops-hetzner"
+    especialidades:
+      - Hetzner Cloud API
+      - Provisionamento de servidores (VPS/Dedicated)
+      - Gerenciamento de SSH Keys
+      - Configuracao de Firewalls
+      - Floating IPs e Networks
+      - Volumes e Backups
+      - Load Balancers
+      - DNS via Hetzner
+
+  - id: devops-portainer
+    arquivo: agentes/DEVOPS-PORTAINER.md
+    comando: "@devops-portainer"
+    especialidades:
+      - Portainer API
+      - Docker Swarm management
+      - Deploy e atualizacao de stacks
+      - Gerenciamento de services, containers, volumes
+      - Networks e overlay networks
+      - Monitoramento de saude de servicos
+      - Rollback e versionamento
+
+  - id: devops-seguranca
+    arquivo: agentes/DEVOPS-SEGURANCA.md
+    comando: "@devops-seguranca"
+    especialidades:
+      - Hardening de servidores Linux
+      - Configuracao de firewalls (UFW, iptables, Hetzner)
+      - SSL/TLS e certificados (Let's Encrypt, Traefik)
+      - SSH hardening e key management
+      - Auditoria de seguranca
+      - Analise de vulnerabilidades
+      - Politicas de backup e disaster recovery
+      - Principio de menor privilegio
+
+# ============================================================
+# TAREFAS
+# ============================================================
+tarefas:
+  # Fase: Descoberta e Planejamento
+  - fase: descoberta
+    comando: /mapear-infra
+    arquivo: tarefas/mapear-infra.yaml
+    agente: devops-estrategista
+    descricao: Mapear infraestrutura atual e documentar
+
+  - fase: descoberta
+    comando: /planejar-servidor
+    arquivo: tarefas/planejar-servidor.yaml
+    agente: devops-estrategista
+    descricao: Planejar especificacoes do servidor necessario
+
+  - fase: descoberta
+    comando: /avaliar-custos
+    arquivo: tarefas/avaliar-custos.yaml
+    agente: devops-estrategista
+    descricao: Estimar custos de infraestrutura
+
+  # Fase: Hetzner
+  - fase: hetzner
+    comando: /criar-servidor
+    arquivo: tarefas/criar-servidor.yaml
+    agente: devops-hetzner
+    descricao: Provisionar novo servidor na Hetzner Cloud
+
+  - fase: hetzner
+    comando: /listar-servidores
+    arquivo: tarefas/listar-servidores.yaml
+    agente: devops-hetzner
+    descricao: Listar servidores ativos na Hetzner
+
+  - fase: hetzner
+    comando: /gerenciar-firewall
+    arquivo: tarefas/gerenciar-firewall.yaml
+    agente: devops-hetzner
+    descricao: Configurar regras de firewall na Hetzner
+
+  - fase: hetzner
+    comando: /gerenciar-ssh-keys
+    arquivo: tarefas/gerenciar-ssh-keys.yaml
+    agente: devops-hetzner
+    descricao: Gerenciar SSH keys na Hetzner Cloud
+
+  - fase: hetzner
+    comando: /criar-backup
+    arquivo: tarefas/criar-backup.yaml
+    agente: devops-hetzner
+    descricao: Criar backup/snapshot de servidor
+
+  - fase: hetzner
+    comando: /gerenciar-dns
+    arquivo: tarefas/gerenciar-dns.yaml
+    agente: devops-hetzner
+    descricao: Gerenciar registros DNS na Hetzner
+
+  # Fase: Portainer
+  - fase: portainer
+    comando: /listar-stacks
+    arquivo: tarefas/listar-stacks.yaml
+    agente: devops-portainer
+    descricao: Listar stacks e servicos no Portainer
+
+  - fase: portainer
+    comando: /deploy-stack
+    arquivo: tarefas/deploy-stack.yaml
+    agente: devops-portainer
+    descricao: Fazer deploy de nova stack via Portainer
+
+  - fase: portainer
+    comando: /atualizar-stack
+    arquivo: tarefas/atualizar-stack.yaml
+    agente: devops-portainer
+    descricao: Atualizar stack existente no Portainer
+
+  - fase: portainer
+    comando: /status-servicos
+    arquivo: tarefas/status-servicos.yaml
+    agente: devops-portainer
+    descricao: Verificar saude dos servicos
+
+  - fase: portainer
+    comando: /escalar-servico
+    arquivo: tarefas/escalar-servico.yaml
+    agente: devops-portainer
+    descricao: Escalar replicas de servico
+
+  - fase: portainer
+    comando: /rollback-stack
+    arquivo: tarefas/rollback-stack.yaml
+    agente: devops-portainer
+    descricao: Reverter stack para versao anterior
+
+  # Fase: Seguranca
+  - fase: seguranca
+    comando: /audit-seguranca
+    arquivo: tarefas/audit-seguranca.yaml
+    agente: devops-seguranca
+    descricao: Auditoria completa de seguranca da infraestrutura
+
+  - fase: seguranca
+    comando: /hardening
+    arquivo: tarefas/hardening.yaml
+    agente: devops-seguranca
+    descricao: Aplicar hardening em servidor Linux
+
+  - fase: seguranca
+    comando: /verificar-ssl
+    arquivo: tarefas/verificar-ssl.yaml
+    agente: devops-seguranca
+    descricao: Verificar certificados SSL/TLS
+
+  - fase: seguranca
+    comando: /plano-backup
+    arquivo: tarefas/plano-backup.yaml
+    agente: devops-seguranca
+    descricao: Criar plano de backup e disaster recovery
+
+# ============================================================
+# WORKFLOWS
+# ============================================================
+workflows:
+  - id: servidor-completo
+    comando: /servidor-completo
+    arquivo: workflows/servidor-completo.yaml
+    descricao: Provisionar servidor do zero com seguranca completa
+    fases:
+      - PLANEJAMENTO
+      - PROVISIONAMENTO
+      - HARDENING
+      - DOCKER_SETUP
+      - PORTAINER_SETUP
+      - VALIDACAO
+
+  - id: nova-stack
+    comando: /nova-stack
+    arquivo: workflows/nova-stack.yaml
+    descricao: Deploy de nova stack com validacao completa
+    fases:
+      - PLANEJAMENTO
+      - COMPOSE
+      - DEPLOY
+      - VALIDACAO
+
+  - id: audit-completo
+    comando: /audit-completo
+    arquivo: workflows/audit-completo.yaml
+    descricao: Auditoria completa de seguranca e infraestrutura
+    fases:
+      - INVENTARIO
+      - SEGURANCA
+      - PERFORMANCE
+      - RELATORIO
+
+  - id: disaster-recovery
+    comando: /disaster-recovery
+    arquivo: workflows/disaster-recovery.yaml
+    descricao: Plano e execucao de disaster recovery
+    fases:
+      - AVALIACAO
+      - PLANO
+      - BACKUP
+      - TESTE
+      - DOCUMENTACAO
+
+# ============================================================
+# CONHECIMENTO
+# ============================================================
+conhecimento:
+  - seguranca-servidores.md
+  - hetzner-cloud-api.md
+  - portainer-api.md
+  - docker-swarm-boas-praticas.md
+  - hardening-linux.md
+  - ssl-tls-certificados.md
+  - backup-disaster-recovery.md
+
+# ============================================================
+# TEMPLATES
+# ============================================================
+templates:
+  infraestrutura:
+    - docker-compose-base.yaml
+    - traefik-config.yaml
+  seguranca:
+    - firewall-rules-template.yaml
+    - ssh-hardening-checklist.md
+    - audit-report-template.md
+  documentacao:
+    - mapa-infraestrutura-template.md
+    - runbook-template.md
+    - plano-dr-template.md
+
+# ============================================================
+# INTEGRACOES
+# ============================================================
+integracoes:
+  apis:
+    - nome: Hetzner Cloud API
+      base_url: https://api.hetzner.cloud/v1
+      auth: Bearer Token (HETZNER_API_TOKEN)
+      docs: https://docs.hetzner.cloud/
+
+    - nome: Portainer API
+      base_url: "{PORTAINER_URL}/api"
+      auth: JWT Token via /api/auth
+      docs: https://docs.portainer.io/api/access
+
+  ferramentas:
+    - Docker / Docker Compose
+    - SSH
+    - curl (para API calls)
+    - Traefik (reverse proxy)
+    - Let's Encrypt (SSL)
+
+  ralph:
+    ativo: true
+    templates:
+      - prd-infraestrutura.json
+      - prompt-devops.md
+
+# ============================================================
+# OUTPUTS
+# ============================================================
+output:
+  base: "workspace/{{empresa}}/devops/"
+  estrutura:
+    logs: "workspace/{{empresa}}/devops/logs/"
+    audit: "workspace/{{empresa}}/devops/audit/"
+    documentacao: "workspace/{{empresa}}/devops/docs/"
+    backups: "workspace/{{empresa}}/devops/backups/"
+    configs: "workspace/{{empresa}}/devops/configs/"
+    scripts: "workspace/{{empresa}}/devops/scripts/"
+
+# ============================================================
+# VALIDACOES
+# ============================================================
+validacoes:
+  pre_operacao:
+    - "Variaveis de ambiente configuradas"
+    - "Conectividade com API verificada"
+    - "Permissoes de usuario validadas"
+    - ".env NO .gitignore"
+
+  servidor:
+    - "SSH acessivel"
+    - "Firewall configurado"
+    - "Updates aplicados"
+    - "Monitoramento ativo"
+
+  stack:
+    - "Compose valido (docker-compose config)"
+    - "Imagens acessiveis"
+    - "Volumes mapeados"
+    - "Networks configuradas"
+    - "Health checks definidos"
+
+  seguranca:
+    - "SSH por chave (sem senha)"
+    - "Porta SSH alterada ou protegida"
+    - "Firewall restritivo (deny all, allow specific)"
+    - "SSL/TLS valido e atualizado"
+    - "Sem credenciais em codigo"
+    - "Logs de auditoria ativos"
+
+# ============================================================
+# COMUNICACAO
+# ============================================================
+comunicacao:
+  principios:
+    - "Explicar riscos de forma clara antes de executar"
+    - "SEMPRE pedir confirmacao para operacoes destrutivas"
+    - "Usar linguagem acessivel para nao-tecnicos"
+    - "Documentar TUDO que foi feito"
+    - "Alertar sobre custos antes de provisionar"
+
+  evitar:
+    - "Executar operacoes destrutivas sem confirmacao"
+    - "Assumir que o usuario entende termos tecnicos"
+    - "Pular etapas de validacao de seguranca"
+    - "Expor credenciais em outputs"
+
+  glossario:
+    - termo: "VPS"
+      explicacao: "Servidor virtual na nuvem - como um computador remoto"
+    - termo: "Container"
+      explicacao: "Pacote isolado que roda uma aplicacao - como uma caixa com tudo que o app precisa"
+    - termo: "Stack"
+      explicacao: "Conjunto de containers que trabalham juntos - como um time de aplicacoes"
+    - termo: "Firewall"
+      explicacao: "Barreira de seguranca que controla quem pode acessar o servidor"
+    - termo: "SSH"
+      explicacao: "Conexao segura e criptografada com o servidor"
+    - termo: "SSL/TLS"
+      explicacao: "Cadeado verde no navegador - criptografa comunicacao"
+    - termo: "DNS"
+      explicacao: "Sistema que traduz nomes (site.com) para enderecos IP"
+    - termo: "Docker Swarm"
+      explicacao: "Orquestrador que gerencia containers em um ou mais servidores"
+    - termo: "Reverse Proxy"
+      explicacao: "Porteiro que direciona visitantes para o servico correto"
+    - termo: "Load Balancer"
+      explicacao: "Distribuidor de trafego entre multiplos servidores"
+
+metricas:
+  - "Uptime dos servicos (meta: 99.9%)"
+  - "Tempo de provisionamento de servidor"
+  - "Tempo de deploy de stack"
+  - "Numero de incidentes de seguranca"
+  - "Cobertura de backup"
+  - "Custo mensal de infraestrutura"
+  - "Tempo de recuperacao (RTO)"

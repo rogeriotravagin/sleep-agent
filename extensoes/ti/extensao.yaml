@@ -1,0 +1,296 @@
+# ============================================
+# EXTENSÃO TI - Sleep Agent
+# ============================================
+# Time especializado em integrações e automações
+# com APIs e Playwright, focado em traduzir
+# necessidades de não-técnicos em soluções claras
+# ============================================
+
+nome: TI
+slug: ti
+versao: "1.0"
+comando: /ti
+status: ativo
+descricao: |
+  Time especializado em integrações e automações, seja com API ou Playwright
+  por exemplo. Traduz necessidades de não-técnicos em soluções técnicas claras,
+  focado em automatizar processos manuais do dia a dia.
+
+tipo: operacional
+
+# ============================================
+# PÚBLICO-ALVO
+# ============================================
+
+publico_alvo: |
+  Profissionais não-técnicos que precisam automatizar tarefas repetitivas,
+  integrar sistemas via API e tornar processos manuais mais eficientes.
+  Inclusive profissionais que nem sabem que precisam de API, apenas relatando
+  que possuem processos manuais.
+
+# ============================================
+# PROBLEMAS QUE RESOLVE
+# ============================================
+
+problemas_resolvidos:
+  - Processos manuais repetitivos e demorados
+  - Falta de integração entre sistemas diferentes
+  - Dificuldade em buscar e processar informações de APIs
+  - Barreira técnica para implementar automações simples
+  - Perda de tempo com tarefas que poderiam ser automatizadas
+
+# ============================================
+# OBJETIVO
+# ============================================
+
+objetivo: |
+  Tornar processos mais eficientes com tecnologia, entendendo o cenário de
+  cada cliente, sempre com comunicação clara para não-técnicos.
+
+# ============================================
+# AGENTES ESPECIALIZADOS
+# ============================================
+
+agentes:
+  - id: ti-processos
+    arquivo: agentes/TI-PROCESSOS.md
+    comando: @ti-processos
+    especialidades:
+      - Análise de processos manuais
+      - Identificação de gargalos
+      - Tradução de necessidades em requisitos técnicos
+      - Comunicação com não-técnicos
+      - Levantamento de requisitos
+      - Mapeamento de fluxos
+
+  - id: ti-integracoes
+    arquivo: agentes/TI-INTEGRACOES.md
+    comando: @ti-integracoes
+    especialidades:
+      - APIs REST e GraphQL
+      - Autenticação (OAuth, API Keys, JWT)
+      - Webhooks e callbacks
+      - Mapeamento de dados
+      - Documentação de APIs
+      - Testes de integração
+
+  - id: ti-automacao
+    arquivo: agentes/TI-AUTOMACAO.md
+    comando: @ti-automacao
+    especialidades:
+      - Playwright e Puppeteer
+      - Web scraping
+      - Automação de navegador
+      - Scripts Python e JavaScript
+      - Manipulação de formulários
+      - Captura de dados web
+
+# ============================================
+# TAREFAS DISPONÍVEIS
+# ============================================
+
+tarefas:
+  # Fase: Descoberta
+  - fase: descoberta
+    comando: /analisar-processo
+    arquivo: tarefas/analisar-processo.yaml
+    agente: ti-processos
+    descricao: Analisar processo manual atual do cliente
+
+  - fase: descoberta
+    comando: /questionar-cliente
+    arquivo: tarefas/questionar-cliente.yaml
+    agente: ti-processos
+    descricao: Fazer perguntas para entender cenário completo
+
+  # Fase: Proposta
+  - fase: proposta
+    comando: /propor-solucao
+    arquivo: tarefas/propor-solucao.yaml
+    agente: ti-processos
+    descricao: Apresentar solução técnica em linguagem clara
+
+  - fase: proposta
+    comando: /analisar-viabilidade
+    arquivo: tarefas/analisar-viabilidade.yaml
+    agente: ti-processos
+    descricao: Avaliar viabilidade técnica e esforço
+
+  # Fase: Desenvolvimento - APIs
+  - fase: desenvolvimento
+    comando: /integrar-api
+    arquivo: tarefas/integrar-api.yaml
+    agente: ti-integracoes
+    descricao: Criar integração com API externa
+
+  - fase: desenvolvimento
+    comando: /testar-api
+    arquivo: tarefas/testar-api.yaml
+    agente: ti-integracoes
+    descricao: Testar endpoints e fluxos da API
+
+  # Fase: Desenvolvimento - Automação
+  - fase: desenvolvimento
+    comando: /criar-automacao
+    arquivo: tarefas/criar-automacao.yaml
+    agente: ti-automacao
+    descricao: Desenvolver script de automação com Playwright
+
+  - fase: desenvolvimento
+    comando: /testar-automacao
+    arquivo: tarefas/testar-automacao.yaml
+    agente: ti-automacao
+    descricao: Testar automação em diferentes cenários
+
+  # Fase: Entrega
+  - fase: entrega
+    comando: /documentar
+    arquivo: tarefas/documentar.yaml
+    agente: ti-processos
+    descricao: Documentar solução em linguagem não-técnica
+
+  - fase: entrega
+    comando: /validar
+    arquivo: tarefas/validar.yaml
+    agente: ti-processos
+    descricao: Validar solução com cliente
+
+# ============================================
+# WORKFLOWS DISPONÍVEIS
+# ============================================
+
+workflows:
+  - id: automacao-completa
+    comando: /automacao-completa
+    arquivo: workflows/automacao-completa.yaml
+    descricao: Criar automação do zero (descoberta até entrega)
+    fases:
+      - DESCOBERTA
+      - ANÁLISE
+      - PROPOSTA
+      - DESENVOLVIMENTO
+      - TESTES
+      - ENTREGA
+
+  - id: integracao-api-rapida
+    comando: /api-rapida
+    arquivo: workflows/integracao-api-rapida.yaml
+    descricao: Integrar API rapidamente
+
+  - id: automacao-web-rapida
+    comando: /automacao-rapida
+    arquivo: workflows/automacao-web-rapida.yaml
+    descricao: Criar automação web com Playwright rapidamente
+
+# ============================================
+# BASE DE CONHECIMENTO
+# ============================================
+
+conhecimento:
+  - apis-rest.md
+  - playwright-basico.md
+  - analise-processos.md
+  - comunicacao-nao-tecnicos.md
+  - boas-praticas-automacao.md
+  - autenticacao-apis.md
+  - tratamento-erros.md
+
+# ============================================
+# TEMPLATES
+# ============================================
+
+templates:
+  analise:
+    - analise-processo-template.md
+    - proposta-solucao-template.md
+  codigo:
+    - script-api-template.py
+    - script-playwright-template.js
+  documentacao:
+    - documentacao-nao-tecnica-template.md
+    - manual-uso-template.md
+
+# ============================================
+# INTEGRAÇÕES
+# ============================================
+
+integracoes:
+  ralph:
+    ativo: true
+    templates:
+      - prd-automacao.json
+      - prompt-integracao.md
+
+  ferramentas:
+    - Playwright (automação web)
+    - Postman/Insomnia (teste de APIs)
+    - Python (scripts de integração)
+    - JavaScript/Node.js (automações)
+
+# ============================================
+# SAÍDAS
+# ============================================
+
+output:
+  scripts: workspace/{{empresa}}/ti/scripts/
+  documentacao: workspace/{{empresa}}/ti/docs/
+  analises: workspace/{{empresa}}/ti/analises/
+  propostas: workspace/{{empresa}}/ti/propostas/
+
+# ============================================
+# VALIDAÇÕES
+# ============================================
+
+validacoes:
+  analise:
+    - "Processo atual documentado"
+    - "Gargalos identificados"
+    - "Requisitos claros para não-técnicos"
+    - "Perguntas respondidas"
+
+  proposta:
+    - "Solução explicada em linguagem simples"
+    - "Viabilidade técnica avaliada"
+    - "Esforço estimado"
+    - "Benefícios quantificados"
+
+  desenvolvimento:
+    - "Código funcional e testado"
+    - "Tratamento de erros implementado"
+    - "Logs para debugging"
+    - "Documentação técnica criada"
+
+  entrega:
+    - "Documentação em linguagem não-técnica"
+    - "Manual de uso criado"
+    - "Validado com cliente"
+    - "Pontos de atenção documentados"
+
+# ============================================
+# REGRAS DE COMUNICAÇÃO
+# ============================================
+
+comunicacao:
+  principios:
+    - "Sempre usar linguagem não-técnica ao falar com cliente"
+    - "Explicar conceitos técnicos através de analogias do dia a dia"
+    - "Fazer perguntas claras para coletar informações faltantes"
+    - "Validar entendimento antes de propor solução"
+    - "Documentar tudo de forma acessível"
+
+  evitar:
+    - "Jargões técnicos sem explicação"
+    - "Assumir conhecimento técnico do cliente"
+    - "Pular etapas de validação"
+    - "Propor solução sem entender completamente o problema"
+
+# ============================================
+# MÉTRICAS DE SUCESSO
+# ============================================
+
+metricas:
+  - "Redução de tempo em processo manual"
+  - "Redução de erros humanos"
+  - "Satisfação do cliente com clareza da comunicação"
+  - "Taxa de sucesso das automações"
+  - "Tempo de resposta de integrações"

@@ -1,0 +1,310 @@
+# Tarefa: Paleta de Cores
+
+id: paleta-cores
+nome: Criar Paleta de Cores
+descricao: Desenvolver sistema de cores completo para a marca
+agente: designer
+comando: /paleta-cores
+
+versao: "1.0"
+categoria: identidade
+
+# Baseado em: Teoria das cores, Psicologia das cores
+
+entradas:
+  obrigatorias:
+    - nome: marca
+      pergunta: "Qual o nome da marca?"
+      tipo: texto
+
+    - nome: personalidade
+      pergunta: "Qual a personalidade da marca? (ex: sofisticada, energica, confiavel)"
+      tipo: texto
+
+    - nome: setor
+      pergunta: "Qual o setor de atuacao?"
+      tipo: texto
+
+  opcionais:
+    - nome: preferencias
+      pergunta: "Tem cores preferidas ou a evitar?"
+      tipo: texto
+      padrao: "Aberto a sugestoes"
+
+    - nome: concorrentes
+      pergunta: "Quais cores os concorrentes usam?"
+      tipo: texto
+      padrao: "A pesquisar"
+
+passos:
+  - numero: 1
+    acao: "Analisar personalidade e setor"
+
+  - numero: 2
+    acao: "Aplicar psicologia das cores"
+    associacoes:
+      azul: "Confianca, profissionalismo, calma"
+      vermelho: "Energia, urgencia, paixao"
+      verde: "Natureza, crescimento, saude"
+      amarelo: "Otimismo, criatividade, atencao"
+      laranja: "Entusiasmo, amigavel, aventura"
+      roxo: "Luxo, criatividade, sabedoria"
+      rosa: "Feminino, jovem, romantico"
+      preto: "Sofisticacao, luxo, poder"
+      branco: "Pureza, simplicidade, minimalismo"
+      cinza: "Neutro, equilibrio, profissional"
+
+  - numero: 3
+    acao: "Criar paleta harmonizada"
+    metodos:
+      - Complementar (opostas na roda)
+      - Analogo (vizinhas na roda)
+      - Triadico (triangulo)
+      - Split-complementar
+
+  - numero: 4
+    acao: "Verificar acessibilidade"
+    criterio: "WCAG AA minimo (contraste 4.5:1)"
+
+  - numero: 5
+    acao: "Documentar especificacoes"
+
+saida:
+  formato: markdown
+  template: |
+    # Paleta de Cores: [Marca]
+
+    ## 1. Conceito
+
+    ### Personalidade da Marca
+    > [Descricao da personalidade]
+
+    ### Sensacoes Desejadas
+    - [Sensacao 1]
+    - [Sensacao 2]
+    - [Sensacao 3]
+
+    ### Metodo de Harmonizacao
+    > [Complementar/Analogo/Triadico/etc]
+
+    ---
+
+    ## 2. Cores Primarias
+
+    ### Cor Principal
+
+    | Propriedade | Valor |
+    |-------------|-------|
+    | **Nome** | [Nome da cor] |
+    | **HEX** | #XXXXXX |
+    | **RGB** | R, G, B |
+    | **HSL** | H, S%, L% |
+    | **CMYK** | C, M, Y, K |
+    | **Pantone** | XXXX C (opcional) |
+
+    **Uso:** Logo, elementos principais, CTAs
+    **Psicologia:** [O que esta cor transmite]
+
+    ### Cor Secundaria (se houver)
+
+    | Propriedade | Valor |
+    |-------------|-------|
+    | **Nome** | [Nome da cor] |
+    | **HEX** | #XXXXXX |
+    | **RGB** | R, G, B |
+
+    **Uso:** [Onde usar]
+
+    ---
+
+    ## 3. Cores Secundarias
+
+    ### Cor de Suporte 1
+
+    | Propriedade | Valor |
+    |-------------|-------|
+    | **Nome** | [Nome] |
+    | **HEX** | #XXXXXX |
+    | **RGB** | R, G, B |
+
+    **Uso:** [Onde usar]
+
+    ### Cor de Suporte 2
+
+    | Propriedade | Valor |
+    |-------------|-------|
+    | **Nome** | [Nome] |
+    | **HEX** | #XXXXXX |
+    | **RGB** | R, G, B |
+
+    **Uso:** [Onde usar]
+
+    ---
+
+    ## 4. Cores Neutras
+
+    ### Escala de Cinzas
+
+    | Nome | HEX | Uso |
+    |------|-----|-----|
+    | Gray 900 | #111111 | Texto principal |
+    | Gray 700 | #374151 | Texto secundario |
+    | Gray 500 | #6B7280 | Texto terciario |
+    | Gray 300 | #D1D5DB | Bordas, divisores |
+    | Gray 100 | #F3F4F6 | Backgrounds claros |
+    | White | #FFFFFF | Background principal |
+
+    ### Preto e Branco da Marca
+
+    | Nome | HEX | Uso |
+    |------|-----|-----|
+    | Brand Black | #[XXX] | Logo em preto |
+    | Brand White | #[XXX] | Logo em branco |
+
+    ---
+
+    ## 5. Cores Funcionais
+
+    ### Sistema de Feedback
+
+    | Tipo | Nome | HEX | Uso |
+    |------|------|-----|-----|
+    | Sucesso | Green | #10B981 | Confirmacoes, sucesso |
+    | Alerta | Yellow | #F59E0B | Avisos, atencao |
+    | Erro | Red | #EF4444 | Erros, remocao |
+    | Info | Blue | #3B82F6 | Informacoes, links |
+
+    ---
+
+    ## 6. Gradientes (Opcional)
+
+    ### Gradiente Principal
+
+    ```css
+    background: linear-gradient(
+      [angulo]deg,
+      [cor1] 0%,
+      [cor2] 100%
+    );
+    ```
+
+    **Uso:** [Onde aplicar gradientes]
+
+    ---
+
+    ## 7. Acessibilidade
+
+    ### Verificacao de Contraste
+
+    | Combinacao | Ratio | WCAG AA | WCAG AAA |
+    |------------|-------|---------|----------|
+    | Primaria + Branco | X:1 | ✅/❌ | ✅/❌ |
+    | Primaria + Preto | X:1 | ✅/❌ | ✅/❌ |
+    | Secundaria + Branco | X:1 | ✅/❌ | ✅/❌ |
+    | Texto + Background | X:1 | ✅/❌ | ✅/❌ |
+
+    ### Recomendacoes
+    - Texto pequeno: Minimo 4.5:1
+    - Texto grande: Minimo 3:1
+    - Elementos graficos: Minimo 3:1
+
+    ---
+
+    ## 8. Proporcoes de Uso
+
+    ### Regra 60-30-10
+
+    ```
+    ████████████████████ 60% - Cor dominante (neutras/background)
+    ██████████ 30% - Cor secundaria (secoes, cards)
+    ████ 10% - Cor de destaque (CTAs, destaques)
+    ```
+
+    ### Aplicacao Pratica
+
+    | Elemento | Cor Recomendada |
+    |----------|-----------------|
+    | Background pagina | [Cor] |
+    | Cards/Secoes | [Cor] |
+    | Titulos | [Cor] |
+    | Texto | [Cor] |
+    | CTAs | [Cor] |
+    | Links | [Cor] |
+    | Hover states | [Cor] |
+
+    ---
+
+    ## 9. Dark Mode (Opcional)
+
+    ### Paleta Dark
+
+    | Elemento | Light Mode | Dark Mode |
+    |----------|------------|-----------|
+    | Background | [Cor] | [Cor] |
+    | Surface | [Cor] | [Cor] |
+    | Texto primario | [Cor] | [Cor] |
+    | Texto secundario | [Cor] | [Cor] |
+    | Primaria | [Cor] | [Cor ajustada] |
+
+    ---
+
+    ## 10. Exemplos de Aplicacao
+
+    ### Combinacoes Aprovadas
+    ✅ [Cor A] sobre [Cor B] - [Contexto]
+    ✅ [Cor C] sobre [Cor D] - [Contexto]
+
+    ### Combinacoes a Evitar
+    ❌ [Cor X] sobre [Cor Y] - [Por que evitar]
+    ❌ [Cor Z] sobre [Cor W] - [Por que evitar]
+
+    ---
+
+    ## 11. Arquivos
+
+    ### Formatos Disponiveis
+    - [ ] ASE (Adobe Swatch Exchange)
+    - [ ] ACO (Photoshop)
+    - [ ] CSS Variables
+    - [ ] SCSS Variables
+    - [ ] JSON tokens
+    - [ ] Figma tokens
+
+    ### CSS Variables
+
+    ```css
+    :root {
+      /* Primarias */
+      --color-primary: #XXXXXX;
+      --color-secondary: #XXXXXX;
+
+      /* Neutras */
+      --color-gray-900: #111111;
+      --color-gray-700: #374151;
+      --color-gray-500: #6B7280;
+      --color-gray-300: #D1D5DB;
+      --color-gray-100: #F3F4F6;
+      --color-white: #FFFFFF;
+
+      /* Funcionais */
+      --color-success: #10B981;
+      --color-warning: #F59E0B;
+      --color-error: #EF4444;
+      --color-info: #3B82F6;
+    }
+    ```
+
+conhecimento:
+  - branding.md
+  - design-systems.md
+
+gates:
+  - Cores transmitem personalidade da marca?
+  - Acessibilidade WCAG AA atendida?
+  - Diferenciacao dos concorrentes?
+  - Sistema e completo e escalavel?
+
+proximos_passos:
+  - Criar tipografia
+  - Aplicar em logo
+  - Criar design system completo

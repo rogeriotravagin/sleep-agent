@@ -1,0 +1,363 @@
+# =====================================================
+# TAREFA: Avaliação de Risco Jurídico
+# =====================================================
+
+id: avaliar-risco-juridico
+nome: Avaliação de Risco Jurídico
+comando: /risco-juridico
+agente: critical-cases-specialist
+fase: analise-legal
+
+# =====================================================
+# OBJETIVO
+# =====================================================
+
+objetivo: |
+  Fazer análise jurídica profunda de caso crítico, focando em:
+  - Embasamento legal do cliente (CDC)
+  - Vulnerabilidades da empresa
+  - Probabilidade de processo
+  - Score de risco jurídico
+  - Recomendações legais específicas
+
+# =====================================================
+# INPUT DO USUÁRIO
+# =====================================================
+
+input:
+  perguntas:
+    - id: descricao_caso
+      pergunta: "Descreva o caso (fatos objetivos)"
+      tipo: texto_longo
+      obrigatorio: sim
+
+    - id: reivindicacoes_cliente
+      pergunta: "O que o cliente está reivindicando?"
+      tipo: texto
+      obrigatorio: sim
+
+    - id: tipo_produto_servico
+      pergunta: "Tipo de produto/serviço"
+      tipo: multipla_escolha
+      opcoes:
+        - "Produto físico"
+        - "Produto digital/software"
+        - "Serviço (SaaS)"
+        - "Curso online"
+        - "Consultoria/serviço"
+        - "Outro"
+      obrigatorio: sim
+
+    - id: canal_venda
+      pergunta: "Como foi vendido?"
+      tipo: multipla_escolha
+      opcoes:
+        - "Online (site/e-commerce)"
+        - "Telefone"
+        - "Presencial"
+        - "Marketplace"
+      obrigatorio: sim
+
+    - id: tempo_desde_compra
+      pergunta: "Há quanto tempo foi a compra/contratação?"
+      tipo: multipla_escolha
+      opcoes:
+        - "Menos de 7 dias"
+        - "7-30 dias"
+        - "30-90 dias"
+        - "90 dias - 6 meses"
+        - "6 meses - 1 ano"
+        - "Mais de 1 ano"
+      obrigatorio: sim
+
+    - id: problema_reportado
+      pergunta: "Quando cliente reportou o problema?"
+      tipo: texto
+      obrigatorio: sim
+
+    - id: acoes_empresa
+      pergunta: "O que a empresa fez até agora?"
+      tipo: texto_longo
+      obrigatorio: sim
+
+# =====================================================
+# PROCESSO DE ANÁLISE JURÍDICA
+# =====================================================
+
+processo:
+  etapas:
+    - numero: 1
+      nome: CLASSIFICAR_TIPO_RECLAMACAO
+      conhecimento:
+        - conhecimento/analise-risco-juridico.md
+      acoes:
+        - "Identificar tipo de reclamação (A-H):"
+        - "A: Vício de Produto/Serviço (Art. 18, 20)"
+        - "B: Publicidade Enganosa / Promessa Não Cumprida (Art. 30, 37)"
+        - "C: Cobrança Indevida (Art. 42) - RISCO CRÍTICO"
+        - "D: Dificuldade de Cancelamento (Art. 6º III, Art. 39)"
+        - "E: Direito de Arrependimento 7 dias (Art. 49)"
+        - "F: Cláusula Abusiva (Art. 51)"
+        - "G: Expectativa Frustrada (Sem Base Legal)"
+        - "H: Má-fé / Tentativa de Extorsão"
+
+    - numero: 2
+      nome: ANALISAR_BASE_LEGAL_CDC
+      conhecimento:
+        - conhecimento/cdc-completo.md
+      acoes:
+        - "Carregar conhecimento completo do CDC"
+        - "Identificar todos os artigos CDC aplicáveis"
+        - "Para cada artigo, explicar:"
+        - "  - O que diz o artigo"
+        - "  - Como se aplica a este caso"
+        - "  - Cliente está dentro do direito?"
+        - "Avaliar: Cliente tem razão (TOTAL / PARCIAL / NÃO)"
+
+    - numero: 3
+      nome: ANALISAR_PRAZOS_LEGAIS
+      acoes:
+        - "Verificar prazo de reclamação:"
+        - "  - Produtos não duráveis: 30 dias"
+        - "  - Produtos duráveis: 90 dias"
+        - "  - Arrependimento (venda online): 7 dias"
+        - "Avaliar se cliente está dentro do prazo"
+        - "Considerar: prazo obstado se cliente reclamou"
+        - "Avaliar prescrição (5 anos)"
+
+    - numero: 4
+      nome: IDENTIFICAR_VULNERABILIDADES_EMPRESA
+      acoes:
+        - "Checklist de vulnerabilidades:"
+        - "✅ Vulnerabilidades de Informação/Publicidade"
+        - "  - Landing page prometeu mais que produto entrega?"
+        - "  - Sales deck tem informações não verdadeiras?"
+        - "  - Depoimentos reais ou fabricados?"
+        - "✅ Vulnerabilidades de Produto/Serviço"
+        - "  - Produto tem defeitos conhecidos?"
+        - "  - Downtime frequente sem SLA?"
+        - "  - Features prometidas não funcionam?"
+        - "✅ Vulnerabilidades de Cobrança"
+        - "  - Sistema de cobrança tem erros?"
+        - "  - Cobranças após cancelamento?"
+        - "  - Valores diferentes do contratado?"
+        - "✅ Vulnerabilidades de Contrato/Termos"
+        - "  - Termos têm cláusulas abusivas (Art. 51)?"
+        - "  - Multas desproporcionais?"
+        - "  - 'Não nos responsabilizamos' genérico?"
+        - "  - Empresa pode alterar preço unilateralmente?"
+        - "✅ Vulnerabilidades de Cancelamento"
+        - "  - Cancelamento mais difícil que contratação?"
+        - "  - Exige ligação quando contratou online?"
+        - "  - Demora mais que 48h?"
+        - "✅ Vulnerabilidades de Arrependimento"
+        - "  - Vendas online não oferecem devolução em 7 dias?"
+        - "  - Devolução não é imediata e integral?"
+
+    - numero: 5
+      nome: CALCULAR_SCORE_RISCO_JURIDICO
+      conhecimento:
+        - conhecimento/analise-risco-juridico.md
+      acoes:
+        - "Usar fórmula:"
+        - "Score = (Base Legal × 4) + (Prazo × 3) + (Evidências × 2) + (Precedente × 1)"
+        - ""
+        - "Base Legal (0-10):"
+        - "  10 = CDC claramente violado"
+        - "  8 = CDC provavelmente violado"
+        - "  6 = Área cinzenta"
+        - "  4 = CDC provavelmente não violado"
+        - "  2 = CDC não violado"
+        - "  0 = Cliente má-fé"
+        - ""
+        - "Prazo (0-10):"
+        - "  10 = Dentro do prazo legal"
+        - "  7 = Vencido recentemente (< 6 meses)"
+        - "  4 = Vencido há 6-12 meses"
+        - "  2 = Vencido há mais de 1 ano"
+        - "  0 = Prescrito (> 5 anos)"
+        - ""
+        - "Evidências (0-10):"
+        - "  10 = Cliente tem todas evidências"
+        - "  7 = Cliente tem maioria"
+        - "  5 = Divididas"
+        - "  3 = Empresa tem mais"
+        - "  0 = Empresa tem todas"
+        - ""
+        - "Precedente (0-10):"
+        - "  10 = Muitos casos similares que empresa perdeu"
+        - "  7 = Alguns casos contra"
+        - "  5 = Sem precedente"
+        - "  3 = Alguns casos a favor"
+        - "  0 = Muitos casos a favor"
+        - ""
+        - "Interpretar Score Final:"
+        - "  80-100: 🔴 RISCO CRÍTICO - Envolver jurídico IMEDIATAMENTE"
+        - "  60-79: 🟠 RISCO ALTO - Resolver em 24h ou envolver jurídico"
+        - "  40-59: 🟡 RISCO MODERADO - Resolver em 48h"
+        - "  20-39: 🟢 RISCO BAIXO - Processo padrão CS"
+        - "  0-19: 🟢 RISCO MÍNIMO - Pode ser firme"
+
+    - numero: 6
+      nome: PROBABILIDADE_DE_PROCESSO
+      acoes:
+        - "Avaliar probabilidade (%):"
+        - "  - Cliente mencionou advogado? (+30%)"
+        - "  - Cliente mencionou PROCON? (+20%)"
+        - "  - Cliente tem razão legal clara? (+30%)"
+        - "  - Valor em disputa alto? (+10%)"
+        - "  - Cliente emotivo/raivoso? (+10%)"
+        - ""
+        - "Classificar:"
+        - "  - 70-100%: Probabilidade ALTA"
+        - "  - 40-69%: Probabilidade MÉDIA"
+        - "  - 0-39%: Probabilidade BAIXA"
+
+    - numero: 7
+      nome: ANALISAR_CUSTO_BENEFICIO
+      acoes:
+        - "Custo de Litígio:"
+        - "  - Honorários advocatícios: R$ 5.000 - 50.000+"
+        - "  - Custas processuais"
+        - "  - Perícias (se necessário)"
+        - "  - Tempo da equipe"
+        - "  - Risco de perder: valor em disputa + custas + honorários sucumbência"
+        - ""
+        - "Custo de Acordo:"
+        - "  - Valor de reembolso/compensação"
+        - "  - Tempo de CS"
+        - ""
+        - "Calcular:"
+        - "Se Custo Acordo < (Custo Litígio × Prob. Perder)"
+        - "→ Acordo é melhor financeiramente"
+
+# =====================================================
+# OUTPUT
+# =====================================================
+
+output:
+  template: templates/avaliacao-risco-juridico.md
+
+  conteudo:
+    - secao: CLASSIFICACAO
+      itens:
+        - Tipo de Reclamação (A-H)
+        - Base Legal (artigos CDC aplicáveis)
+
+    - secao: SCORE_DE_RISCO
+      itens:
+        - Base Legal: [0-10] × 4 = [score]
+        - Prazo: [0-10] × 3 = [score]
+        - Evidências: [0-10] × 2 = [score]
+        - Precedente: [0-10] × 1 = [score]
+        - TOTAL: [0-100]
+        - Classificação: 🔴/🟠/🟡/🟢
+
+    - secao: ANALISE_LEGAL_DETALHADA
+      itens:
+        - Cliente tem razão? (SIM / PARCIAL / NÃO)
+        - Artigos CDC aplicáveis (com explicação de cada)
+        - Violações do CDC pela empresa (se houver)
+        - Responsabilidade da empresa
+        - Pontos de vulnerabilidade
+        - Pontos de defesa
+        - Prazos legais (respeitados ou não)
+
+    - secao: VULNERABILIDADES_IDENTIFICADAS
+      itens:
+        - Lista de vulnerabilidades por categoria
+        - Gravidade de cada (CRÍTICA / GRAVE / MODERADA)
+        - Artigos CDC relacionados
+
+    - secao: PROBABILIDADE_DE_PROCESSO
+      itens:
+        - Probabilidade estimada (%)
+        - Fatores que aumentam probabilidade
+        - Fatores que reduzem probabilidade
+        - Classificação (ALTA / MÉDIA / BAIXA)
+
+    - secao: ANALISE_FINANCEIRA
+      itens:
+        - Custo estimado de litígio (breakdown)
+        - Custo estimado de acordo (breakdown)
+        - Probabilidade de perder (%)
+        - Cálculo comparativo
+        - Recomendação financeira
+
+    - secao: PRECEDENTE
+      itens:
+        - Este caso pode criar precedente para
+        - Casos similares anteriores (se houver)
+        - Impacto de perder este caso
+
+    - secao: RED_FLAGS
+      itens:
+        - Lista de red flags identificados
+        - Gravidade de cada
+
+    - secao: RECOMENDACAO
+      itens:
+        - Ação recomendada (Resolver / Acordo / Envolver Jurídico / Ser Firme)
+        - Prazo (Imediato / 24h / 48h)
+        - Escalação necessária (SIM/NÃO - para quem)
+        - Justificativa da recomendação
+
+    - secao: PROTECAO_LEGAL
+      itens:
+        - O que documentar
+        - Evidências a reunir
+        - Comunicações a fazer (e não fazer)
+
+  formato: markdown
+  salvar_em: workspace/[estrutura]/customer-success/casos-criticos/analises-juridicas/
+
+# =====================================================
+# VALIDAÇÕES
+# =====================================================
+
+validacoes:
+  - item: cdc_consultado
+    descricao: "Conhecimento do CDC deve ser carregado e consultado"
+    critico: sim
+
+  - item: artigos_especificos
+    descricao: "Devem ser citados artigos CDC específicos (não genérico)"
+    critico: sim
+
+  - item: score_calculado
+    descricao: "Score de risco deve ser calculado com fórmula"
+    critico: sim
+
+  - item: recomendacao_justificada
+    descricao: "Recomendação deve ter justificativa baseada em análise"
+    critico: sim
+
+# =====================================================
+# QUANDO ESCALAR PARA JURÍDICO
+# =====================================================
+
+escalacao_juridico:
+  criterios:
+    - Score de risco > 80
+    - Ameaça formal de processo
+    - Cliente mencionou advogado
+    - Notificação extrajudicial recebida
+    - Dúvida sobre responsabilidade legal
+    - Valor > R$ [threshold empresa]
+    - Caso pode criar precedente perigoso
+    - Múltiplos clientes afetados
+
+# =====================================================
+# REFERÊNCIAS
+# =====================================================
+
+referencias:
+  conhecimento:
+    - conhecimento/cdc-completo.md
+    - conhecimento/analise-risco-juridico.md
+
+  templates:
+    - templates/avaliacao-risco-juridico.md
+
+  agente:
+    - agentes/CRITICAL-CASES.md

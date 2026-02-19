@@ -1,0 +1,192 @@
+{
+  "projeto": "{{nome}}",
+  "tipo": "extensao",
+  "versao": "1.0",
+  "descricao": "Extensão completa para {{descricao}}",
+
+  "contexto": {
+    "publico_alvo": "{{publico}}",
+    "problemas_resolvidos": {{problemas_json}},
+    "resultados_esperados": {{resultados_json}}
+  },
+
+  "user_stories": [
+    {
+      "id": "US001",
+      "titulo": "Criar estrutura da extensão",
+      "descricao": "Criar extensao.yaml, README.md e estrutura de diretórios completa",
+      "criterios_aceitacao": [
+        "extensao.yaml com configurações válidas",
+        "README.md com documentação completa",
+        "Diretórios agentes/, conhecimento/, tarefas/, workflows/ criados",
+        "Nomenclatura seguindo padrão kebab-case"
+      ],
+      "arquivos": [
+        "extensoes/{{slug}}/extensao.yaml",
+        "extensoes/{{slug}}/README.md"
+      ],
+      "prioridade": "alta",
+      "estimativa": "1 iteração"
+    },
+    {
+      "id": "US002",
+      "titulo": "Criar agentes especializados",
+      "descricao": "Criar {{num_agentes}} agentes com identidade e especialidades definidas",
+      "criterios_aceitacao": [
+        "Cada agente com identidade clara e única",
+        "Especialidades bem definidas e complementares",
+        "Regras de comportamento documentadas",
+        "Processo de trabalho detalhado",
+        "Base de conhecimento referenciada"
+      ],
+      "arquivos": [
+        "extensoes/{{slug}}/agentes/{{agente_1_slug}}.md",
+        "extensoes/{{slug}}/agentes/{{agente_2_slug}}.md",
+        "extensoes/{{slug}}/agentes/{{agente_3_slug}}.md"
+      ],
+      "dependencias": ["US001"],
+      "prioridade": "alta",
+      "estimativa": "2-3 iterações"
+    },
+    {
+      "id": "US003",
+      "titulo": "Criar base de conhecimento",
+      "descricao": "Desenvolver arquivos de conhecimento da área {{nome}}",
+      "criterios_aceitacao": [
+        "Metodologias principais documentadas",
+        "Frameworks e modelos incluídos",
+        "Exemplos práticos em cada arquivo",
+        "Referências e fontes citadas",
+        "Mínimo de 5 arquivos de conhecimento"
+      ],
+      "arquivos": [
+        "extensoes/{{slug}}/conhecimento/"
+      ],
+      "dependencias": ["US001"],
+      "prioridade": "alta",
+      "estimativa": "3-4 iterações"
+    },
+    {
+      "id": "US004",
+      "titulo": "Criar tarefas principais",
+      "descricao": "Criar 5-7 tarefas que cobrem os principais casos de uso",
+      "criterios_aceitacao": [
+        "Cada tarefa com entradas obrigatórias e opcionais",
+        "Templates de saída completos",
+        "Gates de qualidade definidos",
+        "Próximos passos sugeridos",
+        "Vinculação com agentes correta"
+      ],
+      "arquivos": [
+        "extensoes/{{slug}}/tarefas/"
+      ],
+      "dependencias": ["US002", "US003"],
+      "prioridade": "media",
+      "estimativa": "3-4 iterações"
+    },
+    {
+      "id": "US005",
+      "titulo": "Criar workflow completo",
+      "descricao": "Criar workflow profissional com todas as fases do processo",
+      "criterios_aceitacao": [
+        "5-7 fases bem definidas",
+        "Agente responsável por cada fase",
+        "Checkpoints de validação",
+        "Entrega final especificada",
+        "Mensagens de início e conclusão"
+      ],
+      "arquivos": [
+        "extensoes/{{slug}}/workflows/{{slug}}-completo.yaml"
+      ],
+      "dependencias": ["US004"],
+      "prioridade": "media",
+      "estimativa": "2 iterações"
+    },
+    {
+      "id": "US006",
+      "titulo": "Criar modo iniciante",
+      "descricao": "Criar workflow rápido com 5 perguntas + geração Ralph",
+      "criterios_aceitacao": [
+        "Apenas 5 perguntas essenciais",
+        "Processamento automático",
+        "Integração com Ralph configurada",
+        "PRD e prompt templates criados",
+        "Fallbacks documentados"
+      ],
+      "arquivos": [
+        "extensoes/{{slug}}/workflows/modo-iniciante-{{slug}}.yaml"
+      ],
+      "dependencias": ["US005"],
+      "prioridade": "media",
+      "estimativa": "2 iterações"
+    },
+    {
+      "id": "US007",
+      "titulo": "Criar templates Ralph",
+      "descricao": "Criar PRD e prompt templates para geração autônoma",
+      "criterios_aceitacao": [
+        "prd-{{slug}}.json com user stories",
+        "prompt-{{slug}}.md otimizado",
+        "Variáveis mapeadas corretamente",
+        "Critérios de aceitação claros"
+      ],
+      "arquivos": [
+        "frameworks/ralph/templates/prd-{{slug}}.json",
+        "frameworks/ralph/templates/prompt-{{slug}}.md"
+      ],
+      "dependencias": ["US006"],
+      "prioridade": "baixa",
+      "estimativa": "1 iteração"
+    },
+    {
+      "id": "US008",
+      "titulo": "Integrar no sistema",
+      "descricao": "Atualizar delegacao.yaml e CLAUDE.md para registrar a extensão",
+      "criterios_aceitacao": [
+        "Extensão adicionada em delegacao.yaml",
+        "Gatilhos configurados para cada agente",
+        "CLAUDE.md atualizado com nova extensão",
+        "Comandos documentados",
+        "Output directories criados"
+      ],
+      "arquivos": [
+        "core/orquestrador/delegacao.yaml",
+        ".claude/CLAUDE.md"
+      ],
+      "dependencias": ["US007"],
+      "prioridade": "alta",
+      "estimativa": "1 iteração"
+    }
+  ],
+
+  "arquitetura": {
+    "padrao": "Clean Architecture",
+    "estrutura": {
+      "raiz": "extensoes/{{slug}}/",
+      "agentes": "extensoes/{{slug}}/agentes/",
+      "conhecimento": "extensoes/{{slug}}/conhecimento/",
+      "tarefas": "extensoes/{{slug}}/tarefas/",
+      "workflows": "extensoes/{{slug}}/workflows/"
+    }
+  },
+
+  "validacao": {
+    "gates": [
+      "extensao.yaml existe e é válido",
+      "Mínimo 1 agente com identidade completa",
+      "Mínimo 3 arquivos de conhecimento",
+      "Mínimo 3 tarefas funcionais",
+      "Mínimo 1 workflow completo",
+      "Modo iniciante configurado",
+      "delegacao.yaml atualizado",
+      "CLAUDE.md atualizado"
+    ]
+  },
+
+  "configuracao_ralph": {
+    "max_iteracoes": 30,
+    "paralelismo": false,
+    "validacao_continua": true,
+    "output_dir": "extensoes/{{slug}}/"
+  }
+}

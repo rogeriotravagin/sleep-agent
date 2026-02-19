@@ -1,0 +1,446 @@
+# Tarefa: Criar Landing Page
+
+id: criar-landing
+nome: Criar Landing Page de Alta Conversao
+descricao: Criar wireframe e copy de landing page otimizada para conversao
+agente: uiux
+comando: /criar-landing
+
+versao: "1.0"
+categoria: aplicacao
+
+# Baseado em: Oli Gardner (CCD), Peep Laja (CXL), LIFT Model
+
+entradas:
+  obrigatorias:
+    - nome: objetivo
+      pergunta: "Qual o objetivo da landing page?"
+      tipo: escolha
+      opcoes:
+        - Vendas (compra direta)
+        - Leads (captura de contatos)
+        - Downloads (material gratuito)
+        - Agendamento (chamada/demo)
+        - Inscricao (evento/curso)
+
+    - nome: oferta
+      pergunta: "O que voce esta oferecendo?"
+      tipo: texto
+
+    - nome: publico
+      pergunta: "Quem e o publico-alvo?"
+      tipo: texto
+
+    - nome: beneficio_principal
+      pergunta: "Qual o principal beneficio para o cliente?"
+      tipo: texto
+
+  opcionais:
+    - nome: prova_social
+      pergunta: "Tem prova social? (testimonials, numeros, logos)"
+      tipo: texto
+      padrao: "A ser criada"
+
+    - nome: urgencia
+      pergunta: "Tem urgencia ou escassez real?"
+      tipo: texto
+      padrao: "Nao"
+
+    - nome: objecoes
+      pergunta: "Quais as principais objecoes do publico?"
+      tipo: texto
+      padrao: "Preco, confianca, tempo"
+
+    - nome: origem_trafego
+      pergunta: "De onde vira o trafego?"
+      tipo: escolha
+      opcoes:
+        - Anuncios pagos
+        - Email marketing
+        - Organico/SEO
+        - Redes sociais
+        - Misto
+      padrao: "Misto"
+
+passos:
+  - numero: 1
+    acao: "Analisar objetivo e publico"
+    aplicar:
+      - LIFT Model (6 fatores)
+      - Identificar message match necessario
+      - Definir acao primaria
+
+  - numero: 2
+    acao: "Estruturar secoes"
+    sequencia_aida:
+      - Hero (Attention)
+      - Problema/Solucao (Interest)
+      - Beneficios/Features (Desire)
+      - Prova Social (Desire)
+      - CTA (Action)
+
+  - numero: 3
+    acao: "Escrever copy por secao"
+    elementos:
+      - Headlines
+      - Subheadlines
+      - Body copy
+      - CTAs
+      - Microcopy
+
+  - numero: 4
+    acao: "Criar wireframe"
+    versoes:
+      - Mobile (375px)
+      - Desktop (1440px)
+
+  - numero: 5
+    acao: "Especificar para desenvolvimento"
+
+saida:
+  formato: markdown
+  template: |
+    # Landing Page: [Nome da Oferta]
+
+    ## Visao Geral
+
+    | Elemento | Definicao |
+    |----------|-----------|
+    | **Objetivo** | [Vendas/Leads/etc] |
+    | **Oferta** | [O que esta sendo oferecido] |
+    | **Publico** | [Quem e o alvo] |
+    | **Acao Principal** | [O que queremos que facam] |
+    | **Origem Trafego** | [De onde vem] |
+
+    ---
+
+    ## Analise LIFT Model
+
+    | Fator | Status | Estrategia |
+    |-------|--------|------------|
+    | **Value Proposition** | [Forte/Media/Fraca] | [Como fortalecer] |
+    | **Clarity** | [Forte/Media/Fraca] | [Como clarificar] |
+    | **Relevance** | [Forte/Media/Fraca] | [Como tornar relevante] |
+    | **Anxiety** | [Alta/Media/Baixa] | [Como reduzir] |
+    | **Distraction** | [Alta/Media/Baixa] | [Como eliminar] |
+    | **Urgency** | [Presente/Ausente] | [Como criar] |
+
+    ---
+
+    ## Estrutura da Pagina
+
+    ### Secoes
+
+    | # | Secao | Objetivo | Copy Focus |
+    |---|-------|----------|------------|
+    | 1 | Hero | Capturar atencao | Beneficio principal |
+    | 2 | Social Proof | Credibilidade | Numeros/logos |
+    | 3 | Problema | Empatia | Dor do cliente |
+    | 4 | Solucao | Esperanca | Sua oferta |
+    | 5 | Features | Interesse | Beneficios |
+    | 6 | Como Funciona | Clareza | 3-4 passos |
+    | 7 | Testimonials | Confianca | Prova social |
+    | 8 | Pricing | Decisao | Valor |
+    | 9 | FAQ | Objecoes | Respostas |
+    | 10 | CTA Final | Acao | Ultimo push |
+
+    ---
+
+    ## Secao 1: Hero
+
+    ### Wireframe Mobile (375px)
+    ```
+    ┌─────────────────────────────────┐
+    │  [Logo]            [CTA Nav]   │
+    │                                │
+    │  [Kicker]                      │
+    │                                │
+    │  [HEADLINE]                    │
+    │  [HEADLINE]                    │
+    │                                │
+    │  [Subheadline com beneficio    │
+    │   em 1-2 linhas]               │
+    │                                │
+    │  ┌───────────────────────────┐ │
+    │  │     CTA PRIMARIO          │ │
+    │  └───────────────────────────┘ │
+    │                                │
+    │  [Link secundario]             │
+    │                                │
+    │  [Imagem/Video Hero]           │
+    │                                │
+    └─────────────────────────────────┘
+    ```
+
+    ### Wireframe Desktop (1440px)
+    ```
+    ┌─────────────────────────────────────────────────────────────┐
+    │  [Logo]                                        [CTA Nav]   │
+    ├─────────────────────────────────────────────────────────────┤
+    │                                                             │
+    │  ┌──────────────────────────┐  ┌──────────────────────────┐ │
+    │  │                          │  │                          │ │
+    │  │  [Kicker]                │  │                          │ │
+    │  │                          │  │                          │ │
+    │  │  [HEADLINE PRINCIPAL]    │  │  [Imagem/Video Hero]     │ │
+    │  │  [HEADLINE PRINCIPAL]    │  │                          │ │
+    │  │                          │  │                          │ │
+    │  │  [Subheadline]           │  │                          │ │
+    │  │                          │  │                          │ │
+    │  │  [CTA]  [Link]           │  │                          │ │
+    │  │                          │  │                          │ │
+    │  └──────────────────────────┘  └──────────────────────────┘ │
+    │                                                             │
+    └─────────────────────────────────────────────────────────────┘
+    ```
+
+    ### Copy
+
+    **Kicker (Social Proof):**
+    > [Numero ou prova social curta]
+
+    **Headline Principal:**
+    > [Headline focada no beneficio]
+
+    **Subheadline:**
+    > [Expande o beneficio em 1-2 linhas]
+
+    **CTA Primario:**
+    > [Texto do botao - acao clara]
+
+    **Link Secundario:**
+    > [Alternativa - ex: "Ver demo"]
+
+    ---
+
+    ## Secao 2: Social Proof Bar
+
+    ### Wireframe
+    ```
+    ┌─────────────────────────────────────────────────────────────┐
+    │                                                             │
+    │  [Logo 1]  [Logo 2]  [Logo 3]  [Logo 4]  [Logo 5]          │
+    │                                                             │
+    │  ou                                                         │
+    │                                                             │
+    │  [+10.000 usuarios]  [4.9★ avaliacao]  [Desde 2020]        │
+    │                                                             │
+    └─────────────────────────────────────────────────────────────┘
+    ```
+
+    ### Elementos
+    - [Logo/Numero 1]
+    - [Logo/Numero 2]
+    - [Logo/Numero 3]
+
+    ---
+
+    ## Secao 3: Problema
+
+    ### Wireframe
+    ```
+    ┌─────────────────────────────────────────────────────────────┐
+    │                                                             │
+    │  [Headline do problema]                                     │
+    │                                                             │
+    │  [Descricao da dor em 2-3 linhas]                          │
+    │                                                             │
+    │  • [Dor 1]                                                  │
+    │  • [Dor 2]                                                  │
+    │  • [Dor 3]                                                  │
+    │                                                             │
+    └─────────────────────────────────────────────────────────────┘
+    ```
+
+    ### Copy
+
+    **Headline:**
+    > [Headline que gera identificacao]
+
+    **Dores:**
+    1. [Dor 1 especifica]
+    2. [Dor 2 especifica]
+    3. [Dor 3 especifica]
+
+    ---
+
+    ## Secao 4: Solucao
+
+    ### Copy
+
+    **Headline:**
+    > [Apresenta sua solucao]
+
+    **Corpo:**
+    > [Como voce resolve o problema]
+
+    ---
+
+    ## Secao 5: Features/Benefits
+
+    ### Wireframe Desktop
+    ```
+    ┌─────────────────────────────────────────────────────────────┐
+    │                                                             │
+    │  [Headline da secao]                                        │
+    │                                                             │
+    │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
+    │  │   [Icone]   │  │   [Icone]   │  │   [Icone]   │         │
+    │  │   [Titulo]  │  │   [Titulo]  │  │   [Titulo]  │         │
+    │  │   [Desc]    │  │   [Desc]    │  │   [Desc]    │         │
+    │  └─────────────┘  └─────────────┘  └─────────────┘         │
+    │                                                             │
+    └─────────────────────────────────────────────────────────────┘
+    ```
+
+    ### Copy
+
+    **Headline:**
+    > [Por que escolher / O que voce ganha]
+
+    **Beneficio 1:**
+    - Titulo: [Beneficio em 3-5 palavras]
+    - Descricao: [1-2 linhas de suporte]
+
+    **Beneficio 2:**
+    - Titulo: [Beneficio em 3-5 palavras]
+    - Descricao: [1-2 linhas de suporte]
+
+    **Beneficio 3:**
+    - Titulo: [Beneficio em 3-5 palavras]
+    - Descricao: [1-2 linhas de suporte]
+
+    ---
+
+    ## Secao 6: Como Funciona
+
+    ### Copy
+
+    **Headline:**
+    > Como funciona
+
+    **Passo 1:** [Titulo]
+    > [Descricao em 1 linha]
+
+    **Passo 2:** [Titulo]
+    > [Descricao em 1 linha]
+
+    **Passo 3:** [Titulo]
+    > [Descricao em 1 linha]
+
+    ---
+
+    ## Secao 7: Testimonials
+
+    ### Copy
+
+    **Testimonial 1:**
+    > "[Citacao do cliente]"
+    - **Nome:** [Nome completo]
+    - **Cargo:** [Cargo/Empresa]
+
+    **Testimonial 2:**
+    > "[Citacao do cliente]"
+    - **Nome:** [Nome completo]
+    - **Cargo:** [Cargo/Empresa]
+
+    ---
+
+    ## Secao 8: FAQ
+
+    ### Perguntas
+
+    **Q: [Objecao 1 em forma de pergunta]**
+    A: [Resposta que quebra a objecao]
+
+    **Q: [Objecao 2 em forma de pergunta]**
+    A: [Resposta que quebra a objecao]
+
+    **Q: [Objecao 3 em forma de pergunta]**
+    A: [Resposta que quebra a objecao]
+
+    ---
+
+    ## Secao 9: CTA Final
+
+    ### Copy
+
+    **Headline:**
+    > [Chamada final de acao]
+
+    **Subheadline:**
+    > [Beneficio ou urgencia]
+
+    **CTA:**
+    > [Texto do botao]
+
+    ---
+
+    ## Especificacoes Tecnicas
+
+    ### Breakpoints
+    - Mobile: 320-767px
+    - Tablet: 768-1023px
+    - Desktop: 1024px+
+
+    ### Cores
+    - Background principal: [cor]
+    - Background secoes alternadas: [cor]
+    - CTA: [cor]
+    - Texto: [cor]
+
+    ### Tipografia
+    - Headlines: [fonte], [peso], [tamanho]
+    - Body: [fonte], [peso], [tamanho]
+    - CTA: [fonte], [peso], [tamanho]
+
+    ---
+
+    ## Checklist Pre-Lancamento
+
+    ### Copy
+    - [ ] Headlines claras e com beneficio
+    - [ ] Subheadlines suportam headlines
+    - [ ] Beneficios > Features
+    - [ ] Prova social presente
+    - [ ] Objecoes endereacadas
+    - [ ] CTAs com acao clara
+
+    ### Design
+    - [ ] Hierarquia visual clara
+    - [ ] Attention ratio 1:1
+    - [ ] Mobile responsivo
+    - [ ] Carregamento <3s
+
+    ### Tecnico
+    - [ ] Meta tags configuradas
+    - [ ] Favicon presente
+    - [ ] Analytics instalado
+    - [ ] Forms funcionando
+
+    ---
+
+    ## Metricas Esperadas
+
+    | Metrica | Benchmark | Meta |
+    |---------|-----------|------|
+    | CTR CTA | >3% | >5% |
+    | Bounce Rate | <50% | <40% |
+    | Scroll Depth | >50% | >70% |
+    | Conversion | >2% | >5% |
+
+conhecimento:
+  - landing-pages.md
+  - ui-ux.md
+  - copywriting.md
+
+gates:
+  - Objetivo esta claro?
+  - Attention ratio e 1:1?
+  - Copy e persuasiva?
+  - Mobile funciona bem?
+
+proximos_passos:
+  - Implementar design
+  - Configurar analytics
+  - Lancar e testar

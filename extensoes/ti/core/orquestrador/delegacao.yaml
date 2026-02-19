@@ -1,0 +1,433 @@
+# ============================================
+# DELEGAÇÃO - Extensão TI
+# ============================================
+# Sistema de roteamento de tarefas para
+# agentes especializados da extensão TI
+# ============================================
+
+extensao: ti
+versao: "1.0"
+
+# ============================================
+# GATILHOS GLOBAIS DA EXTENSÃO
+# ============================================
+
+gatilhos_extensao:
+  palavras_chave:
+    - "automatizar"
+    - "automação"
+    - "integração"
+    - "integrar"
+    - "api"
+    - "playwright"
+    - "robô"
+    - "script"
+    - "conectar sistemas"
+    - "processo manual"
+    - "copiar dados"
+    - "web scraping"
+    - "webhook"
+
+  comandos:
+    - "/ti"
+    - "/automacao-completa"
+    - "/api-rapida"
+    - "/automacao-rapida"
+
+  contextos:
+    - "preciso automatizar"
+    - "como integrar"
+    - "conectar com api"
+    - "processo manual"
+    - "fazer automático"
+
+# ============================================
+# REGRAS DE DELEGAÇÃO POR AGENTE
+# ============================================
+
+agentes:
+
+  # ------------------------------------------
+  # ANALISTA DE PROCESSOS
+  # ------------------------------------------
+  - id: analista-processos
+    arquivo: agentes/ANALISTA-PROCESSOS.md
+    comando: /analista-processos
+
+    gatilhos:
+      palavras_chave:
+        - "analisar processo"
+        - "entender processo"
+        - "mapear processo"
+        - "como funciona"
+        - "processo atual"
+        - "levantamento"
+        - "requisitos"
+        - "propor solução"
+        - "viabilidade"
+
+      frases:
+        - "preciso automatizar [algo]"
+        - "como posso automatizar"
+        - "tenho um processo manual"
+        - "faço isso todo dia"
+        - "copio dados entre"
+        - "processo que leva muito tempo"
+
+      comandos:
+        - "/analisar-processo"
+        - "/questionar-cliente"
+        - "/propor-solucao"
+        - "/analisar-viabilidade"
+        - "/analista-processos"
+
+    responsabilidades:
+      - "Primeira linha de contato com cliente"
+      - "Entender processo manual atual"
+      - "Fazer perguntas em linguagem não-técnica"
+      - "Mapear fluxo de trabalho"
+      - "Identificar oportunidades de automação"
+      - "Propor solução em linguagem simples"
+      - "Validar entendimento com cliente"
+      - "Documentar requisitos"
+      - "Calcular ROI estimado"
+
+    delega_para:
+      - agente: especialista-integracoes
+        quando: "Solução envolve API ou integração entre sistemas"
+
+      - agente: engenheiro-automacao
+        quando: "Solução envolve automação web ou Playwright"
+
+    nao_delegar_se:
+      - "Cliente ainda não explicou o processo completamente"
+      - "Faltam informações básicas"
+      - "Requisitos não estão claros"
+      - "Cliente não aprovou proposta"
+
+  # ------------------------------------------
+  # ESPECIALISTA EM INTEGRAÇÕES
+  # ------------------------------------------
+  - id: especialista-integracoes
+    arquivo: agentes/ESPECIALISTA-INTEGRACOES.md
+    comando: /especialista-integracoes
+
+    gatilhos:
+      palavras_chave:
+        - "api"
+        - "integração"
+        - "integrar"
+        - "conectar sistemas"
+        - "webhook"
+        - "endpoint"
+        - "rest"
+        - "graphql"
+        - "token"
+        - "autenticação"
+        - "oauth"
+
+      frases:
+        - "integrar com api"
+        - "conectar [sistema A] com [sistema B]"
+        - "buscar dados da api"
+        - "enviar dados para api"
+        - "sincronizar sistemas"
+
+      comandos:
+        - "/integrar-api"
+        - "/testar-api"
+        - "/especialista-integracoes"
+        - "/api-rapida"
+
+    responsabilidades:
+      - "Criar integrações com APIs"
+      - "Implementar autenticação (OAuth, tokens, etc)"
+      - "Mapear e transformar dados entre sistemas"
+      - "Implementar webhooks"
+      - "Tratamento de erros e retry logic"
+      - "Respeitar rate limits"
+      - "Testar endpoints"
+      - "Documentar integração (técnico e não-técnico)"
+      - "Criar scripts Python/JavaScript"
+
+    recebe_de:
+      - agente: analista-processos
+        entregaveis:
+          - "Requisitos técnicos estruturados"
+          - "Endpoints necessários"
+          - "Regras de transformação de dados"
+          - "Critérios de sucesso"
+
+    entrega_para:
+      - agente: analista-processos
+        entregaveis:
+          - "Integração funcionando"
+          - "Documentação técnica"
+          - "Manual não-técnico"
+          - "Troubleshooting guide"
+
+    requisitos_minimos:
+      - "Documentação da API ou endpoints conhecidos"
+      - "Credenciais de acesso (ou como obter)"
+      - "Exemplos de dados de entrada/saída"
+      - "Regras de negócio claras"
+
+  # ------------------------------------------
+  # ENGENHEIRO DE AUTOMAÇÃO
+  # ------------------------------------------
+  - id: engenheiro-automacao
+    arquivo: agentes/ENGENHEIRO-AUTOMACAO.md
+    comando: /engenheiro-automacao
+
+    gatilhos:
+      palavras_chave:
+        - "playwright"
+        - "automação web"
+        - "robô"
+        - "scraping"
+        - "preencher formulário"
+        - "clicar"
+        - "navegar"
+        - "site"
+        - "navegador"
+        - "selenium"
+        - "puppeteer"
+
+      frases:
+        - "automatizar preenchimento"
+        - "preencher formulário automaticamente"
+        - "extrair dados do site"
+        - "fazer login automaticamente"
+        - "clicar em botões"
+        - "copiar dados de página"
+
+      comandos:
+        - "/criar-automacao"
+        - "/testar-automacao"
+        - "/engenheiro-automacao"
+        - "/automacao-rapida"
+
+    responsabilidades:
+      - "Criar automações web com Playwright"
+      - "Web scraping ético e respeitoso"
+      - "Preenchimento automático de formulários"
+      - "Login e gestão de sessões"
+      - "Navegação entre páginas"
+      - "Extração de dados"
+      - "Screenshots e debugging"
+      - "Tratamento de timeout e erros"
+      - "Documentar automação (técnico e não-técnico)"
+
+    recebe_de:
+      - agente: analista-processos
+        entregaveis:
+          - "Descrição detalhada do processo"
+          - "URLs dos sites"
+          - "Credenciais de teste"
+          - "Regras e validações"
+          - "Casos especiais"
+
+    entrega_para:
+      - agente: analista-processos
+        entregaveis:
+          - "Automação funcionando"
+          - "Documentação técnica"
+          - "Manual não-técnico"
+          - "Screenshots de exemplo"
+          - "Troubleshooting guide"
+          - "Limitações identificadas"
+
+    requisitos_minimos:
+      - "URL do site a ser automatizado"
+      - "Credenciais (ou processo de login descrito)"
+      - "Processo passo a passo descrito"
+      - "Regras e validações documentadas"
+
+    limitacoes_comunicadas:
+      - "Captchas não podem ser automatizados"
+      - "Sites que mudam frequentemente podem quebrar automação"
+      - "Autenticação multi-fator (SMS/app) requer intervenção manual"
+      - "Detecção de bots pode bloquear automação"
+
+# ============================================
+# FLUXOS DE TRABALHO
+# ============================================
+
+workflows:
+
+  # Workflow: Automação Completa
+  - id: automacao-completa
+    comando: /automacao-completa
+    descricao: "Criar automação do zero até entrega"
+
+    fases:
+      - fase: DESCOBERTA
+        agente: analista-processos
+        tarefas:
+          - "/analisar-processo"
+          - "/questionar-cliente"
+        entregavel: "Processo mapeado e requisitos claros"
+
+      - fase: ANÁLISE
+        agente: analista-processos
+        tarefas:
+          - "/analisar-viabilidade"
+        entregavel: "Viabilidade técnica avaliada"
+
+      - fase: PROPOSTA
+        agente: analista-processos
+        tarefas:
+          - "/propor-solucao"
+        entregavel: "Proposta em linguagem não-técnica"
+        checkpoint: "Cliente aprovou proposta?"
+
+      - fase: DESENVOLVIMENTO
+        agente_dinamico: true
+        decisao:
+          se_envolve: "api"
+          entao: "especialista-integracoes"
+          senao_se_envolve: "automação web"
+          entao: "engenheiro-automacao"
+        tarefas_dinamicas: true
+        entregavel: "Solução técnica implementada"
+
+      - fase: TESTES
+        agente: mesmo_do_desenvolvimento
+        tarefas_dinamicas: true
+        entregavel: "Solução testada e validada"
+
+      - fase: ENTREGA
+        agente: analista-processos
+        tarefas:
+          - "/documentar"
+          - "/validar"
+        entregavel: "Documentação completa e validação com cliente"
+
+  # Workflow: API Rápida
+  - id: integracao-api-rapida
+    comando: /api-rapida
+    descricao: "Integrar com API rapidamente"
+
+    fases:
+      - fase: REQUISITOS
+        agente: analista-processos
+        entregavel: "Requisitos técnicos"
+
+      - fase: IMPLEMENTAÇÃO
+        agente: especialista-integracoes
+        tarefas:
+          - "/integrar-api"
+          - "/testar-api"
+        entregavel: "Integração funcionando"
+
+      - fase: DOCUMENTAÇÃO
+        agente: analista-processos
+        tarefas:
+          - "/documentar"
+        entregavel: "Documentação completa"
+
+  # Workflow: Automação Web Rápida
+  - id: automacao-web-rapida
+    comando: /automacao-rapida
+    descricao: "Criar automação web com Playwright rapidamente"
+
+    fases:
+      - fase: REQUISITOS
+        agente: analista-processos
+        entregavel: "Processo mapeado"
+
+      - fase: IMPLEMENTAÇÃO
+        agente: engenheiro-automacao
+        tarefas:
+          - "/criar-automacao"
+          - "/testar-automacao"
+        entregavel: "Automação funcionando"
+
+      - fase: DOCUMENTAÇÃO
+        agente: analista-processos
+        tarefas:
+          - "/documentar"
+        entregavel: "Documentação completa"
+
+# ============================================
+# REGRAS DE QUALIDADE
+# ============================================
+
+gates_qualidade:
+
+  antes_desenvolvimento:
+    - "Processo está mapeado?"
+    - "Requisitos estão claros?"
+    - "Cliente aprovou proposta?"
+    - "Viabilidade técnica confirmada?"
+
+  antes_entrega:
+    - "Solução foi testada?"
+    - "Erros são tratados adequadamente?"
+    - "Documentação técnica existe?"
+    - "Manual não-técnico existe?"
+    - "Cliente validou que funciona?"
+    - "Limitações foram comunicadas?"
+
+# ============================================
+# ESCALAÇÃO
+# ============================================
+
+escalacao:
+
+  - situacao: "Cliente não consegue fornecer informação necessária"
+    acao: "Analista orienta como obter informação ou propõe alternativa"
+
+  - situacao: "API não tem documentação"
+    acao: "Especialista testa endpoints manualmente ou propõe automação web"
+
+  - situacao: "Site tem captcha agressivo"
+    acao: "Engenheiro comunica limitação e propõe usar API se disponível"
+
+  - situacao: "Processo muito complexo para automatizar completamente"
+    acao: "Analista propõe automatizar parte principal e manter exceções manuais"
+
+  - situacao: "Cliente pede algo tecnicamente impossível"
+    acao: "Analista explica limitação e propõe alternativa viável"
+
+# ============================================
+# COMUNICAÇÃO
+# ============================================
+
+principios_comunicacao:
+  - "Sempre usar linguagem não-técnica com cliente"
+  - "Explicar conceitos através de analogias"
+  - "Validar entendimento antes de avançar"
+  - "Fazer perguntas que cliente consiga responder"
+  - "Ser honesto sobre limitações"
+  - "Quantificar benefícios quando possível"
+
+glossario_traducao:
+  "API": "forma de dois sistemas conversarem automaticamente"
+  "Webhook": "sistema A avisa sistema B quando algo acontece"
+  "Playwright": "robô que usa o navegador automaticamente"
+  "Token": "senha temporária para acessar sistema"
+  "Rate limit": "limite de quantas vezes pode acessar por minuto"
+  "Timeout": "tempo máximo de espera por resposta"
+  "Retry": "tentar de novo se der erro"
+
+# ============================================
+# MÉTRICAS DE SUCESSO
+# ============================================
+
+metricas:
+  eficiencia:
+    - "Tempo economizado (horas/semana)"
+    - "Redução de erros (%)"
+    - "Volume processado (itens/dia)"
+
+  qualidade:
+    - "Taxa de sucesso das automações (%)"
+    - "Tempo médio de resposta (APIs)"
+    - "Número de erros não tratados"
+
+  satisfacao:
+    - "Cliente consegue usar sozinho?"
+    - "Cliente entende o que foi feito?"
+    - "Cliente sabe o que fazer se der erro?"
+    - "Documentação é clara?"

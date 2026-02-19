@@ -1,0 +1,147 @@
+# =============================================================
+# TOOL DISCOVERY - Regras de Descoberta Dinamica
+# =============================================================
+# Define como o sistema descobre, valida e disponibiliza
+# ferramentas automaticamente
+# =============================================================
+
+discovery:
+
+  # ---------------------------------------------------------
+  # DESCOBERTA AO CARREGAR EXTENSAO
+  # ---------------------------------------------------------
+  ao_carregar_extensao:
+    descricao: "Quando uma extensao e carregada, verificar ferramentas"
+    passos:
+      1_escanear:
+        acao: "Verificar se extensao tem pasta ferramentas/"
+        caminho: "extensoes/{extensao}/ferramentas/"
+        se_existe: "Registrar novas ferramentas no registry"
+        se_nao_existe: "Pular (nem toda extensao tem ferramentas proprias)"
+
+      2_verificar_delegacao:
+        acao: "Ler delegacao.yaml para identificar ferramentas referenciadas"
+        caminho: "extensoes/{extensao}/core/orquestrador/delegacao.yaml"
+        extrair: "ferramentas mencionadas em tarefas"
+
+      3_validar_credenciais:
+        acao: "Para cada ferramenta encontrada, verificar env_vars"
+        verificar: "Variavel de ambiente existe no .env?"
+        resultado:
+          encontrada: "disponivel: true"
+          nao_encontrada: "disponivel: false + registrar alerta"
+
+      4_atualizar_registry:
+        acao: "Atualizar registry.yaml com ferramentas descobertas"
+        se_nova: "Adicionar ao inventario"
+        se_existente: "Atualizar disponibilidade"
+
+  # ---------------------------------------------------------
+  # DESCOBERTA DURANTE EXECUCAO (BUSCA POR CAPACIDADE)
+  # ---------------------------------------------------------
+  ao_executar_tarefa:
+    descricao: "Quando um agente precisa de uma capacidade"
+    passos:
+      1_agente_solicita:
+        formato: "Agente descreve o que precisa fazer"
+        exemplo: "Preciso enviar um email de cancelamento"
+
+      2_registry_busca:
+        acao: "Buscar ferramentas com capacidade matching"
+        metodo: "Match de capacidades no registry.yaml"
+        ordenar_por:
+          - relevancia_capacidade: 0.4
+          - disponibilidade: 0.3
+          - extensao_atual: 0.2
+          - uso_recente: 0.1
+
+      3_retorna_opcoes:
+        formato: "Lista de ferramentas com match e status"
+        exemplo:
+          - ferramenta: "mautic"
+            capacidade: "criar_email"
+            disponivel: true
+            match: 0.95
+          - ferramenta: "activecampaign"
+            capacidade: "enviar_email"
+            disponivel: true
+            match: 0.70
+
+      4_agente_seleciona:
+        acao: "Agente escolhe a ferramenta mais adequada"
+        criterio: "Maior match + disponivel"
+
+  # ---------------------------------------------------------
+  # VALIDACAO PERIODICA
+  # ---------------------------------------------------------
+  validacao_periodica:
+    descricao: "Verificar se ferramentas continuam disponiveis"
+    quando:
+      - "Inicio de sessao (Health Check)"
+      - "Mudanca de extensao"
+      - "A cada 30 minutos de sessao ativa"
+
+    verificacoes:
+      - tipo: credenciais
+        acao: "Verificar se env_vars existem"
+        se_falhou: "Marcar disponivel: false"
+
+      - tipo: conectividade
+        acao: "Verificar se API responde (opcional, so se explicitamente solicitado)"
+        se_falhou: "Marcar com alerta de conectividade"
+
+  # ---------------------------------------------------------
+  # REGISTRO AUTOMATICO
+  # ---------------------------------------------------------
+  registro_automatico:
+    descricao: "Quando detecta nova ferramenta usada pelo usuario"
+    trigger: "Usuario usa API ou script nao registrado"
+    passos:
+      1: "Detectar que a ferramenta nao esta no registry"
+      2: "Extrair metadados (tipo, capacidades, autenticacao)"
+      3: "Sugerir registro ao usuario"
+      4: "Se aprovado, adicionar ao registry.yaml"
+
+  # ---------------------------------------------------------
+  # MAPEAMENTO DE CAPACIDADES
+  # ---------------------------------------------------------
+  mapeamento:
+    descricao: "Mapa semantico de capacidades para busca inteligente"
+    sinonimos:
+      enviar_email:
+        - "mandar email"
+        - "disparar email"
+        - "criar campanha de email"
+      buscar_contato:
+        - "procurar cliente"
+        - "encontrar membro"
+        - "localizar usuario"
+      enviar_mensagem:
+        - "mandar whatsapp"
+        - "enviar zap"
+        - "mensagem whatsapp"
+      ver_progresso:
+        - "verificar andamento"
+        - "consultar progresso"
+        - "como esta o aluno"
+      solicitar_reembolso:
+        - "estornar pagamento"
+        - "devolver dinheiro"
+        - "reembolsar"
+
+# =============================================================
+# INTEGRACAO COM HEALTH CHECK
+# =============================================================
+health_check:
+  verificacoes:
+    - nome: "Registry existe"
+      nivel: 1
+      auto_correcao: "Criar com ferramentas padrao"
+
+    - nome: "Ferramentas com credenciais validadas"
+      nivel: 2
+      acao: "Alertar quais ferramentas estao indisponiveis"
+
+    - nome: "Ferramentas referenciadas por extensoes existem"
+      nivel: 2
+      acao: "Alertar se extensao referencia ferramenta nao registrada"

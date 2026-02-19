@@ -1,0 +1,381 @@
+# =====================================================
+# TAREFA: Criar Plano de Resolução para Caso Crítico
+# =====================================================
+
+id: criar-plano-resolucao
+nome: Criar Plano de Resolução
+comando: /plano-resolucao
+agente: critical-cases-specialist
+fase: estrategia-resolucao
+
+# =====================================================
+# OBJETIVO
+# =====================================================
+
+objetivo: |
+  Criar estratégia detalhada de resolução para caso crítico,
+  incluindo técnicas de de-escalation, compensações, scripts
+  de comunicação, cenários alternativos e plano de ação.
+
+# =====================================================
+# INPUT DO USUÁRIO
+# =====================================================
+
+input:
+  perguntas:
+    - id: caso_analisado
+      pergunta: "Você já fez análise do caso crítico? (/caso-critico)"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim, tenho análise completa"
+        - "Não, vou fazer agora"
+      obrigatorio: sim
+
+    - id: classificacao_risco
+      pergunta: "Classificação de risco do caso"
+      tipo: multipla_escolha
+      opcoes:
+        - "🔴 CRÍTICO"
+        - "🟠 GRAVE"
+        - "🟡 MODERADO"
+        - "🟢 BAIXO"
+      obrigatorio: sim
+
+    - id: cliente_tem_razao
+      pergunta: "Cliente tem razão legal?"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim - nós erramos"
+        - "Parcialmente - ambos têm culpa"
+        - "Não - sem violação CDC"
+        - "Má-fé - cliente tentando extorquir"
+      obrigatorio: sim
+
+    - id: estado_emocional_cliente
+      pergunta: "Estado emocional do cliente (Termômetro 1-5)"
+      tipo: multipla_escolha
+      opcoes:
+        - "Nível 5: 🔴 CRÍTICO (amygdala hijack, muito agressivo)"
+        - "Nível 4: 🟠 GRAVE (alta emoção, frustrado)"
+        - "Nível 3: 🟡 MODERADO (frustração controlada)"
+        - "Nível 2: 🟢 BAIXO (decepção leve)"
+        - "Nível 1: ⚪ NEUTRO (racional)"
+      obrigatorio: sim
+
+    - id: objetivo_principal
+      pergunta: "Objetivo principal da resolução"
+      tipo: multipla_escolha
+      opcoes:
+        - "Prevenir processo judicial"
+        - "Proteger reputação (exposição pública)"
+        - "Manter o cliente"
+        - "Minimizar custo"
+        - "Divórcio amigável"
+      obrigatorio: sim
+
+# =====================================================
+# PROCESSO
+# =====================================================
+
+processo:
+  etapas:
+    - numero: 1
+      nome: DEFINIR_OBJETIVOS
+      acoes:
+        - "Priorizar objetivos (em ordem):"
+        - "  1. Prevenir processo judicial"
+        - "  2. Proteger reputação"
+        - "  3. Minimizar custo"
+        - "  4. Resolver dentro do CDC"
+        - "  5. (Opcional) Manter cliente"
+
+    - numero: 2
+      nome: IDENTIFICAR_TIPO_CASO
+      conhecimento:
+        - conhecimento/casos-criticos-framework.md
+      acoes:
+        - "Classificar em:"
+        - "  A) Cliente tem razão → Reconhecer + Resolver + Compensar"
+        - "  B) Cliente tem razão parcial → Negociação equilibrada"
+        - "  C) Cliente não tem razão → Educação + Empatia + Valor adicional"
+        - "  D) Cliente má-fé → Firmeza + Documentação + Limites"
+
+    - numero: 3
+      nome: ESCOLHER_TECNICAS_DEESCALATION
+      conhecimento:
+        - conhecimento/estrategias-deescalation.md
+      acoes:
+        - "Baseado no estado emocional do cliente, escolher:"
+        - ""
+        - "Para Nível 5 (Crítico):"
+        - "  - Accusation Audit (antecipar críticas)"
+        - "  - Labeling (rotular emoção)"
+        - "  - Tactical Empathy extrema"
+        - "  - Dar tempo para desabafar"
+        - ""
+        - "Para Nível 4 (Grave):"
+        - "  - Labeling"
+        - "  - Tactical Empathy"
+        - "  - Mirroring"
+        - "  - Summary"
+        - ""
+        - "Para Nível 3 (Moderado):"
+        - "  - Labeling leve"
+        - "  - Nonviolent Communication"
+        - "  - Calibrated Questions"
+        - ""
+        - "Para Nível 2-1 (Baixo/Neutro):"
+        - "  - Comunicação direta"
+        - "  - Nonviolent Communication"
+        - "  - Foco em solução"
+
+    - numero: 4
+      nome: DEFINIR_COMPENSACAO
+      conhecimento:
+        - conhecimento/casos-criticos-framework.md
+      acoes:
+        - "Framework de Compensações:"
+        - ""
+        - "Nível 1 - Desculpas:"
+        - "  Quando: Erro pequeno, sem impacto"
+        - "  O que: Email de desculpas sinceras"
+        - ""
+        - "Nível 2 - Reconhecimento + Ação:"
+        - "  Quando: Erro moderado"
+        - "  O que: Resolver + explicar prevenção"
+        - ""
+        - "Nível 3 - Compensação Simbólica:"
+        - "  Quando: Erro com impacto pequeno"
+        - "  O que: Desconto, upgrade temporário"
+        - ""
+        - "Nível 4 - Compensação Proporcional:"
+        - "  Quando: Erro com impacto médio"
+        - "  O que: Reembolso proporcional, créditos"
+        - ""
+        - "Nível 5 - Compensação Total:"
+        - "  Quando: Erro grave ou CDC violado"
+        - "  O que: Reembolso total + compensação adicional"
+        - ""
+        - "Nível 6 - Acordo Formal:"
+        - "  Quando: Risco de processo"
+        - "  O que: Acordo escrito + compensação + quitação"
+
+    - numero: 5
+      nome: CRIAR_CENARIOS
+      acoes:
+        - "Cenário A - Melhor Caso:"
+        - "  - O que oferecemos"
+        - "  - Como cliente reage"
+        - "  - Resultado esperado"
+        - ""
+        - "Cenário B - Caso Provável:"
+        - "  - O que oferecemos"
+        - "  - Como cliente reage"
+        - "  - Resultado esperado"
+        - ""
+        - "Cenário C - Pior Caso:"
+        - "  - Cliente rejeita tudo"
+        - "  - O que fazemos (Plano B)"
+        - "  - Quando escalar"
+        - ""
+        - "Plano B:"
+        - "  - Alternativa 1"
+        - "  - Alternativa 2"
+        - ""
+        - "Plano C:"
+        - "  - Última alternativa antes de escalar"
+
+    - numero: 6
+      nome: ESTRUTURAR_COMUNICACAO
+      conhecimento:
+        - conhecimento/estrategias-deescalation.md
+      acoes:
+        - "Usar estrutura de comunicação:"
+        - ""
+        - "1️⃣ ACCUSATION AUDIT (se Nível 5):"
+        - "   [Antecipar o que cliente pensa]"
+        - ""
+        - "2️⃣ LABELING + TACTICAL EMPATHY:"
+        - "   'Parece que você está [emoção].'"
+        - "   'Se eu estivesse no seu lugar, também estaria [emoção]'"
+        - ""
+        - "3️⃣ SUMMARY:"
+        - "   'Deixe-me resumir o que entendi: [pontos]'"
+        - ""
+        - "4️⃣ BUSCAR 'EXATAMENTE':"
+        - "   [Ajustar até cliente confirmar]"
+        - ""
+        - "5️⃣ RESPONSABILIDADE:"
+        - "   [Se erramos] 'Nós erramos em [X]'"
+        - "   [Se não] 'Aqui está o que aconteceu: [explicação]'"
+        - ""
+        - "6️⃣ SOLUÇÃO (NVC):"
+        - "   1. [Ação 1] - [Prazo]"
+        - "   2. [Ação 2] - [Prazo]"
+        - ""
+        - "7️⃣ COMPENSAÇÃO:"
+        - "   'Além disso, [compensação]'"
+        - ""
+        - "8️⃣ GARANTIA:"
+        - "   'Para garantir não repetição: [ação]'"
+        - ""
+        - "9️⃣ CALIBRATED QUESTION:"
+        - "   'Isso resolve sua situação?'"
+        - ""
+        - "🔟 CONTATO DIRETO:"
+        - "   [Telefone/WhatsApp]"
+
+    - numero: 7
+      nome: DEFINIR_ESCALACAO
+      acoes:
+        - "Quando escalar para JURÍDICO:"
+        - "  - Ameaça formal de processo"
+        - "  - Cliente mencionou advogado"
+        - "  - Notificação recebida"
+        - "  - Score risco > 80"
+        - "  - Valor > [threshold]"
+        - ""
+        - "Quando escalar para LIDERANÇA:"
+        - "  - Risco reputacional crítico"
+        - "  - Decisão cria precedente"
+        - "  - Cliente VIP"
+        - "  - Valor > [threshold]"
+        - ""
+        - "Quando escalar para RP:"
+        - "  - Exposição pública alta visibilidade"
+        - "  - Potencial viralização"
+        - "  - Mídia envolvida"
+
+# =====================================================
+# OUTPUT
+# =====================================================
+
+output:
+  template: templates/plano-resolucao-caso-critico.md
+
+  conteudo:
+    - secao: RESUMO_EXECUTIVO
+      itens:
+        - Caso (ID/nome cliente)
+        - Classificação de risco
+        - Objetivo principal
+        - Estratégia escolhida
+
+    - secao: ANALISE_RAPIDA
+      itens:
+        - Cliente tem razão? (SIM/PARCIAL/NÃO)
+        - Estado emocional (Nível 1-5)
+        - Tipo de caso (A/B/C/D)
+        - CDC aplicável (se houver)
+
+    - secao: OBJETIVOS
+      itens:
+        - Lista priorizada de objetivos
+        - Métrica de sucesso para cada
+
+    - secao: ESTRATEGIA_DE_DEESCALATION
+      itens:
+        - Técnicas escolhidas (com justificativa)
+        - Como aplicar cada técnica
+        - Canal de comunicação recomendado
+        - Tom apropriado
+
+    - secao: COMPENSACAO
+      itens:
+        - Nível de compensação (1-6)
+        - O que oferecer
+        - Valor estimado
+        - Justificativa
+
+    - secao: CENARIOS
+      itens:
+        - Cenário A: Melhor Caso
+        - Cenário B: Caso Provável
+        - Cenário C: Pior Caso
+        - Plano B
+        - Plano C
+
+    - secao: SCRIPT_DE_COMUNICACAO
+      itens:
+        - Template completo de comunicação
+        - Versão EMAIL (estruturada)
+        - Versão TELEFONE (roteiro)
+        - Versão CHAT (bullets)
+        - Pontos-chave a mencionar
+        - Pontos a NUNCA mencionar
+
+    - secao: PLANO_DE_ACAO
+      itens:
+        - Ação 1: [descrição] - Responsável - Prazo
+        - Ação 2: [descrição] - Responsável - Prazo
+        - Ação 3: [descrição] - Responsável - Prazo
+        - (lista completa numerada)
+
+    - secao: ESCALACAO
+      itens:
+        - Escalar para Jurídico? (SIM/NÃO + quando)
+        - Escalar para Liderança? (SIM/NÃO + quando)
+        - Escalar para RP? (SIM/NÃO + quando)
+        - Critérios para escalação
+
+    - secao: DOCUMENTACAO
+      itens:
+        - O que documentar
+        - Como documentar
+        - Quando documentar
+
+    - secao: FOLLOW_UP
+      itens:
+        - Quando fazer follow-up
+        - O que perguntar
+        - Como acompanhar
+
+    - secao: METRICAS_DE_SUCESSO
+      itens:
+        - Como medir se resolveu
+        - KPIs específicos
+        - Critério de sucesso
+
+  formato: markdown
+  salvar_em: workspace/[estrutura]/customer-success/casos-criticos/planos-acao/
+
+# =====================================================
+# VALIDAÇÕES
+# =====================================================
+
+validacoes:
+  - item: estrategia_especifica
+    descricao: "Estratégia deve ser específica para este caso (não genérica)"
+    critico: sim
+
+  - item: tecnicas_deescalation
+    descricao: "Deve listar técnicas específicas de de-escalation a usar"
+    critico: sim
+
+  - item: scripts_completos
+    descricao: "Scripts de comunicação devem estar completos e acionáveis"
+    critico: sim
+
+  - item: cenarios_realistas
+    descricao: "Cenários devem ser realistas e com planos B e C"
+    critico: sim
+
+  - item: plano_acao_detalhado
+    descricao: "Plano de ação deve ter responsáveis e prazos"
+    critico: sim
+
+# =====================================================
+# REFERÊNCIAS
+# =====================================================
+
+referencias:
+  conhecimento:
+    - conhecimento/casos-criticos-framework.md
+    - conhecimento/estrategias-deescalation.md
+
+  templates:
+    - templates/plano-resolucao-caso-critico.md
+    - templates/scripts-comunicacao.md
+
+  agente:
+    - agentes/CRITICAL-CASES.md

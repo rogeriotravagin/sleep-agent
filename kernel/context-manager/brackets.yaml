@@ -1,0 +1,63 @@
+# =============================================================
+# CONTEXT BRACKETS - Faixas de Contexto Adaptativas
+# =============================================================
+# Adapta a injecao de contexto baseado na profundidade da conversa
+# Quanto mais longa a conversa, mais agressivo o reforco de regras
+# =============================================================
+
+brackets:
+
+  FRESH:
+    descricao: "Conversa recente, muito contexto disponivel"
+    indicador: "turnos < 10"
+    carregar:
+      - constituicao: "resumo (artigos como lista)"
+      - blackboard: "completo"
+      - memoria_semantica: "apenas categorias relevantes para tarefa"
+    nao_carregar:
+      - conhecimento_profundo: "lazy load sob demanda"
+      - historico_tarefas: "nao necessario"
+
+  MODERATE:
+    descricao: "Conversa em andamento, contexto moderado"
+    indicador: "10 <= turnos < 30"
+    carregar:
+      - constituicao: "artigos NON_NEGOTIABLE completos"
+      - blackboard: "completo"
+      - memoria_semantica: "relevante + episodica recente"
+    reforcar:
+      - decisoes_sessao: "relembrar o que ja foi decidido"
+      - tom_voz: "re-injetar se definido"
+
+  DEPLETED:
+    descricao: "Conversa longa, contexto escasso"
+    indicador: "30 <= turnos < 60"
+    carregar:
+      - constituicao: "TODOS os artigos (texto completo)"
+      - blackboard: "completo"
+      - memoria: "tudo relevante (semantica + episodica + trabalho)"
+    reforcar_fortemente:
+      - icp: "re-injetar se definido"
+      - tom_voz: "re-injetar se definido"
+      - decisoes: "re-injetar TODAS da sessao"
+    alertar: "Conversa longa. Considere salvar progresso."
+
+  CRITICAL:
+    descricao: "Conversa muito longa, risco de perda de contexto"
+    indicador: "turnos >= 60"
+    carregar:
+      - constituicao: "TUDO"
+      - blackboard: "completo"
+      - memoria: "tudo"
+    acoes:
+      - "Sugerir salvar trabalho e iniciar nova sessao"
+      - "Salvar checkpoint no blackboard"
+      - "Registrar estado completo na memoria de trabalho"
+
+# =============================================================
+# COMO DETERMINAR A FAIXA
+# =============================================================
+calculo:
+  metodo: "Contar turnos de conversa (pares usuario/agente)"
+  atualizar: "blackboard.contexto.turnos e blackboard.contexto.bracket"
+  fallback: "Se nao conseguir calcular, assumir MODERATE"

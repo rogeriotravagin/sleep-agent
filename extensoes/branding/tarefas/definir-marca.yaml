@@ -1,0 +1,272 @@
+# Tarefa: Definir Marca
+
+id: definir-marca
+nome: Definir Identidade de Marca
+descricao: Construir a identidade completa da marca usando frameworks estrategicos
+agente: brand-strategist
+comando: /definir-marca
+
+versao: "1.0"
+categoria: estrategia
+
+# Baseado em: Simon Sinek, Marty Neumeier, David Aaker
+
+entradas:
+  obrigatorias:
+    - nome: nome_empresa
+      pergunta: "Qual o nome da empresa/marca?"
+      tipo: texto
+
+    - nome: o_que_faz
+      pergunta: "O que voce vende ou oferece?"
+      tipo: texto
+
+    - nome: problema
+      pergunta: "Qual problema voce resolve para seus clientes?"
+      tipo: texto
+
+    - nome: publico
+      pergunta: "Quem e seu cliente ideal?"
+      tipo: texto
+
+    - nome: diferencial
+      pergunta: "O que te torna diferente dos concorrentes?"
+      tipo: texto
+
+  opcionais:
+    - nome: concorrentes
+      pergunta: "Quem sao seus principais concorrentes?"
+      tipo: texto
+      padrao: "A ser pesquisado"
+
+    - nome: valores
+      pergunta: "Quais valores sao inegociaveis para voce?"
+      tipo: texto
+      padrao: "A ser definido"
+
+passos:
+  - numero: 1
+    acao: "Aplicar Golden Circle (Simon Sinek)"
+    estrutura:
+      why: "Por que a empresa existe? Qual o proposito?"
+      how: "Como faz diferente? Quais os valores?"
+      what: "O que oferece? Produtos/servicos"
+
+  - numero: 2
+    acao: "Identificar Brand Archetype"
+    arquétipos:
+      - Inocente
+      - Explorador
+      - Sabio
+      - Heroi
+      - Fora-da-Lei
+      - Mago
+      - Cara Comum
+      - Amante
+      - Bobo da Corte
+      - Cuidador
+      - Criador
+      - Governante
+
+  - numero: 3
+    acao: "Criar Positioning Statement"
+    template: |
+      Para [publico-alvo]
+      que [necessidade/problema],
+      [marca] e a [categoria]
+      que [beneficio principal]
+      porque [razao para crer].
+
+  - numero: 4
+    acao: "Definir Brand Prism (Kapferer)"
+    facetas:
+      externas:
+        - Physique (aparencia)
+        - Relationship (relacao com cliente)
+        - Reflection (como reflete usuario)
+      internas:
+        - Personality (caracteristicas)
+        - Culture (valores)
+        - Self-image (autoimagem)
+
+  - numero: 5
+    acao: "Mapear diferenciacao"
+    elementos:
+      - Unique Value Proposition
+      - Points of Difference
+      - Razoes para Crer
+
+saida:
+  formato: markdown
+  template: |
+    # Identidade de Marca: [Nome]
+
+    ## 1. Golden Circle
+
+    ### WHY - Proposito
+    > [Declaracao de proposito inspiradora]
+
+    **Por que existimos:**
+    [Explicacao do proposito fundamental]
+
+    ### HOW - Valores e Processos
+    **Como fazemos diferente:**
+    1. [Valor/processo 1]
+    2. [Valor/processo 2]
+    3. [Valor/processo 3]
+
+    ### WHAT - Oferta
+    **O que oferecemos:**
+    [Descricao clara de produtos/servicos]
+
+    ---
+
+    ## 2. Brand Archetype
+
+    ### Arquetipo Principal: [Nome]
+
+    **Desejo Core:** [Desejo fundamental]
+
+    **Caracteristicas:**
+    - [Traco 1]
+    - [Traco 2]
+    - [Traco 3]
+
+    **Tom de Comunicacao:**
+    [Como o arquetipo se comunica]
+
+    **Marcas de Referencia:**
+    [Outras marcas com mesmo arquetipo]
+
+    ### Arquetipo Secundario: [Nome] (se aplicavel)
+    [Descricao breve]
+
+    ---
+
+    ## 3. Positioning Statement
+
+    > Para **[publico-alvo]**
+    > que **[necessidade/problema]**,
+    > **[Nome da Marca]** e a **[categoria]**
+    > que **[beneficio principal]**
+    > porque **[razao para crer]**.
+
+    ### Versao Curta (Elevator Pitch)
+    > [1-2 frases que resumem o posicionamento]
+
+    ---
+
+    ## 4. Brand Prism
+
+    ### Facetas Externas (Visiveis)
+
+    | Faceta | Descricao |
+    |--------|-----------|
+    | **Physique** | [Aparencia visual da marca] |
+    | **Relationship** | [Como interage com clientes] |
+    | **Reflection** | [Como reflete seu usuario ideal] |
+
+    ### Facetas Internas (Espirito)
+
+    | Faceta | Descricao |
+    |--------|-----------|
+    | **Personality** | [Tracos de personalidade] |
+    | **Culture** | [Valores e crencas] |
+    | **Self-Image** | [Como a marca se ve] |
+
+    ---
+
+    ## 5. Diferenciacao
+
+    ### Unique Value Proposition
+    > [Proposta de valor unica em 1-2 frases]
+
+    ### Points of Difference (PODs)
+    1. **[POD 1]:** [Explicacao]
+    2. **[POD 2]:** [Explicacao]
+    3. **[POD 3]:** [Explicacao]
+
+    ### Points of Parity (POPs)
+    - [O que precisa ter para competir]
+
+    ### Razoes para Crer (RTBs)
+    1. [Prova/evidencia 1]
+    2. [Prova/evidencia 2]
+    3. [Prova/evidencia 3]
+
+    ---
+
+    ## 6. Brand Voice
+
+    ### Tom de Voz
+    - **Primario:** [Adjetivo 1]
+    - **Secundario:** [Adjetivo 2]
+    - **Terciario:** [Adjetivo 3]
+
+    ### Personalidade na Escrita
+    | Somos | Nao somos |
+    |-------|-----------|
+    | [Caracteristica] | [Oposto] |
+    | [Caracteristica] | [Oposto] |
+    | [Caracteristica] | [Oposto] |
+
+    ### Vocabulario
+    **Palavras a usar:**
+    - [Palavra 1]
+    - [Palavra 2]
+
+    **Palavras a evitar:**
+    - [Palavra 1]
+    - [Palavra 2]
+
+    ---
+
+    ## 7. Tagline/Slogan
+
+    ### Opcoes
+    1. "[Tagline 1]"
+    2. "[Tagline 2]"
+    3. "[Tagline 3]"
+
+    ### Recomendacao
+    **"[Tagline escolhida]"**
+
+    **Justificativa:**
+    [Por que esta tagline funciona]
+
+    ---
+
+    ## 8. Resumo Executivo
+
+    | Elemento | Definicao |
+    |----------|-----------|
+    | **Proposito (WHY)** | [Resumo] |
+    | **Arquetipo** | [Nome] |
+    | **Posicionamento** | [Resumo] |
+    | **Diferencial** | [Resumo] |
+    | **Tom de Voz** | [Resumo] |
+    | **Tagline** | [Tagline] |
+
+    ---
+
+    ## 9. Proximos Passos
+
+    1. Criar identidade visual (/identidade-visual)
+    2. Desenvolver logo (/criar-logo)
+    3. Definir paleta de cores (/paleta-cores)
+    4. Criar design system (/design-system)
+
+conhecimento:
+  - branding.md
+  - personal-branding.md
+
+gates:
+  - Golden Circle esta claro e inspirador?
+  - Arquetipo faz sentido para a marca?
+  - Posicionamento e diferenciado?
+  - Tom de voz e consistente?
+
+proximos_passos:
+  - Criar logo (/criar-logo)
+  - Definir identidade visual (/identidade-visual)
+  - Criar landing page (/criar-landing)

@@ -1,0 +1,260 @@
+# ============================================
+# TAREFA: Criar Atividade Prática
+# ============================================
+
+id: criar-atividade
+nome: Criar Atividade Prática
+descricao: Criar atividade prática que desenvolve habilidades através da aplicação
+agente: especialista-avaliacao
+comando: /criar-atividade
+versao: "1.0"
+categoria: avaliacao
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: competencia
+      pergunta: "Qual competência/habilidade a atividade deve desenvolver?"
+      tipo: texto
+      exemplo: "Criar headlines persuasivas usando a fórmula AIDA"
+
+    - nome: contexto
+      pergunta: "Qual o contexto/cenário da atividade?"
+      tipo: texto
+      exemplo: "O aluno é consultor de marketing contratado por uma loja de roupas"
+
+    - nome: entregavel
+      pergunta: "O que o aluno deve entregar/produzir?"
+      tipo: texto
+      exemplo: "5 headlines para campanha de Black Friday"
+
+  opcionais:
+    - nome: tipo
+      pergunta: "Qual o tipo de atividade?"
+      tipo: escolha
+      opcoes:
+        - "Exercício individual"
+        - "Projeto prático"
+        - "Estudo de caso"
+        - "Simulação/Role play"
+        - "Desafio em grupo"
+      padrao: "Exercício individual"
+
+    - nome: nivel
+      pergunta: "Qual o nível de dificuldade?"
+      tipo: escolha
+      opcoes:
+        - "Básico (reprodução)"
+        - "Intermediário (aplicação)"
+        - "Avançado (criação)"
+      padrao: "Intermediário (aplicação)"
+
+    - nome: tempo
+      pergunta: "Tempo estimado para realização?"
+      tipo: texto
+      padrao: "30 minutos"
+
+    - nome: recursos_permitidos
+      pergunta: "Quais recursos o aluno pode usar?"
+      tipo: lista
+      exemplo:
+        - "Material do curso"
+        - "Internet para pesquisa"
+        - "Templates fornecidos"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Definir cenário"
+    detalhes:
+      - Criar situação realista
+      - Contextualizar personagens
+      - Apresentar desafio/problema
+      - Definir restrições
+
+  - numero: 2
+    acao: "Especificar requisitos"
+    detalhes:
+      - Listar o que deve ser entregue
+      - Definir critérios obrigatórios
+      - Estabelecer formato de entrega
+
+  - numero: 3
+    acao: "Criar rubrica"
+    detalhes:
+      - Definir critérios de avaliação
+      - Criar níveis de desempenho
+      - Atribuir pesos
+
+  - numero: 4
+    acao: "Elaborar instruções"
+    detalhes:
+      - Escrever passo a passo claro
+      - Incluir exemplos quando útil
+      - Antecipar dúvidas comuns
+
+  - numero: 5
+    acao: "Criar gabarito/modelo"
+    detalhes:
+      - Produzir exemplo de resposta
+      - Identificar pontos-chave
+      - Preparar feedback padrão
+
+# ============================================
+# SAÍDA
+# ============================================
+
+saida:
+  formato: markdown
+  local: output/atividades/
+  template: |
+    # Atividade: {{titulo}}
+
+    ## Informações
+
+    | Item | Descrição |
+    |------|-----------|
+    | **Tipo** | {{tipo}} |
+    | **Nível** | {{nivel}} |
+    | **Tempo estimado** | {{tempo}} |
+    | **Competência** | {{competencia}} |
+
+    ---
+
+    ## Contexto
+
+    ### Cenário
+    {{contexto}}
+
+    ### Sua Missão
+    [Descrição do que o aluno precisa resolver]
+
+    ### Informações Disponíveis
+    - [Dado relevante 1]
+    - [Dado relevante 2]
+    - [Dado relevante 3]
+
+    ---
+
+    ## Instruções
+
+    ### O que você deve fazer
+
+    **Passo 1:** [Primeira ação]
+
+    **Passo 2:** [Segunda ação]
+
+    **Passo 3:** [Terceira ação]
+
+    ### O que você deve entregar
+
+    {{entregavel}}
+
+    **Formato de entrega:** [Especificar formato]
+
+    ### Recursos permitidos
+
+    - [Recurso 1]
+    - [Recurso 2]
+
+    ---
+
+    ## Critérios de Avaliação
+
+    ### Rubrica
+
+    | Critério | Excelente (4) | Bom (3) | Satisfatório (2) | Insuficiente (1) |
+    |----------|---------------|---------|------------------|------------------|
+    | **[Critério 1]** | [Descrição] | [Descrição] | [Descrição] | [Descrição] |
+    | **[Critério 2]** | [Descrição] | [Descrição] | [Descrição] | [Descrição] |
+    | **[Critério 3]** | [Descrição] | [Descrição] | [Descrição] | [Descrição] |
+    | **[Critério 4]** | [Descrição] | [Descrição] | [Descrição] | [Descrição] |
+
+    ### Pontuação
+
+    | Faixa | Conceito |
+    |-------|----------|
+    | 14-16 | Excelente |
+    | 11-13 | Bom |
+    | 8-10 | Satisfatório |
+    | < 8 | Refazer |
+
+    ---
+
+    ## Dicas
+
+    ### Para um bom resultado
+
+    - [Dica 1]
+    - [Dica 2]
+    - [Dica 3]
+
+    ### Erros comuns a evitar
+
+    - [Erro 1]
+    - [Erro 2]
+
+    ---
+
+    ## Exemplo (Modelo)
+
+    > Este é um exemplo de entrega excelente para referência:
+
+    [Exemplo de resposta modelo]
+
+    **Por que é bom:**
+    - [Ponto forte 1]
+    - [Ponto forte 2]
+
+    ---
+
+    ## Entrega
+
+    - **Prazo:** [Data/Momento]
+    - **Onde:** [Local de entrega]
+    - **Formato:** [Especificação]
+
+    ---
+
+    ## Após a Entrega
+
+    Você receberá feedback com:
+    - Pontuação por critério
+    - Comentários específicos
+    - Sugestões de melhoria
+
+# ============================================
+# CONHECIMENTO UTILIZADO
+# ============================================
+
+conhecimento:
+  - conhecimento/avaliacoes-aprendizagem.md
+  - conhecimento/taxonomia-bloom.md
+  - conhecimento/engajamento-alunos.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "A atividade desenvolve a competência proposta?"
+  - "O cenário é realista e relevante?"
+  - "As instruções são claras e completas?"
+  - "A rubrica tem critérios objetivos?"
+  - "O tempo estimado é realista?"
+  - "Há exemplo de referência?"
+
+# ============================================
+# PRÓXIMOS PASSOS SUGERIDOS
+# ============================================
+
+proximos_passos:
+  - "/criar-rubrica - Detalhar rubrica de avaliação"
+  - "/criar-exercicio - Criar mais exercícios"
+  - "/gamificar - Adicionar elementos de gamificação"

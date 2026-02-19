@@ -1,0 +1,183 @@
+# ============================================
+# TAREFA: Criar OKRs de Produto
+# ============================================
+
+id: criar-okrs
+nome: Criar OKRs de Produto
+comando: /criar-okrs
+agente: product-strategist
+fase: estrategia
+
+descricao: |
+  Definir Objectives and Key Results trimestrais
+  alinhados com a estrategia de produto.
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: nome_produto
+      descricao: Nome do produto
+      tipo: texto
+
+    - nome: periodo
+      descricao: Trimestre/Periodo (ex. Q1 2024)
+      tipo: texto
+
+    - nome: estrategia
+      descricao: Contexto estrategico ou visao
+      tipo: texto
+
+  opcionais:
+    - nome: okrs_anteriores
+      descricao: OKRs do periodo anterior
+      tipo: texto
+
+    - nome: metricas_atuais
+      descricao: Metricas atuais do produto
+      tipo: objeto
+
+# ============================================
+# PERGUNTAS GUIA
+# ============================================
+
+perguntas:
+  - "Qual o periodo dos OKRs? (Ex: Q1 2024)"
+  - "Quais sao os objetivos estrategicos da empresa?"
+  - "Quais metricas do produto precisam melhorar?"
+  - "O que o time precisa focar este trimestre?"
+  - "Quais os maiores desafios atuais?"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    nome: "Revisar Contexto"
+    descricao: "Entender estrategia e estado atual"
+    acoes:
+      - Revisar visao de produto
+      - Analisar OKRs anteriores (se houver)
+      - Identificar gaps e oportunidades
+
+  - numero: 2
+    nome: "Definir Objetivos"
+    descricao: "Criar 3-5 objetivos qualitativos"
+    acoes:
+      - Brainstorm de objetivos
+      - Priorizar por impacto
+      - Garantir que sao inspiradores
+
+  - numero: 3
+    nome: "Criar Key Results"
+    descricao: "Definir 2-4 KRs por objetivo"
+    acoes:
+      - Identificar metricas relevantes
+      - Definir baseline e target
+      - Validar se sao mensuraveis
+
+  - numero: 4
+    nome: "Validar Ambicao"
+    descricao: "Garantir nivel correto de stretch"
+    acoes:
+      - Verificar se sao ambiciosos (stretch)
+      - Confirmar que sao alcancaveis
+      - Aplicar regra do 70%
+
+  - numero: 5
+    nome: "Documentar e Alinhar"
+    descricao: "Finalizar documento e preparar comunicacao"
+    acoes:
+      - Usar template padrao
+      - Conectar com iniciativas
+      - Preparar comunicacao
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # OKRs {{periodo}} - {{nome_produto}}
+
+  ## Contexto
+  {{contexto_estrategico}}
+
+  ---
+
+  ## Objetivo 1: {{objetivo_1}}
+
+  **Por que isso importa:**
+  {{justificativa_1}}
+
+  | KR | Baseline | Target | Responsavel |
+  |----|----------|--------|-------------|
+  | {{kr_1_1}} | {{base_1_1}} | {{target_1_1}} | {{resp_1_1}} |
+  | {{kr_1_2}} | {{base_1_2}} | {{target_1_2}} | {{resp_1_2}} |
+  | {{kr_1_3}} | {{base_1_3}} | {{target_1_3}} | {{resp_1_3}} |
+
+  **Iniciativas planejadas:**
+  - {{iniciativa_1_1}}
+  - {{iniciativa_1_2}}
+
+  ---
+
+  ## Objetivo 2: {{objetivo_2}}
+
+  **Por que isso importa:**
+  {{justificativa_2}}
+
+  | KR | Baseline | Target | Responsavel |
+  |----|----------|--------|-------------|
+  | {{kr_2_1}} | {{base_2_1}} | {{target_2_1}} | {{resp_2_1}} |
+  | {{kr_2_2}} | {{base_2_2}} | {{target_2_2}} | {{resp_2_2}} |
+
+  **Iniciativas planejadas:**
+  - {{iniciativa_2_1}}
+  - {{iniciativa_2_2}}
+
+  ---
+
+  ## Objetivo 3: {{objetivo_3}}
+
+  [Mesmo formato]
+
+  ---
+
+  ## Riscos e Dependencias
+  - {{risco_1}}
+  - {{dependencia_1}}
+
+  ## Cadencia de Check-in
+  - Semanal: [dia/hora]
+  - Review: [data]
+
+  ---
+  *Criado em: {{data}}*
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+qualidade:
+  criterios:
+    - "Objetivos sao qualitativos e inspiradores?"
+    - "KRs sao quantitativos com numeros especificos?"
+    - "Targets sao ambiciosos mas alcancaveis (70%)?"
+    - "Cada KR tem baseline definido?"
+    - "Ha 3-5 objetivos no maximo?"
+    - "Ha 2-4 KRs por objetivo?"
+
+  validacao:
+    - "Time entende e concorda com OKRs?"
+    - "Ha alinhamento com OKRs da empresa?"
+
+# ============================================
+# OUTPUT
+# ============================================
+
+output:
+  arquivo: "okrs-{{periodo}}.md"
+  pasta: "output/{{produto}}/produtos/okrs/"

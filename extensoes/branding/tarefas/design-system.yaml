@@ -1,0 +1,532 @@
+# Tarefa: Design System
+
+id: design-system
+nome: Criar Design System
+descricao: Desenvolver sistema de design escalavel com tokens e componentes
+agente: designer
+comando: /design-system
+
+versao: "1.0"
+categoria: sistema
+
+# Baseado em: Atomic Design (Brad Frost), Material Design, Human Interface Guidelines
+
+entradas:
+  obrigatorias:
+    - nome: marca
+      pergunta: "Qual o nome da marca?"
+      tipo: texto
+
+    - nome: plataforma
+      pergunta: "Para qual plataforma?"
+      tipo: escolha
+      opcoes:
+        - Web (landing pages, sites)
+        - Web App (aplicacao)
+        - Mobile App
+        - Todas
+
+    - nome: identidade_existente
+      pergunta: "Ja tem identidade visual definida? (logo, cores, tipografia)"
+      tipo: escolha
+      opcoes:
+        - Sim, completa
+        - Parcial
+        - Nao, precisa criar
+
+  opcionais:
+    - nome: escala
+      pergunta: "Qual a escala do projeto?"
+      tipo: escolha
+      opcoes:
+        - Pequeno (1-5 paginas)
+        - Medio (5-20 paginas)
+        - Grande (20+ paginas)
+        - Enterprise (multiplos produtos)
+      padrao: "Medio"
+
+    - nome: framework_tech
+      pergunta: "Qual framework/tech stack sera usado?"
+      tipo: texto
+      padrao: "A definir"
+
+passos:
+  - numero: 1
+    acao: "Definir Design Tokens"
+    tokens:
+      - Cores
+      - Tipografia
+      - Espacamento
+      - Border radius
+      - Shadows
+      - Breakpoints
+
+  - numero: 2
+    acao: "Criar componentes base (Atoms)"
+    componentes:
+      - Botoes
+      - Inputs
+      - Labels
+      - Icones
+      - Typography
+
+  - numero: 3
+    acao: "Criar moleculas (Molecules)"
+    componentes:
+      - Form fields
+      - Cards basicos
+      - Navigation items
+
+  - numero: 4
+    acao: "Criar organismos (Organisms)"
+    componentes:
+      - Headers
+      - Footers
+      - Sections
+
+  - numero: 5
+    acao: "Documentar guidelines"
+
+saida:
+  formato: markdown
+  template: |
+    # Design System: [Marca]
+
+    ## 1. Visao Geral
+
+    ### Proposito
+    > [Por que este design system existe]
+
+    ### Principios de Design
+    1. **[Principio 1]:** [Descricao]
+    2. **[Principio 2]:** [Descricao]
+    3. **[Principio 3]:** [Descricao]
+
+    ### Plataformas
+    - [ ] Web
+    - [ ] Mobile
+    - [ ] Desktop
+
+    ---
+
+    ## 2. Design Tokens
+
+    ### 2.1 Cores
+
+    #### Primarias
+    ```css
+    --color-primary: #XXXXXX;
+    --color-primary-light: #XXXXXX;
+    --color-primary-dark: #XXXXXX;
+    ```
+
+    #### Secundarias
+    ```css
+    --color-secondary: #XXXXXX;
+    --color-accent: #XXXXXX;
+    ```
+
+    #### Neutras
+    ```css
+    --color-gray-900: #111827;
+    --color-gray-800: #1F2937;
+    --color-gray-700: #374151;
+    --color-gray-600: #4B5563;
+    --color-gray-500: #6B7280;
+    --color-gray-400: #9CA3AF;
+    --color-gray-300: #D1D5DB;
+    --color-gray-200: #E5E7EB;
+    --color-gray-100: #F3F4F6;
+    --color-gray-50: #F9FAFB;
+    ```
+
+    #### Funcionais
+    ```css
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-error: #EF4444;
+    --color-info: #3B82F6;
+    ```
+
+    ### 2.2 Tipografia
+
+    #### Font Families
+    ```css
+    --font-family-heading: '[Fonte]', sans-serif;
+    --font-family-body: '[Fonte]', sans-serif;
+    --font-family-mono: '[Fonte]', monospace;
+    ```
+
+    #### Font Sizes
+    ```css
+    --font-size-xs: 12px;    /* 0.75rem */
+    --font-size-sm: 14px;    /* 0.875rem */
+    --font-size-base: 16px;  /* 1rem */
+    --font-size-lg: 18px;    /* 1.125rem */
+    --font-size-xl: 20px;    /* 1.25rem */
+    --font-size-2xl: 24px;   /* 1.5rem */
+    --font-size-3xl: 30px;   /* 1.875rem */
+    --font-size-4xl: 36px;   /* 2.25rem */
+    --font-size-5xl: 48px;   /* 3rem */
+    --font-size-6xl: 60px;   /* 3.75rem */
+    ```
+
+    #### Font Weights
+    ```css
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    ```
+
+    #### Line Heights
+    ```css
+    --line-height-tight: 1.25;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.75;
+    ```
+
+    ### 2.3 Espacamento
+
+    #### Escala (8px base)
+    ```css
+    --spacing-0: 0;
+    --spacing-1: 4px;    /* 0.25rem */
+    --spacing-2: 8px;    /* 0.5rem */
+    --spacing-3: 12px;   /* 0.75rem */
+    --spacing-4: 16px;   /* 1rem */
+    --spacing-5: 20px;   /* 1.25rem */
+    --spacing-6: 24px;   /* 1.5rem */
+    --spacing-8: 32px;   /* 2rem */
+    --spacing-10: 40px;  /* 2.5rem */
+    --spacing-12: 48px;  /* 3rem */
+    --spacing-16: 64px;  /* 4rem */
+    --spacing-20: 80px;  /* 5rem */
+    --spacing-24: 96px;  /* 6rem */
+    ```
+
+    ### 2.4 Border Radius
+    ```css
+    --radius-none: 0;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+    ```
+
+    ### 2.5 Shadows
+    ```css
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    ```
+
+    ### 2.6 Breakpoints
+    ```css
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+    ```
+
+    ---
+
+    ## 3. Componentes
+
+    ### 3.1 Atoms
+
+    #### Buttons
+
+    **Variantes:**
+    | Variante | Uso |
+    |----------|-----|
+    | Primary | Acao principal |
+    | Secondary | Acao secundaria |
+    | Ghost | Acao terciaria |
+    | Danger | Acoes destrutivas |
+
+    **Tamanhos:**
+    | Tamanho | Padding | Font Size |
+    |---------|---------|-----------|
+    | sm | 8px 16px | 14px |
+    | md | 12px 24px | 16px |
+    | lg | 16px 32px | 18px |
+
+    **Estados:**
+    - Default
+    - Hover
+    - Active
+    - Focus
+    - Disabled
+    - Loading
+
+    **Especificacoes:**
+    ```css
+    .button-primary {
+      background: var(--color-primary);
+      color: white;
+      font-weight: var(--font-weight-semibold);
+      border-radius: var(--radius-md);
+      transition: all 0.2s;
+    }
+
+    .button-primary:hover {
+      opacity: 0.9;
+    }
+
+    .button-primary:active {
+      transform: scale(0.98);
+    }
+
+    .button-primary:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .button-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    ```
+
+    #### Inputs
+
+    **Tipos:**
+    - Text
+    - Email
+    - Password
+    - Number
+    - Textarea
+    - Select
+
+    **Estados:**
+    - Default
+    - Focus
+    - Error
+    - Disabled
+    - Success
+
+    **Especificacoes:**
+    ```css
+    .input {
+      padding: var(--spacing-3) var(--spacing-4);
+      border: 1px solid var(--color-gray-300);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-base);
+      transition: border-color 0.2s;
+    }
+
+    .input:focus {
+      border-color: var(--color-primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(primary, 0.1);
+    }
+
+    .input-error {
+      border-color: var(--color-error);
+    }
+    ```
+
+    #### Typography
+
+    **Estilos:**
+    ```css
+    .heading-1 {
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+    }
+
+    .heading-2 {
+      font-size: var(--font-size-4xl);
+      font-weight: var(--font-weight-bold);
+      line-height: var(--line-height-tight);
+    }
+
+    .heading-3 {
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-tight);
+    }
+
+    .body-large {
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-normal);
+    }
+
+    .body {
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-normal);
+    }
+
+    .body-small {
+      font-size: var(--font-size-sm);
+      line-height: var(--line-height-normal);
+    }
+
+    .caption {
+      font-size: var(--font-size-xs);
+      line-height: var(--line-height-normal);
+      color: var(--color-gray-500);
+    }
+    ```
+
+    ---
+
+    ### 3.2 Molecules
+
+    #### Form Field
+
+    **Estrutura:**
+    ```
+    ┌─────────────────────────────┐
+    │ Label                       │
+    │ ┌─────────────────────────┐ │
+    │ │ Input                   │ │
+    │ └─────────────────────────┘ │
+    │ Helper text / Error         │
+    └─────────────────────────────┘
+    ```
+
+    #### Card
+
+    **Estrutura:**
+    ```
+    ┌─────────────────────────────┐
+    │ [Imagem]                    │
+    │ ─────────────────────────── │
+    │ [Titulo]                    │
+    │ [Descricao]                 │
+    │ [CTA ou Link]               │
+    └─────────────────────────────┘
+    ```
+
+    **Especificacoes:**
+    ```css
+    .card {
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .card-body {
+      padding: var(--spacing-6);
+    }
+    ```
+
+    ---
+
+    ### 3.3 Organisms
+
+    #### Header/Navbar
+
+    **Desktop:**
+    ```
+    ┌─────────────────────────────────────────────────────┐
+    │ [Logo]     [Nav Links]              [CTA Button]   │
+    └─────────────────────────────────────────────────────┘
+    ```
+
+    **Mobile:**
+    ```
+    ┌─────────────────────────────┐
+    │ [Logo]           [Hamburger]│
+    └─────────────────────────────┘
+    ```
+
+    #### Footer
+
+    **Estrutura:**
+    ```
+    ┌─────────────────────────────────────────────────────┐
+    │ [Logo]                                              │
+    │ [Links Col 1]  [Links Col 2]  [Links Col 3]        │
+    │ ─────────────────────────────────────────────────── │
+    │ [Copyright]                    [Social Icons]       │
+    └─────────────────────────────────────────────────────┘
+    ```
+
+    ---
+
+    ## 4. Layout
+
+    ### Grid System
+
+    **Container:**
+    ```css
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-4);
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 0 var(--spacing-8);
+      }
+    }
+    ```
+
+    **Grid:**
+    ```css
+    .grid {
+      display: grid;
+      gap: var(--spacing-6);
+    }
+
+    .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+    ```
+
+    ---
+
+    ## 5. Acessibilidade
+
+    ### Checklist
+    - [ ] Contraste WCAG AA (4.5:1 texto, 3:1 graficos)
+    - [ ] Focus states visiveis
+    - [ ] Touch targets min 44x44px
+    - [ ] Labels em todos inputs
+    - [ ] Alt text em imagens
+    - [ ] Hierarquia de headings correta
+
+    ---
+
+    ## 6. Arquivos
+
+    ### Estrutura de Pasta
+    ```
+    design-system/
+    ├── tokens/
+    │   ├── colors.json
+    │   ├── typography.json
+    │   ├── spacing.json
+    │   └── index.css
+    ├── components/
+    │   ├── atoms/
+    │   ├── molecules/
+    │   └── organisms/
+    └── documentation/
+        └── guidelines.md
+    ```
+
+conhecimento:
+  - design-systems.md
+  - ui-ux.md
+
+gates:
+  - Tokens estao completos?
+  - Componentes cobrem necessidades basicas?
+  - Acessibilidade atendida?
+  - Sistema e escalavel?
+
+proximos_passos:
+  - Implementar em codigo
+  - Criar biblioteca de componentes
+  - Documentar no Storybook ou similar

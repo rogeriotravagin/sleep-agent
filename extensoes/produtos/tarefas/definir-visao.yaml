@@ -1,0 +1,157 @@
+# ============================================
+# TAREFA: Definir Visao de Produto
+# ============================================
+
+id: definir-visao
+nome: Definir Visao e Missao do Produto
+comando: /definir-visao
+agente: product-strategist
+fase: estrategia
+
+descricao: |
+  Criar documento de visao de produto incluindo
+  visao de longo prazo, missao, publico-alvo,
+  problemas resolvidos e diferenciacao.
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: nome_produto
+      descricao: Nome do produto
+      tipo: texto
+
+    - nome: contexto_negocio
+      descricao: Contexto do negocio/empresa
+      tipo: texto
+
+  opcionais:
+    - nome: visao_existente
+      descricao: Visao atual (se houver)
+      tipo: texto
+
+    - nome: concorrentes
+      descricao: Principais concorrentes
+      tipo: lista
+
+# ============================================
+# PERGUNTAS GUIA
+# ============================================
+
+perguntas:
+  - "Qual o nome do produto?"
+  - "Em que contexto de negocio ele existe?"
+  - "Quem sao os usuarios ideais (ICP)?"
+  - "Quais problemas principais resolve?"
+  - "Onde voce quer que o produto esteja em 10 anos?"
+  - "O que diferencia de alternativas/concorrentes?"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    nome: "Coletar Contexto"
+    descricao: "Entender o negocio, mercado e usuarios"
+    acoes:
+      - Perguntar sobre o produto e contexto
+      - Identificar usuarios-alvo
+      - Mapear problemas que resolve
+
+  - numero: 2
+    nome: "Definir Visao"
+    descricao: "Criar declaracao de visao inspiradora"
+    acoes:
+      - Definir horizonte de 10 anos
+      - Criar declaracao inspiradora
+      - Validar se e ambiciosa mas crivel
+
+  - numero: 3
+    nome: "Articular Missao"
+    descricao: "Definir como contribuimos para a visao hoje"
+    acoes:
+      - Conectar com a visao
+      - Definir contribuicao atual
+      - Tornar acionavel
+
+  - numero: 4
+    nome: "Documentar Diferenciacao"
+    descricao: "Articular o que nos torna unicos"
+    acoes:
+      - Mapear concorrentes
+      - Identificar diferenciais
+      - Articular proposicao de valor
+
+  - numero: 5
+    nome: "Compilar Documento"
+    descricao: "Criar documento de visao completo"
+    acoes:
+      - Usar template padrao
+      - Revisar consistencia
+      - Formatar para comunicacao
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Visao de Produto - {{nome_produto}}
+
+  ## Visao (10 anos)
+  {{visao}}
+
+  ## Missao
+  {{missao}}
+
+  ## Publico-Alvo (ICP)
+  ### Primario
+  {{icp_primario}}
+
+  ### Secundario
+  {{icp_secundario}}
+
+  ## Problemas que Resolvemos
+  1. {{problema_1}}
+  2. {{problema_2}}
+  3. {{problema_3}}
+
+  ## Nossa Solucao
+  {{solucao}}
+
+  ## Diferenciacao
+  {{diferenciacao}}
+
+  ## Metricas de Sucesso
+  - North Star: {{north_star}}
+  - Secundarias: {{metricas_secundarias}}
+
+  ---
+  *Criado em: {{data}}*
+  *Versao: 1.0*
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+qualidade:
+  criterios:
+    - "Visao e inspiradora e de longo prazo?"
+    - "Missao e acionavel e conectada a visao?"
+    - "ICP esta claramente definido?"
+    - "Problemas sao reais e validados?"
+    - "Diferenciacao e crivel e defensavel?"
+
+  validacao:
+    - "Stakeholders entendem e apoiam?"
+    - "Time consegue usar para tomar decisoes?"
+
+# ============================================
+# OUTPUT
+# ============================================
+
+output:
+  arquivo: "visao-produto.md"
+  pasta: "output/{{produto}}/produtos/estrategias/"

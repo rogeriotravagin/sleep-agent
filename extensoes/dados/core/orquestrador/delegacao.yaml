@@ -1,0 +1,110 @@
+# Regras de Delegacao - Extensao Dados
+# Define qual agente atende cada tipo de pedido
+
+# =====================================================
+# CONFIGURACAO DE OUTPUT
+# =====================================================
+
+output:
+  extensao: dados
+  tipos:
+    - pesquisas
+    - relatorios
+    - dashboards
+    - analises
+    - benchmarks
+    - tendencias
+  auto_criar: true
+
+# =====================================================
+# AGENTES
+# =====================================================
+
+# Agente Cientista de Dados
+cientista_dados:
+  agente: agentes/CIENTISTA-DADOS.md
+  gatilhos:
+    - pesquisa profunda
+    - pesquisar dados
+    - analise exploratoria
+    - EDA
+    - data mining
+    - descobrir padroes
+    - validar hipotese
+    - hipoteses
+    - modelagem estatistica
+    - ciencia de dados
+    - data science
+  tarefas:
+    - pesquisa-profunda
+
+# Agente Analista de Dados
+analista_dados:
+  agente: agentes/ANALISTA-DADOS.md
+  gatilhos:
+    - relatorio
+    - dashboard
+    - KPI
+    - KPIs
+    - metricas
+    - analise de dados
+    - dados internos
+    - business intelligence
+    - BI
+    - visualizacao
+    - storytelling dados
+  tarefas:
+    - analise-dados-internos
+    - criar-dashboard
+    - relatorio-executivo
+    - definir-metricas
+
+# Agente Pesquisador de Mercado
+pesquisador_mercado:
+  agente: agentes/PESQUISADOR-MERCADO.md
+  gatilhos:
+    - pesquisa de mercado
+    - inteligencia competitiva
+    - benchmark
+    - benchmarking
+    - concorrentes
+    - analise de mercado
+    - tendencias
+    - consumer insights
+    - TAM SAM SOM
+    - tamanho de mercado
+  tarefas:
+    - pesquisa-mercado
+    - benchmark-competitivo
+    - analise-tendencias
+
+# =====================================================
+# REGRAS DE PRIORIDADE
+# =====================================================
+
+prioridade:
+  ordem:
+    - cientista_dados      # Primeiro: pesquisa e descoberta
+    - pesquisador_mercado  # Segundo: contexto de mercado
+    - analista_dados       # Terceiro: relatorios e dashboards
+
+# =====================================================
+# CASOS ESPECIAIS
+# =====================================================
+
+casos_especiais:
+  multi_agente:
+    - gatilho: "pesquisa completa"
+      workflow: workflows/pesquisa-completa.yaml
+    - gatilho: "analise de mercado completa"
+      workflow: workflows/pesquisa-completa.yaml
+    - gatilho: "analise completa"
+      workflow: workflows/analise-completa.yaml
+
+  explorar_primeiro:
+    - "preciso de dados"
+    - "quero analisar"
+    - "preciso de pesquisa"
+    - "preciso entender o mercado"
+    - "criar dashboard"
+    - "montar relatorio"

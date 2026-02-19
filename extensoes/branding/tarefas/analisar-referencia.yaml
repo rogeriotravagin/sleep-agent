@@ -1,0 +1,183 @@
+id: analisar-referencia
+nome: Analisar Referencia Visual
+descricao: Analisa uma referencia visual (print, link ou descricao) e extrai todos os elementos de design
+agente: design-analyst
+comando: /analisar-referencia
+versao: "1.0"
+categoria: analise
+
+entradas:
+  obrigatorias:
+    - pergunta: "Qual a referencia a ser analisada?"
+      campo: referencia
+      tipo: texto
+      descricao: "URL, caminho do arquivo de imagem, ou descricao detalhada"
+
+    - pergunta: "Qual o tipo de referencia?"
+      campo: tipo_referencia
+      tipo: selecao
+      opcoes: [print, link, descricao]
+      descricao: "Formato da referencia fornecida"
+
+    - pergunta: "Qual o nome do produto/projeto?"
+      campo: produto
+      tipo: texto
+      descricao: "Nome do produto que recebera as diretrizes"
+
+    - pergunta: "Qual o objetivo da analise?"
+      campo: objetivo
+      tipo: texto
+      descricao: "O que voce pretende fazer com esta analise"
+
+  opcionais:
+    - pergunta: "Deseja focar em algum aspecto especifico?"
+      campo: foco
+      tipo: selecao_multipla
+      opcoes: [cores, tipografia, layout, espacamento, componentes, tudo]
+      default: tudo
+
+    - pergunta: "Ha algum contexto adicional importante?"
+      campo: contexto
+      tipo: texto
+
+    - pergunta: "Existem restricoes ou requisitos especificos?"
+      campo: restricoes
+      tipo: texto
+
+passos:
+  - numero: 1
+    acao: Capturar Referencia
+    detalhes:
+      - Receber e processar a referencia fornecida
+      - Se link, acessar e capturar elementos visuais
+      - Se print, analisar imagem fornecida
+      - Se descricao, criar modelo mental do design
+      - Documentar fonte e data da analise
+
+  - numero: 2
+    acao: Identificar Estrutura
+    analisar:
+      - Sistema de grid utilizado
+      - Containers e larguras principais
+      - Secoes e blocos de conteudo
+      - Hierarquia de informacao
+      - Breakpoints (se aplicavel)
+
+  - numero: 3
+    acao: Extrair Elementos Visuais
+    elementos:
+      cores:
+        - Cor primaria e secundaria
+        - Cores de background
+        - Cores de texto
+        - Cores de destaque/CTA
+        - Cores de estado (success, error, warning)
+      tipografia:
+        - Familias de fonte
+        - Escala de tamanhos
+        - Pesos utilizados
+        - Line-heights
+        - Letter-spacings
+      espacamento:
+        - Unidade base (8pt, 4pt, etc)
+        - Espacamento entre elementos
+        - Padding de componentes
+        - Margins de secoes
+
+  - numero: 4
+    acao: Mapear Componentes
+    componentes:
+      - Botoes (estilos, estados, tamanhos)
+      - Inputs e formularios
+      - Cards e containers
+      - Navegacao
+      - Headers e footers
+      - Icones e ilustracoes
+      - Imagens e tratamentos
+
+  - numero: 5
+    acao: Gerar Relatorio
+    formato: |
+      Compilar todas as descobertas no template de
+      "Analise de Referencia Visual" com:
+      - Visao geral da referencia
+      - Estrutura de layout
+      - Paleta de cores extraida
+      - Sistema tipografico
+      - Espacamentos identificados
+      - Componentes catalogados
+      - Padroes visuais
+      - Observacoes e recomendacoes
+
+saida:
+  formato: markdown
+  template: |
+    # Analise de Referencia: {produto}
+
+    ## Visao Geral
+    | Aspecto | Valor |
+    |---------|-------|
+    | Tipo | {tipo_referencia} |
+    | Fonte | {referencia} |
+    | Data da Analise | {data} |
+    | Objetivo | {objetivo} |
+
+    ## Estrutura de Layout
+    - **Grid:** [Descrever sistema de grid]
+    - **Container:** [Largura maxima]
+    - **Secoes:** [Listar secoes identificadas]
+
+    ## Paleta de Cores
+    | Funcao | Cor | HEX | Uso |
+    |--------|-----|-----|-----|
+    | Primaria | [Nome] | #XXXXXX | [Uso] |
+    | Secundaria | [Nome] | #XXXXXX | [Uso] |
+    | Background | [Nome] | #XXXXXX | [Uso] |
+    | Texto | [Nome] | #XXXXXX | [Uso] |
+    | Destaque | [Nome] | #XXXXXX | [Uso] |
+
+    ## Tipografia
+    | Nivel | Fonte | Tamanho | Peso | Line-height |
+    |-------|-------|---------|------|-------------|
+    | H1 | [Fonte] | [px] | [peso] | [valor] |
+    | H2 | [Fonte] | [px] | [peso] | [valor] |
+    | Body | [Fonte] | [px] | [peso] | [valor] |
+
+    ## Espacamento
+    - **Base unit:** [valor]
+    - **Entre elementos:** [valor]
+    - **Entre secoes:** [valor]
+    - **Padding padrao:** [valor]
+
+    ## Componentes Identificados
+    [Lista de componentes com descricao]
+
+    ## Padroes Visuais
+    [Padroes recorrentes identificados]
+
+    ## Observacoes
+    [Notas importantes sobre o design]
+
+    ## Proximos Passos
+    - [ ] Extrair diretrizes formais
+    - [ ] Criar style guide do produto
+
+  salvar_em: output/{produto}/analises/
+
+conhecimento:
+  - analise-visual.md
+  - design-systems.md
+  - ui-ux.md
+
+gates:
+  - Todos os elementos principais foram identificados
+  - Cores extraidas com valores HEX
+  - Tipografia documentada com tamanhos e pesos
+  - Espacamentos mapeados
+  - Estrutura de layout clara
+
+proximos_passos:
+  - tarefa: extrair-diretrizes
+    descricao: "Transformar analise em diretrizes formais de design"
+  - tarefa: criar-styleguide
+    descricao: "Criar style guide completo do produto"

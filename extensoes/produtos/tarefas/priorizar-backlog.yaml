@@ -1,0 +1,196 @@
+# ============================================
+# TAREFA: Priorizar Backlog
+# ============================================
+
+id: priorizar-backlog
+nome: Priorizar Backlog com RICE
+comando: /priorizar-backlog
+agente: delivery-manager
+fase: delivery
+
+descricao: |
+  Priorizar itens do backlog usando framework
+  RICE (Reach, Impact, Confidence, Effort).
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: itens_backlog
+      descricao: Lista de itens para priorizar
+      tipo: lista
+
+    - nome: periodo
+      descricao: Periodo de referencia (ex. Q1)
+      tipo: texto
+
+  opcionais:
+    - nome: metricas_produto
+      descricao: Metricas atuais do produto
+      tipo: objeto
+
+    - nome: capacidade_time
+      descricao: Capacidade disponivel do time
+      tipo: texto
+
+# ============================================
+# PERGUNTAS GUIA
+# ============================================
+
+perguntas:
+  - "Quais itens precisam ser priorizados?"
+  - "Qual o periodo de referencia para Reach?"
+  - "Quais metricas sao importantes mover?"
+  - "Qual a capacidade do time (person-months)?"
+  - "Ha alguma restricao ou dependencia?"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    nome: "Listar Itens"
+    descricao: "Compilar todos os itens candidatos"
+    acoes:
+      - Coletar itens do backlog
+      - Incluir descricao breve
+      - Identificar duplicados
+
+  - numero: 2
+    nome: "Estimar Reach"
+    descricao: "Quantificar usuarios impactados"
+    acoes:
+      - Definir periodo (trimestre)
+      - Estimar usuarios/eventos
+      - Usar dados quando possivel
+
+  - numero: 3
+    nome: "Avaliar Impact"
+    descricao: "Classificar impacto na metrica"
+    acoes:
+      - Usar escala padrao (0.25-3)
+      - Considerar metrica-alvo
+      - Documentar justificativa
+
+  - numero: 4
+    nome: "Definir Confidence"
+    descricao: "Determinar nivel de certeza"
+    acoes:
+      - Avaliar evidencias disponíveis
+      - Usar escala percentual
+      - Ser honesto sobre incertezas
+
+  - numero: 5
+    nome: "Estimar Effort"
+    descricao: "Calcular esforco necessario"
+    acoes:
+      - Estimar em person-months
+      - Considerar todas as disciplinas
+      - Incluir QA e deploy
+
+  - numero: 6
+    nome: "Calcular e Rankear"
+    descricao: "Aplicar formula e ordenar"
+    acoes:
+      - Calcular RICE score
+      - Ordenar do maior para menor
+      - Definir corte de priorizacao
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Priorizacao RICE - {{periodo}}
+
+  ## Criterios Utilizados
+
+  **Reach:** Usuarios unicos impactados em {{periodo_reach}}
+  **Impact:**
+  - 3.0 = Massivo (game changer)
+  - 2.0 = Alto (melhoria significativa)
+  - 1.0 = Medio (melhoria notavel)
+  - 0.5 = Baixo (melhoria pequena)
+  - 0.25 = Minimo (quase imperceptivel)
+
+  **Confidence:**
+  - 100% = Alta (dados solidos)
+  - 80% = Media (algumas evidencias)
+  - 50% = Baixa (intuicao)
+
+  **Effort:** Person-months
+
+  **Formula:** RICE = (Reach x Impact x Confidence) / Effort
+
+  ---
+
+  ## Ranking
+
+  | Rank | Item | Reach | Impact | Conf | Effort | Score |
+  |------|------|-------|--------|------|--------|-------|
+  | 1 | {{item_1}} | {{reach_1}} | {{impact_1}} | {{conf_1}} | {{effort_1}} | {{score_1}} |
+  | 2 | {{item_2}} | {{reach_2}} | {{impact_2}} | {{conf_2}} | {{effort_2}} | {{score_2}} |
+  | 3 | {{item_3}} | {{reach_3}} | {{impact_3}} | {{conf_3}} | {{effort_3}} | {{score_3}} |
+  | ... | ... | ... | ... | ... | ... | ... |
+
+  ---
+
+  ## Decisoes
+
+  ### Prioridade Alta (Fazer)
+  1. **{{item_1}}** - Score: {{score_1}}
+     - Justificativa: {{justificativa_1}}
+  2. **{{item_2}}** - Score: {{score_2}}
+     - Justificativa: {{justificativa_2}}
+
+  ### Prioridade Media (Se der tempo)
+  - {{item_media_1}}
+  - {{item_media_2}}
+
+  ### Nao Priorizado (Backlog futuro)
+  - {{item_nao_1}}: {{motivo_nao_1}}
+  - {{item_nao_2}}: {{motivo_nao_2}}
+
+  ---
+
+  ## Capacidade vs Demanda
+
+  **Capacidade disponivel:** {{capacidade}} person-months
+  **Demanda priorizada:** {{demanda}} person-months
+  **Buffer:** {{buffer}} person-months
+
+  ---
+
+  ## Notas e Consideracoes
+  {{notas}}
+
+  ---
+  *Priorizacao realizada em: {{data}}*
+  *Valida para: {{periodo}}*
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+qualidade:
+  criterios:
+    - "Todos os itens tem os 4 componentes?"
+    - "Reach esta baseado em dados/estimativas razoaveis?"
+    - "Impact reflete impacto na metrica-alvo?"
+    - "Confidence reflete nivel real de certeza?"
+    - "Effort inclui todas as disciplinas?"
+
+  validacao:
+    - "Ranking faz sentido intuitivamente?"
+    - "Stakeholders concordam com top 3?"
+
+# ============================================
+# OUTPUT
+# ============================================
+
+output:
+  arquivo: "priorizacao-{{periodo}}.md"
+  pasta: "output/{{produto}}/produtos/priorizacoes/"

@@ -1,0 +1,421 @@
+# =====================================================
+# TAREFA: Documentar Caso Crítico (Registro Formal)
+# =====================================================
+
+id: documentar-caso-critico
+nome: Documentar Caso Crítico
+comando: /documentar-caso
+agente: critical-cases-specialist
+fase: pos-resolucao
+
+# =====================================================
+# OBJETIVO
+# =====================================================
+
+objetivo: |
+  Criar documentação formal e completa de caso crítico resolvido,
+  para proteção legal da empresa, arquivo histórico, e aprendizado
+  organizacional.
+
+# =====================================================
+# IMPORTÂNCIA DA DOCUMENTAÇÃO
+# =====================================================
+
+importancia: |
+  Documentação rigorosa é CRÍTICA porque:
+
+  1. PROTEÇÃO LEGAL:
+     - CDC tem inversão do ônus da prova
+     - Empresa precisa PROVAR que agiu corretamente
+     - Documentação é sua defesa em processo
+
+  2. COMPLIANCE:
+     - Registro de ações tomadas
+     - Audit trail completo
+     - Evidências de boa-fé
+
+  3. APRENDIZADO:
+     - Identificar padrões
+     - Melhorar processos
+     - Treinar equipe
+
+  4. GESTÃO:
+     - Acompanhar custos
+     - Avaliar efetividade de estratégias
+     - Métricas de CS
+
+# =====================================================
+# INPUT DO USUÁRIO
+# =====================================================
+
+input:
+  perguntas:
+    - id: caso_resolvido
+      pergunta: "O caso foi resolvido?"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim - resolvido com sucesso"
+        - "Sim - parcialmente resolvido"
+        - "Não - cliente rejeitou solução"
+        - "Não - caso escalou para jurídico"
+        - "Não - cliente saiu (churn)"
+      obrigatorio: sim
+
+    - id: resultado_final
+      pergunta: "Qual foi o resultado final?"
+      tipo: texto_longo
+      obrigatorio: sim
+
+    - id: acordo_firmado
+      pergunta: "Houve acordo formal assinado?"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim - acordo formal assinado"
+        - "Não - resolução verbal"
+        - "Não aplicável"
+      obrigatorio: sim
+
+    - id: cliente_satisfeito
+      pergunta: "Cliente ficou satisfeito com resolução?"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim - muito satisfeito"
+        - "Sim - satisfeito"
+        - "Neutro"
+        - "Não - insatisfeito"
+        - "Não - muito insatisfeito"
+      obrigatorio: sim
+
+    - id: custo_total
+      pergunta: "Custo total da resolução (R$)"
+      tipo: texto
+      obrigatorio: sim
+
+    - id: tempo_resolucao
+      pergunta: "Tempo total para resolução (horas ou dias)"
+      tipo: texto
+      obrigatorio: sim
+
+# =====================================================
+# PROCESSO DE DOCUMENTAÇÃO
+# =====================================================
+
+processo:
+  etapas:
+    - numero: 1
+      nome: COMPILAR_INFORMACOES
+      acoes:
+        - "Reunir TODOS os documentos:"
+        - "  ✅ Análise inicial (/caso-critico)"
+        - "  ✅ Avaliação jurídica (/risco-juridico - se houver)"
+        - "  ✅ Plano de resolução (/plano-resolucao - se houver)"
+        - "  ✅ Todas as comunicações (emails, chats, ligações)"
+        - "  ✅ Evidências (prints, logs, gravações)"
+        - "  ✅ Contratos/termos aceitos"
+        - "  ✅ Notas internas"
+        - "  ✅ Decisões tomadas"
+        - "  ✅ Aprovações (se houve)"
+        - "  ✅ Acordo firmado (se houver)"
+
+    - numero: 2
+      nome: CRIAR_LINHA_DO_TEMPO
+      acoes:
+        - "Linha do tempo COMPLETA:"
+        - "  [Data/Hora] - Evento - Quem - O que aconteceu"
+        - ""
+        - "Incluir:"
+        - "  - Data da compra/contratação"
+        - "  - Data do problema"
+        - "  - Data da primeira reclamação"
+        - "  - Cada interação com cliente"
+        - "  - Decisões internas"
+        - "  - Ações tomadas"
+        - "  - Compensações oferecidas"
+        - "  - Resolução final"
+
+    - numero: 3
+      nome: ANALISAR_ROOT_CAUSE
+      acoes:
+        - "5 Whys - Por que aconteceu?"
+        - "  1. Por que o problema ocorreu?"
+        - "  2. Por que isso foi possível?"
+        - "  3. Por que não foi detectado antes?"
+        - "  4. Por que o processo permite isso?"
+        - "  5. Por que não tínhamos prevenção?"
+        - ""
+        - "Identificar:"
+        - "  - Causa raiz técnica"
+        - "  - Causa raiz de processo"
+        - "  - Causa raiz humana"
+        - "  - Causa raiz sistêmica"
+
+    - numero: 4
+      nome: LICOES_APRENDIDAS
+      acoes:
+        - "O que aprendemos:"
+        - "  ✅ O que funcionou bem"
+        - "  ✅ O que não funcionou"
+        - "  ✅ O que faríamos diferente"
+        - "  ✅ Surpresas/imprevistos"
+        - "  ✅ Técnicas efetivas de de-escalation"
+        - "  ✅ Erros cometidos"
+
+    - numero: 5
+      nome: ACOES_PREVENTIVAS
+      acoes:
+        - "Como prevenir recorrência:"
+        - "  1. Correções de processo"
+        - "  2. Melhorias de produto"
+        - "  3. Treinamento de equipe"
+        - "  4. Atualização de documentação"
+        - "  5. Mudanças em termos/contratos"
+        - "  6. Alertas/monitoring"
+
+    - numero: 6
+      nome: METRICAS_E_CUSTOS
+      acoes:
+        - "Registrar:"
+        - "  - Custo direto (compensação, reembolso)"
+        - "  - Custo indireto (tempo de equipe, honorários)"
+        - "  - Custo de oportunidade"
+        - "  - Tempo total de resolução"
+        - "  - NPS pós-resolução"
+        - "  - Cliente retido? (SIM/NÃO)"
+        - "  - Processo evitado? (SIM/NÃO)"
+
+# =====================================================
+# OUTPUT
+# =====================================================
+
+output:
+  template: templates/documentacao-caso-critico.md
+
+  conteudo:
+    - secao: HEADER
+      itens:
+        - ID do Caso
+        - Data de abertura
+        - Data de fechamento
+        - Duração total
+        - Status: RESOLVIDO / PARCIAL / NÃO RESOLVIDO / ESCALADO
+
+    - secao: RESUMO_EXECUTIVO
+      itens:
+        - TL;DR (3-5 linhas)
+        - Cliente (nome, segmento, LTV)
+        - Tipo de caso
+        - Classificação de risco
+        - Resultado final
+        - Custo total
+
+    - secao: LINHA_DO_TEMPO_COMPLETA
+      itens:
+        - Tabela cronológica COMPLETA
+        - Formato: Data/Hora | Evento | Responsável | Detalhes
+
+    - secao: DESCRICAO_DO_CASO
+      itens:
+        - Contexto do cliente
+        - O que aconteceu (fatos objetivos)
+        - Reclamação do cliente
+        - Reivindicações específicas
+        - Estado emocional
+
+    - secao: ANALISE_LEGAL
+      itens:
+        - CDC aplicável (artigos específicos)
+        - Cliente tinha razão? (SIM/PARCIAL/NÃO)
+        - Vulnerabilidades identificadas
+        - Score de risco jurídico
+        - Probabilidade de processo evitada
+
+    - secao: ESTRATEGIA_APLICADA
+      itens:
+        - Tipo de estratégia
+        - Técnicas de de-escalation usadas
+        - Compensação oferecida
+        - Canal de comunicação usado
+        - Escalações (se houver)
+
+    - secao: COMUNICACOES
+      itens:
+        - Lista de TODAS comunicações
+        - Data/hora de cada
+        - Resumo de cada
+        - Anexos: emails completos, prints, transcrições
+
+    - secao: ACOES_TOMADAS
+      itens:
+        - Lista completa de ações
+        - Data de cada ação
+        - Responsável
+        - Resultado de cada
+
+    - secao: RESOLUCAO_FINAL
+      itens:
+        - O que foi oferecido/feito
+        - Cliente aceitou?
+        - Acordo formal? (anexar se houver)
+        - Cliente satisfeito?
+        - Cliente retido?
+
+    - secao: METRICAS
+      itens:
+        - Tempo de primeira resposta
+        - Tempo total de resolução
+        - Custo direto (R$)
+        - Custo indireto (R$)
+        - Custo total (R$)
+        - NPS pós-resolução
+        - Processo evitado? (SIM/NÃO)
+        - Cliente retido? (SIM/NÃO)
+
+    - secao: ROOT_CAUSE_ANALYSIS
+      itens:
+        - Por que aconteceu (5 Whys)
+        - Causa raiz técnica
+        - Causa raiz de processo
+        - Causa raiz humana
+        - Causa raiz sistêmica
+
+    - secao: LICOES_APRENDIDAS
+      itens:
+        - O que funcionou
+        - O que não funcionou
+        - O que faríamos diferente
+        - Surpresas
+        - Técnicas efetivas
+        - Erros cometidos
+
+    - secao: ACOES_PREVENTIVAS
+      itens:
+        - Correções de processo (implementadas ou planejadas)
+        - Melhorias de produto
+        - Treinamento necessário
+        - Atualizações de documentação
+        - Mudanças em termos/contratos
+        - Responsável por cada ação preventiva
+        - Prazo de implementação
+
+    - secao: EVIDENCIAS_ANEXADAS
+      itens:
+        - Lista de todos os anexos
+        - Emails completos
+        - Prints de telas
+        - Logs do sistema
+        - Gravações (se houver)
+        - Contrato/termos
+        - Acordo firmado (se houver)
+
+    - secao: APROVACOES
+      itens:
+        - Quem aprovou decisões críticas
+        - Quando
+        - Evidência de aprovação
+
+    - secao: NOTAS_ADICIONAIS
+      itens:
+        - Observações importantes
+        - Contextos especiais
+        - Informações sensíveis
+
+  formato: markdown
+  salvar_em: workspace/[estrutura]/customer-success/casos-criticos/documentacao/
+
+# =====================================================
+# ARQUIVO COMPLEMENTAR
+# =====================================================
+
+arquivo_complementar:
+  nome: "Acordo Formal (se houver)"
+  template: templates/acordo-resolucao-caso-critico.md
+  conteudo:
+    - Partes (empresa e cliente)
+    - Data
+    - Descrição do caso
+    - Acordo estabelecido
+    - Compensação
+    - Obrigações de cada parte
+    - Quitação (cliente declara caso resolvido)
+    - Assinaturas
+  salvar_em: workspace/[estrutura]/customer-success/casos-criticos/acordos/
+
+# =====================================================
+# VALIDAÇÕES
+# =====================================================
+
+validacoes:
+  - item: linha_tempo_completa
+    descricao: "Linha do tempo deve ter TODOS os eventos"
+    critico: sim
+
+  - item: evidencias_anexadas
+    descricao: "Todas evidências devem estar anexadas/referenciadas"
+    critico: sim
+
+  - item: root_cause_identificado
+    descricao: "Causa raiz deve ser identificada (não superficial)"
+    critico: sim
+
+  - item: acoes_preventivas_definidas
+    descricao: "Deve haver ações preventivas com responsáveis e prazos"
+    critico: sim
+
+  - item: metricas_preenchidas
+    descricao: "Todas métricas devem estar preenchidas"
+    critico: sim
+
+# =====================================================
+# RETENÇÃO DE DOCUMENTOS
+# =====================================================
+
+retencao:
+  periodo: "5 anos (prazo de prescrição CDC)"
+  localizacao: "workspace/[estrutura]/customer-success/casos-criticos/arquivo/"
+  formato: "PDF (para imutabilidade) + Markdown (para edição)"
+  backup: "Sim - obrigatório"
+
+# =====================================================
+# COMPARTILHAMENTO
+# =====================================================
+
+compartilhamento:
+  interno:
+    - "Time de CS (para aprendizado)"
+    - "Liderança (para decisões estratégicas)"
+    - "Jurídico (se caso foi escalado)"
+    - "Produto (para melhorias)"
+
+  anonimizacao:
+    - "Para compartilhamento educacional, anonimizar:"
+    - "  - Nome do cliente"
+    - "  - Informações identificáveis"
+    - "  - Manter apenas tipo de caso e aprendizados"
+
+# =====================================================
+# MÉTRICAS DE QUALIDADE DA DOCUMENTAÇÃO
+# =====================================================
+
+metricas_qualidade:
+  - Completude (tudo documentado?)
+  - Clareza (fácil de entender?)
+  - Evidências (tudo anexado?)
+  - Acionável (ações preventivas claras?)
+  - Timeline completo (todos eventos?)
+
+# =====================================================
+# REFERÊNCIAS
+# =====================================================
+
+referencias:
+  templates:
+    - templates/documentacao-caso-critico.md
+    - templates/acordo-resolucao-caso-critico.md
+
+  agente:
+    - agentes/CRITICAL-CASES.md
+
+  tarefas_relacionadas:
+    - tarefas/analisar-caso-critico.yaml
+    - tarefas/avaliar-risco-juridico.yaml
+    - tarefas/criar-plano-resolucao.yaml

@@ -1,0 +1,304 @@
+# ============================================
+# TAREFA: Criar Health Score
+# ============================================
+
+id: criar-health-score
+nome: Criar Health Score Personalizado
+descricao: Desenvolver sistema de Health Score customizado para medir saude dos clientes
+agente: csm-estrategista
+comando: /health-score
+versao: "1.0"
+categoria: diagnostico
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: tipo_produto
+      pergunta: "Qual o tipo de produto/servico?"
+      tipo: escolha
+      opcoes:
+        - SaaS
+        - Servicos recorrentes
+        - Educacao/Cursos
+        - Consultoria
+        - Plataforma marketplace
+        - Outro
+      exemplo: "SaaS"
+
+    - nome: dados_disponiveis
+      pergunta: "Quais dados de clientes voce consegue medir?"
+      tipo: lista
+      exemplo:
+        - "Logins/acessos"
+        - "Features utilizadas"
+        - "Tickets de suporte"
+        - "Pagamentos"
+        - "NPS/CSAT"
+        - "Reunioes realizadas"
+
+    - nome: indicadores_sucesso
+      pergunta: "O que indica que um cliente esta tendo sucesso?"
+      tipo: lista
+      exemplo:
+        - "Usa diariamente"
+        - "Expandiu para mais usuarios"
+        - "Indicou outros clientes"
+        - "Renovou sem negociacao"
+
+  opcionais:
+    - nome: indicadores_risco
+      pergunta: "O que indica que um cliente esta em risco?"
+      tipo: lista
+      exemplo:
+        - "Nao loga ha semanas"
+        - "Abriu tickets de reclamacao"
+        - "Pediu desconto"
+
+    - nome: ferramentas
+      pergunta: "Quais ferramentas usam para dados? (CRM, analytics, etc)"
+      tipo: texto
+      exemplo: "HubSpot, Mixpanel, Zendesk"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Identificar indicadores mensuraveis"
+    detalhes:
+      - "Listar todos os dados disponiveis"
+      - "Classificar em categorias (uso, engajamento, suporte, etc)"
+      - "Verificar frequencia de atualizacao"
+      - "Validar confiabilidade"
+
+  - numero: 2
+    acao: "Definir componentes do Health Score"
+    detalhes:
+      - "Selecionar 5-7 indicadores principais"
+      - "Definir peso de cada componente"
+      - "Estabelecer thresholds (verde/amarelo/vermelho)"
+      - "Criar formula de calculo"
+
+  - numero: 3
+    acao: "Criar sistema de scoring"
+    detalhes:
+      - "Definir escala (0-100)"
+      - "Calcular score de cada componente"
+      - "Combinar em score final"
+      - "Categorizar clientes"
+
+  - numero: 4
+    acao: "Definir acoes por score"
+    detalhes:
+      - "Acoes para clientes verdes"
+      - "Intervencoes para amarelos"
+      - "Save plays para vermelhos"
+      - "Alertas automaticos"
+
+  - numero: 5
+    acao: "Planejar implementacao"
+    detalhes:
+      - "Definir fonte de dados"
+      - "Frequencia de atualizacao"
+      - "Dashboard e visualizacao"
+      - "Processo de acao"
+
+# ============================================
+# SAIDA
+# ============================================
+
+saida:
+  formato: markdown
+  template: |
+    # Health Score - {{nome_empresa}}
+
+    ## Visao Geral
+
+    Sistema de pontuacao para medir a saude do relacionamento com clientes, permitindo acoes proativas de retencao e expansion.
+
+    **Escala:** 0-100
+    **Frequencia de atualizacao:** {{frequencia}}
+
+    ---
+
+    ## Componentes do Health Score
+
+    | Componente | Peso | Indicador | Fonte |
+    |------------|------|-----------|-------|
+    {{#each componentes}}
+    | {{this.nome}} | {{this.peso}}% | {{this.indicador}} | {{this.fonte}} |
+    {{/each}}
+
+    ---
+
+    ## Detalhamento por Componente
+
+    {{#each componentes}}
+    ### {{this.numero}}. {{this.nome}} ({{this.peso}}%)
+
+    **O que mede:** {{this.descricao}}
+
+    **Calculo:**
+    ```
+    {{this.formula}}
+    ```
+
+    **Thresholds:**
+    | Status | Criterio | Pontuacao |
+    |--------|----------|-----------|
+    | Verde | {{this.verde}} | 80-100 |
+    | Amarelo | {{this.amarelo}} | 50-79 |
+    | Vermelho | {{this.vermelho}} | 0-49 |
+
+    {{/each}}
+
+    ---
+
+    ## Formula Final
+
+    ```
+    Health Score =
+    {{#each componentes}}
+      ({{this.nome}}_Score × {{this.peso_decimal}}) +
+    {{/each}}
+    ```
+
+    ---
+
+    ## Classificacao de Clientes
+
+    | Score | Status | Significado | Acao |
+    |-------|--------|-------------|------|
+    | 80-100 | Saudavel | Cliente engajado e satisfeito | Focus em expansion |
+    | 60-79 | Atencao | Sinais de alerta moderados | Monitorar e engajar |
+    | 40-59 | Risco | Multiplos sinais de risco | Intervencao planejada |
+    | 0-39 | Critico | Alto risco de churn | Save play urgente |
+
+    ---
+
+    ## Playbooks por Status
+
+    ### Clientes Saudaveis (80-100)
+
+    **Objetivo:** Expansion e advocacy
+
+    - [ ] Identificar oportunidades de upsell
+    - [ ] Solicitar referências
+    - [ ] Convidar para case study
+    - [ ] Incluir em beta de novos features
+
+    ### Clientes em Atencao (60-79)
+
+    **Objetivo:** Prevenir declinio
+
+    - [ ] Agendar check-in
+    - [ ] Revisar uso e engajamento
+    - [ ] Oferecer treinamento
+    - [ ] Identificar blockers
+
+    ### Clientes em Risco (40-59)
+
+    **Objetivo:** Reverter situacao
+
+    - [ ] Reuniao de diagnostico em 48h
+    - [ ] Criar plano de recuperacao
+    - [ ] Envolver stakeholders
+    - [ ] Acompanhamento semanal
+
+    ### Clientes Criticos (0-39)
+
+    **Objetivo:** Save urgente
+
+    - [ ] Contato imediato (mesmo dia)
+    - [ ] Escalar para gestao
+    - [ ] Save play estruturado
+    - [ ] Acompanhamento diario
+
+    ---
+
+    ## Alertas Automaticos
+
+    | Trigger | Alerta | Destinatario | Acao |
+    |---------|--------|--------------|------|
+    | Score cai abaixo de 60 | Email + Notificacao | CSM | Revisar em 24h |
+    | Score cai abaixo de 40 | Urgente | CSM + Manager | Acao imediata |
+    | Score sobe acima de 80 | Oportunidade | CSM | Planejar expansion |
+    | Queda >20 pontos/semana | Alerta critico | Time | Investigar |
+
+    ---
+
+    ## Implementacao
+
+    ### Fase 1: Setup (Semana 1)
+    - [ ] Configurar fontes de dados
+    - [ ] Criar calculos automaticos
+    - [ ] Testar com 10 clientes piloto
+
+    ### Fase 2: Validacao (Semana 2)
+    - [ ] Calibrar pesos e thresholds
+    - [ ] Validar com clientes conhecidos
+    - [ ] Ajustar formula se necessario
+
+    ### Fase 3: Rollout (Semana 3-4)
+    - [ ] Aplicar para toda base
+    - [ ] Treinar time de CS
+    - [ ] Criar dashboard
+    - [ ] Ativar alertas
+
+    ### Fase 4: Otimizacao (Ongoing)
+    - [ ] Revisar mensalmente
+    - [ ] Correlacionar com churn real
+    - [ ] Ajustar baseado em dados
+
+    ---
+
+    ## Dashboard Sugerido
+
+    ```
+    ┌─────────────────────────────────────────────┐
+    │            HEALTH SCORE DASHBOARD            │
+    ├─────────────────────────────────────────────┤
+    │                                              │
+    │  Distribuicao:                              │
+    │  ██████████████████ Saudavel: 65%          │
+    │  ██████████ Atencao: 20%                   │
+    │  █████ Risco: 10%                          │
+    │  ██ Critico: 5%                            │
+    │                                              │
+    │  Score Medio: 72 (↑ 3% vs mes anterior)    │
+    │                                              │
+    │  Alertas Ativos: 12                         │
+    │  - Criticos: 3                              │
+    │  - Risco: 9                                 │
+    │                                              │
+    └─────────────────────────────────────────────┘
+    ```
+
+  arquivo: output/customer-success/health-scores/health-score-{{slug_empresa}}.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "Os indicadores sao realmente mensuraveis?"
+  - "Os pesos refletem importancia para o negocio?"
+  - "Os thresholds sao realistas?"
+  - "As acoes por status sao acionaveis?"
+  - "O calculo e replicavel automaticamente?"
+
+# ============================================
+# PROXIMOS PASSOS
+# ============================================
+
+proximos_passos:
+  - tarefa: criar-plano-retencao
+    se: "Muitos clientes em risco identificados"
+  - tarefa: criar-playbook-onboarding
+    se: "Baixo score em componente de ativacao"
+  - tarefa: criar-qbr
+    se: "Precisa estruturar acompanhamento"

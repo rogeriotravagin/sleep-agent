@@ -1,0 +1,104 @@
+# ============================================================
+# Template: Docker Compose Base (Swarm Mode)
+# ============================================================
+# Use como ponto de partida para novas stacks
+# Substitua os placeholders {{...}} pelos valores reais
+#
+# REGRAS:
+# - SEMPRE usar tag especifica (nunca :latest)
+# - SEMPRE definir health check
+# - SEMPRE definir resource limits
+# - SEMPRE usar network isolada
+# - NUNCA colocar senhas diretamente aqui
+
+version: "3.8"
+
+services:
+  # ---- Aplicacao Principal ----
+  app:
+    image: "{{IMAGEM}}:{{TAG}}"
+
+    environment:
+      - NODE_ENV=production
+      # Adicionar variaveis necessarias
+      # NUNCA colocar senhas aqui - usar secrets ou env externo
+
+    volumes:
+      - app_data:/app/data
+
+    networks:
+      - internal
+      - public
+
+    deploy:
+      mode: replicated
+      replicas: {{REPLICAS:-1}}
+
+      # Atualizacao gradual
+      update_config:
+        parallelism: 1
+        delay: 30s
+        failure_action: rollback
+        order: start-first
+        monitor: 60s
+
+      # Rollback automatico
+      rollback_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+
+      # Restart policy
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+      # Limites de recursos
+      resources:
+        limits:
+          cpus: '{{CPU_LIMIT:-1.0}}'
+          memory: {{RAM_LIMIT:-512M}}
+        reservations:
+          cpus: '{{CPU_RESERVE:-0.25}}'
+          memory: {{RAM_RESERVE:-128M}}
+
+      # Labels para Traefik (descomente se precisar de acesso web)
+      # labels:
+      #   - "traefik.enable=true"
+      #   - "traefik.http.routers.{{NOME}}.rule=Host(`{{DOMINIO}}`)"
+      #   - "traefik.http.routers.{{NOME}}.entrypoints=websecure"
+      #   - "traefik.http.routers.{{NOME}}.tls.certresolver=letsencrypt"
+      #   - "traefik.http.services.{{NOME}}.loadbalancer.server.port={{PORTA}}"
+
+    # Health check OBRIGATORIO
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:{{PORTA}}/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+    # Logging com limites
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+# ---- Volumes ----
+volumes:
+  app_data:
+    driver: local
+
+# ---- Networks ----
+networks:
+  # Rede interna (isolada, sem acesso externo)
+  internal:
+    driver: overlay
+    internal: true
+
+  # Rede publica (compartilhada com Traefik)
+  public:
+    external: true

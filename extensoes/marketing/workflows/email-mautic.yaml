@@ -1,0 +1,135 @@
+# Workflow: Criar Email para Mautic
+
+id: email-mautic
+nome: Criar Email HTML para Mautic 5
+descricao: Gera email HTML com inline CSS e copy persuasiva, pronto para colar no Mautic 5
+comando: /criar-email-mautic
+versao: "1.0"
+
+sobre: |
+  Este workflow gera emails em HTML com inline CSS para o Mautic 5.
+  O usuario cola o HTML no editor de codigo do Mautic e o GrapesJS
+  converte automaticamente para o builder visual.
+
+  Combina copy de alta conversao com design responsivo e boas praticas
+  de deliverability.
+
+  Tipos suportados:
+  - Email de venda (oferta, prova social, objecoes, urgencia)
+  - Welcome sequence (Soap Opera)
+  - Newsletter
+  - Email transacional
+  - Nurture/educacional
+  - Reengajamento
+  - Cart abandonment
+  - Lancamento (PLF)
+
+# Etapas
+etapas:
+  - numero: 1
+    nome: Briefing
+    agente: email-builder
+    descricao: Coletar informacoes sobre o email a ser criado
+    entregavel: Briefing completo do email
+    perguntas:
+      - Qual o tipo de email? (venda, welcome, newsletter, transacional, nurture, lancamento)
+      - Qual o produto/servico?
+      - Quem e o publico-alvo?
+      - Qual o objetivo principal? (vender, engajar, informar, converter)
+      - Qual o CTA? (o que a pessoa deve fazer)
+
+  - numero: 2
+    nome: Configuracao Visual
+    agente: email-builder
+    descricao: Definir identidade visual do email
+    entregavel: Configuracoes visuais definidas
+    depende_de: 1
+    perguntas:
+      - Qual a cor primaria da marca? (hex)
+      - URL do logo?
+      - Nome de quem assina?
+      - Tom de voz? (formal, casual, descontraido)
+
+  - numero: 3
+    nome: Copy
+    agente: copywriter
+    descricao: Escrever a copy do email usando frameworks adequados
+    entregavel: Copy completa (subject, preheader, corpo, CTA, PS)
+    depende_de: [1, 2]
+    detalhes:
+      inclui:
+        - Subject line (max 50 caracteres)
+        - Preheader text (40-90 caracteres, diferente do subject)
+        - Saudacao personalizada
+        - Corpo do email com framework adequado
+        - CTA principal
+        - P.S. (quando aplicavel)
+
+  - numero: 4
+    nome: Montagem HTML
+    agente: email-builder
+    descricao: Montar o email completo em HTML com inline CSS usando template adequado
+    entregavel: Codigo HTML completo e funcional
+    depende_de: 3
+    detalhes:
+      inclui:
+        - Template HTML selecionado e customizado
+        - Inline CSS em todos os elementos
+        - Tokens Mautic configurados
+        - Botoes em table
+        - Fontes e cores aplicadas
+        - Imagens com alt text
+
+  - numero: 5
+    nome: Validacao
+    agente: email-builder
+    descricao: Validar email contra checklist de qualidade
+    entregavel: Email validado + instrucoes de implementacao
+    depende_de: 4
+    detalhes:
+      checklist:
+        - tracking_pixel presente
+        - unsubscribe_url presente
+        - Preheader definido
+        - Alt text em imagens
+        - Links HTTPS
+        - CTA funcional
+        - Tokens com fallback
+        - Peso estimado < 102KB
+
+# Modo rapido
+modo_rapido:
+  descricao: Para quando o usuario ja tem todas as informacoes
+  etapas_combinadas: [1, 2, 3, 4, 5]
+  fluxo: |
+    Se o usuario forneceu tipo + produto + publico + CTA + cores,
+    pular direto para geracao completa sem perguntas intermediarias.
+
+# Perguntas iniciais
+perguntas_iniciais:
+  - Que tipo de email voce precisa?
+  - Para qual produto/servico?
+  - Quem vai receber? (publico-alvo)
+
+# Templates utilizados
+templates:
+  venda: templates/mautic/venda.html
+  newsletter: templates/mautic/newsletter.html
+  transacional: templates/mautic/transacional.html
+  base: templates/mautic/base-email.html
+
+# Conhecimento necessario
+conhecimento:
+  - conhecimento/mautic-email-html.md
+  - conhecimento/email-marketing.md
+  - conhecimento/copywriting.md
+  - conhecimento/gatilhos.md
+
+# Entrega final
+entrega_final:
+  formato: arquivo
+  estrutura: |
+    workspace/[estrutura]/marketing/emails/
+    ├── [nome]-copy.md           # Copy para revisao
+    ├── [nome].html              # Codigo HTML completo (colar no Mautic)
+    └── [nome]-instrucoes.md     # Como importar no Mautic

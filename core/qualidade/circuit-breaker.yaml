@@ -1,0 +1,144 @@
+# =============================================================
+# CIRCUIT BREAKER - Protecao nos Quality Gates
+# =============================================================
+# Padrao de protecao que "abre o circuito" quando um quality gate
+# falha repetidamente, permitindo que o trabalho continue com
+# aviso ao inves de travar completamente
+# =============================================================
+
+versao: 1.0
+
+circuit_breaker:
+  descricao: |
+    Quality Gates atuais sao sequenciais e bloqueantes. Se o gate
+    nivel 2 falha repetidamente, toda a producao para. O Circuit
+    Breaker permite "bypass inteligente" quando o sistema de
+    qualidade esta com problema, sem perder rastreabilidade.
+
+  # ---------------------------------------------------------
+  # ESTADOS DO CIRCUIT BREAKER
+  # ---------------------------------------------------------
+  estados:
+
+    fechado:
+      descricao: "Normal. Gate funciona e avalia."
+      comportamento: "Gate executa normalmente"
+      transicao:
+        condicao: "falhas consecutivas >= threshold"
+        destino: semi_aberto
+
+    semi_aberto:
+      descricao: "Testando. Gate tenta funcionar com timeout curto."
+      comportamento: "Gate executa com timeout reduzido"
+      timeout: "2s"  # Metade do normal
+      transicao_sucesso:
+        destino: fechado
+        descricao: "Gate voltou ao normal"
+      transicao_falha:
+        destino: aberto
+        descricao: "Gate continua falhando"
+
+    aberto:
+      descricao: "Gate desativado temporariamente. Trabalho continua com aviso."
+      comportamento: "Gate pulado, entrega marcada como [NAO VALIDADA]"
+      transicao:
+        condicao: "apos cooldown"
+        destino: semi_aberto
+        descricao: "Tenta de novo apos cooldown"
+      acoes:
+        - "Registrar que gate esta desativado"
+        - "Marcar entrega como [NAO VALIDADA pelo gate X]"
+        - "Continuar workflow normalmente"
+        - "Informar usuario que validacao foi pulada"
+
+  # ---------------------------------------------------------
+  # CONFIGURACAO
+  # ---------------------------------------------------------
+  configuracao:
+    threshold_falhas: 3      # Falhas consecutivas para abrir
+    cooldown: "5min"         # Tempo antes de tentar de novo
+    timeout_gate: "4s"       # Timeout por gate
+    max_aberto: "30min"      # Tempo maximo com gate aberto
+    reset_automatico: true   # Fecha automaticamente apos cooldown + sucesso
+
+  # ---------------------------------------------------------
+  # APLICACAO POR NIVEL DE GATE
+  # ---------------------------------------------------------
+  por_nivel:
+
+    nivel_1_automatico:
+      circuit_breaker: false
+      motivo: "Verificacoes objetivas, rapidas, raramente falham"
+
+    nivel_2_agente:
+      circuit_breaker: true
+      threshold: 3
+      cooldown: "5min"
+      timeout: "4s"
+      motivo: "Revisao por agente pode ser lenta ou falhar"
+
+    nivel_3_humano:
+      circuit_breaker: false
+      motivo: "Humano decide, nao tem conceito de 'falha'. Sempre esperar."
+
+  # ---------------------------------------------------------
+  # ACOES POR ESTADO
+  # ---------------------------------------------------------
+  acoes:
+
+    quando_abre:
+      - "Log: 'Circuit breaker ABERTO para gate {nome}. Motivo: {falhas} falhas consecutivas.'"
+      - "Notificar usuario: 'Validacao {nome} temporariamente desativada. Entregas continuam mas sem essa verificacao.'"
+      - "Registrar em workspace/.status/circuit-breaker-log.yaml"
+
+    quando_fecha:
+      - "Log: 'Circuit breaker FECHADO para gate {nome}. Gate voltou ao normal.'"
+      - "Notificar usuario: 'Validacao {nome} restaurada.'"
+
+    entrega_nao_validada:
+      - "Marcar entrega com tag [NAO VALIDADA]"
+      - "Incluir motivo: 'Gate {nome} estava desativado (circuit breaker aberto)'"
+      - "Agendar re-validacao quando gate fechar"
+
+  # ---------------------------------------------------------
+  # LOGGING
+  # ---------------------------------------------------------
+  logging:
+    arquivo: "workspace/.status/circuit-breaker-log.yaml"
+    registrar:
+      - "Quando circuit breaker abre (com motivo)"
+      - "Quando fecha novamente"
+      - "Entregas que passaram sem validacao"
+      - "Tempo total que ficou aberto"
+    formato:
+      - timestamp: null
+        gate: null
+        evento: null  # aberto | semi_aberto | fechado
+        motivo: null
+        falhas_consecutivas: 0
+
+  # ---------------------------------------------------------
+  # INTEGRACAO
+  # ---------------------------------------------------------
+  integracao:
+
+    com_quality_gates:
+      descricao: "Circuit breaker e consultado ANTES de executar gate nivel 2"
+      fluxo:
+        1: "Verificar estado do circuit breaker para este gate"
+        2: "Se FECHADO: executar gate normalmente"
+        3: "Se SEMI_ABERTO: executar com timeout curto"
+        4: "Se ABERTO: pular gate, marcar [NAO VALIDADA]"
+
+    com_auto_calibracao:
+      descricao: "Falhas do circuit breaker alimentam metricas"
+      acao: "Registrar em tracking.yaml como falha de gate"
+
+    com_dag_engine:
+      descricao: "Workflow continua mesmo com gate aberto"
+      acao: "Tarefas dependentes recebem aviso de validacao incompleta"
+
+    com_health_check:
+      descricao: "Health check monitora estado dos circuit breakers"
+      verificacao: "Algum circuit breaker aberto por mais de max_aberto?"
+      acao: "Alertar usuario para investigar"

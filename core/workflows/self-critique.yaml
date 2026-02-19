@@ -1,0 +1,142 @@
+# =============================================================
+# SELF-CRITIQUE - Auto-Critica entre Retries
+# =============================================================
+# Quando uma tarefa falha ou o usuario pede ajustes, o agente
+# faz uma pausa para analisar O QUE deu errado e COMO melhorar
+# antes de tentar novamente
+# =============================================================
+
+versao: 1.0
+
+self_critique:
+  descricao: |
+    Entre cada tentativa de uma tarefa, o agente faz uma pausa para
+    analisar o que deu errado e como melhorar. Isso evita repetir
+    os mesmos erros e melhora progressivamente a qualidade.
+
+  trigger:
+    - "Quality Gate falhou"
+    - "Usuario pediu ajuste"
+    - "Retry apos erro"
+
+  # ---------------------------------------------------------
+  # PROCESSO DE AUTO-CRITICA (5 passos)
+  # ---------------------------------------------------------
+  processo:
+
+    1_analisar:
+      acao: "Identificar exatamente o que falhou"
+      perguntas:
+        - "O que o usuario esperava vs o que entreguei?"
+        - "Qual parte especifica nao atendeu?"
+        - "Existe um padrao nos ajustes pedidos?"
+      fonte_dados:
+        - "Feedback do usuario (se disponivel)"
+        - "Resultado do quality gate (se falhou)"
+        - "Historico de ajustes (tracking.yaml)"
+        - "Memoria semantica (alertas e padroes)"
+
+    2_diagnosticar:
+      acao: "Encontrar a causa raiz"
+      categorias:
+        contexto_insuficiente:
+          descricao: "Faltou informacao do blackboard ou memoria?"
+          solucao: "Carregar mais contexto (nivel 3)"
+        regra_ignorada:
+          descricao: "Violei algum padrao ou decisao anterior?"
+          solucao: "Consultar memoria semantica"
+        tom_inadequado:
+          descricao: "Tom de voz nao combinou com o publico?"
+          solucao: "Recarregar definicao de tom do blackboard"
+        formato_errado:
+          descricao: "Formato ou estrutura inadequados?"
+          solucao: "Consultar template correto"
+        excesso_tecnico:
+          descricao: "Usei linguagem complexa demais?"
+          solucao: "Simplificar, consultar nivel do publico"
+        falta_especificidade:
+          descricao: "Conteudo generico, sem dados concretos?"
+          solucao: "Adicionar numeros, exemplos, provas"
+
+    3_planejar:
+      acao: "Definir o que mudar na proxima tentativa"
+      formato:
+        causa: "O que causou a falha"
+        ajuste: "O que vou fazer diferente"
+        evidencia: "Por que acredito que isso vai funcionar"
+      regra: "O plano DEVE ser diferente da tentativa anterior"
+
+    4_executar:
+      acao: "Nova tentativa com ajustes aplicados"
+      verificacoes_pre:
+        - "Plano e diferente da tentativa anterior?"
+        - "Causa raiz foi endereçada?"
+        - "Contexto adicional foi carregado (se necessario)?"
+      regra: "DEVE ser diferente da tentativa anterior"
+
+    5_registrar:
+      acao: "Salvar aprendizado na memoria"
+      destino:
+        se_padrao_recorrente: "semantica/alertas.yaml (permanente)"
+        se_insight_novo: "episodica/{data}.yaml (temporario)"
+        se_ajuste_frequente: "tracking.yaml (auto-calibracao)"
+
+  # ---------------------------------------------------------
+  # LIMITES
+  # ---------------------------------------------------------
+  limites:
+    max_ciclos: 3  # Maximo de ciclos de auto-critica por tarefa
+    apos_limite:
+      acao: "Perguntar ao usuario o que especificamente quer diferente"
+      motivo: "3 tentativas sem sucesso indica que falta informacao"
+
+  # ---------------------------------------------------------
+  # INTEGRACAO COM RALPH
+  # ---------------------------------------------------------
+  ralph_integracao:
+    descricao: "Self-critique entre iteracoes do Ralph"
+    ciclo_ralph:
+      1: "Executar story"
+      2: "Verificar gates"
+      3: "SE gate falhou → Self-Critique"
+      4: "Aplicar ajustes da critica"
+      5: "Re-executar story"
+      6: "SE 3 falhas → Escalar para usuario"
+
+  # ---------------------------------------------------------
+  # EXEMPLO PRATICO
+  # ---------------------------------------------------------
+  exemplo:
+    tarefa: "criar-headline"
+    agente: "copywriter"
+
+    tentativa_1:
+      entrega: "Transforme sua empresa com o Metodo IP"
+      feedback: "Muito generico. Quero algo mais direto e com numero."
+      critica:
+        analise: "Headline sem especificidade e sem prova social numerica"
+        causa: "falta_especificidade"
+        ajuste: "Adicionar numero concreto + beneficio especifico"
+        evidencia: "Headlines com numeros tem 36% mais cliques (padrao da memoria)"
+
+    tentativa_2:
+      entrega: "O metodo que ja formou 10.000 lideres em 6 paises"
+      feedback: "Aprovado!"
+      registro:
+        insight: "Para este cliente, headlines com numeros concretos funcionam melhor"
+        destino: "semantica/publico.yaml"
+        auto_calibracao: "Registrar em tracking.yaml para eventual gate"
+
+  # ---------------------------------------------------------
+  # METRICAS
+  # ---------------------------------------------------------
+  metricas:
+    taxa_sucesso_retry:
+      descricao: "% de retries que resolvem o problema"
+      alvo: "> 70%"
+    media_tentativas:
+      descricao: "Media de tentativas ate aprovacao"
+      alvo: "< 2"
+    causas_frequentes:
+      descricao: "Ranking das causas raiz mais comuns"
+      util_para: "Identificar gaps sistematicos"

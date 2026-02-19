@@ -1,0 +1,177 @@
+# =============================================================
+# METRICAS V5 - Observabilidade Profunda
+# =============================================================
+# Metricas expandidas para o v5, alimentadas automaticamente
+# pelo Event Bus. Inclui dados de sessao, historico,
+# insights operacionais e alertas.
+# =============================================================
+
+versao: 1.0
+
+metricas:
+  descricao: |
+    No v4, o /status era basico: tarefa atual e historico simples.
+    O v5 oferece metricas profundas: quais agentes sao mais usados,
+    onde estao os gargalos, como a qualidade evolui ao longo do tempo.
+
+  # ---------------------------------------------------------
+  # METRICAS DA SESSAO ATUAL
+  # ---------------------------------------------------------
+  sessao_atual:
+    inicio: null
+    tarefas_executadas: 0
+    tarefas_em_andamento: 0
+    tarefas_na_fila: 0
+    tarefas_falhadas: 0
+    tempo_total: "0min"
+    tempo_medio_tarefa: "0min"
+    extensoes_usadas: []
+    agentes_ativos: []
+    erros: 0
+    gates_executados: 0
+    gates_falhados: 0
+    retries: 0
+    insights_capturados: 0
+    ativos_criados: 0
+    ativos_reusados: 0
+    eventos_processados: 0
+    bracket_atual: "FRESH"
+
+  # ---------------------------------------------------------
+  # METRICAS POR AGENTE (sessao)
+  # ---------------------------------------------------------
+  por_agente: {}
+    # Formato:
+    # copywriter:
+    #   tarefas: 0
+    #   tempo_total: "0min"
+    #   tempo_medio: "0min"
+    #   aprovadas_primeiro: 0    # Aprovadas sem ajuste
+    #   retries: 0
+    #   fallbacks: 0
+
+  # ---------------------------------------------------------
+  # METRICAS POR EXTENSAO (sessao)
+  # ---------------------------------------------------------
+  por_extensao: {}
+    # Formato:
+    # marketing:
+    #   tarefas: 0
+    #   agentes_usados: []
+    #   tempo_total: "0min"
+
+  # ---------------------------------------------------------
+  # METRICAS POR TIPO DE TAREFA (sessao)
+  # ---------------------------------------------------------
+  por_tarefa: {}
+    # Formato:
+    # criar-headline:
+    #   execucoes: 0
+    #   tempo_medio: "0min"
+    #   taxa_aprovacao: "0%"
+    #   iteracoes_media: 0
+
+  # ---------------------------------------------------------
+  # HISTORICO (ultimas 30 sessoes)
+  # ---------------------------------------------------------
+  historico: []
+    # Formato de cada item:
+    # - data: "2026-02-19"
+    #   tarefas: 0
+    #   tempo_total: "0min"
+    #   tempo_medio: "0min"
+    #   extensao_mais_usada: null
+    #   agente_mais_ativo: null
+    #   taxa_aprovacao: "0%"
+    #   retries_total: 0
+    #   insights_capturados: 0
+    #   ativos_criados: 0
+    #   ativos_reusados: 0
+    #   eventos_total: 0
+    #   circuit_breakers_abertos: 0
+
+  # ---------------------------------------------------------
+  # INSIGHTS OPERACIONAIS (calculados automaticamente)
+  # ---------------------------------------------------------
+  insights_operacionais:
+    agente_mais_eficiente: null     # Menor tempo medio
+    agente_mais_lento: null          # Maior tempo medio
+    tarefa_mais_refeita: null        # Maior media de iteracoes
+    horario_pico: null               # Horario com mais tarefas
+    extensao_mais_usada: null        # Extensao com mais tarefas no mes
+    extensao_subutilizada: null      # Extensao com 0 usos no mes
+    taxa_reuso: "0%"                 # % de tarefas que reusaram/adaptaram ativos
+    gate_mais_falho: null            # Gate que mais reprova
+    causa_retry_mais_comum: null     # Causa mais comum de retry
+    tempo_medio_7dias: "0min"        # Media ultimos 7 dias
+
+  # ---------------------------------------------------------
+  # ALERTAS OPERACIONAIS
+  # ---------------------------------------------------------
+  alertas:
+
+    degradacao:
+      condicao: "tempo_medio > 5min por 3 sessoes consecutivas"
+      acao: "Investigar causa da lentidao"
+      status: "inativo"
+      ultima_verificacao: null
+
+    qualidade:
+      condicao: "taxa_aprovacao < 80% por 5 sessoes"
+      acao: "Revisar quality gates e calibrar"
+      status: "inativo"
+      ultima_verificacao: null
+
+    extensao_ociosa:
+      condicao: "extensao nao usada em 30 dias"
+      acao: "Sugerir remocao ou lembrar capacidades"
+      status: "inativo"
+      ultima_verificacao: null
+
+    circuit_breaker_prolongado:
+      condicao: "circuit breaker aberto por mais de 30min"
+      acao: "Alertar usuario para investigar"
+      status: "inativo"
+      ultima_verificacao: null
+
+    memoria_cheia:
+      condicao: "episodica com mais de 200 itens"
+      acao: "Forcar limpeza e promocao"
+      status: "inativo"
+      ultima_verificacao: null
+
+    reuso_baixo:
+      condicao: "taxa de reuso < 10% com 50+ ativos no inventario"
+      acao: "Revisar scoring e inventario"
+      status: "inativo"
+      ultima_verificacao: null
+
+  # ---------------------------------------------------------
+  # TENDENCIAS (calculadas semanalmente)
+  # ---------------------------------------------------------
+  tendencias:
+    qualidade:
+      direcao: null        # melhorando | estavel | piorando
+      taxa_atual: "0%"
+      taxa_semana_passada: "0%"
+
+    velocidade:
+      direcao: null
+      tempo_atual: "0min"
+      tempo_semana_passada: "0min"
+
+    reuso:
+      direcao: null
+      taxa_atual: "0%"
+      taxa_semana_passada: "0%"
+
+  # ---------------------------------------------------------
+  # CONFIGURACAO
+  # ---------------------------------------------------------
+  configuracao:
+    historico_max_sessoes: 30    # Manter ultimas 30 sessoes
+    recalcular_insights: "ao_encerrar_sessao"
+    recalcular_tendencias: "semanal"
+    alertas_habilitados: true
+    log_metricas: true
+    log_arquivo: "workspace/.status/metricas-log.yaml"

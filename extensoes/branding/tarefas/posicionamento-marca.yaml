@@ -1,0 +1,268 @@
+# Tarefa: Posicionamento de Marca
+
+id: posicionamento-marca
+nome: Criar Posicionamento de Marca
+descricao: Definir posicionamento estrategico diferenciado no mercado
+agente: brand-strategist
+comando: /posicionamento
+
+versao: "1.0"
+categoria: estrategia
+
+# Baseado em: Al Ries & Jack Trout, Michael Porter, Blue Ocean Strategy
+
+entradas:
+  obrigatorias:
+    - nome: marca
+      pergunta: "Qual o nome da marca/empresa?"
+      tipo: texto
+
+    - nome: categoria
+      pergunta: "Em qual categoria voce compete?"
+      tipo: texto
+
+    - nome: concorrentes
+      pergunta: "Quem sao seus 3 principais concorrentes?"
+      tipo: texto
+
+    - nome: publico
+      pergunta: "Quem e seu publico-alvo?"
+      tipo: texto
+
+    - nome: diferencial
+      pergunta: "O que voce faz melhor que os outros?"
+      tipo: texto
+
+  opcionais:
+    - nome: percepcao_atual
+      pergunta: "Como voce acha que e percebido hoje?"
+      tipo: texto
+      padrao: "A definir"
+
+    - nome: percepcao_desejada
+      pergunta: "Como gostaria de ser percebido?"
+      tipo: texto
+      padrao: "A definir"
+
+passos:
+  - numero: 1
+    acao: "Mapear posicionamento dos concorrentes"
+    analisar:
+      - Como cada concorrente se posiciona
+      - Quais espacos estao ocupados
+      - Onde ha oportunidades
+
+  - numero: 2
+    acao: "Identificar espaco vazio na mente"
+    principio_ries_trout: "Be first in a category, or create a new one"
+
+  - numero: 3
+    acao: "Criar mapa de posicionamento"
+    eixos:
+      - Eixo X: [Dimensao relevante 1]
+      - Eixo Y: [Dimensao relevante 2]
+
+  - numero: 4
+    acao: "Formular Positioning Statement"
+    template: |
+      Para [publico-alvo]
+      que [necessidade],
+      [marca] e [categoria]
+      que [beneficio unico]
+      porque [razao para crer].
+
+  - numero: 5
+    acao: "Definir pontos de diferenciacao"
+
+saida:
+  formato: markdown
+  template: |
+    # Posicionamento de Marca: [Nome]
+
+    ## 1. Analise Competitiva
+
+    ### Mapa de Concorrentes
+
+    | Concorrente | Posicionamento | Forca | Fraqueza |
+    |-------------|----------------|-------|----------|
+    | [Conc 1] | [Como se posiciona] | [+] | [-] |
+    | [Conc 2] | [Como se posiciona] | [+] | [-] |
+    | [Conc 3] | [Como se posiciona] | [+] | [-] |
+
+    ### Espacos Ocupados
+    - **[Concorrente 1]:** [Espaco mental ocupado]
+    - **[Concorrente 2]:** [Espaco mental ocupado]
+    - **[Concorrente 3]:** [Espaco mental ocupado]
+
+    ### Oportunidade Identificada
+    > [Espaco vazio no mercado/mente]
+
+    ---
+
+    ## 2. Mapa de Posicionamento
+
+    ```
+                        [Atributo A - Alto]
+                              │
+                              │    ★ [Marca]
+                              │
+        [Atributo B]──────────┼──────────[Atributo B]
+        [Baixo]               │              [Alto]
+                              │
+                    ○ [Conc1] │ ○ [Conc2]
+                              │
+                        [Atributo A - Baixo]
+    ```
+
+    ### Eixos Escolhidos
+    - **Eixo X:** [Nome do atributo] - Por que e relevante
+    - **Eixo Y:** [Nome do atributo] - Por que e relevante
+
+    ### Posicao Escolhida
+    > [Quadrante e justificativa]
+
+    ---
+
+    ## 3. Positioning Statement
+
+    ### Versao Completa
+
+    > Para **[publico-alvo especifico]**
+    > que **[necessidade ou problema]**,
+    > **[Nome da Marca]** e a **[categoria]**
+    > que **[beneficio unico e diferenciado]**
+    > porque **[razao para crer - prova]**.
+
+    ### Versao Curta (Elevator Pitch)
+    > [2-3 frases que resumem o posicionamento]
+
+    ### Versao Ultra-Curta (Tagline)
+    > [5-7 palavras]
+
+    ---
+
+    ## 4. Diferenciacao
+
+    ### Unique Value Proposition (UVP)
+    > [O que so voce oferece - 1 frase]
+
+    ### Points of Difference (PODs)
+
+    | POD | Descricao | Prova |
+    |-----|-----------|-------|
+    | [POD 1] | [O que e diferente] | [Como provar] |
+    | [POD 2] | [O que e diferente] | [Como provar] |
+    | [POD 3] | [O que e diferente] | [Como provar] |
+
+    ### Points of Parity (POPs)
+    - [O que precisa ter para competir na categoria]
+    - [Requisito basico 2]
+    - [Requisito basico 3]
+
+    ### Razoes para Crer (RTBs)
+    1. **[RTB 1]:** [Evidencia concreta]
+    2. **[RTB 2]:** [Evidencia concreta]
+    3. **[RTB 3]:** [Evidencia concreta]
+
+    ---
+
+    ## 5. Estrategia de Posicionamento
+
+    ### Abordagem Escolhida
+
+    - [ ] **Lideranca de categoria** - Ser o #1 na categoria
+    - [ ] **Desafiante** - Posicionar contra o lider
+    - [ ] **Nicho** - Dominar um segmento especifico
+    - [ ] **Especialista** - Ser o melhor em algo especifico
+    - [ ] **Nova categoria** - Criar categoria propria
+
+    ### Justificativa
+    > [Por que esta abordagem e a ideal]
+
+    ---
+
+    ## 6. Mensagens-Chave
+
+    ### Hierarquia de Mensagens
+
+    **Mensagem Principal (M1):**
+    > [Mensagem mais importante - o que todos devem saber]
+
+    **Mensagem de Suporte (M2):**
+    > [Expande a M1 - como entrega o beneficio]
+
+    **Mensagem de Prova (M3):**
+    > [Prova da M1 - por que acreditar]
+
+    ### Pilares de Comunicacao
+
+    | Pilar | Mensagem | Prova |
+    |-------|----------|-------|
+    | [Pilar 1] | [O que comunicar] | [Como provar] |
+    | [Pilar 2] | [O que comunicar] | [Como provar] |
+    | [Pilar 3] | [O que comunicar] | [Como provar] |
+
+    ---
+
+    ## 7. Validacao do Posicionamento
+
+    ### Checklist de Al Ries & Jack Trout
+
+    - [ ] **Simples?** Facil de entender em segundos
+    - [ ] **Unico?** Ninguem mais ocupa este espaco
+    - [ ] **Crivel?** Voce pode entregar esta promessa
+    - [ ] **Relevante?** Importa para o publico-alvo
+    - [ ] **Defensavel?** Dificil de copiar
+    - [ ] **Escalavel?** Permite crescimento
+
+    ### Teste do Contrario
+    > Se o oposto do seu posicionamento nao faz sentido,
+    > seu posicionamento e muito generico.
+
+    **Seu posicionamento:** [Posicionamento]
+    **Contrario:** [Oposto]
+    **Resultado:** [Faz sentido o contrario? Se sim, refinar]
+
+    ---
+
+    ## 8. Implementacao
+
+    ### Onde Comunicar o Posicionamento
+
+    | Touchpoint | Como Aplicar |
+    |------------|--------------|
+    | Website | [Como aparece] |
+    | Redes Sociais | [Como aparece] |
+    | Vendas | [Como comunicar] |
+    | Produto | [Como refletir] |
+    | Atendimento | [Como demonstrar] |
+
+    ### Metricas de Sucesso
+    - [Como medir se posicionamento esta funcionando]
+    - [Indicador 2]
+    - [Indicador 3]
+
+    ---
+
+    ## 9. Proximos Passos
+
+    1. Validar posicionamento com clientes
+    2. Alinhar comunicacao com posicionamento
+    3. Treinar equipe
+    4. Atualizar materiais de marketing
+    5. Monitorar percepcao de marca
+
+conhecimento:
+  - branding.md
+  - personal-branding.md
+
+gates:
+  - Posicionamento e unico no mercado?
+  - E crivel e entregavel?
+  - Passa no teste do contrario?
+  - E simples de comunicar?
+
+proximos_passos:
+  - Definir identidade de marca (/definir-marca)
+  - Criar identidade visual (/identidade-visual)
+  - Desenvolver messaging (/messaging)

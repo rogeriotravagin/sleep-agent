@@ -1,0 +1,181 @@
+# ============================================================
+# Workflow: Servidor Completo
+# ============================================================
+# Provisiona servidor do zero com seguranca completa
+
+id: servidor-completo
+nome: Provisionar Servidor Completo
+comando: /servidor-completo
+versao: "1.0"
+
+descricao: |
+  Provisiona um novo servidor na Hetzner Cloud com todas as camadas
+  de seguranca aplicadas: firewall, SSH hardening, fail2ban, updates
+  automaticos, Docker Swarm e Portainer Agent.
+
+pre_requisitos:
+  - "HETZNER_API_TOKEN configurado"
+  - "SSH key publica disponivel"
+  - "Confirmacao de custos pelo usuario"
+
+# ============================================================
+# FASES
+# ============================================================
+fases:
+  - numero: 1
+    nome: PLANEJAMENTO
+    agente: devops-estrategista
+    descricao: Entender necessidade e dimensionar servidor
+    perguntas:
+      - "Qual aplicacao vai rodar nesse servidor?"
+      - "Quantos usuarios simultaneos espera?"
+      - "Precisa de muito processamento ou memoria?"
+      - "Preferencia de datacenter?"
+      - "Orcamento mensal maximo?"
+    entregas:
+      - Specs do servidor recomendado
+      - Estimativa de custo mensal
+      - Justificativa da escolha
+    gate:
+      nivel: 3
+      verificacao: "Usuario aprovou specs e custo?"
+
+  - numero: 2
+    nome: PRE-PROVISIONAMENTO
+    descricao: Preparar firewall e SSH key
+    paralelo: true
+    fork:
+      - tarefa: criar-firewall
+        agente: devops-hetzner
+        descricao: Criar firewall com regras seguras
+        regras:
+          - "SSH apenas IP autorizado"
+          - "HTTP/HTTPS publico"
+          - "Demais portas bloqueadas"
+      - tarefa: verificar-ssh-key
+        agente: devops-hetzner
+        descricao: Verificar ou criar SSH key
+    join:
+      estrategia: aguardar_todos
+
+  - numero: 3
+    nome: PROVISIONAMENTO
+    agente: devops-hetzner
+    descricao: Criar servidor na Hetzner Cloud
+    acoes:
+      - "Criar servidor com specs aprovadas"
+      - "Aplicar firewall criado na fase 2"
+      - "Vincular SSH key"
+      - "Aguardar servidor ficar Running"
+      - "Registrar IP publico"
+    gate:
+      nivel: 1
+      verificacao: "Servidor acessivel via SSH?"
+
+  - numero: 4
+    nome: HARDENING
+    agente: devops-seguranca
+    descricao: Aplicar hardening completo no servidor
+    acoes:
+      - "Atualizar sistema (apt update && upgrade)"
+      - "Criar usuario nao-root"
+      - "Configurar SSH hardening"
+      - "Instalar e configurar UFW"
+      - "Instalar fail2ban"
+      - "Configurar updates automaticos"
+      - "Aplicar sysctl hardening"
+      - "Instalar auditd"
+    gate:
+      nivel: 2
+      agente: devops-seguranca
+      verificacao: "Checklist de hardening completo?"
+
+  - numero: 5
+    nome: DOCKER_SETUP
+    agente: devops-portainer
+    descricao: Instalar Docker e configurar Swarm
+    condicao: se_necessario
+    acoes:
+      - "Instalar Docker Engine"
+      - "Inicializar Docker Swarm"
+      - "Criar overlay network padrao"
+      - "Configurar logging"
+    gate:
+      nivel: 1
+      verificacao: "Docker Swarm ativo?"
+
+  - numero: 6
+    nome: PORTAINER_SETUP
+    agente: devops-portainer
+    descricao: Conectar servidor ao Portainer
+    condicao: se_necessario
+    acoes:
+      - "Deploy do Portainer Agent"
+      - "Conectar ao Portainer central"
+      - "Verificar conectividade"
+    gate:
+      nivel: 1
+      verificacao: "Endpoint visivel no Portainer?"
+
+  - numero: 7
+    nome: VALIDACAO_FINAL
+    descricao: Auditoria e documentacao final
+    paralelo: true
+    fork:
+      - tarefa: audit-final
+        agente: devops-seguranca
+        descricao: Auditoria de seguranca pos-setup
+      - tarefa: documentar
+        agente: devops-estrategista
+        descricao: Documentar servidor no inventario
+    join:
+      estrategia: aguardar_todos
+
+# ============================================================
+# SAIDA
+# ============================================================
+saida:
+  formato: markdown
+  salvar_em: "workspace/{{empresa}}/devops/docs/"
+  template: |
+    # Servidor Provisionado
+
+    ## Detalhes
+    | Item | Valor |
+    |------|-------|
+    | Nome | {{nome}} |
+    | IP | {{ip}} |
+    | Tipo | {{tipo}} |
+    | Datacenter | {{datacenter}} |
+    | OS | {{os}} |
+    | Custo | {{custo}}/mes |
+
+    ## Seguranca
+    - [x] Firewall configurado
+    - [x] SSH hardening aplicado
+    - [x] Fail2ban ativo
+    - [x] Updates automaticos
+    - [x] Usuario nao-root criado
+
+    ## Docker
+    - [x] Docker Engine instalado
+    - [x] Swarm inicializado
+    - [x] Portainer Agent conectado
+
+    ## Acesso
+    - SSH: `ssh deploy@{{ip}} -p 2222`
+    - Portainer: Endpoint "{{nome}}" no painel
+
+    ## Proximos Passos
+    - Deploy de stacks via `/deploy-stack`
+    - Configurar backup via `/plano-backup`
+    - Configurar DNS via `/gerenciar-dns`
+
+# ============================================================
+# ROLLBACK
+# ============================================================
+rollback:
+  - "Se falhar no provisionamento: deletar servidor e firewall"
+  - "Se falhar no hardening: recriar servidor do zero"
+  - "Se falhar no Docker: reinstalar Docker"
+  - "Sempre: documentar o que deu errado"

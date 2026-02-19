@@ -1,0 +1,116 @@
+# ============================================================
+# Template: Traefik Reverse Proxy (Docker Swarm)
+# ============================================================
+# Traefik como reverse proxy com SSL automatico via Let's Encrypt
+# Substitua {{EMAIL}} pelo email real
+
+version: "3.8"
+
+services:
+  traefik:
+    image: traefik:v3.0
+    command:
+      # Dashboard (desabilitado em producao por padrao)
+      - "--api.dashboard=false"
+
+      # Docker provider
+      - "--providers.docker=true"
+      - "--providers.docker.swarmMode=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.network=public"
+
+      # Entrypoints
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+
+      # Redirect HTTP → HTTPS
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+
+      # Let's Encrypt (ACME)
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.letsencrypt.acme.email={{EMAIL}}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+
+      # Logging
+      - "--log.level=WARN"
+      - "--accesslog=true"
+      - "--accesslog.bufferingsize=100"
+
+      # Security headers middleware (global)
+      - "--entrypoints.websecure.http.middlewares=secure-headers@docker"
+
+    ports:
+      - "80:80"
+      - "443:443"
+
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "letsencrypt:/letsencrypt"
+
+    networks:
+      - public
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+      update_config:
+        parallelism: 1
+        delay: 10s
+        order: start-first
+      labels:
+        # Secure headers middleware
+        - "traefik.enable=true"
+        - "traefik.http.middlewares.secure-headers.headers.stsSeconds=31536000"
+        - "traefik.http.middlewares.secure-headers.headers.stsIncludeSubdomains=true"
+        - "traefik.http.middlewares.secure-headers.headers.stsPreload=true"
+        - "traefik.http.middlewares.secure-headers.headers.frameDeny=true"
+        - "traefik.http.middlewares.secure-headers.headers.contentTypeNosniff=true"
+        - "traefik.http.middlewares.secure-headers.headers.browserXssFilter=true"
+        - "traefik.http.middlewares.secure-headers.headers.referrerPolicy=strict-origin-when-cross-origin"
+        - "traefik.http.middlewares.secure-headers.headers.permissionsPolicy=camera=(), microphone=(), geolocation=()"
+
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  letsencrypt:
+
+networks:
+  public:
+    driver: overlay
+    attachable: true
+
+# ============================================================
+# COMO USAR EM OUTROS SERVICES:
+# ============================================================
+# deploy:
+#   labels:
+#     - "traefik.enable=true"
+#     - "traefik.http.routers.NOME.rule=Host(`dominio.com`)"
+#     - "traefik.http.routers.NOME.entrypoints=websecure"
+#     - "traefik.http.routers.NOME.tls.certresolver=letsencrypt"
+#     - "traefik.http.services.NOME.loadbalancer.server.port=8080"
+# networks:
+#   - public

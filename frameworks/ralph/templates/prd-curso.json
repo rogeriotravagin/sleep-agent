@@ -1,0 +1,202 @@
+{
+  "metadata": {
+    "type": "curso-educacional",
+    "version": "1.0",
+    "created_by": "Sleep Agent - Extensão Educacional"
+  },
+  "project": {
+    "name": "{{nome_curso}}",
+    "slug": "{{slug}}",
+    "description": "{{descricao}}",
+    "target_audience": "{{publico_alvo}}",
+    "transformation": "{{transformacao}}"
+  },
+  "requirements": {
+    "format": "{{formato}}",
+    "duration": "{{duracao}}",
+    "modules": "{{num_modulos}}",
+    "lessons_per_module": "{{aulas_por_modulo}}"
+  },
+  "user_stories": [
+    {
+      "id": "US001",
+      "title": "Criar estrutura completa do curso",
+      "description": "Como criador de curso, quero uma estrutura organizada com módulos e aulas sequenciados logicamente",
+      "acceptance_criteria": [
+        "Grade curricular completa com todos os módulos",
+        "Objetivos de aprendizagem por módulo usando Taxonomia de Bloom",
+        "Sequência lógica do simples ao complexo",
+        "Carga horária estimada por módulo e aula",
+        "Trilha visual de aprendizagem"
+      ],
+      "priority": "high",
+      "deliverables": [
+        "estrutura/grade-curricular.md",
+        "estrutura/objetivos.md",
+        "estrutura/trilha.md"
+      ]
+    },
+    {
+      "id": "US002",
+      "title": "Criar planos de aula detalhados",
+      "description": "Como criador, quero planos de aula completos seguindo os 9 Eventos de Gagné",
+      "acceptance_criteria": [
+        "Hook de abertura que captura atenção",
+        "Objetivo claro no início",
+        "Conteúdo estruturado em blocos de 3-5 minutos",
+        "Exemplos práticos para cada conceito",
+        "Interações a cada 3-5 minutos",
+        "Resumo com máximo 3 pontos",
+        "Call-to-action claro"
+      ],
+      "priority": "high",
+      "deliverables": [
+        "aulas/modulo-{{n}}/aula-{{n}}-{{m}}.md"
+      ]
+    },
+    {
+      "id": "US003",
+      "title": "Criar roteiros de vídeo-aula",
+      "description": "Como criador, quero roteiros prontos para gravação com marcações de edição",
+      "acceptance_criteria": [
+        "Script completo palavra por palavra",
+        "Marcações de tempo",
+        "Indicações de B-roll e visuais",
+        "Notas para edição",
+        "Duração estimada realista"
+      ],
+      "priority": "medium",
+      "deliverables": [
+        "roteiros/roteiro-{{n}}-{{m}}.md"
+      ]
+    },
+    {
+      "id": "US004",
+      "title": "Criar exercícios práticos",
+      "description": "Como criador, quero exercícios que desenvolvam habilidades através da prática",
+      "acceptance_criteria": [
+        "Exercício alinhado ao objetivo da aula",
+        "Cenário/contexto realista",
+        "Instruções claras passo a passo",
+        "Critérios de avaliação objetivos",
+        "Exemplo de resposta modelo"
+      ],
+      "priority": "high",
+      "deliverables": [
+        "exercicios/modulo-{{n}}-exercicios.md"
+      ]
+    },
+    {
+      "id": "US005",
+      "title": "Criar quizzes de fixação",
+      "description": "Como criador, quero quizzes para verificar aprendizagem com feedback",
+      "acceptance_criteria": [
+        "5-10 questões por módulo",
+        "Mix de dificuldades (fácil/médio/difícil)",
+        "Distratores plausíveis",
+        "Justificativa para cada resposta",
+        "Feedback educativo"
+      ],
+      "priority": "medium",
+      "deliverables": [
+        "quizzes/quiz-modulo-{{n}}.md"
+      ]
+    },
+    {
+      "id": "US006",
+      "title": "Criar projeto final integrador",
+      "description": "Como criador, quero um projeto que integre todo o aprendizado do curso",
+      "acceptance_criteria": [
+        "Briefing completo com contexto",
+        "Requisitos claros e mensuráveis",
+        "Rubrica de avaliação detalhada",
+        "Exemplo de entrega excelente",
+        "Critérios de aprovação"
+      ],
+      "priority": "high",
+      "deliverables": [
+        "projeto-final/briefing.md",
+        "projeto-final/rubrica.md"
+      ]
+    },
+    {
+      "id": "US007",
+      "title": "Criar sistema de gamificação",
+      "description": "Como criador, quero gamificação para aumentar engajamento",
+      "acceptance_criteria": [
+        "Sistema de pontos (XP) balanceado",
+        "Níveis com progressão justa",
+        "Badges significativos e alcançáveis",
+        "Streaks com recompensas crescentes",
+        "Leaderboards opcionais"
+      ],
+      "priority": "medium",
+      "deliverables": [
+        "gamificacao/sistema.yaml",
+        "gamificacao/badges.md"
+      ]
+    },
+    {
+      "id": "US008",
+      "title": "Criar materiais de apoio",
+      "description": "Como criador, quero materiais complementares para reforçar aprendizado",
+      "acceptance_criteria": [
+        "Resumo de cada aula (1 página)",
+        "Checklists de progresso por módulo",
+        "Templates/ferramentas práticas",
+        "Leituras complementares recomendadas"
+      ],
+      "priority": "low",
+      "deliverables": [
+        "materiais/resumos/",
+        "materiais/checklists/",
+        "materiais/templates/"
+      ]
+    }
+  ],
+  "quality_gates": {
+    "estrutura": [
+      "Todos os módulos têm objetivos claros?",
+      "A sequência é lógica (simples → complexo)?",
+      "A carga horária está adequada?"
+    ],
+    "conteudo": [
+      "Cada aula tem hook nos primeiros 30 segundos?",
+      "Cada conceito tem exemplo prático?",
+      "Há interações a cada 3-5 minutos?"
+    ],
+    "avaliacao": [
+      "Exercícios avaliam os objetivos?",
+      "Questões são claras e sem ambiguidade?",
+      "Rubricas têm critérios objetivos?"
+    ],
+    "engajamento": [
+      "A gamificação incentiva comportamentos desejados?",
+      "Os badges são motivadores?",
+      "A progressão de níveis é justa?"
+    ]
+  },
+  "knowledge_base": [
+    "extensoes/educacional/conhecimento/design-instrucional.md",
+    "extensoes/educacional/conhecimento/taxonomia-bloom.md",
+    "extensoes/educacional/conhecimento/metodologias-ativas.md",
+    "extensoes/educacional/conhecimento/gamificacao-educacional.md",
+    "extensoes/educacional/conhecimento/avaliacoes-aprendizagem.md",
+    "extensoes/educacional/conhecimento/roteiros-videoaulas.md"
+  ],
+  "output_structure": {
+    "base_path": "output/cursos/{{slug}}/",
+    "directories": [
+      "estrutura",
+      "aulas",
+      "roteiros",
+      "exercicios",
+      "quizzes",
+      "projeto-final",
+      "gamificacao",
+      "materiais/resumos",
+      "materiais/checklists",
+      "materiais/templates"
+    ]
+  }
+}

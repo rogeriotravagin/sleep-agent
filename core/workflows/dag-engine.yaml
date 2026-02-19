@@ -1,0 +1,137 @@
+# =============================================================
+# DAG ENGINE - Grafos de Dependencia para Workflows
+# =============================================================
+# Substitui workflows lineares por grafos com paralelismo
+# automatico, retry, fallback e circuit breaker
+# =============================================================
+
+versao: 1.0
+
+dag_engine:
+
+  # ---------------------------------------------------------
+  # RESOLUCAO TOPOLOGICA
+  # ---------------------------------------------------------
+  resolucao:
+    algoritmo: kahn  # Ordenacao topologica de Kahn
+    descricao: |
+      Identifica tarefas sem dependencias (onda 1),
+      remove do grafo, repete ate esvaziar.
+      Tarefas na mesma onda executam em paralelo.
+
+    deteccao_ciclo: true
+    acao_ciclo: "Rejeitar workflow e alertar usuario"
+
+  # ---------------------------------------------------------
+  # EXECUCAO POR ONDAS
+  # ---------------------------------------------------------
+  execucao:
+    modelo: ondas  # ondas | streaming
+    descricao: |
+      Onda N+1 so comeca quando onda N terminar.
+      Dentro da onda, tarefas rodam em paralelo.
+
+    join:
+      estrategia_padrao: aguardar_todos
+      estrategias_disponiveis:
+        aguardar_todos:
+          descricao: "Espera todas as tarefas da onda"
+        aguardar_criticos:
+          descricao: "Espera apenas tarefas marcadas como criticas"
+        primeiro_valido:
+          descricao: "Usa resultado da primeira que terminar"
+        melhor_resultado:
+          descricao: "Compara resultados via gate nivel 2"
+
+    max_ondas: 20          # Limite de profundidade do grafo
+    max_tarefas_onda: 10   # Limite de paralelas por onda
+
+  # ---------------------------------------------------------
+  # RESILIENCIA
+  # ---------------------------------------------------------
+  resiliencia:
+
+    retry:
+      max_tentativas: 3
+      backoff:
+        tipo: exponencial
+        base: 1  # segundos
+      condicao: "erro_transiente OU gate_falhou"
+      entre_retries: self_critique
+      referencia: "core/workflows/self-critique.yaml"
+
+    fallback:
+      habilitado: true
+      estrategia: agente_alternativo
+      mapeamento:
+        # tarefa: [agente_primario, agente_fallback]
+        criar-headline: [copywriter, estrategista]
+        criar-email: [email-builder, copywriter]
+        criar-landing: [copywriter, estrategista]
+        definir-marca: [brand-strategist, estrategista]
+      descricao: |
+        Se agente primario falha apos max retries,
+        tenta com agente fallback antes de abandonar.
+
+    circuit_breaker:
+      habilitado: true
+      referencia: "core/qualidade/circuit-breaker.yaml"
+      acao_quando_aberto:
+        - "Marcar tarefa como [NAO COMPLETADA]"
+        - "Continuar com tarefas independentes"
+        - "Bloquear tarefas dependentes"
+        - "Notificar usuario"
+
+  # ---------------------------------------------------------
+  # PROPAGACAO DE DADOS
+  # ---------------------------------------------------------
+  propagacao:
+    descricao: |
+      Resultados de tarefas anteriores sao automaticamente
+      disponiveis para tarefas dependentes via blackboard.
+
+    mecanismo:
+      1: "Tarefa completa → resultado salvo no blackboard"
+      2: "Tarefa dependente inicia → le blackboard atualizado"
+      3: "Handoff estruturado entre ondas diferentes"
+
+    blackboard_fields:
+      pesquisa: "blackboard.contexto.pesquisa"
+      icp: "blackboard.publico"
+      oferta: "blackboard.oferta"
+      headline: "blackboard.copy.headline"
+      paleta: "blackboard.marca.cores"
+
+  # ---------------------------------------------------------
+  # COMPATIBILIDADE COM V4
+  # ---------------------------------------------------------
+  compatibilidade:
+    workflows_v4: true
+    descricao: |
+      Workflows v4 com fork/join continuam funcionando.
+      O DAG Engine interpreta formato v4 automaticamente:
+      - fork = tarefas na mesma onda
+      - join = barreira entre ondas
+      - fases numericas = ondas sequenciais
+
+  # ---------------------------------------------------------
+  # TEMPLATE DE WORKFLOW DAG
+  # ---------------------------------------------------------
+  template:
+    nome: null
+    tipo: dag
+    descricao: null
+    tarefas: {}
+      # formato:
+      # nome_tarefa:
+      #   agente: nome_agente
+      #   extensao: nome_extensao  # opcional se contexto claro
+      #   dependencias: []
+      #   prioridade: normal
+      #   critica: false           # se true, join aguarda esta
+      #   timeout: null            # usa padrao do scheduler
+      #   retry: null              # usa padrao da engine
+      #   fallback: null           # agente alternativo
+    join_estrategia: aguardar_todos
+    on_complete: null              # acao ao finalizar workflow
+    on_error: null                 # acao se workflow falha

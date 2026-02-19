@@ -1,0 +1,270 @@
+id: extrair-diretrizes
+nome: Extrair Diretrizes de Design
+descricao: Transforma uma analise de referencia em diretrizes formais de design para o produto
+agente: design-analyst
+comando: /extrair-diretrizes
+versao: "1.0"
+categoria: diretrizes
+
+entradas:
+  obrigatorias:
+    - pergunta: "Qual analise de referencia usar como base?"
+      campo: analise
+      tipo: texto
+      descricao: "Caminho ou conteudo da analise de referencia anterior"
+
+    - pergunta: "Qual o nome do produto?"
+      campo: produto
+      tipo: texto
+      descricao: "Nome do produto que recebera as diretrizes"
+
+    - pergunta: "Qual o objetivo do produto?"
+      campo: objetivo_produto
+      tipo: texto
+      descricao: "O que o produto faz e para quem"
+
+  opcionais:
+    - pergunta: "Deseja focar em algum aspecto especifico?"
+      campo: foco
+      tipo: selecao_multipla
+      opcoes: [cores, tipografia, espacamento, componentes, layout, todos]
+      default: todos
+
+    - pergunta: "Qual o nivel de detalhe desejado?"
+      campo: nivel_detalhe
+      tipo: selecao
+      opcoes: [basico, intermediario, avancado]
+      default: intermediario
+
+    - pergunta: "Ha adaptacoes necessarias em relacao a referencia?"
+      campo: adaptacoes
+      tipo: texto
+
+    - pergunta: "Existe alguma restricao tecnica?"
+      campo: restricoes_tecnicas
+      tipo: texto
+
+passos:
+  - numero: 1
+    acao: Revisar Analise
+    detalhes:
+      - Ler analise de referencia completa
+      - Identificar elementos principais
+      - Mapear hierarquia de importancia
+      - Notar inconsistencias ou gaps
+
+  - numero: 2
+    acao: Identificar Padroes Recorrentes
+    elementos:
+      - Padroes de cor consistentes
+      - Escala tipografica coerente
+      - Sistema de espacamento base
+      - Componentes reutilizaveis
+      - Tratamento de imagens
+      - Estilo de icones
+
+  - numero: 3
+    acao: Definir Regras Formais
+    regras:
+      cores:
+        - Definir paleta primaria com roles (primary, secondary, accent)
+        - Definir cores de estado (success, warning, error, info)
+        - Definir cores neutras para texto e backgrounds
+        - Especificar contraste minimo para acessibilidade
+      tipografia:
+        - Definir escala tipografica (text-xs ate text-4xl)
+        - Especificar pesos por uso (normal, medium, semibold, bold)
+        - Definir line-heights por nivel
+        - Especificar font-family primaria e secundaria
+      espacamento:
+        - Definir unidade base (4px ou 8px)
+        - Criar escala de espacamento (space-1 ate space-16)
+        - Definir uso por contexto (padding, margin, gap)
+      componentes:
+        - Definir estilos de botoes
+        - Definir estilos de inputs
+        - Definir estilos de cards
+        - Definir border-radius padrao
+
+  - numero: 4
+    acao: Criar Especificacoes Tecnicas
+    especificacoes:
+      - Design tokens em formato reutilizavel
+      - Valores exatos (HEX, px, rem)
+      - Variaveis CSS ou tokens
+      - Regras de aplicacao
+
+  - numero: 5
+    acao: Documentar Diretrizes
+    formato: |
+      Compilar no template de "Diretrizes de Design" com:
+      - Principios fundamentais do design
+      - Sistema completo de cores
+      - Sistema tipografico
+      - Sistema de espacamento
+      - Especificacoes de componentes
+      - Do's and Don'ts
+
+saida:
+  formato: markdown
+  template: |
+    # Diretrizes de Design: {produto}
+
+    ## Principios Fundamentais
+    1. [Principio derivado da analise]
+    2. [Principio derivado da analise]
+    3. [Principio derivado da analise]
+
+    ---
+
+    ## Sistema de Cores
+
+    ### Cores Primarias
+    | Nome | HEX | RGB | Uso |
+    |------|-----|-----|-----|
+    | primary | #XXXXXX | R,G,B | Acoes principais, brand |
+    | secondary | #XXXXXX | R,G,B | Elementos de suporte |
+    | accent | #XXXXXX | R,G,B | Destaques, CTAs |
+
+    ### Cores de Estado
+    | Estado | HEX | Uso |
+    |--------|-----|-----|
+    | success | #XXXXXX | Confirmacoes, sucesso |
+    | warning | #XXXXXX | Alertas, atencao |
+    | error | #XXXXXX | Erros, problemas |
+    | info | #XXXXXX | Informacoes neutras |
+
+    ### Cores Neutras
+    | Token | HEX | Uso |
+    |-------|-----|-----|
+    | gray-50 | #XXXXXX | Background claro |
+    | gray-100 | #XXXXXX | Background secundario |
+    | gray-200 | #XXXXXX | Borders |
+    | gray-500 | #XXXXXX | Texto secundario |
+    | gray-700 | #XXXXXX | Texto principal |
+    | gray-900 | #XXXXXX | Titulos |
+
+    ---
+
+    ## Sistema Tipografico
+
+    ### Font Family
+    - **Primaria:** [Nome da fonte] (titulos, destaques)
+    - **Secundaria:** [Nome da fonte] (corpo, texto)
+    - **Monospace:** [Nome da fonte] (codigo, tecnico)
+
+    ### Escala de Tamanhos
+    | Token | Tamanho | Line-height | Uso |
+    |-------|---------|-------------|-----|
+    | text-xs | 12px | 16px | Captions, labels pequenos |
+    | text-sm | 14px | 20px | Labels, texto auxiliar |
+    | text-base | 16px | 24px | Corpo de texto |
+    | text-lg | 18px | 28px | Lead paragraphs |
+    | text-xl | 20px | 28px | H4, subtitulos |
+    | text-2xl | 24px | 32px | H3 |
+    | text-3xl | 30px | 36px | H2 |
+    | text-4xl | 36px | 40px | H1 |
+    | text-5xl | 48px | 1 | Display, hero |
+
+    ### Pesos
+    | Token | Valor | Uso |
+    |-------|-------|-----|
+    | font-normal | 400 | Texto corrido |
+    | font-medium | 500 | Enfase leve |
+    | font-semibold | 600 | Subtitulos, labels |
+    | font-bold | 700 | Titulos, destaques |
+
+    ---
+
+    ## Sistema de Espacamento
+
+    ### Escala Base
+    | Token | Valor | Uso Recomendado |
+    |-------|-------|-----------------|
+    | space-0 | 0 | Reset |
+    | space-1 | 4px | Micro espacamento |
+    | space-2 | 8px | Interno de componentes |
+    | space-3 | 12px | Entre elementos relacionados |
+    | space-4 | 16px | Padding padrao |
+    | space-5 | 20px | Entre grupos pequenos |
+    | space-6 | 24px | Entre grupos |
+    | space-8 | 32px | Entre secoes pequenas |
+    | space-10 | 40px | Entre secoes |
+    | space-12 | 48px | Entre blocos |
+    | space-16 | 64px | Entre secoes principais |
+    | space-20 | 80px | Hero spacing |
+
+    ---
+
+    ## Componentes Base
+
+    ### Botoes
+    | Propriedade | Valor |
+    |-------------|-------|
+    | Border-radius | [valor] |
+    | Padding | [valor] |
+    | Font-weight | [valor] |
+    | Font-size | [valor] |
+
+    **Estados:**
+    - Default: [especificacao]
+    - Hover: [especificacao]
+    - Active: [especificacao]
+    - Disabled: [especificacao]
+
+    ### Inputs
+    | Propriedade | Valor |
+    |-------------|-------|
+    | Border | [valor] |
+    | Border-radius | [valor] |
+    | Padding | [valor] |
+    | Font-size | [valor] |
+
+    ### Cards
+    | Propriedade | Valor |
+    |-------------|-------|
+    | Background | [cor] |
+    | Border-radius | [valor] |
+    | Shadow | [especificacao] |
+    | Padding | [valor] |
+
+    ---
+
+    ## Do's and Don'ts
+
+    ### Do's (Faca)
+    - [Boa pratica 1]
+    - [Boa pratica 2]
+    - [Boa pratica 3]
+
+    ### Don'ts (Evite)
+    - [Pratica a evitar 1]
+    - [Pratica a evitar 2]
+    - [Pratica a evitar 3]
+
+    ---
+
+    ## Proximos Passos
+    - [ ] Criar style guide completo
+    - [ ] Implementar design tokens
+    - [ ] Criar componentes de UI
+
+  salvar_em: output/{produto}/diretrizes/
+
+conhecimento:
+  - analise-visual.md
+  - design-systems.md
+  - branding.md
+
+gates:
+  - Todos os sistemas definidos (cores, tipografia, espacamento)
+  - Valores especificos documentados
+  - Tokens nomeados consistentemente
+  - Componentes base especificados
+  - Do's and Don'ts claros
+
+proximos_passos:
+  - tarefa: criar-styleguide
+    descricao: "Criar style guide completo do produto"
+  - tarefa: design-system
+    descricao: "Implementar design system baseado nas diretrizes"

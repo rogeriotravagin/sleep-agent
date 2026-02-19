@@ -1,0 +1,245 @@
+# =============================================================
+# TRIGGERS - Reacoes Automaticas a Eventos
+# =============================================================
+# Define regras de reacao: quando evento X acontece E
+# condicao Y e verdadeira, executar acao Z automaticamente.
+# Transforma o Sleep Agent de reativo para proativo.
+# =============================================================
+
+versao: 1.0
+
+triggers:
+  descricao: |
+    Triggers sao regras automaticas que disparam acoes quando
+    eventos especificos ocorrem. Eles transformam o Sleep Agent
+    de um sistema que so age quando pedido para um sistema
+    que reage inteligentemente ao que acontece.
+
+  # ---------------------------------------------------------
+  # TRIGGERS DE QUALIDADE
+  # ---------------------------------------------------------
+  qualidade:
+
+    - nome: "auto-quality-check"
+      evento: "tarefa.concluida"
+      condicao: "tarefa.tipo in ['criar-email', 'criar-landing', 'criar-copy', 'criar-headline', 'criar-anuncio']"
+      acao:
+        tipo: "executar_gate"
+        gate_nivel: 1
+        automatico: true
+      descricao: "Toda entrega de copy passa por quality gate nivel 1 automatico"
+
+    - nome: "auto-review-copy"
+      evento: "tarefa.concluida"
+      condicao: "tarefa.tipo in ['criar-email', 'criar-landing'] AND tarefa.extensao == 'marketing'"
+      acao:
+        tipo: "executar_gate"
+        gate_nivel: 2
+        agente_revisor: "revisor"
+      descricao: "Emails e landing pages passam por revisao de outro agente"
+
+    - nome: "calibracao-threshold"
+      evento: "gate.falhou"
+      condicao: "auto_calibracao.ajustes_similares >= 3"
+      acao:
+        tipo: "sugerir_novo_gate"
+        dados: "auto_calibracao.padrao_detectado"
+      descricao: "Quando mesmo ajuste pedido 3+ vezes, sugerir novo gate"
+
+  # ---------------------------------------------------------
+  # TRIGGERS DE RESILIENCIA
+  # ---------------------------------------------------------
+  resiliencia:
+
+    - nome: "alert-on-failure"
+      evento: "tarefa.falhou"
+      condicao: "tarefa.tentativa >= tarefa.max_tentativas"
+      acao:
+        tipo: "notificar_usuario"
+        mensagem: "A tarefa '{tarefa.nome}' falhou apos {tarefa.tentativa} tentativas. Motivo: {tarefa.erro}"
+        prioridade: alta
+      descricao: "Avisa o usuario quando uma tarefa esgota tentativas"
+
+    - nome: "retry-with-critique"
+      evento: "tarefa.falhou"
+      condicao: "tarefa.tentativa < tarefa.max_tentativas"
+      acao:
+        tipo: "executar_workflow"
+        workflow: "self-critique"
+        referencia: "core/workflows/self-critique.yaml"
+        dados: {tarefa_id: "tarefa.id", erro: "tarefa.erro"}
+      descricao: "Falha recuperavel dispara self-critique antes do retry"
+
+    - nome: "circuit-breaker-alert"
+      evento: "circuit_breaker.abriu"
+      condicao: "sempre"
+      acao:
+        tipo: "notificar_usuario"
+        mensagem: "Validacao '{gate.nome}' temporariamente desativada. Entregas continuam sem essa verificacao."
+        prioridade: alta
+      descricao: "Avisa usuario quando circuit breaker abre"
+
+    - nome: "fallback-agente"
+      evento: "agente.falhou"
+      condicao: "dag_engine.fallback_disponivel(agente)"
+      acao:
+        tipo: "escalonar_fallback"
+        referencia: "core/workflows/dag-engine.yaml"
+      descricao: "Agente falhou, tenta com agente fallback"
+
+  # ---------------------------------------------------------
+  # TRIGGERS DE MEMORIA
+  # ---------------------------------------------------------
+  memoria:
+
+    - nome: "auto-save-insight"
+      evento: "tarefa.concluida"
+      condicao: "tarefa.aprendizados AND len(tarefa.aprendizados) > 0"
+      acao:
+        tipo: "persistir_memoria"
+        camada: "trabalho"
+        dados: "tarefa.aprendizados"
+      descricao: "Salva insights automaticamente ao concluir tarefa"
+
+    - nome: "promover-episodica"
+      evento: "memoria.promovida"
+      condicao: "item.acessos >= 3"
+      acao:
+        tipo: "mover_memoria"
+        de: "episodica"
+        para: "semantica"
+        categoria: "item.categoria_sugerida"
+      descricao: "Item acessado 3+ vezes promovido para memoria permanente"
+
+    - nome: "detectar-padrao"
+      evento: "tarefa.concluida"
+      condicao: "tarefas_similares_recentes >= 3"
+      acao:
+        tipo: "emitir_evento"
+        evento: "padrao.detectado"
+        payload: {tipo: "tarefa_recorrente", descricao: "auto-detectado"}
+      descricao: "Detecta padrao quando 3+ tarefas similares em sequencia"
+
+    - nome: "limpar-episodica"
+      evento: "sessao.iniciada"
+      condicao: "episodica.itens_expirados > 0"
+      acao:
+        tipo: "limpar_memoria"
+        camada: "episodica"
+        criterio: "dias_inativo > 30"
+      descricao: "Limpa itens episodicos vencidos ao iniciar sessao"
+
+  # ---------------------------------------------------------
+  # TRIGGERS DE REUSO (Asset Engine)
+  # ---------------------------------------------------------
+  reuso:
+
+    - nome: "indexar-ativo-aprovado"
+      evento: "gate.passou"
+      condicao: "evento.payload.nivel == 3"
+      acao:
+        tipo: "indexar_ativo"
+        referencia: "kernel/asset-engine/decision.yaml"
+        dados: {tarefa_id: "tarefa.id", resultado: "tarefa.resultado"}
+      descricao: "Entrega aprovada pelo usuario e indexada como ativo reusavel"
+
+    - nome: "promover-ativo-template"
+      evento: "tarefa.concluida"
+      condicao: "ativo.vezes_reusado >= 3"
+      acao:
+        tipo: "promover_template"
+        referencia: "kernel/asset-engine/decision.yaml"
+      descricao: "Ativo reusado 3+ vezes vira template oficial"
+
+    - nome: "depreciar-ativo"
+      evento: "sessao.iniciada"
+      condicao: "ativos.inativos_60_dias > 0"
+      acao:
+        tipo: "depreciar_ativos"
+        criterio: "dias_sem_uso > 60 AND vezes_reusado == 0"
+      descricao: "Ativos nao usados em 60 dias sao depreciados"
+
+  # ---------------------------------------------------------
+  # TRIGGERS DE OBSERVABILIDADE
+  # ---------------------------------------------------------
+  observabilidade:
+
+    - nome: "registrar-metrica"
+      evento: "*"
+      condicao: "sempre"
+      acao:
+        tipo: "incrementar_metrica"
+        destino: "core/status/metricas-v5.yaml"
+      descricao: "Todo evento alimenta metricas do dashboard"
+
+    - nome: "alerta-degradacao"
+      evento: "tarefa.concluida"
+      condicao: "metricas.tempo_medio_sessao > '5min' AND metricas.sessoes_consecutivas_lentas >= 3"
+      acao:
+        tipo: "notificar_usuario"
+        mensagem: "Performance degradada: tarefas estao demorando mais que o normal. Considere verificar contexto e memoria."
+        prioridade: normal
+      descricao: "Alerta quando sistema esta consistentemente lento"
+
+    - nome: "alerta-qualidade"
+      evento: "gate.falhou"
+      condicao: "metricas.taxa_aprovacao < 80 AND metricas.sessoes_baixa_qualidade >= 5"
+      acao:
+        tipo: "notificar_usuario"
+        mensagem: "Taxa de aprovacao abaixo de 80% nas ultimas sessoes. Recomendo revisar quality gates com /calibracao."
+        prioridade: normal
+      descricao: "Alerta quando qualidade cai sistematicamente"
+
+    - nome: "alerta-extensao-ociosa"
+      evento: "sessao.iniciada"
+      condicao: "extensao.dias_sem_uso > 30"
+      acao:
+        tipo: "lembrete"
+        mensagem: "A extensao '{extensao.nome}' nao e usada ha {extensao.dias_sem_uso} dias. Precisa dela ou pode desinstalar?"
+        prioridade: baixa
+      descricao: "Lembra usuario de extensoes que nao usa"
+
+  # ---------------------------------------------------------
+  # TRIGGERS DE SESSAO
+  # ---------------------------------------------------------
+  sessao:
+
+    - nome: "health-check-inicio"
+      evento: "sessao.iniciada"
+      condicao: "sempre"
+      acao:
+        tipo: "executar_health_check"
+        referencia: "core/saude/HEALTH-CHECK.md"
+      descricao: "Health check automatico ao iniciar sessao"
+
+    - nome: "salvar-estado-fim"
+      evento: "sessao.encerrada"
+      condicao: "sempre"
+      acao:
+        tipo: "salvar_estado"
+        itens:
+          - "blackboard"
+          - "memoria_trabalho"
+          - "metricas_sessao"
+          - "session_overrides_cleanup"
+      descricao: "Salva todo estado ao encerrar sessao"
+
+    - nome: "contexto-critico"
+      evento: "blackboard.atualizado"
+      condicao: "contexto.bracket == 'CRITICAL'"
+      acao:
+        tipo: "notificar_usuario"
+        mensagem: "Contexto quase esgotado. Recomendo iniciar nova sessao para melhor qualidade."
+        prioridade: alta
+      descricao: "Alerta quando contexto chega a faixa critica"
+
+  # ---------------------------------------------------------
+  # CONFIGURACAO DE TRIGGERS
+  # ---------------------------------------------------------
+  configuracao:
+    habilitado: true
+    max_triggers_por_evento: 5    # Evitar cascata
+    timeout_trigger: "3s"          # Timeout por trigger
+    log_execucoes: true
+    log_arquivo: "workspace/.status/trigger-log.yaml"
+    modo_debug: false              # Se true, mostra triggers executados ao usuario

@@ -1,0 +1,159 @@
+{
+  "project": "pagina-vendas",
+  "gitEnabled": false,
+  "branchName": null,
+  "mode": "content",
+  "outputDir": "output/landing-pages/",
+  "description": "Pagina de vendas completa baseada no briefing do usuario",
+  "context": {
+    "produto": "{{produto}}",
+    "publico": "{{publico}}",
+    "resultado": "{{resultado}}",
+    "preco": "{{preco}}",
+    "diferencial": "{{diferencial}}",
+    "headline": "{{headline_escolhida}}",
+    "icp": "{{icp_gerado}}",
+    "dores": "{{dores_extraidas}}",
+    "beneficios": "{{beneficios_extraidos}}"
+  },
+  "designSystem": {
+    "framework": "tailwindcss",
+    "cdn": "https://cdn.tailwindcss.com",
+    "fonts": ["Inter", "Source Serif 4"],
+    "colors": {
+      "primary": "#FFCC00",
+      "secondary": "#C9B298",
+      "dark": "#1a1a1a",
+      "light": "#ffffff"
+    }
+  },
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Estrutura HTML Base",
+      "description": "Criar arquivo HTML5 com head completo, meta tags SEO, viewport mobile, e imports do Tailwind CSS via CDN.",
+      "acceptanceCriteria": [
+        "DOCTYPE html5",
+        "Meta charset UTF-8",
+        "Meta viewport mobile",
+        "Meta description com promessa",
+        "Title com nome do produto",
+        "Tailwind CSS via CDN",
+        "Fonts Google Fonts",
+        "Dark mode class no html"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Secao Hero",
+      "description": "Criar secao hero com headline principal, subheadline focada em beneficio, e botao CTA primario que leva para secao de preco.",
+      "acceptanceCriteria": [
+        "Headline h1 grande e impactante",
+        "Subheadline com beneficio claro",
+        "Botao CTA com cor destacada",
+        "Scroll suave para secao preco",
+        "Responsivo em mobile",
+        "Altura minima 80vh"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Secao Problema",
+      "description": "Criar secao que apresenta as dores do publico de forma empatica, mostrando que voce entende a situacao deles.",
+      "acceptanceCriteria": [
+        "Titulo tipo 'Voce ja passou por isso?'",
+        "3-5 dores listadas com icones",
+        "Tom empatico e nao agressivo",
+        "Transicao suave para solucao",
+        "Background diferenciado"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "Secao Solucao",
+      "description": "Apresentar o produto como a solucao ideal, conectando cada dor a um beneficio especifico.",
+      "acceptanceCriteria": [
+        "Titulo apresentando o produto",
+        "Conexao dor -> beneficio",
+        "Diferencial destacado",
+        "Imagem ou icone ilustrativo",
+        "Lista de beneficios principais"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Secao O Que Voce Recebe",
+      "description": "Listar todos os entregaveis do produto com valor percebido de cada item, criando stack de valor.",
+      "acceptanceCriteria": [
+        "Titulo 'Veja tudo que voce recebe'",
+        "Lista de modulos/itens com descricao",
+        "Valor monetario de cada item",
+        "Total de valor somado",
+        "Visual de cards ou lista",
+        "Bonus se houver"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-006",
+      "title": "Secao Preco e CTA Final",
+      "description": "Apresentar preco com ancoragem de valor, garantia, e CTA final grande e claro.",
+      "acceptanceCriteria": [
+        "Ancoragem: De R$ X por R$ Y",
+        "Preco grande e destacado",
+        "Parcelamento se aplicavel",
+        "Garantia de 7 dias visivel",
+        "Botao CTA grande",
+        "Urgencia sutil se aplicavel",
+        "ID 'preco' para scroll"
+      ],
+      "priority": 6,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-007",
+      "title": "Secao FAQ",
+      "description": "Criar FAQ com 5-7 perguntas frequentes que quebram objecoes comuns.",
+      "acceptanceCriteria": [
+        "Titulo 'Perguntas Frequentes'",
+        "5-7 perguntas relevantes",
+        "Respostas objetivas e curtas",
+        "Accordion ou lista simples",
+        "Quebra objecoes de preco, tempo, garantia"
+      ],
+      "priority": 7,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-008",
+      "title": "Footer",
+      "description": "Criar footer simples com informacoes legais e contato.",
+      "acceptanceCriteria": [
+        "Copyright com ano atual",
+        "Link politica de privacidade",
+        "Link termos de uso",
+        "Email ou contato",
+        "Background escuro"
+      ],
+      "priority": 8,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}

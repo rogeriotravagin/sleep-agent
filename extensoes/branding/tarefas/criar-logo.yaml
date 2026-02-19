@@ -1,0 +1,243 @@
+# Tarefa: Criar Logo
+
+id: criar-logo
+nome: Criar Conceito de Logo
+descricao: Criar briefing e conceito de logo baseado nos principios dos mestres
+agente: designer
+comando: /criar-logo
+
+versao: "1.0"
+categoria: identidade
+
+# Baseado em: Paul Rand, Saul Bass, Milton Glaser
+
+entradas:
+  obrigatorias:
+    - nome: nome_marca
+      pergunta: "Qual o nome da marca?"
+      tipo: texto
+
+    - nome: segmento
+      pergunta: "Qual o segmento de atuacao?"
+      tipo: texto
+
+    - nome: valores
+      pergunta: "Quais os 3 principais valores da marca?"
+      tipo: texto
+
+    - nome: publico
+      pergunta: "Quem e o publico-alvo?"
+      tipo: texto
+
+  opcionais:
+    - nome: tipo_preferido
+      pergunta: "Tem preferencia de tipo de logo?"
+      tipo: escolha
+      opcoes:
+        - Wordmark (nome em tipografia)
+        - Lettermark (iniciais)
+        - Pictorial (simbolo)
+        - Abstract (forma abstrata)
+        - Combination (texto + simbolo)
+        - Sem preferencia
+      padrao: "Sem preferencia"
+
+    - nome: referencias
+      pergunta: "Tem alguma referencia visual que admira?"
+      tipo: texto
+      padrao: "Nenhuma especifica"
+
+    - nome: cores_preferidas
+      pergunta: "Tem cores preferidas ou a evitar?"
+      tipo: texto
+      padrao: "Aberto a sugestoes"
+
+passos:
+  - numero: 1
+    acao: "Analisar briefing e contexto"
+    detalhes:
+      - Entender o negocio
+      - Mapear concorrentes visuais
+      - Identificar oportunidades
+
+  - numero: 2
+    acao: "Aplicar teste de Paul Rand"
+    criterios:
+      distintivo: "Sera unico no mercado?"
+      visivel: "Vai se destacar?"
+      adaptavel: "Funciona em qualquer aplicacao?"
+      universal: "Comunica para todos?"
+      atemporal: "Vai durar anos?"
+      simples: "E conciso e claro?"
+      memoravel: "Sera lembrado?"
+
+  - numero: 3
+    acao: "Definir direcao conceitual"
+    elementos:
+      - Simbolismo a explorar
+      - Metaforas visuais
+      - Associacoes desejadas
+
+  - numero: 4
+    acao: "Recomendar tipo de logo"
+    analisar:
+      - Tamanho do nome
+      - Unicidade do nome
+      - Necessidade de flexibilidade
+      - Contexto de uso
+
+  - numero: 5
+    acao: "Criar briefing para design"
+    incluir:
+      - Conceito criativo
+      - Direcao estetica
+      - Restricoes tecnicas
+      - Referencias visuais
+
+saida:
+  formato: markdown
+  template: |
+    # Briefing de Logo: [Nome da Marca]
+
+    ## 1. Contexto da Marca
+
+    ### Informacoes Basicas
+    - **Nome:** [Nome]
+    - **Segmento:** [Segmento]
+    - **Publico:** [Descricao do publico]
+
+    ### Valores
+    1. [Valor 1]
+    2. [Valor 2]
+    3. [Valor 3]
+
+    ### Personalidade da Marca
+    [Descricao da personalidade baseada nos valores]
+
+    ---
+
+    ## 2. Analise de Mercado
+
+    ### Concorrentes Visuais
+    | Concorrente | Tipo de Logo | Cores | Observacao |
+    |-------------|--------------|-------|------------|
+    | [Nome] | [Tipo] | [Cores] | [Obs] |
+
+    ### Oportunidade Visual
+    [O que podemos fazer de diferente]
+
+    ---
+
+    ## 3. Conceito Criativo
+
+    ### Ideia Central
+    [Conceito principal do logo]
+
+    ### Simbolismo
+    - [Elemento 1]: [Significado]
+    - [Elemento 2]: [Significado]
+    - [Elemento 3]: [Significado]
+
+    ### Metaforas Visuais
+    - [Metafora que pode ser explorada]
+
+    ---
+
+    ## 4. Direcao de Design
+
+    ### Tipo de Logo Recomendado
+    **[Tipo]**
+
+    **Justificativa:**
+    [Por que este tipo e ideal]
+
+    ### Direcao Estetica
+    - **Estilo:** [Moderno/Classico/Minimalista/etc]
+    - **Mood:** [Serio/Divertido/Sofisticado/etc]
+    - **Forma:** [Geometrica/Organica/etc]
+
+    ### Paleta de Cores Sugerida
+
+    | Cor | HEX | Significado |
+    |-----|-----|-------------|
+    | [Nome] | [#XXXXXX] | [Por que esta cor] |
+
+    ### Tipografia Sugerida
+    - **Estilo:** [Serif/Sans-serif/etc]
+    - **Caracteristicas:** [Arredondada/Angular/etc]
+    - **Sugestoes:** [Fontes especificas]
+
+    ---
+
+    ## 5. Especificacoes Tecnicas
+
+    ### Versoes Necessarias
+    - [ ] Colorido horizontal
+    - [ ] Colorido vertical
+    - [ ] Monocromatico (preto)
+    - [ ] Monocromatico (branco)
+    - [ ] Favicon (16x16, 32x32)
+    - [ ] Icone de app (512x512)
+
+    ### Requisitos de Aplicacao
+    - Digital (web, app, social)
+    - Impressao (cartoes, materiais)
+    - Sinalizacao (se aplicavel)
+
+    ### Tamanho Minimo
+    - Horizontal: [X]px largura
+    - Favicon: 16x16px
+
+    ---
+
+    ## 6. Teste de Paul Rand
+
+    | Criterio | Atende? | Observacao |
+    |----------|---------|------------|
+    | Distintivo | [ ] | [Como sera unico] |
+    | Visivel | [ ] | [Como se destacara] |
+    | Adaptavel | [ ] | [Flexibilidade] |
+    | Universal | [ ] | [Comunicacao] |
+    | Atemporal | [ ] | [Durabilidade] |
+    | Simples | [ ] | [Simplicidade] |
+    | Memoravel | [ ] | [Memorabilidade] |
+
+    ---
+
+    ## 7. Referencias Visuais
+
+    ### Inspiracoes (nao copiar, apenas direcao)
+    1. [Referencia 1]: [O que pegar de inspiracao]
+    2. [Referencia 2]: [O que pegar de inspiracao]
+    3. [Referencia 3]: [O que pegar de inspiracao]
+
+    ### O que Evitar
+    - [Cliche do setor]
+    - [Tendencia passageira]
+    - [Elemento generico]
+
+    ---
+
+    ## 8. Proximos Passos
+
+    1. Criar sketches (15-25 opcoes)
+    2. Refinar melhores opcoes (5-7)
+    3. Apresentar finalistas (3)
+    4. Finalizar escolhido
+    5. Criar todas as versoes
+    6. Documentar guidelines
+
+conhecimento:
+  - logo-design.md
+  - branding.md
+
+gates:
+  - Conceito esta claro?
+  - Diferencial visual identificado?
+  - Tipo de logo justificado?
+  - Referencias sao inspiradoras (nao copias)?
+
+proximos_passos:
+  - Definir paleta de cores (/paleta-cores)
+  - Criar design system (/design-system)
+  - Documentar guidelines

@@ -1,0 +1,294 @@
+# ============================================
+# WORKFLOW: Modo Iniciante - Produtos
+# ============================================
+
+id: modo-iniciante-produtos
+nome: Modo Iniciante - Estruturar Produto Rapido
+descricao: Caminho rapido para estruturar produto com 5 perguntas + geracao automatica
+comando: /iniciante-produtos
+versao: "1.0"
+
+# ============================================
+# VISAO GERAL
+# ============================================
+
+visao_geral:
+  objetivo: "Estruturar produto rapidamente para quem esta comecando"
+  resultado: "Estrutura basica de produto pronta para uso"
+
+  diferencial: |
+    Este modo simplifica a estruturacao de produto:
+    - Apenas 5 perguntas essenciais
+    - Sistema processa e expande automaticamente
+    - Entrega documentacao inicial completa
+
+  integracao_ralph: true
+
+# ============================================
+# FASES
+# ============================================
+
+fases:
+  # ------------------------------------------
+  # FASE 1: BRIEFING EXPRESS
+  # ------------------------------------------
+  - numero: 1
+    nome: BRIEFING EXPRESS
+    descricao: "Coletar informacoes essenciais em 5 perguntas"
+    agente: product-strategist
+
+    etapas:
+      - id: 5-perguntas
+        nome: "5 Perguntas Essenciais"
+        descricao: "Briefing simplificado"
+
+        perguntas:
+          - pergunta: "Qual o nome do produto?"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Meu App de Gestao"
+            var: nome
+
+          - pergunta: "O que seu produto faz? (1-2 frases)"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Ajuda pequenas empresas a gerenciar projetos de forma simples"
+            var: descricao
+
+          - pergunta: "Para quem e? (publico-alvo)"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Pequenos empreendedores que gerenciam times de 5-20 pessoas"
+            var: publico
+
+          - pergunta: "Qual problema principal resolve?"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Falta de visibilidade do que cada pessoa esta fazendo"
+            var: problema
+
+          - pergunta: "O que ja existe hoje? (concorrentes/alternativas)"
+            tipo: texto
+            obrigatorio: true
+            exemplo: "Trello, Asana, planilhas Excel"
+            var: alternativas
+
+        entregavel: briefing-express.md
+
+    saida_fase: |
+      ## Briefing Express Coletado
+
+      - **Nome:** {{nome}}
+      - **Descricao:** {{descricao}}
+      - **Publico:** {{publico}}
+      - **Problema:** {{problema}}
+      - **Alternativas:** {{alternativas}}
+
+  # ------------------------------------------
+  # FASE 2: PROCESSAMENTO
+  # ------------------------------------------
+  - numero: 2
+    nome: PROCESSAMENTO
+    descricao: "Sistema processa e expande informacoes automaticamente"
+    agente: product-strategist
+    automatico: true
+
+    etapas:
+      - id: gerar-visao
+        nome: "Gerar Visao e Estrategia"
+        descricao: "Criar visao baseada no briefing"
+        automatico: true
+
+        processo:
+          - "Analisar descricao e problema"
+          - "Criar vision statement"
+          - "Definir missao"
+          - "Articular diferenciacao"
+
+        entregavel: visao-gerada.md
+
+      - id: gerar-okrs
+        nome: "Sugerir OKRs Iniciais"
+        descricao: "Criar OKRs de partida"
+        automatico: true
+
+        processo:
+          - "Identificar metricas relevantes"
+          - "Sugerir 3 objetivos iniciais"
+          - "Criar KRs mensuraveis"
+
+        entregavel: okrs-sugeridos.md
+
+      - id: gerar-metricas
+        nome: "Definir Metricas Basicas"
+        descricao: "Sugerir North Star e AARRR"
+        automatico: true
+
+        processo:
+          - "Identificar valor principal"
+          - "Sugerir North Star"
+          - "Mapear funil basico"
+
+        entregavel: metricas-sugeridas.md
+
+      - id: gerar-roadmap
+        nome: "Criar Roadmap Inicial"
+        descricao: "Montar roadmap de 90 dias"
+        automatico: true
+
+        processo:
+          - "Definir outcomes de 90 dias"
+          - "Sugerir iniciativas"
+          - "Organizar em Now/Next/Later"
+
+        entregavel: roadmap-inicial.md
+
+    saida_fase: |
+      ## Processamento Completo
+
+      Geramos automaticamente:
+      - Visao e estrategia
+      - OKRs iniciais
+      - Framework de metricas
+      - Roadmap de 90 dias
+
+  # ------------------------------------------
+  # FASE 3: ENTREGA
+  # ------------------------------------------
+  - numero: 3
+    nome: ENTREGA
+    descricao: "Apresentar resultado e oferecer refinamentos"
+    agente: product-strategist
+
+    etapas:
+      - id: apresentar
+        nome: "Apresentar Resultado"
+        descricao: "Mostrar o que foi criado"
+
+        template_apresentacao: |
+          ## Produto {{nome}} Estruturado!
+
+          ### O que foi criado
+
+          **Estrategia**
+          - Visao de produto definida
+          - Missao articulada
+          - Diferenciacao documentada
+
+          **OKRs Iniciais**
+          - 3 objetivos para o trimestre
+          - Key Results mensuraveis
+          - Foco em validacao inicial
+
+          **Metricas**
+          - North Star sugerida
+          - Funil AARRR mapeado
+          - Metricas-chave identificadas
+
+          **Roadmap 90 dias**
+          - NOW: Validacao inicial
+          - NEXT: Primeiras melhorias
+          - LATER: Expansao
+
+      - id: refinamentos
+        nome: "Oferecer Refinamentos"
+        descricao: "Perguntar se quer ajustar algo"
+
+        opcoes_refinamento:
+          - "Ajustar visao/missao"
+          - "Refinar OKRs"
+          - "Modificar metricas"
+          - "Reorganizar roadmap"
+          - "Adicionar discovery (OST)"
+          - "Esta perfeito!"
+
+        entregavel: resumo-final.md
+
+# ============================================
+# ENTREGA FINAL
+# ============================================
+
+entrega_final:
+  formato: pasta
+  local: output/{{produto_slug}}/produtos/
+
+  estrutura: |
+    {{produto_slug}}/produtos/
+      estrategias/
+        visao-produto.md
+      okrs/
+        okrs-inicial.md
+      metricas/
+        metricas-produto.md
+      roadmaps/
+        roadmap-90-dias.md
+      README.md
+
+# ============================================
+# EXECUCAO
+# ============================================
+
+execucao:
+  comando: /iniciante-produtos
+
+  fluxo:
+    1: "Fazer 5 perguntas essenciais"
+    2: "Processar e expandir informacoes"
+    3: "Gerar documentacao completa"
+    4: "Apresentar resultado"
+    5: "Oferecer refinamentos"
+
+  mensagem_inicial: |
+    ## Modo Iniciante - Estruturar Produto
+
+    Vou te ajudar a estruturar seu produto em poucos minutos!
+
+    Preciso de apenas **5 informacoes** para comecar.
+    Depois, o sistema gera toda a documentacao automaticamente.
+
+    **O que voce vai receber:**
+    - Visao e estrategia
+    - OKRs iniciais
+    - Framework de metricas
+    - Roadmap de 90 dias
+
+    Vamos la?
+
+    **1/5 - Qual o nome do seu produto?**
+
+  mensagem_final: |
+    ## Seu Produto Esta Estruturado!
+
+    O produto **{{nome}}** agora tem documentacao profissional:
+
+    - Visao e missao definidas
+    - 3 OKRs para comecar
+    - North Star + metricas AARRR
+    - Roadmap de 90 dias
+
+    **Arquivos criados em:** `output/{{slug}}/produtos/`
+
+    **Proximos passos sugeridos:**
+    1. Revisar e ajustar a visao
+    2. Validar OKRs com stakeholders
+    3. Iniciar entrevistas de discovery
+    4. Acompanhar metricas semanalmente
+
+    Quer refinar alguma parte ou comecar o discovery?
+
+# ============================================
+# FALLBACKS
+# ============================================
+
+fallbacks:
+  se_nome_vago:
+    acao: "pedir_clarificacao"
+    mensagem: "Pode dar um nome mais especifico para o produto?"
+
+  se_problema_generico:
+    acao: "sugerir"
+    mensagem: "O problema esta um pouco generico. Pode dar um exemplo concreto do dia a dia do usuario?"
+
+  se_publico_amplo:
+    acao: "pedir_foco"
+    mensagem: "O publico esta muito amplo. Quem seria o usuario IDEAL, o primeiro a adotar?"

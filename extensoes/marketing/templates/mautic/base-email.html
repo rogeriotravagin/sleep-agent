@@ -1,0 +1,81 @@
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, Helvetica, sans-serif; background: BG_EXTERNO; color: COR_TEXTO; margin: 0; padding: 20px;">
+
+  <!-- Preheader Oculto -->
+  <div style="display:none;font-size:1px;color:BG_EXTERNO;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">
+    PREHEADER_TEXT
+    &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+  </div>
+
+  <!-- Container Principal -->
+  <div style="max-width: 600px; margin: 0 auto; background: BG_CONTEUDO; border-radius: 40px; border: 1px solid COR_BORDA;">
+
+    <!-- Header / Logo -->
+    <div style="padding: 48px 30px 32px 30px; text-align: center; border-radius: 40px 40px 0 0; border-bottom: 1px solid COR_BORDA;">
+      <table cellpadding="0" cellspacing="0" border="0" align="center">
+        <tr>
+          <td>
+            <img src="URL_LOGO" alt="NOME_MARCA" style="max-width: 150px; height: auto;" />
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Conteudo Principal -->
+    <div style="padding: 40px 48px;">
+
+      <!-- Saudacao -->
+      <h2 style="color: COR_TITULO; margin: 0 0 24px 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
+        Ola, {contactfield=firstname|amigo}!
+      </h2>
+
+      <!-- Corpo do Email -->
+      <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.7; color: COR_TEXTO;">
+        CONTEUDO_PRINCIPAL
+      </p>
+
+      <!-- CTA Principal -->
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin: 32px 0;">
+        <tr>
+          <td align="center">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td style="background: COR_PRIMARIA; border-radius: 16px;">
+                  <a href="URL_CTA" style="display: inline-block; padding: 20px 48px; color: #FFFFFF; text-decoration: none; font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">TEXTO_CTA</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Divisor -->
+      <div style="height: 1px; background-color: COR_BORDA; margin: 32px 0;"></div>
+
+      <!-- Assinatura -->
+      <p style="margin: 0 0 8px 0; font-size: 16px; color: COR_TEXTO;">
+        Abraco,
+      </p>
+      <p style="margin: 0; font-size: 18px; font-weight: 700; color: COR_TITULO;">
+        NOME_REMETENTE
+      </p>
+
+    </div>
+
+    <!-- Footer -->
+    <div style="padding: 36px 48px; text-align: center; border-top: 1px solid COR_BORDA; border-radius: 0 0 40px 40px;">
+
+      <p style="margin: 0 0 10px 0; font-size: 10px; color: COR_MUTED; line-height: 1.8;">
+        NOME_EMPRESA<br>
+        Este email foi enviado para {contactfield=email}
+      </p>
+
+      <p style="margin: 10px 0 0 0;">
+        <a href="{unsubscribe_url}" style="color: COR_MUTED; text-decoration: underline; font-size: 11px;">Cancelar inscricao</a>
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+{tracking_pixel}

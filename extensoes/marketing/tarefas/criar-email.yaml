@@ -1,0 +1,178 @@
+# Tarefa: Criar Email de Venda
+
+id: criar-email
+nome: Criar Email de Venda
+descricao: Escreve emails persuasivos para converter leads em clientes
+agente: copywriter
+comando: /criar-email
+
+versao: "1.0"
+categoria: criacao
+
+# Entradas
+entradas:
+  obrigatorias:
+    - nome: objetivo
+      pergunta: "Qual o objetivo deste email?"
+      tipo: escolha
+      opcoes:
+        - Apresentar oferta
+        - Quebrar objeções
+        - Criar urgência
+        - Contar história
+        - Dar conteúdo + vender
+      exemplo: "Apresentar oferta"
+
+    - nome: oferta
+      pergunta: "O que você está vendendo?"
+      tipo: texto
+      exemplo: "Mentoria de 3 meses para empreendedores"
+
+    - nome: publico
+      pergunta: "Quem vai receber este email?"
+      tipo: texto
+      exemplo: "Leads que baixaram ebook sobre vendas"
+
+  opcionais:
+    - nome: preco
+      pergunta: "Qual o preço? (se for mencionar)"
+      tipo: texto
+      padrao: "Não mencionar"
+
+    - nome: urgencia
+      pergunta: "Há algum prazo ou escassez?"
+      tipo: texto
+      padrao: "Não"
+
+    - nome: tom
+      pergunta: "Qual tom deseja?"
+      tipo: escolha
+      opcoes:
+        - Profissional
+        - Casual/amigável
+        - Urgente
+        - Storytelling
+      padrao: "Casual/amigável"
+
+    - nome: tamanho
+      pergunta: "Tamanho preferido?"
+      tipo: escolha
+      opcoes:
+        - Curto (100-200 palavras)
+        - Médio (200-400 palavras)
+        - Longo (400+ palavras)
+      padrao: "Médio (200-400 palavras)"
+
+# Processo
+passos:
+  - numero: 1
+    acao: "Entender objetivo e contexto"
+
+  - numero: 2
+    acao: "Definir estrutura baseada no objetivo"
+
+  - numero: 3
+    acao: "Criar linha de assunto magnética"
+
+  - numero: 4
+    acao: "Escrever abertura que prende"
+
+  - numero: 5
+    acao: "Desenvolver corpo com técnica adequada"
+
+  - numero: 6
+    acao: "Criar CTA claro e específico"
+
+  - numero: 7
+    acao: "Oferecer variação de assunto para teste"
+
+# Estruturas por objetivo
+estruturas:
+  apresentar_oferta:
+    - Hook de abertura
+    - Problema/dor
+    - Solução (sua oferta)
+    - Benefícios
+    - CTA
+
+  quebrar_objecoes:
+    - Reconhecer objeção
+    - Reframe/nova perspectiva
+    - Prova que funciona
+    - CTA
+
+  criar_urgencia:
+    - Lembrete do que está perdendo
+    - Consequências de não agir
+    - Prazo claro
+    - CTA urgente
+
+  contar_historia:
+    - História envolvente
+    - Conexão com o leitor
+    - Transição para oferta
+    - CTA
+
+  conteudo_venda:
+    - Dica/insight valioso
+    - Como aplicar
+    - Transição suave
+    - Oferta relacionada
+    - CTA
+
+# Saída
+saida:
+  formato: markdown
+  template: |
+    ## Email de Venda
+
+    **Objetivo:** [objetivo]
+    **Tom:** [tom]
+
+    ---
+
+    ### Linha de Assunto
+    **Principal:** [assunto]
+    **Alternativa 1:** [assunto alternativo]
+    **Alternativa 2:** [assunto alternativo]
+
+    ### Preview Text
+    [texto que aparece após o assunto]
+
+    ---
+
+    ### Corpo do Email
+
+    [email completo]
+
+    ---
+
+    ### Análise
+
+    **Estrutura usada:** [qual estrutura]
+    **Gatilhos mentais:** [gatilhos aplicados]
+    **CTA:** [qual ação esperada]
+
+    ---
+
+    ### Variações Sugeridas
+
+    Para teste A/B, você pode:
+    - Trocar assunto por: [sugestão]
+    - Mudar abertura para: [sugestão]
+
+conhecimento:
+  - conhecimento/copywriting.md
+  - conhecimento/gatilhos.md
+
+gates:
+  - Assunto gera curiosidade/interesse?
+  - Primeira linha prende atenção?
+  - CTA está claro e específico?
+  - Tom está adequado ao público?
+  - Tamanho está adequado?
+
+proximos_passos:
+  - Criar sequência de follow-up
+  - Criar versão para não-abridores
+  - Criar página de destino do CTA

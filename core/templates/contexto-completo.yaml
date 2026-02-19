@@ -1,0 +1,199 @@
+# Template de Contexto Completo
+# Use para tarefas complexas que precisam de contexto rico
+# Garante que o agente tenha TODAS as informacoes necessarias
+
+# ============================================================
+# IDENTIFICACAO
+# ============================================================
+id: nome-da-tarefa
+nome: Nome Descritivo da Tarefa
+descricao: O que esta tarefa faz e qual resultado produz
+agente: qual-agente
+versao: "1.0"
+categoria: criacao   # criacao, analise, estrategia, automacao
+
+# ============================================================
+# CONTEXTO COMPLETO
+# Esta secao garante que o agente entenda TODO o cenario
+# ============================================================
+contexto:
+  # O que o usuario realmente quer (objetivo final)
+  objetivo_final: |
+    Descreva aqui o que o usuario quer alcançar.
+    Nao apenas a tarefa, mas o RESULTADO esperado.
+
+  # Decisoes que ja foram tomadas (nao questionar)
+  decisoes_tomadas:
+    - decisao: "Decisao 1 ja definida"
+      motivo: "Por que foi decidido assim"
+    - decisao: "Decisao 2 ja definida"
+      motivo: "Por que foi decidido assim"
+
+  # Restricoes e limitacoes (respeitar sempre)
+  restricoes:
+    - "Restricao 1 que deve ser respeitada"
+    - "Restricao 2 que deve ser respeitada"
+    - "Limitacao de orcamento/tempo/recursos"
+
+  # Informacoes de background
+  background: |
+    Contexto adicional que ajuda a entender o cenario.
+    Historia, situacao atual, tentativas anteriores.
+
+  # Referencias e inspiracoes
+  referencias:
+    - tipo: "arquivo"
+      caminho: "path/para/referencia.md"
+      descricao: "O que essa referencia contem"
+    - tipo: "url"
+      link: "https://exemplo.com"
+      descricao: "Por que essa referencia e relevante"
+
+# ============================================================
+# ENTRADAS
+# ============================================================
+entradas:
+  obrigatorias:
+    - nome: entrada1
+      pergunta: "Qual pergunta fazer ao usuario?"
+      tipo: texto
+      exemplo: "Exemplo de resposta"
+      validacao: "Como validar se a resposta esta correta"
+
+  opcionais:
+    - nome: entrada_opcional
+      pergunta: "Pergunta opcional?"
+      tipo: texto
+      padrao: "Valor padrao"
+
+# ============================================================
+# PROCESSO COM AUTOCRITICA
+# Cada passo tem um ponto de verificacao
+# ============================================================
+passos:
+  - numero: 1
+    acao: "Descricao do primeiro passo"
+    verificacao: "Pergunta para validar se o passo foi bem executado?"
+    criterio_sucesso: "Como saber se passou na verificacao"
+
+  - numero: 2
+    acao: "Descricao do segundo passo"
+    verificacao: "Este passo atende ao objetivo?"
+    criterio_sucesso: "Criterio objetivo de sucesso"
+
+  - numero: 3
+    acao: "Descricao do terceiro passo"
+    verificacao: "O resultado parcial faz sentido?"
+    criterio_sucesso: "Criterio objetivo de sucesso"
+
+# ============================================================
+# PROGRESSO
+# Rastreamento visual do andamento
+# ============================================================
+progresso:
+  status: pendente   # pendente, em_andamento, concluido, bloqueado
+  passos_completados: 0
+  total_passos: 3
+  checkboxes:
+    - "[  ] Passo 1: Descricao curta"
+    - "[  ] Passo 2: Descricao curta"
+    - "[  ] Passo 3: Descricao curta"
+  ultima_atualizacao: null
+  notas_progresso: ""
+
+# ============================================================
+# MEMORIA RELEVANTE
+# Insights e alertas do sistema de memoria
+# ============================================================
+memoria:
+  # Insights que podem ajudar nesta tarefa
+  insights_relevantes:
+    - "Insight 1 da memoria que se aplica aqui"
+    - "Insight 2 da memoria que se aplica aqui"
+
+  # Alertas para evitar erros
+  alertas_ativos:
+    - "Alerta 1: Cuidado com isso"
+    - "Alerta 2: Evitar aquilo"
+
+  # Padroes a seguir
+  padroes_aplicaveis:
+    - "Padrao 1 que deve ser seguido"
+    - "Padrao 2 que deve ser seguido"
+
+# ============================================================
+# SAIDA
+# ============================================================
+saida:
+  formato: markdown
+  template: |
+    ## Resultado
+
+    ### [Secao 1]
+    [Conteudo]
+
+    ### [Secao 2]
+    [Conteudo]
+
+  arquivos_gerados:
+    - nome: "arquivo1.md"
+      descricao: "O que este arquivo contem"
+    - nome: "arquivo2.yaml"
+      descricao: "O que este arquivo contem"
+
+# ============================================================
+# QUALITY GATES (3 Niveis)
+# ============================================================
+gates:
+  # Nivel 1: Verificacao automatica (Sleep Agent verifica sozinho)
+  nivel_1_automatico:
+    - verificacao: "Formato do arquivo esta correto?"
+      tipo: "formato"
+    - verificacao: "Todos os campos obrigatorios preenchidos?"
+      tipo: "completude"
+    - verificacao: "Tamanho adequado (nao muito curto/longo)?"
+      tipo: "tamanho"
+
+  # Nivel 2: Validacao por agente (outro agente revisa)
+  nivel_2_agente:
+    - verificacao: "Conteudo e consistente com a marca?"
+      agente_revisor: "brand-strategist"
+    - verificacao: "Linguagem adequada ao publico?"
+      agente_revisor: "copywriter"
+
+  # Nivel 3: Aprovacao humana (usuario decide)
+  nivel_3_humano:
+    - verificacao: "O resultado atende suas expectativas?"
+    - verificacao: "Algo precisa ser ajustado?"
+
+# ============================================================
+# CONHECIMENTO
+# ============================================================
+conhecimento:
+  arquivos:
+    - caminho/para/arquivo1.md
+    - caminho/para/arquivo2.md
+
+  # Consultar memoria automaticamente
+  consultar_memoria: true
+  categorias_memoria:
+    - "insights"
+    - "padroes"
+    - "alertas"
+
+# ============================================================
+# PROXIMOS PASSOS
+# ============================================================
+proximos_passos:
+  sugeridos:
+    - tarefa: "proxima-tarefa-1"
+      descricao: "Por que essa seria uma boa continuacao"
+    - tarefa: "proxima-tarefa-2"
+      descricao: "Alternativa de continuacao"
+
+  # Capturar aprendizados ao final
+  capturar_memoria:
+    - tipo: "insight"
+      pergunta: "Algum aprendizado novo desta tarefa?"
+    - tipo: "alerta"
+      pergunta: "Algo a evitar em tarefas futuras?"

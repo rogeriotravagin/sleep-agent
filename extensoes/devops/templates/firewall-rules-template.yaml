@@ -1,0 +1,80 @@
+# ============================================================
+# Template: Regras de Firewall (Hetzner Cloud)
+# ============================================================
+# Regras padrao para servidor de producao
+# Ajustar IPs autorizados antes de aplicar
+#
+# IMPORTANTE: SSH NUNCA deve ser aberto para 0.0.0.0/0
+
+nome: "fw-producao-{{NOME}}"
+
+regras:
+  # ---- SSH (RESTRITO) ----
+  - direction: "in"
+    protocol: "tcp"
+    port: "{{SSH_PORT:-2222}}"
+    source_ips:
+      - "{{IP_AUTORIZADO_1}}/32"
+      # - "{{IP_AUTORIZADO_2}}/32"  # Adicionar mais IPs conforme necessario
+    description: "SSH - apenas IPs autorizados"
+
+  # ---- HTTP ----
+  - direction: "in"
+    protocol: "tcp"
+    port: "80"
+    source_ips:
+      - "0.0.0.0/0"
+      - "::/0"
+    description: "HTTP - publico (redirect para HTTPS)"
+
+  # ---- HTTPS ----
+  - direction: "in"
+    protocol: "tcp"
+    port: "443"
+    source_ips:
+      - "0.0.0.0/0"
+      - "::/0"
+    description: "HTTPS - publico"
+
+  # ---- Docker Swarm (APENAS REDE INTERNA) ----
+  # Descomente se usar multiplos nodes no Swarm
+  # - direction: "in"
+  #   protocol: "tcp"
+  #   port: "2377"
+  #   source_ips:
+  #     - "{{REDE_INTERNA:-10.0.0.0/16}}"
+  #   description: "Swarm management - rede interna"
+  #
+  # - direction: "in"
+  #   protocol: "tcp"
+  #   port: "7946"
+  #   source_ips:
+  #     - "{{REDE_INTERNA:-10.0.0.0/16}}"
+  #   description: "Swarm nodes TCP - rede interna"
+  #
+  # - direction: "in"
+  #   protocol: "udp"
+  #   port: "7946"
+  #   source_ips:
+  #     - "{{REDE_INTERNA:-10.0.0.0/16}}"
+  #   description: "Swarm nodes UDP - rede interna"
+  #
+  # - direction: "in"
+  #   protocol: "udp"
+  #   port: "4789"
+  #   source_ips:
+  #     - "{{REDE_INTERNA:-10.0.0.0/16}}"
+  #   description: "Swarm overlay - rede interna"
+
+labels:
+  managed_by: "sleep-agent"
+  env: "production"
+
+# ============================================================
+# REGRAS DE SEGURANCA:
+# ============================================================
+# 1. SSH: NUNCA abrir para 0.0.0.0/0
+# 2. Swarm: APENAS rede interna (10.x.x.x ou rede privada)
+# 3. Portas nao listadas: BLOQUEADAS por padrao
+# 4. Revisar IPs autorizados regularmente
+# 5. Manter sincronizado com UFW do servidor

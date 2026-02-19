@@ -1,0 +1,224 @@
+# ============================================
+# TAREFA: Criar Roadmap
+# ============================================
+
+id: criar-roadmap
+nome: Criar Roadmap Outcome-Driven
+comando: /criar-roadmap
+agente: delivery-manager
+fase: delivery
+
+descricao: |
+  Criar roadmap de produto baseado em outcomes,
+  usando formato Now/Next/Later.
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: nome_produto
+      descricao: Nome do produto
+      tipo: texto
+
+    - nome: okrs
+      descricao: OKRs do periodo
+      tipo: texto
+
+    - nome: iniciativas
+      descricao: Iniciativas planejadas/priorizadas
+      tipo: lista
+
+  opcionais:
+    - nome: roadmap_anterior
+      descricao: Roadmap anterior para referencia
+      tipo: texto
+
+    - nome: dependencias
+      descricao: Dependencias externas
+      tipo: lista
+
+# ============================================
+# PERGUNTAS GUIA
+# ============================================
+
+perguntas:
+  - "Quais sao os OKRs do periodo?"
+  - "Quais iniciativas foram priorizadas?"
+  - "Ha dependencias de outros times?"
+  - "Qual a capacidade disponivel?"
+  - "Ha eventos/datas importantes?"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    nome: "Revisar Estrategia"
+    descricao: "Conectar com visao e OKRs"
+    acoes:
+      - Revisar visao de produto
+      - Mapear OKRs do periodo
+      - Identificar outcomes prioritarios
+
+  - numero: 2
+    nome: "Organizar Iniciativas"
+    descricao: "Distribuir em Now/Next/Later"
+    acoes:
+      - NOW = comprometido (alto detalhe)
+      - NEXT = planejado (medio detalhe)
+      - LATER = possibilidade (baixo detalhe)
+
+  - numero: 3
+    nome: "Conectar a Outcomes"
+    descricao: "Garantir cada iniciativa serve um outcome"
+    acoes:
+      - Vincular iniciativa a OKR
+      - Definir metrica de sucesso
+      - Documentar hipotese
+
+  - numero: 4
+    nome: "Mapear Dependencias"
+    descricao: "Identificar riscos e dependencias"
+    acoes:
+      - Dependencias internas
+      - Dependencias externas
+      - Riscos conhecidos
+
+  - numero: 5
+    nome: "Documentar e Comunicar"
+    descricao: "Criar documento e preparar comunicacao"
+    acoes:
+      - Usar template padrao
+      - Definir cadencia de atualizacao
+      - Preparar versoes por audiencia
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Product Roadmap - {{nome_produto}}
+  *Atualizado em: {{data}}*
+
+  ## Visao
+  {{visao_resumo}}
+
+  ## North Star Metric
+  {{north_star}}: {{nsm_atual}} -> {{nsm_target}}
+
+  ---
+
+  ## NOW (Comprometido)
+  *{{periodo_now}} - Alta confianca*
+
+  ### Outcome: {{outcome_now}}
+  **Metrica:** {{metrica_now}} de {{baseline_now}} para {{target_now}}
+  **OKR:** {{okr_relacionado}}
+
+  #### Iniciativas
+
+  **{{iniciativa_now_1}}**
+  - Status: {{status_now_1}}
+  - Squad: {{squad_now_1}}
+  - Hipotese: {{hipotese_now_1}}
+
+  **{{iniciativa_now_2}}**
+  - Status: {{status_now_2}}
+  - Squad: {{squad_now_2}}
+  - Hipotese: {{hipotese_now_2}}
+
+  #### Riscos e Dependencias
+  - {{risco_now_1}}
+  - {{dependencia_now_1}}
+
+  ---
+
+  ## NEXT (Planejado)
+  *{{periodo_next}} - Media confianca*
+
+  ### Outcome: {{outcome_next}}
+  **Metrica-alvo:** {{metrica_next}}
+
+  #### Iniciativas em Exploracao
+  - {{iniciativa_next_1}}: {{descricao_next_1}}
+  - {{iniciativa_next_2}}: {{descricao_next_2}}
+
+  #### A Validar
+  - {{validacao_next_1}}
+
+  ---
+
+  ## LATER (Possibilidade)
+  *Futuro - Baixa confianca*
+
+  ### Temas em Consideracao
+  | Tema | Descricao | Conexao Estrategica |
+  |------|-----------|---------------------|
+  | {{tema_1}} | {{tema_1_desc}} | {{tema_1_conexao}} |
+  | {{tema_2}} | {{tema_2_desc}} | {{tema_2_conexao}} |
+
+  ### Ideias no Radar
+  - {{ideia_1}} (Fonte: {{fonte_1}})
+  - {{ideia_2}} (Fonte: {{fonte_2}})
+
+  ---
+
+  ## NOT Doing (Decidimos Nao Fazer)
+  | Item | Motivo | Data Decisao |
+  |------|--------|--------------|
+  | {{not_1}} | {{motivo_not_1}} | {{data_not_1}} |
+  | {{not_2}} | {{motivo_not_2}} | {{data_not_2}} |
+
+  ---
+
+  ## Comunicacao
+
+  ### Cadencia de Atualizacao
+  - Revisao interna: {{cadencia_interna}}
+  - Update stakeholders: {{cadencia_stakeholders}}
+  - Comunicacao publica: {{cadencia_publica}}
+
+  ### Versoes por Audiencia
+  | Audiencia | Formato | Frequencia |
+  |-----------|---------|------------|
+  | Board | Slides | Trimestral |
+  | Leadership | Este doc | Mensal |
+  | Time | Sprint review | Bi-semanal |
+  | Clientes | Changelog | Conforme releases |
+
+  ---
+
+  ## Changelog
+  | Data | Mudanca | Motivo |
+  |------|---------|--------|
+  | {{data}} | Versao inicial | - |
+
+  ---
+  *Responsavel: {{pm_responsavel}}*
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+qualidade:
+  criterios:
+    - "Cada iniciativa esta conectada a um outcome?"
+    - "NOW tem alto nivel de detalhe e confianca?"
+    - "LATER tem baixo nivel de detalhe (flexivel)?"
+    - "Riscos e dependencias estao mapeados?"
+    - "Ha cadencia de atualizacao definida?"
+
+  validacao:
+    - "Stakeholders entendem e apoiam?"
+    - "Time sabe o que esta em NOW?"
+
+# ============================================
+# OUTPUT
+# ============================================
+
+output:
+  arquivo: "roadmap-{{ano}}.md"
+  pasta: "output/{{produto}}/produtos/roadmaps/"

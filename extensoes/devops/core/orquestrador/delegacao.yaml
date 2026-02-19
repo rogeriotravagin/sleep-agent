@@ -1,0 +1,465 @@
+# ============================================================
+# DELEGACAO - Extensao DevOps
+# ============================================================
+# Define gatilhos, roteamento e fluxos de trabalho
+
+extensao: devops
+
+# ============================================================
+# GATILHOS GLOBAIS
+# ============================================================
+gatilhos:
+  palavras_chave:
+    - servidor
+    - server
+    - servidores
+    - hetzner
+    - portainer
+    - docker
+    - container
+    - stack
+    - deploy
+    - infraestrutura
+    - infra
+    - firewall
+    - ssh
+    - ssl
+    - certificado
+    - backup
+    - snapshot
+    - dns
+    - dominio
+    - volume
+    - network
+    - rede
+    - swarm
+    - hardening
+    - seguranca servidor
+    - devops
+    - vps
+    - cloud
+    - load balancer
+    - reverse proxy
+    - traefik
+    - uptime
+    - monitoramento
+    - disaster recovery
+
+  frases:
+    - "subir servidor"
+    - "criar servidor"
+    - "subir aplicacao"
+    - "fazer deploy"
+    - "atualizar stack"
+    - "verificar seguranca"
+    - "auditar infraestrutura"
+    - "configurar firewall"
+    - "configurar ssl"
+    - "criar backup"
+    - "restaurar backup"
+    - "escalar servico"
+    - "reverter stack"
+    - "mapear infraestrutura"
+    - "quanto custa"
+    - "listar servidores"
+    - "listar stacks"
+    - "status dos servicos"
+    - "ta tudo no ar"
+    - "caiu alguma coisa"
+    - "preciso de um servidor"
+    - "quero colocar no ar"
+
+# ============================================================
+# REGRAS DE DELEGACAO
+# ============================================================
+regras:
+  # ------- Estrategista -------
+  - trigger:
+      - /mapear-infra
+      - /planejar-servidor
+      - /avaliar-custos
+      - "mapear infraestrutura"
+      - "planejar servidor"
+      - "quanto custa"
+      - "preciso de um servidor"
+      - "quero subir"
+      - "quero colocar no ar"
+      - "preciso de infraestrutura"
+      - "comparar opcoes"
+    agente: devops-estrategista
+    prioridade: alta
+    descricao: Planejamento e analise de infraestrutura
+    contexto_necessario:
+      - workspace_config
+      - memoria_devops
+
+  # ------- Hetzner -------
+  - trigger:
+      - /criar-servidor
+      - /listar-servidores
+      - /gerenciar-firewall
+      - /gerenciar-ssh-keys
+      - /criar-backup
+      - /gerenciar-dns
+      - "criar servidor"
+      - "hetzner"
+      - "firewall hetzner"
+      - "ssh key"
+      - "snapshot"
+      - "backup servidor"
+      - "dns hetzner"
+      - "floating ip"
+      - "volume hetzner"
+      - "load balancer hetzner"
+    agente: devops-hetzner
+    prioridade: alta
+    descricao: Operacoes na Hetzner Cloud
+    contexto_necessario:
+      - HETZNER_API_TOKEN
+      - workspace_config
+    pre_requisitos:
+      - "Token HETZNER_API_TOKEN configurado"
+      - "Conectividade com api.hetzner.cloud"
+
+  # ------- Portainer -------
+  - trigger:
+      - /listar-stacks
+      - /deploy-stack
+      - /atualizar-stack
+      - /status-servicos
+      - /escalar-servico
+      - /rollback-stack
+      - "portainer"
+      - "listar stacks"
+      - "deploy stack"
+      - "atualizar stack"
+      - "subir stack"
+      - "status servicos"
+      - "escalar servico"
+      - "rollback"
+      - "reverter stack"
+      - "container"
+      - "docker"
+      - "service"
+      - "swarm"
+      - "ta tudo no ar"
+      - "caiu alguma coisa"
+    agente: devops-portainer
+    prioridade: alta
+    descricao: Operacoes via Portainer/Docker Swarm
+    contexto_necessario:
+      - PORTAINER_URL
+      - PORTAINER_USER
+      - PORTAINER_PASSWORD
+      - workspace_config
+    pre_requisitos:
+      - "Credenciais Portainer configuradas"
+      - "Conectividade com Portainer"
+
+  # ------- Seguranca -------
+  - trigger:
+      - /audit-seguranca
+      - /hardening
+      - /verificar-ssl
+      - /plano-backup
+      - "auditoria seguranca"
+      - "hardening"
+      - "seguranca servidor"
+      - "verificar ssl"
+      - "certificado ssl"
+      - "let's encrypt"
+      - "backup"
+      - "disaster recovery"
+      - "ta seguro"
+      - "vulnerabilidade"
+      - "fail2ban"
+      - "firewall ufw"
+    agente: devops-seguranca
+    prioridade: critica
+    descricao: Seguranca e auditoria de infraestrutura
+    contexto_necessario:
+      - workspace_config
+      - inventario_infra
+
+# ============================================================
+# FLUXOS DE TRABALHO
+# ============================================================
+fluxos:
+  servidor-completo:
+    descricao: Provisionar servidor do zero com seguranca completa
+    trigger:
+      - /servidor-completo
+      - "criar servidor completo"
+      - "servidor do zero"
+    etapas:
+      - agente: devops-estrategista
+        tarefa: planejar-servidor
+        descricao: Entender necessidade e dimensionar
+      - agente: devops-estrategista
+        tarefa: confirmar-proposta
+        descricao: Apresentar proposta e custo
+      - agente: devops-hetzner
+        tarefa: criar-firewall
+        descricao: Criar firewall ANTES do servidor
+      - agente: devops-hetzner
+        tarefa: criar-ssh-key
+        descricao: Garantir SSH key cadastrada
+        condicao: se_nao_existir
+      - agente: devops-hetzner
+        tarefa: criar-servidor
+        descricao: Provisionar servidor
+      - agente: devops-seguranca
+        tarefa: hardening
+        descricao: Aplicar hardening completo
+      - agente: devops-portainer
+        tarefa: setup-docker
+        descricao: Instalar Docker e configurar Swarm
+        condicao: se_necessario
+      - agente: devops-seguranca
+        tarefa: validar
+        descricao: Auditoria final de seguranca
+      - agente: devops-estrategista
+        tarefa: documentar
+        descricao: Documentar e atualizar inventario
+
+  nova-stack:
+    descricao: Deploy de nova stack com validacao completa
+    trigger:
+      - /nova-stack
+      - "nova stack"
+      - "subir aplicacao nova"
+    etapas:
+      - agente: devops-estrategista
+        tarefa: entender-requisitos
+        descricao: Que aplicacao, recursos, dominios
+      - agente: devops-portainer
+        tarefa: verificar-recursos
+        descricao: Recursos disponiveis no servidor
+      - agente: devops-portainer
+        tarefa: criar-compose
+        descricao: Criar docker-compose.yaml
+      - agente: devops-seguranca
+        tarefa: validar-compose
+        descricao: Revisar seguranca do compose
+      - agente: devops-portainer
+        tarefa: deploy
+        descricao: Deploy da stack
+      - agente: devops-portainer
+        tarefa: health-check
+        descricao: Verificar saude dos services
+      - agente: devops-estrategista
+        tarefa: documentar
+        descricao: Documentar stack no inventario
+
+  audit-completo:
+    descricao: Auditoria completa de seguranca e infraestrutura
+    trigger:
+      - /audit-completo
+      - "auditoria completa"
+      - "verificar tudo"
+    etapas:
+      - agente: devops-estrategista
+        tarefa: inventariar
+        descricao: Listar todos os recursos
+      - agente: devops-seguranca
+        tarefa: audit-servidor
+        descricao: Verificar seguranca do servidor
+      - agente: devops-seguranca
+        tarefa: audit-ssl
+        descricao: Verificar certificados SSL
+      - agente: devops-portainer
+        tarefa: audit-stacks
+        descricao: Verificar stacks e services
+      - agente: devops-hetzner
+        tarefa: audit-firewall
+        descricao: Verificar regras de firewall
+      - agente: devops-seguranca
+        tarefa: relatorio
+        descricao: Gerar relatorio consolidado
+      - agente: devops-estrategista
+        tarefa: plano-acao
+        descricao: Criar plano de correcoes
+
+  disaster-recovery:
+    descricao: Plano e execucao de disaster recovery
+    trigger:
+      - /disaster-recovery
+      - "disaster recovery"
+      - "plano de contingencia"
+    etapas:
+      - agente: devops-estrategista
+        tarefa: avaliar-criticidade
+        descricao: Classificar servicos por importancia
+      - agente: devops-seguranca
+        tarefa: definir-rto-rpo
+        descricao: Definir RTO e RPO por servico
+      - agente: devops-seguranca
+        tarefa: plano-backup
+        descricao: Criar estrategia de backup
+      - agente: devops-hetzner
+        tarefa: configurar-snapshots
+        descricao: Configurar snapshots automaticos
+      - agente: devops-portainer
+        tarefa: backup-stacks
+        descricao: Exportar todas as stacks
+      - agente: devops-seguranca
+        tarefa: documentar-procedimentos
+        descricao: Criar runbooks de restauracao
+      - agente: devops-seguranca
+        tarefa: testar-restore
+        descricao: Testar procedimento de restauracao
+
+# ============================================================
+# QUALITY GATES
+# ============================================================
+quality_gates:
+  nivel_1_automatico:
+    - "Variaveis de ambiente verificadas"
+    - "Conectividade com APIs testada"
+    - "Formato dos arquivos valido"
+    - ".env no .gitignore"
+
+  nivel_2_agente:
+    - agente: devops-seguranca
+      verifica:
+        - "Firewall configurado antes de expor servidor"
+        - "SSH por chave (sem senha)"
+        - "SSL/TLS valido em servicos publicos"
+        - "Health checks em todos os services"
+        - "Resource limits definidos"
+        - "Sem credenciais em compose files"
+
+  nivel_3_humano:
+    - "Custos aprovados antes de provisionar"
+    - "Operacoes destrutivas confirmadas"
+    - "Plano de DR revisado"
+    - "Relatorio de auditoria aceito"
+
+# ============================================================
+# ESCALACAO
+# ============================================================
+escalacao:
+  - situacao: "Servidor inacessivel"
+    acao: "Verificar via Hetzner API → Console → Snapshot/Rebuild"
+    agente: devops-hetzner
+
+  - situacao: "Stack com falhas continuas"
+    acao: "Verificar logs → Rollback → Investigar causa"
+    agente: devops-portainer
+
+  - situacao: "Possivel comprometimento de seguranca"
+    acao: "ISOLAR servidor → Avaliar → Provisionar novo → Restaurar"
+    agente: devops-seguranca
+
+  - situacao: "Token API invalido/expirado"
+    acao: "Orientar usuario a gerar novo token"
+    agente: devops-estrategista
+
+  - situacao: "Custo inesperado"
+    acao: "Listar recursos → Identificar origem → Propor otimizacao"
+    agente: devops-estrategista
+
+# ============================================================
+# PRINCIPIOS DE COMUNICACAO
+# ============================================================
+comunicacao:
+  antes_de_executar:
+    - "Explicar O QUE sera feito"
+    - "Informar CUSTOS envolvidos"
+    - "Alertar RISCOS da operacao"
+    - "Pedir CONFIRMACAO explicita"
+
+  durante_execucao:
+    - "Mostrar progresso passo a passo"
+    - "Informar se algo inesperado acontecer"
+    - "Nunca esconder erros"
+
+  apos_execucao:
+    - "Confirmar resultado"
+    - "Mostrar como verificar"
+    - "Documentar o que foi feito"
+    - "Sugerir proximos passos"
+
+  operacoes_destrutivas:
+    - "DUPLA confirmacao obrigatoria"
+    - "Listar TUDO que sera afetado"
+    - "Criar backup ANTES"
+    - "Documentar MOTIVO da operacao"
+
+# ============================================================
+# GLOSSARIO
+# ============================================================
+glossario:
+  - termo: "VPS"
+    tecnico: "Virtual Private Server"
+    simples: "Computador na nuvem que voce aluga por mes"
+
+  - termo: "Container"
+    tecnico: "Processo isolado com filesystem proprio"
+    simples: "Caixa que empacota uma aplicacao com tudo que ela precisa"
+
+  - termo: "Stack"
+    tecnico: "Grupo de services Docker Compose"
+    simples: "Time de aplicacoes que trabalham juntas"
+
+  - termo: "Firewall"
+    tecnico: "Sistema de filtragem de pacotes de rede"
+    simples: "Porteiro que decide quem entra e quem nao entra no servidor"
+
+  - termo: "SSH"
+    tecnico: "Secure Shell Protocol"
+    simples: "Tunel criptografado para acessar o servidor remotamente"
+
+  - termo: "SSL/TLS"
+    tecnico: "Transport Layer Security"
+    simples: "Cadeado verde no navegador que protege a comunicacao"
+
+  - termo: "DNS"
+    tecnico: "Domain Name System"
+    simples: "Lista telefonica da internet - traduz nomes para enderecos"
+
+  - termo: "Snapshot"
+    tecnico: "Imagem do estado do servidor em um momento"
+    simples: "Foto do servidor que pode ser restaurada depois"
+
+  - termo: "Overlay Network"
+    tecnico: "Rede virtual entre containers em nodes diferentes"
+    simples: "Rede privada entre as aplicacoes do servidor"
+
+  - termo: "Health Check"
+    tecnico: "Verificacao periodica de saude do servico"
+    simples: "Checagem automatica se a aplicacao esta funcionando"
+
+  - termo: "Rollback"
+    tecnico: "Reverter para versao anterior"
+    simples: "Voltar no tempo para quando tava funcionando"
+
+  - termo: "Hardening"
+    tecnico: "Processo de reducao de superficie de ataque"
+    simples: "Blindar o servidor contra invasoes"
+
+  - termo: "Load Balancer"
+    tecnico: "Distribuidor de carga entre servidores"
+    simples: "Recepcionista que distribui visitantes entre atendentes"
+
+# ============================================================
+# METRICAS
+# ============================================================
+metricas:
+  operacionais:
+    - "Uptime dos servicos"
+    - "Tempo de provisionamento"
+    - "Tempo de deploy"
+    - "Tempo de rollback"
+    - "Cobertura de backup"
+
+  seguranca:
+    - "Score de auditoria"
+    - "Dias desde ultimo incidente"
+    - "Certificados com menos de 30 dias"
+    - "Vulnerabilidades abertas"
+
+  custo:
+    - "Custo mensal total"
+    - "Custo por stack"
+    - "Recursos ociosos"

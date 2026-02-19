@@ -1,0 +1,363 @@
+# =====================================================
+# TAREFA: Análise Completa de Caso Crítico
+# =====================================================
+
+id: analisar-caso-critico
+nome: Análise Completa de Caso Crítico
+comando: /caso-critico
+agente: critical-cases-specialist
+fase: diagnostico-crise
+
+# =====================================================
+# OBJETIVO
+# =====================================================
+
+objetivo: |
+  Analisar caso crítico de cliente de forma 360° (CS + Jurídico + Negócio),
+  classificar níveis de risco, avaliar base legal (CDC), e criar estratégia
+  de resolução com plano de ação detalhado.
+
+# =====================================================
+# INPUT DO USUÁRIO
+# =====================================================
+
+input:
+  perguntas:
+    - id: descricao_caso
+      pergunta: "Descreva o caso crítico (situação, histórico, reclamação do cliente)"
+      tipo: texto_longo
+      obrigatorio: sim
+
+    - id: cliente_info
+      pergunta: "Informações do cliente (nome, segmento, LTV, tempo de cliente)"
+      tipo: texto
+      obrigatorio: sim
+
+    - id: comunicacoes
+      pergunta: "Você tem acesso às comunicações do cliente? (emails, prints, mensagens)"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim, tenho tudo"
+        - "Tenho parcial"
+        - "Não tenho"
+      obrigatorio: sim
+
+    - id: documentos_empresa
+      pergunta: "Tem acesso a documentos da empresa? (processos, contratos, termos, T&C)"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim, tenho acesso"
+        - "Parcial"
+        - "Não tenho"
+      obrigatorio: sim
+
+    - id: ameacas
+      pergunta: "Cliente fez ameaças? (processo, exposição pública, etc)"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim - ameaça de processo judicial"
+        - "Sim - ameaça de exposição pública/mídia"
+        - "Sim - ambas"
+        - "Não, mas muito insatisfeito"
+        - "Não"
+      obrigatorio: sim
+
+    - id: exposicao_publica
+      pergunta: "Houve exposição pública? (redes sociais, review sites, mídia)"
+      tipo: multipla_escolha
+      opcoes:
+        - "Sim - alta visibilidade"
+        - "Sim - média visibilidade"
+        - "Sim - baixa visibilidade"
+        - "Não, reclamação privada"
+      obrigatorio: sim
+
+    - id: urgencia
+      pergunta: "Qual a urgência?"
+      tipo: multipla_escolha
+      opcoes:
+        - "Crítica - cliente quer resposta hoje"
+        - "Alta - cliente quer resposta em 24h"
+        - "Média - cliente quer resposta em 48h"
+        - "Normal - sem prazo específico"
+      obrigatorio: sim
+
+# =====================================================
+# DOCUMENTOS PARA LER
+# =====================================================
+
+documentos_para_solicitar:
+  - tipo: comunicacoes_cliente
+    descricao: "Emails, prints, mensagens do cliente"
+    obrigatorio: sim
+
+  - tipo: historico_cliente
+    descricao: "Histórico completo de relacionamento"
+    obrigatorio: sim
+
+  - tipo: contratos_termos
+    descricao: "Contrato/termos aceitos pelo cliente"
+    obrigatorio: sim
+
+  - tipo: processos_internos
+    descricao: "Documentos de processos da empresa (como funciona o produto/serviço)"
+    obrigatorio: nao
+
+  - tipo: evidencias_empresa
+    descricao: "Evidências que a empresa possui (logs, confirmações, etc)"
+    obrigatorio: nao
+
+# =====================================================
+# PROCESSO DE ANÁLISE
+# =====================================================
+
+processo:
+  etapas:
+    - numero: 1
+      nome: TRIAGEM_INICIAL
+      acoes:
+        - "Ler descrição do caso fornecida pelo usuário"
+        - "Identificar tipo de caso (vício de produto, publicidade enganosa, cobrança indevida, etc)"
+        - "Classificar urgência inicial"
+        - "Solicitar documentos relevantes"
+
+    - numero: 2
+      nome: ANALISE_CONTEXTO
+      acoes:
+        - "Ler todos os documentos fornecidos"
+        - "Analisar histórico do cliente (segmento, LTV, tempo, histórico de problemas)"
+        - "Criar linha do tempo cronológica dos eventos"
+        - "Identificar gatilhos e padrões"
+        - "Avaliar perfil emocional do cliente (racional vs emocional)"
+        - "Avaliar poder de influência (influencer, comunidade, mídia)"
+
+    - numero: 3
+      nome: ANALISE_RECLAMACAO
+      acoes:
+        - "Separar fatos objetivos de emoções"
+        - "Identificar reivindicações específicas do cliente"
+        - "Analisar tom e linguagem usada"
+        - "Identificar ameaças explícitas e implícitas"
+        - "Entender o que cliente realmente quer (nem sempre é o que diz)"
+
+    - numero: 4
+      nome: ANALISE_LEGAL_CDC
+      conhecimento:
+        - conhecimento/cdc-completo.md
+        - conhecimento/analise-risco-juridico.md
+      acoes:
+        - "Carregar conhecimento completo do CDC"
+        - "Identificar artigos CDC aplicáveis"
+        - "Avaliar se cliente tem razão legal (SIM/PARCIAL/NÃO)"
+        - "Identificar violações do CDC pela empresa (se houver)"
+        - "Verificar prazos legais (7, 30, 90 dias)"
+        - "Avaliar força da base legal do cliente"
+        - "Identificar vulnerabilidades da empresa"
+        - "Identificar pontos de defesa da empresa"
+
+    - numero: 5
+      nome: CLASSIFICACAO_RISCO
+      conhecimento:
+        - conhecimento/analise-risco-juridico.md
+      acoes:
+        - "Calcular Risco Jurídico (0-10)"
+        - "Calcular Risco Reputacional (0-10)"
+        - "Estimar Risco Financeiro (direto + indireto)"
+        - "Definir Urgência (24h/48h/1 semana)"
+        - "Aplicar Matriz de Criticidade (🔴 CRÍTICO / 🟠 GRAVE / 🟡 MODERADO / 🟢 BAIXO)"
+        - "Usar Score de Risco Jurídico: (Base Legal × 4) + (Prazo × 3) + (Evidências × 2) + (Precedente × 1)"
+
+    - numero: 6
+      nome: ESTRATEGIA_RESOLUCAO
+      conhecimento:
+        - conhecimento/casos-criticos-framework.md
+        - conhecimento/estrategias-deescalation.md
+      acoes:
+        - "Identificar tipo de caso (Cliente tem razão / razão parcial / sem razão / má-fé)"
+        - "Definir objetivos (prevenir processo, proteger reputação, minimizar custo, manter cliente)"
+        - "Escolher técnica de de-escalation apropriada"
+        - "Definir compensação proporcional (se aplicável)"
+        - "Criar 3 cenários (melhor caso, caso provável, pior caso)"
+        - "Definir quando escalar (jurídico, liderança, RP)"
+        - "Estruturar comunicação usando framework NVC"
+
+    - numero: 7
+      nome: CUSTO_BENEFICIO
+      acoes:
+        - "Calcular custo estimado de litígio"
+        - "Calcular custo estimado de acordo"
+        - "Avaliar custo vs benefício"
+        - "Considerar precedente que pode criar"
+        - "Recomendar ação financeira ótima"
+
+# =====================================================
+# OUTPUT
+# =====================================================
+
+output:
+  template: templates/analise-caso-critico.md
+
+  conteudo:
+    - secao: RESUMO_EXECUTIVO
+      itens:
+        - Cliente (nome/ID/segmento)
+        - Data do caso
+        - Classificação de Criticidade (emoji + texto)
+        - Ação imediata recomendada (SIM/NÃO)
+        - TL;DR (3 linhas)
+
+    - secao: CONTEXTO_DO_CLIENTE
+      itens:
+        - Segmento
+        - LTV
+        - Tempo de cliente
+        - Histórico de relacionamento
+        - Histórico de problemas anteriores
+        - Perfil emocional
+        - Poder de influência
+
+    - secao: DESCRICAO_DO_CASO
+      itens:
+        - Linha do tempo cronológica (formato tabela)
+        - Fatos objetivos
+        - Reivindicações do cliente
+        - Emoções envolvidas
+        - Ameaças (explícitas/implícitas)
+
+    - secao: ANALISE_LEGAL_CDC
+      itens:
+        - Cliente tem razão? (SIM/PARCIAL/NÃO + justificativa)
+        - Artigos CDC aplicáveis (lista com explicação)
+        - Violações do CDC pela empresa (se houver)
+        - Responsabilidade da empresa (ALTA/MÉDIA/BAIXA/NENHUMA)
+        - Pontos de vulnerabilidade da empresa
+        - Pontos de defesa da empresa
+        - Prazos legais (respeitados ou não)
+
+    - secao: MATRIZ_DE_RISCO
+      itens:
+        - Risco Jurídico: [X/10] com justificativa detalhada
+        - Risco Reputacional: [X/10] com justificativa
+        - Risco Financeiro: R$ [estimativa] (direto + indireto)
+        - Urgência: [24h / 48h / 1 semana]
+        - Score Total de Risco Jurídico: [0-100]
+        - Classificação Final: 🔴 CRÍTICO / 🟠 GRAVE / 🟡 MODERADO / 🟢 BAIXO
+
+    - secao: ESTRATEGIA_DE_RESOLUCAO
+      itens:
+        - Tipo de caso identificado
+        - Objetivos prioritários
+        - Técnicas de de-escalation recomendadas
+        - Compensação sugerida (se aplicável)
+        - Cenário: Melhor caso
+        - Cenário: Caso provável
+        - Cenário: Pior caso
+        - Plano B e C
+        - Quando escalar (para quem, quando, por quê)
+
+    - secao: ANALISE_CUSTO_BENEFICIO
+      itens:
+        - Custo estimado de litígio (breakdown)
+        - Custo estimado de acordo (breakdown)
+        - Probabilidade de perder litígio (%)
+        - Cálculo: Custo Acordo vs (Custo Litígio × Probabilidade)
+        - Recomendação financeira
+        - Análise de precedente
+
+    - secao: COMUNICACAO_SUGERIDA
+      itens:
+        - Template de resposta estruturada (usando NVC + de-escalation)
+        - Canal recomendado (email/telefone/videoconferência)
+        - Tom apropriado
+        - Pontos-chave a mencionar
+        - Pontos a evitar mencionar
+
+    - secao: ESCALACAO
+      itens:
+        - Envolver Jurídico? (SIM/NÃO + motivo)
+        - Envolver Liderança? (SIM/NÃO + motivo)
+        - Envolver RP? (SIM/NÃO + motivo)
+        - Urgência da escalação
+
+    - secao: PLANO_DE_ACAO
+      itens:
+        - Lista numerada de ações específicas
+        - Responsável por cada ação
+        - Prazo de cada ação
+        - Critério de sucesso
+
+    - secao: DOCUMENTACAO_NECESSARIA
+      itens:
+        - O que documentar
+        - Como documentar
+        - Onde armazenar
+
+  formato: markdown
+  salvar_em: workspace/[estrutura]/customer-success/casos-criticos/analises/
+
+# =====================================================
+# VALIDAÇÕES
+# =====================================================
+
+validacoes:
+  - item: conhecimento_cdc_carregado
+    descricao: "Verifique se carregou conhecimento/cdc-completo.md"
+    critico: sim
+
+  - item: analise_legal_completa
+    descricao: "Análise legal deve identificar artigos CDC específicos"
+    critico: sim
+
+  - item: matriz_risco_preenchida
+    descricao: "Todas as dimensões de risco devem ter score e justificativa"
+    critico: sim
+
+  - item: estrategia_definida
+    descricao: "Estratégia de resolução deve ser específica e acionável"
+    critico: sim
+
+  - item: custo_beneficio_calculado
+    descricao: "Análise financeira deve ter valores estimados"
+    critico: sim
+
+  - item: comunicacao_estruturada
+    descricao: "Template de comunicação deve usar framework NVC + de-escalation"
+    critico: sim
+
+# =====================================================
+# FOLLOW-UP
+# =====================================================
+
+proximos_passos:
+  - "Implementar plano de ação"
+  - "Se necessário, usar /plano-resolucao para detalhar estratégia"
+  - "Se necessário, usar /risco-juridico para análise legal mais profunda"
+  - "Após resolução, usar /documentar-caso para registro formal"
+
+# =====================================================
+# MÉTRICAS
+# =====================================================
+
+metricas:
+  - Tempo de análise (meta: < 4 horas para casos graves)
+  - Acurácia da classificação de risco
+  - % de casos resolvidos conforme estratégia
+  - % de casos que escalaram vs previsão
+
+# =====================================================
+# REFERÊNCIAS
+# =====================================================
+
+referencias:
+  conhecimento:
+    - conhecimento/cdc-completo.md
+    - conhecimento/casos-criticos-framework.md
+    - conhecimento/analise-risco-juridico.md
+    - conhecimento/estrategias-deescalation.md
+
+  templates:
+    - templates/analise-caso-critico.md
+    - templates/matriz-criticidade.md
+
+  agente:
+    - agentes/CRITICAL-CASES.md

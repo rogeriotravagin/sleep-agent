@@ -1,0 +1,159 @@
+# =============================================================
+# AGENT LIFECYCLE - Ciclo de Vida de Agentes
+# =============================================================
+# Define estados, transicoes e hooks para agentes
+# Garante carregamento, salvamento e cleanup adequados
+# =============================================================
+
+versao: 1.0
+
+ciclo_de_vida:
+
+  # ---------------------------------------------------------
+  # ESTADOS
+  # ---------------------------------------------------------
+  estados:
+
+    registrado:
+      descricao: "Agente existe mas nao foi carregado"
+      recursos: nenhum
+      transicoes: [inicializar]
+
+    inicializado:
+      descricao: "Agente carregou instrucoes e conhecimento"
+      recursos: leitura
+      transicoes: [ativar, suspender]
+
+    ativo:
+      descricao: "Agente esta executando uma tarefa"
+      recursos: completo
+      transicoes: [pausar, concluir, falhar]
+
+    pausado:
+      descricao: "Agente salvou checkpoint e aguarda retomada"
+      recursos: minimo
+      transicoes: [retomar, suspender]
+
+    suspenso:
+      descricao: "Agente liberou recursos, pode ser reativado"
+      recursos: nenhum
+      transicoes: [inicializar]
+
+    concluido:
+      descricao: "Agente finalizou tarefa com sucesso"
+      recursos: em_limpeza
+      transicoes: [registrado]
+
+    falha:
+      descricao: "Agente encontrou erro irrecuperavel"
+      recursos: em_diagnostico
+      transicoes: [inicializar, registrado]
+
+  # ---------------------------------------------------------
+  # HOOKS (Acoes automaticas em transicoes)
+  # ---------------------------------------------------------
+  hooks:
+
+    on_init:
+      trigger: "registrado → inicializado"
+      acoes:
+        - "Carregar instrucoes do agente (extensoes/{ext}/agentes/{nome}.md)"
+        - "Carregar conhecimento relevante (via loading-rules.yaml)"
+        - "Buscar memoria relacionada (semantica + episodica)"
+        - "Verificar ferramentas necessarias (via tool-registry)"
+        - "Verificar modo de permissao (via modes.yaml)"
+        - "Aplicar configuracao resolvida (hierarchy.yaml L0-L4)"
+
+    on_activate:
+      trigger: "inicializado → ativo"
+      acoes:
+        - "Registrar inicio no blackboard (contexto.agente_ativo)"
+        - "Carregar checkpoint se existir (retomada de tarefa pausada)"
+        - "Notificar scheduler: agente ativo"
+        - "Iniciar timer de timeout"
+
+    on_pause:
+      trigger: "ativo → pausado"
+      acoes:
+        - "Salvar checkpoint com progresso atual"
+        - "Registrar estado parcial no blackboard"
+        - "Liberar recursos nao essenciais (descarregar Nivel 3)"
+        - "Notificar scheduler: agente pausado"
+        - "Pausar timer de timeout"
+
+    on_resume:
+      trigger: "pausado → ativo"
+      acoes:
+        - "Recarregar checkpoint"
+        - "Restaurar contexto completo"
+        - "Verificar se blackboard mudou durante pausa"
+        - "Notificar scheduler: agente retomado"
+        - "Retomar timer de timeout"
+
+    on_complete:
+      trigger: "ativo → concluido"
+      acoes:
+        - "Salvar resultado final no workspace"
+        - "Atualizar blackboard com entrega"
+        - "Capturar aprendizados (memoria de trabalho)"
+        - "Executar Quality Gates"
+        - "Preparar handoff se proximo agente definido"
+        - "Notificar scheduler: tarefa concluida"
+        - "Limpar timer de timeout"
+
+    on_error:
+      trigger: "ativo → falha"
+      acoes:
+        - "Registrar erro com contexto completo"
+        - "Salvar estado para diagnostico"
+        - "Avaliar se retry e viavel (consultar scheduler.yaml)"
+        - "Se retry viavel: disparar self-critique"
+        - "Se nao viavel: notificar usuario"
+        - "Notificar scheduler: tarefa falhou"
+
+    on_suspend:
+      trigger: "pausado → suspenso OU inicializado → suspenso"
+      acoes:
+        - "Liberar todos os recursos"
+        - "Descarregar conhecimento do contexto (Niveis 2 e 3)"
+        - "Manter apenas referencia minima (ID, extensao, tipo)"
+        - "Notificar context-manager: recursos liberados"
+
+  # ---------------------------------------------------------
+  # CARREGAMENTO ESCALONADO (integracao com Context Manager)
+  # ---------------------------------------------------------
+  carregamento_por_estado:
+    registrado:
+      nivel_contexto: nenhum
+      descricao: "Nada carregado, apenas referencia"
+    inicializado:
+      nivel_contexto: nivel_2
+      descricao: "Instrucoes do agente + conhecimento relevante"
+    ativo:
+      nivel_contexto: "nivel_2 + nivel_3 sob demanda"
+      descricao: "Completo, com lazy load de nivel 3"
+    pausado:
+      nivel_contexto: nivel_2
+      descricao: "Mantem instrucoes, descarrega conhecimento profundo"
+    suspenso:
+      nivel_contexto: nenhum
+      descricao: "Tudo descarregado"
+
+  # ---------------------------------------------------------
+  # CHECKPOINT
+  # ---------------------------------------------------------
+  checkpoint:
+    formato: "workspace/.state/agent_{id}_checkpoint.yaml"
+    conteudo:
+      agente_id: null
+      extensao: null
+      tarefa_id: null
+      estado_anterior: null
+      progresso: 0
+      fase_atual: null
+      dados_parciais: {}
+      decisoes_tomadas: []
+      contexto_relevante: {}
+      timestamp: null
+    max_checkpoints: 5  # Manter ultimos 5 checkpoints
+    cleanup: "Remover checkpoints de tarefas concluidas"

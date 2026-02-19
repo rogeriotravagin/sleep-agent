@@ -1,0 +1,391 @@
+# ============================================
+# TAREFA: Criar QBR (Quarterly Business Review)
+# ============================================
+
+id: criar-qbr
+nome: Criar QBR Estruturado
+descricao: Desenvolver estrutura de Business Review para cliente especifico
+agente: retention-expert
+comando: /criar-qbr
+versao: "1.0"
+categoria: retencao
+
+# ============================================
+# ENTRADAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - nome: cliente
+      pergunta: "Qual o nome do cliente?"
+      tipo: texto
+      exemplo: "Empresa ABC Ltda"
+
+    - nome: periodo
+      pergunta: "Qual o periodo sendo revisado?"
+      tipo: texto
+      exemplo: "Q4 2024 (Out-Dez)"
+
+    - nome: objetivos_cliente
+      pergunta: "Quais eram os objetivos do cliente neste periodo?"
+      tipo: lista
+      exemplo:
+        - "Aumentar produtividade em 20%"
+        - "Reduzir tempo de processo em 30%"
+        - "Treinar 50 usuarios"
+
+    - nome: resultados_alcancados
+      pergunta: "Quais resultados foram alcancados?"
+      tipo: lista
+      exemplo:
+        - "Produtividade aumentou 25%"
+        - "Tempo de processo reduziu 35%"
+        - "45 usuarios treinados"
+
+  opcionais:
+    - nome: health_score
+      pergunta: "Qual o Health Score atual do cliente?"
+      tipo: numero
+      exemplo: "78"
+
+    - nome: tipo_qbr
+      pergunta: "Qual o tipo de QBR?"
+      tipo: escolha
+      opcoes:
+        - QBR Regular
+        - QBR de Renovacao
+        - QBR de Risco/Recuperacao
+        - EBR (Executive Business Review)
+      exemplo: "QBR Regular"
+
+    - nome: stakeholders
+      pergunta: "Quem participara do QBR?"
+      tipo: lista
+      exemplo:
+        - "Diretor de Operacoes (cliente)"
+        - "Gerente de TI (cliente)"
+        - "CSM Senior (nosso)"
+        - "Account Executive (nosso)"
+
+# ============================================
+# PROCESSO
+# ============================================
+
+passos:
+  - numero: 1
+    acao: "Coletar e analisar dados"
+    detalhes:
+      - "Metricas de uso"
+      - "Historico de interacoes"
+      - "Tickets e issues"
+      - "NPS/CSAT"
+      - "Resultados vs objetivos"
+
+  - numero: 2
+    acao: "Preparar retrospectiva"
+    detalhes:
+      - "Objetivos vs resultados"
+      - "Principais conquistas"
+      - "Desafios superados"
+      - "ROI demonstrado"
+
+  - numero: 3
+    acao: "Desenvolver visao de futuro"
+    detalhes:
+      - "Objetivos proximo periodo"
+      - "Roadmap relevante"
+      - "Oportunidades identificadas"
+      - "Plano de acao"
+
+  - numero: 4
+    acao: "Montar apresentacao"
+    detalhes:
+      - "Estruturar deck"
+      - "Criar visualizacoes"
+      - "Preparar talking points"
+      - "Antecipar perguntas"
+
+# ============================================
+# SAIDA
+# ============================================
+
+saida:
+  formato: markdown
+  template: |
+    # Quarterly Business Review
+
+    ## {{cliente}}
+    ### {{periodo}}
+
+    ---
+
+    ## Informacoes da Reuniao
+
+    | Item | Detalhe |
+    |------|---------|
+    | **Cliente** | {{cliente}} |
+    | **Periodo** | {{periodo}} |
+    | **Tipo** | {{tipo_qbr}} |
+    | **Data** | {{data_qbr}} |
+    | **Duracao** | {{duracao}} minutos |
+
+    ### Participantes
+
+    **Cliente:**
+    {{#each stakeholders_cliente}}
+    - {{this.nome}} - {{this.cargo}}
+    {{/each}}
+
+    **Nosso Time:**
+    {{#each stakeholders_interno}}
+    - {{this.nome}} - {{this.cargo}}
+    {{/each}}
+
+    ---
+
+    ## Agenda
+
+    ```
+    {{agenda_formatada}}
+    ```
+
+    ---
+
+    ## 1. Retrospectiva do Periodo
+
+    ### Objetivos vs Resultados
+
+    | Objetivo | Meta | Resultado | Status |
+    |----------|------|-----------|--------|
+    {{#each objetivos}}
+    | {{this.objetivo}} | {{this.meta}} | {{this.resultado}} | {{this.status}} |
+    {{/each}}
+
+    ### Principais Conquistas
+
+    {{#each conquistas}}
+    **{{this.titulo}}**
+    {{this.descricao}}
+
+    {{/each}}
+
+    ### Valor Entregue
+
+    ```
+    ┌─────────────────────────────────────────┐
+    │         VALOR NO PERIODO                 │
+    ├─────────────────────────────────────────┤
+    │                                          │
+    │  {{metrica_valor_1}}: {{valor_1}}       │
+    │  {{metrica_valor_2}}: {{valor_2}}       │
+    │  {{metrica_valor_3}}: {{valor_3}}       │
+    │                                          │
+    │  ROI Estimado: {{roi_estimado}}         │
+    │                                          │
+    └─────────────────────────────────────────┘
+    ```
+
+    ### Desafios Superados
+
+    {{#each desafios}}
+    - **{{this.desafio}}:** {{this.resolucao}}
+    {{/each}}
+
+    ---
+
+    ## 2. Situacao Atual
+
+    ### Health Score
+
+    ```
+    Health Score: {{health_score}} / 100
+
+    [{{barra_health}}] {{status_health}}
+
+    Componentes:
+    - Uso: {{score_uso}}
+    - Engajamento: {{score_engajamento}}
+    - Suporte: {{score_suporte}}
+    - Relacionamento: {{score_relacionamento}}
+    ```
+
+    ### Metricas de Uso
+
+    | Metrica | {{periodo_anterior}} | {{periodo_atual}} | Variacao |
+    |---------|----------------------|-------------------|----------|
+    {{#each metricas_uso}}
+    | {{this.metrica}} | {{this.anterior}} | {{this.atual}} | {{this.variacao}} |
+    {{/each}}
+
+    ### Suporte e Interacoes
+
+    | Item | Quantidade | Satisfacao |
+    |------|------------|------------|
+    | Tickets | {{qtd_tickets}} | {{csat_tickets}} |
+    | Reunioes | {{qtd_reunioes}} | - |
+    | Treinamentos | {{qtd_treinamentos}} | {{csat_treino}} |
+
+    ### NPS
+
+    **NPS Atual:** {{nps_atual}}
+    **Comentario:** "{{comentario_nps}}"
+
+    ---
+
+    ## 3. Roadmap e Novidades
+
+    ### Novidades Relevantes
+
+    {{#each novidades}}
+    **{{this.feature}}**
+    - O que e: {{this.descricao}}
+    - Beneficio para voces: {{this.beneficio}}
+    - Disponibilidade: {{this.disponibilidade}}
+
+    {{/each}}
+
+    ### Roadmap Proximo Trimestre
+
+    | Feature | Previsao | Relevancia |
+    |---------|----------|------------|
+    {{#each roadmap}}
+    | {{this.feature}} | {{this.previsao}} | {{this.relevancia}} |
+    {{/each}}
+
+    ---
+
+    ## 4. Objetivos Proximo Periodo
+
+    ### Objetivos Propostos
+
+    {{#each objetivos_proximos}}
+    **Objetivo {{this.numero}}: {{this.titulo}}**
+    - Meta: {{this.meta}}
+    - Metrica: {{this.metrica}}
+    - Acao necessaria: {{this.acao}}
+    - Responsavel: {{this.responsavel}}
+
+    {{/each}}
+
+    ### Perguntas para Discussao
+
+    {{#each perguntas_discussao}}
+    - {{this}}
+    {{/each}}
+
+    ---
+
+    ## 5. Plano de Acao
+
+    ### Acoes Acordadas
+
+    | Acao | Responsavel | Prazo | Status |
+    |------|-------------|-------|--------|
+    {{#each acoes}}
+    | {{this.acao}} | {{this.responsavel}} | {{this.prazo}} | Pendente |
+    {{/each}}
+
+    ### Proximos Touchpoints
+
+    | Data | Tipo | Objetivo |
+    |------|------|----------|
+    {{#each proximos_touchpoints}}
+    | {{this.data}} | {{this.tipo}} | {{this.objetivo}} |
+    {{/each}}
+
+    ---
+
+    ## 6. Oportunidades
+
+    ### Expansion Identificadas
+
+    {{#each oportunidades}}
+    **{{this.oportunidade}}**
+    - Contexto: {{this.contexto}}
+    - Potencial: {{this.potencial}}
+    - Proximo passo: {{this.proximo_passo}}
+
+    {{/each}}
+
+    ---
+
+    ## Talking Points para CSM
+
+    ### Abertura
+    - Agradecer a presenca
+    - Reforcar parceria
+    - Definir objetivo da reuniao
+
+    ### Durante Retrospectiva
+    - Enfatizar conquistas
+    - Reconhecer desafios
+    - Mostrar ROI claramente
+
+    ### Situacao Atual
+    - Ser transparente sobre Health Score
+    - Abordar preocupacoes proativamente
+    - Celebrar metricas positivas
+
+    ### Objetivos Futuros
+    - Ouvir mais do que falar
+    - Entender prioridades do cliente
+    - Alinhar como podemos ajudar
+
+    ### Encerramento
+    - Resumir principais pontos
+    - Confirmar proximos passos
+    - Reforcar comprometimento
+
+    ### Perguntas Provaveis
+
+    | Pergunta | Resposta Sugerida |
+    |----------|-------------------|
+    {{#each perguntas_provaveis}}
+    | {{this.pergunta}} | {{this.resposta}} |
+    {{/each}}
+
+    ---
+
+    ## Checklist Pre-QBR
+
+    - [ ] Deck atualizado com dados
+    - [ ] Reuniao confirmada
+    - [ ] Stakeholders confirmados
+    - [ ] Materiais enviados (se aplicavel)
+    - [ ] Talking points revisados
+    - [ ] Perguntas antecipadas preparadas
+    - [ ] Oportunidades mapeadas
+    - [ ] Proposta de expansion (se aplicavel)
+
+    ---
+
+    ## Apos o QBR
+
+    - [ ] Enviar ata em 24h
+    - [ ] Documentar acoes no CRM
+    - [ ] Atualizar Health Score
+    - [ ] Agendar proximos touchpoints
+    - [ ] Follow-up em acoes pendentes
+
+  arquivo: output/customer-success/qbrs/qbr-{{slug_cliente}}-{{periodo_slug}}.md
+
+# ============================================
+# GATES DE QUALIDADE
+# ============================================
+
+gates:
+  - "Todos os dados estao atualizados?"
+  - "Os resultados refletem a realidade?"
+  - "Os proximos objetivos sao SMART?"
+  - "As oportunidades sao relevantes?"
+  - "Os talking points estao preparados?"
+
+# ============================================
+# PROXIMOS PASSOS
+# ============================================
+
+proximos_passos:
+  - tarefa: criar-plano-retencao
+    se: "Cliente em risco identificado"
+  - tarefa: criar-plano-risco
+    se: "Precisa plano de acao urgente"

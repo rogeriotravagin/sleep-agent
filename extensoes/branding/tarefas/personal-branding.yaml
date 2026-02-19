@@ -1,0 +1,406 @@
+# Tarefa: Personal Branding
+
+id: personal-branding
+nome: Construir Marca Pessoal
+descricao: Criar estrategia completa de personal branding para empresarios e profissionais
+agente: brand-strategist
+comando: /personal-brand
+
+versao: "1.0"
+categoria: estrategia
+
+# Baseado em: Gary Vaynerchuk, Dorie Clark, Austin Kleon, Chris Ducker
+
+entradas:
+  obrigatorias:
+    - nome: nome
+      pergunta: "Qual seu nome completo?"
+      tipo: texto
+
+    - nome: area_atuacao
+      pergunta: "Qual sua area de atuacao/expertise?"
+      tipo: texto
+
+    - nome: publico_alvo
+      pergunta: "Quem voce quer alcançar/influenciar?"
+      tipo: texto
+
+    - nome: objetivo
+      pergunta: "Qual seu objetivo com a marca pessoal?"
+      tipo: escolha
+      opcoes:
+        - Atrair clientes
+        - Conseguir emprego/carreira
+        - Tornar-se referencia/thought leader
+        - Vender cursos/mentorias
+        - Networking e oportunidades
+        - Posicionar empresa atraves do fundador
+
+    - nome: diferencial
+      pergunta: "O que te torna unico na sua area?"
+      tipo: texto
+
+  opcionais:
+    - nome: historia
+      pergunta: "Qual sua historia de origem? (jornada ate aqui)"
+      tipo: texto
+      padrao: "A ser explorada"
+
+    - nome: presenca_atual
+      pergunta: "Ja tem presenca online? Onde?"
+      tipo: texto
+      padrao: "Nenhuma ou minima"
+
+    - nome: disponibilidade
+      pergunta: "Quanto tempo pode dedicar a criacao de conteudo?"
+      tipo: escolha
+      opcoes:
+        - 1-2 horas por semana
+        - 3-5 horas por semana
+        - 5-10 horas por semana
+        - 10+ horas por semana
+      padrao: "3-5 horas por semana"
+
+passos:
+  - numero: 1
+    acao: "Descobrir identidade e diferencial"
+    perguntas_gary_vee:
+      - O que voce faria de graca?
+      - Sobre o que as pessoas te perguntam?
+      - O que voce sabe que outros nao sabem?
+      - Qual sua historia unica?
+
+  - numero: 2
+    acao: "Definir posicionamento pessoal"
+    elementos:
+      - Nicho especifico
+      - Ponto de vista unico
+      - Promessa de transformacao
+
+  - numero: 3
+    acao: "Criar pilares de conteudo"
+    quantidade: "3-5 pilares"
+    criterios:
+      - Alinhado com expertise
+      - Relevante para audiencia
+      - Sustentavel longo prazo
+
+  - numero: 4
+    acao: "Definir presenca digital"
+    escolher:
+      - Plataforma principal
+      - Plataforma secundaria
+      - Tipos de conteudo
+
+  - numero: 5
+    acao: "Criar plano de execucao"
+
+saida:
+  formato: markdown
+  template: |
+    # Personal Brand: [Nome]
+
+    ## 1. Identidade
+
+    ### Quem Sou
+
+    **Nome:** [Nome completo]
+    **Titulo/Bio curta:** [Como quer ser apresentado em 1 linha]
+
+    **Bio completa (100 palavras):**
+    > [Bio para redes sociais e apresentacoes]
+
+    ### Especialidade
+
+    | Elemento | Definicao |
+    |----------|-----------|
+    | **Area** | [Sua area de atuacao] |
+    | **Nicho** | [Segmento especifico] |
+    | **Expertise** | [Conhecimento principal] |
+    | **Experiencia** | [Anos/projetos relevantes] |
+
+    ### Diferencial
+
+    > [O que te torna unico - 2-3 frases]
+
+    **Unique Point of View (POV):**
+    > [Sua perspectiva unica sobre o tema]
+
+    ---
+
+    ## 2. Historia de Origem
+
+    ### A Jornada
+
+    **Onde comecou:**
+    > [Contexto inicial - de onde veio]
+
+    **O desafio:**
+    > [Problema/obstaculo que enfrentou]
+
+    **A transformacao:**
+    > [Como superou e o que aprendeu]
+
+    **Onde esta hoje:**
+    > [Posicao atual e conquistas]
+
+    **Para onde vai:**
+    > [Visao de futuro]
+
+    ### Momentos-Chave
+    1. [Momento decisivo 1]
+    2. [Momento decisivo 2]
+    3. [Momento decisivo 3]
+
+    ### Historia em 30 segundos
+    > [Versao elevator pitch da sua historia]
+
+    ---
+
+    ## 3. Posicionamento
+
+    ### Para Quem
+
+    **Audiencia ideal:**
+    - **Perfil:** [Quem sao]
+    - **Desafio:** [O que enfrentam]
+    - **Desejo:** [O que querem]
+    - **Onde estao:** [Onde encontra-los]
+
+    ### O Que Voce Oferece
+
+    **Problema que resolve:**
+    > [Dor principal que endereca]
+
+    **Transformacao prometida:**
+    > De [estado atual] para [estado desejado]
+
+    **Metodo/Abordagem:**
+    > [Como voce faz diferente]
+
+    ### Positioning Statement
+
+    > Eu ajudo **[audiencia especifica]**
+    > a **[transformacao/resultado]**
+    > atraves de **[metodo/abordagem unica]**
+    > para que possam **[beneficio final]**.
+
+    ---
+
+    ## 4. Pilares de Conteudo
+
+    ### Pilar 1: [Nome]
+    - **Tema:** [Sobre o que]
+    - **Por que:** [Por que e relevante]
+    - **Tipos de conteudo:** [Formatos]
+    - **Frequencia:** [Quantas vezes por semana]
+
+    ### Pilar 2: [Nome]
+    - **Tema:** [Sobre o que]
+    - **Por que:** [Por que e relevante]
+    - **Tipos de conteudo:** [Formatos]
+    - **Frequencia:** [Quantas vezes por semana]
+
+    ### Pilar 3: [Nome]
+    - **Tema:** [Sobre o que]
+    - **Por que:** [Por que e relevante]
+    - **Tipos de conteudo:** [Formatos]
+    - **Frequencia:** [Quantas vezes por semana]
+
+    ### Distribuicao de Conteudo
+    - [X]% Pilar 1
+    - [Y]% Pilar 2
+    - [Z]% Pilar 3
+    - [W]% Pessoal/Bastidores
+
+    ---
+
+    ## 5. Presenca Digital
+
+    ### Plataforma Principal: [Nome]
+
+    **Por que escolhida:**
+    > [Justificativa]
+
+    **Objetivo:**
+    > [O que quer alcançar nela]
+
+    **Tipo de conteudo:**
+    - [Formato 1]
+    - [Formato 2]
+
+    **Frequencia:**
+    > [X vezes por semana]
+
+    ### Plataforma Secundaria: [Nome]
+
+    **Por que escolhida:**
+    > [Justificativa]
+
+    **Objetivo:**
+    > [O que quer alcançar nela]
+
+    **Tipo de conteudo:**
+    - [Formato 1]
+    - [Formato 2]
+
+    **Frequencia:**
+    > [X vezes por semana]
+
+    ### Ecossistema Completo
+
+    | Plataforma | Objetivo | Conteudo | Frequencia |
+    |------------|----------|----------|------------|
+    | [Principal] | [Obj] | [Tipo] | [Freq] |
+    | [Secundaria] | [Obj] | [Tipo] | [Freq] |
+    | [Email] | [Obj] | [Tipo] | [Freq] |
+
+    ---
+
+    ## 6. Identidade Visual
+
+    ### Cores Pessoais
+    - **Cor principal:** [Cor + significado]
+    - **Cor secundaria:** [Cor + significado]
+    - **Cor de destaque:** [Cor + significado]
+
+    ### Tipografia
+    - **Headlines:** [Fonte sugerida]
+    - **Corpo:** [Fonte sugerida]
+
+    ### Estilo Fotografico
+    - **Poses:** [Casual/Profissional/etc]
+    - **Fundos:** [Estudio/Natural/etc]
+    - **Cores de roupa:** [Sugestoes]
+    - **Expressao:** [Serio/Sorridente/etc]
+
+    ### Elementos Visuais
+    - [Elemento distintivo 1]
+    - [Elemento distintivo 2]
+
+    ---
+
+    ## 7. Voice & Tone
+
+    ### Tom de Voz
+
+    **Somos:**
+    - [Adjetivo 1]
+    - [Adjetivo 2]
+    - [Adjetivo 3]
+
+    **Nao somos:**
+    - [Adjetivo a evitar 1]
+    - [Adjetivo a evitar 2]
+    - [Adjetivo a evitar 3]
+
+    ### Vocabulario
+
+    **Palavras a usar:**
+    - [Palavra/expressao 1]
+    - [Palavra/expressao 2]
+    - [Palavra/expressao 3]
+
+    **Palavras a evitar:**
+    - [Palavra/expressao 1]
+    - [Palavra/expressao 2]
+
+    ### Exemplos de Posts
+
+    **Post educativo:**
+    > [Exemplo de como escrever]
+
+    **Post pessoal:**
+    > [Exemplo de como escrever]
+
+    ---
+
+    ## 8. Estrategia de Crescimento
+
+    ### Fase 1: Fundacao (Meses 1-3)
+    - [ ] Definir perfis otimizados
+    - [ ] Criar conteudo consistente
+    - [ ] Engajar com comunidade
+    - [ ] Construir rotina de publicacao
+
+    ### Fase 2: Crescimento (Meses 4-6)
+    - [ ] Aumentar frequencia
+    - [ ] Colaboracoes
+    - [ ] Experimentar formatos
+    - [ ] Construir lista de email
+
+    ### Fase 3: Autoridade (Meses 7-12)
+    - [ ] Conteudo longform (artigos, podcasts)
+    - [ ] Palestras/participacoes
+    - [ ] Lancar produto/servico
+    - [ ] Parcerias estrategicas
+
+    ### Metricas de Sucesso
+
+    | Metrica | Atual | 3 meses | 6 meses | 1 ano |
+    |---------|-------|---------|---------|-------|
+    | Seguidores | [X] | [Meta] | [Meta] | [Meta] |
+    | Engajamento | [X]% | [Meta]% | [Meta]% | [Meta]% |
+    | Lista email | [X] | [Meta] | [Meta] | [Meta] |
+    | Leads | [X] | [Meta] | [Meta] | [Meta] |
+
+    ---
+
+    ## 9. Calendario Editorial Semanal
+
+    ### Template de Semana
+
+    | Dia | Plataforma | Tipo | Pilar |
+    |-----|------------|------|-------|
+    | Segunda | [Plat] | [Tipo] | [Pilar] |
+    | Terca | [Plat] | [Tipo] | [Pilar] |
+    | Quarta | [Plat] | [Tipo] | [Pilar] |
+    | Quinta | [Plat] | [Tipo] | [Pilar] |
+    | Sexta | [Plat] | [Tipo] | [Pilar] |
+
+    ### Ideias de Conteudo para Comecar
+
+    **Pilar 1:**
+    1. [Ideia de post]
+    2. [Ideia de post]
+    3. [Ideia de post]
+
+    **Pilar 2:**
+    1. [Ideia de post]
+    2. [Ideia de post]
+    3. [Ideia de post]
+
+    **Pilar 3:**
+    1. [Ideia de post]
+    2. [Ideia de post]
+    3. [Ideia de post]
+
+    ---
+
+    ## 10. Proximos Passos Imediatos
+
+    ### Esta Semana
+    1. [ ] [Acao 1]
+    2. [ ] [Acao 2]
+    3. [ ] [Acao 3]
+
+    ### Proximo Mes
+    1. [ ] [Acao 1]
+    2. [ ] [Acao 2]
+    3. [ ] [Acao 3]
+
+conhecimento:
+  - personal-branding.md
+  - branding.md
+
+gates:
+  - Posicionamento e claro e diferenciado?
+  - Pilares sao sustentaveis no longo prazo?
+  - Plano de execucao e realista?
+  - Historia de origem e cativante?
+
+proximos_passos:
+  - Criar perfis otimizados
+  - Produzir primeiro batch de conteudo
+  - Criar fotos profissionais
+  - Comecar publicacao consistente

@@ -1,0 +1,194 @@
+# =============================================================
+# LOADING RULES - Regras de Carregamento por Tipo de Tarefa
+# =============================================================
+# Define QUAIS arquivos de conhecimento carregar (Nivel 2)
+# baseado no tipo de tarefa que o agente vai executar
+# =============================================================
+
+regras_por_tarefa:
+
+  # ---------------------------------------------------------
+  # MARKETING
+  # ---------------------------------------------------------
+  criar-headline:
+    extensao: marketing
+    agente: MKT-COPYWRITER
+    nivel_2:
+      - "extensoes/marketing/conhecimento/headlines.md"
+      - "extensoes/marketing/conhecimento/gatilhos-mentais.md"
+    nivel_3_se_necessario:
+      - "extensoes/marketing/frameworks/copy/*.md"
+    consultar_memoria:
+      - semantica: [marca, publico]
+      - episodica: "headlines anteriores"
+
+  criar-email:
+    extensao: marketing
+    agente: MKT-EMAIL-BUILDER
+    nivel_2:
+      - "extensoes/marketing/conhecimento/mautic-email-html.md"
+      - "extensoes/marketing/templates/mautic/GUIA-TEMPLATES.md"
+    nivel_3_se_necessario:
+      - "extensoes/marketing/templates/mautic/*.html"
+    consultar_memoria:
+      - semantica: [marca, publico, tecnico]
+
+  criar-landing:
+    extensao: marketing
+    agente: MKT-COPYWRITER
+    nivel_2:
+      - "extensoes/marketing/conhecimento/landing-pages.md"
+      - "extensoes/marketing/conhecimento/cro.md"
+    nivel_3_se_necessario:
+      - "extensoes/marketing/frameworks/copy/*.md"
+      - "extensoes/marketing/templates/landing/*.html"
+    consultar_memoria:
+      - semantica: [marca, publico, tecnico]
+
+  criar-anuncio:
+    extensao: marketing
+    agente: MKT-COPYWRITER
+    nivel_2:
+      - "extensoes/marketing/conhecimento/anuncios.md"
+      - "extensoes/marketing/conhecimento/trafego-pago.md"
+    nivel_3_se_necessario:
+      - "extensoes/marketing/frameworks/copy/*.md"
+    consultar_memoria:
+      - semantica: [marca, publico]
+
+  sequencia-email:
+    extensao: marketing
+    agente: MKT-EMAIL-BUILDER
+    nivel_2:
+      - "extensoes/marketing/conhecimento/mautic-email-html.md"
+      - "extensoes/marketing/conhecimento/sequencias.md"
+    nivel_3_se_necessario:
+      - "extensoes/marketing/templates/mautic/*.html"
+      - "extensoes/marketing/workflows/sequencia-email-mautic.yaml"
+    consultar_memoria:
+      - semantica: [marca, publico, tecnico]
+
+  # ---------------------------------------------------------
+  # BRANDING
+  # ---------------------------------------------------------
+  definir-marca:
+    extensao: branding
+    agente: brand-strategist
+    nivel_2:
+      - "extensoes/branding/conhecimento/identidade.md"
+      - "extensoes/branding/conhecimento/posicionamento.md"
+    nivel_3_se_necessario:
+      - "extensoes/branding/frameworks/*.md"
+    consultar_memoria:
+      - semantica: [marca]
+
+  criar-logo:
+    extensao: branding
+    agente: designer
+    nivel_2:
+      - "extensoes/branding/conhecimento/logo-design.md"
+    nivel_3_se_necessario:
+      - "extensoes/branding/conhecimento/tipografia.md"
+      - "extensoes/branding/conhecimento/cores.md"
+    consultar_memoria:
+      - semantica: [marca]
+
+  # ---------------------------------------------------------
+  # CUSTOMER SUCCESS
+  # ---------------------------------------------------------
+  processar-cancelamento:
+    extensao: customer-success
+    agente: CS-CANCELAMENTO-AL
+    nivel_2:
+      - "extensoes/customer-success/conhecimento/cancelamento-academia-lendaria.md"
+    nivel_3_se_necessario:
+      - "extensoes/customer-success/tarefas/processar-cancelamento-al.yaml"
+    consultar_memoria:
+      - semantica: [processo, tecnico, alertas]
+
+  criar-health-score:
+    extensao: customer-success
+    agente: csm-estrategia
+    nivel_2:
+      - "extensoes/customer-success/conhecimento/health-score.md"
+      - "extensoes/customer-success/conhecimento/metricas.md"
+    nivel_3_se_necessario:
+      - "extensoes/customer-success/frameworks/*.md"
+    consultar_memoria:
+      - semantica: [publico, processo]
+
+  # ---------------------------------------------------------
+  # EDUCACIONAL
+  # ---------------------------------------------------------
+  criar-aula:
+    extensao: educacional
+    agente: conteudista
+    nivel_2:
+      - "extensoes/educacional/conhecimento/design-instrucional.md"
+      - "extensoes/educacional/conhecimento/metodologias-ativas.md"
+    nivel_3_se_necessario:
+      - "extensoes/educacional/frameworks/bloom.md"
+    consultar_memoria:
+      - semantica: [publico, processo]
+
+  criar-curso:
+    extensao: educacional
+    agente: design-instrucional
+    nivel_2:
+      - "extensoes/educacional/conhecimento/arquitetura-cursos.md"
+    nivel_3_se_necessario:
+      - "extensoes/educacional/conhecimento/*.md"
+    consultar_memoria:
+      - semantica: [publico, processo, tecnico]
+
+  # ---------------------------------------------------------
+  # PRODUTOS
+  # ---------------------------------------------------------
+  criar-oferta:
+    extensao: produtos
+    agente: estrategista-produto
+    nivel_2:
+      - "extensoes/produtos/conhecimento/ofertas.md"
+      - "extensoes/produtos/conhecimento/precificacao.md"
+    nivel_3_se_necessario:
+      - "extensoes/produtos/frameworks/hormozi.md"
+    consultar_memoria:
+      - semantica: [marca, publico]
+
+  criar-roadmap:
+    extensao: produtos
+    agente: delivery
+    nivel_2:
+      - "extensoes/produtos/conhecimento/roadmap.md"
+      - "extensoes/produtos/conhecimento/priorizacao.md"
+    nivel_3_se_necessario:
+      - "extensoes/produtos/frameworks/rice.md"
+    consultar_memoria:
+      - semantica: [processo, tecnico]
+
+# =============================================================
+# REGRA FALLBACK
+# =============================================================
+# Se a tarefa nao esta mapeada acima, usar regra generica
+fallback:
+  nivel_2:
+    - "extensoes/{extensao}/agentes/{agente}.md"
+    - "extensoes/{extensao}/conhecimento/{primeiro_relevante}.md"
+  nivel_3_se_necessario:
+    - "extensoes/{extensao}/conhecimento/*.md"
+  consultar_memoria:
+    - semantica: "todas as categorias relevantes"
+
+# =============================================================
+# REGRAS DE SELECAO INTELIGENTE
+# =============================================================
+selecao:
+  como_determinar_relevancia:
+    1: "Match de nome do arquivo com tipo de tarefa"
+    2: "Match de tags no cabecalho do arquivo (se existirem)"
+    3: "Referencia no delegacao.yaml da extensao"
+    4: "Historico de uso (quais arquivos foram carregados em tarefas similares)"
+
+  max_arquivos_nivel_2: 3
+  max_arquivos_nivel_3: 5
+  peso_maximo_total: "~10KB combinado"

@@ -1,0 +1,171 @@
+# ============================================================
+# Workflow: Auditoria Completa
+# ============================================================
+# Auditoria completa de seguranca e infraestrutura
+
+id: audit-completo
+nome: Auditoria Completa de Infraestrutura
+comando: /audit-completo
+versao: "1.0"
+
+descricao: |
+  Executa auditoria completa de seguranca e infraestrutura:
+  servidores, firewalls, SSL, stacks, containers e backups.
+  Gera relatorio com classificacao de riscos e plano de acao.
+
+pre_requisitos:
+  - "Acesso a Hetzner API (HETZNER_API_TOKEN)"
+  - "Acesso a Portainer (credenciais)"
+  - "SSH access ao servidor"
+
+# ============================================================
+# FASES
+# ============================================================
+fases:
+  - numero: 1
+    nome: INVENTARIO
+    agente: devops-estrategista
+    descricao: Listar todos os recursos da infraestrutura
+    acoes:
+      - "Listar servidores via Hetzner API"
+      - "Listar stacks e services via Portainer"
+      - "Listar firewalls, SSH keys, volumes"
+      - "Listar dominios e DNS"
+    entregas:
+      - Inventario completo em YAML
+      - Mapa de infraestrutura
+
+  - numero: 2
+    nome: VERIFICACOES
+    descricao: Verificacoes de seguranca em paralelo
+    paralelo: true
+    fork:
+      - tarefa: audit-servidor
+        agente: devops-seguranca
+        descricao: Verificar seguranca do servidor
+        checklist:
+          - "SSH hardening"
+          - "Usuarios e permissoes"
+          - "Firewall (UFW)"
+          - "Fail2ban"
+          - "Updates automaticos"
+          - "Kernel hardening"
+          - "Auditd"
+      - tarefa: audit-firewall
+        agente: devops-hetzner
+        descricao: Verificar Cloud Firewall
+        checklist:
+          - "Regras aplicadas"
+          - "Portas expostas"
+          - "SSH restrito por IP"
+          - "Regras desnecessarias"
+      - tarefa: audit-ssl
+        agente: devops-seguranca
+        descricao: Verificar certificados SSL
+        checklist:
+          - "Certificados validos"
+          - "Data de expiracao"
+          - "TLS version"
+          - "HSTS configurado"
+      - tarefa: audit-stacks
+        agente: devops-portainer
+        descricao: Verificar stacks e services
+        checklist:
+          - "Health checks configurados"
+          - "Resource limits"
+          - "Tags especificas (nao :latest)"
+          - "Networks isoladas"
+          - "Logs configurados"
+    join:
+      estrategia: aguardar_todos
+
+  - numero: 3
+    nome: BACKUP
+    agente: devops-seguranca
+    descricao: Verificar cobertura de backup
+    acoes:
+      - "Verificar snapshots de servidor"
+      - "Verificar backup de volumes"
+      - "Verificar export de stacks"
+      - "Testar procedimento de restore (se possivel)"
+    checklist:
+      - "Snapshots periodicos ativos"
+      - "Volumes criticos com backup"
+      - "Composes exportados"
+      - "Restore testado"
+
+  - numero: 4
+    nome: RELATORIO
+    agente: devops-seguranca
+    descricao: Gerar relatorio consolidado
+    acoes:
+      - "Consolidar todas as verificacoes"
+      - "Classificar riscos (CRITICO, ALTO, MEDIO, BAIXO)"
+      - "Gerar relatorio em markdown"
+      - "Criar plano de acao com prazos"
+
+  - numero: 5
+    nome: PLANO_DE_ACAO
+    agente: devops-estrategista
+    descricao: Criar plano de correcoes priorizado
+    acoes:
+      - "Priorizar correcoes por risco"
+      - "Estimar esforco por correcao"
+      - "Definir responsavel (agente)"
+      - "Definir prazos"
+    gate:
+      nivel: 3
+      verificacao: "Plano de acao aprovado pelo usuario?"
+
+# ============================================================
+# SAIDA
+# ============================================================
+saida:
+  formato: markdown
+  salvar_em: "workspace/{{empresa}}/devops/audit/"
+  template: |
+    # Relatorio de Auditoria - {{data}}
+
+    ## Score Geral: {{score}}/100
+
+    ## Resumo
+    | Nivel | Quantidade |
+    |-------|-----------|
+    | CRITICO | {{critico}} |
+    | ALTO | {{alto}} |
+    | MEDIO | {{medio}} |
+    | BAIXO | {{baixo}} |
+
+    ## Detalhes por Area
+
+    ### Servidor
+    {{#servidor_items}}
+    - [{{status}}] {{descricao}} - **{{risco}}**
+    {{/servidor_items}}
+
+    ### Firewall
+    {{#firewall_items}}
+    - [{{status}}] {{descricao}} - **{{risco}}**
+    {{/firewall_items}}
+
+    ### SSL/TLS
+    {{#ssl_items}}
+    - [{{status}}] {{descricao}} - **{{risco}}**
+    {{/ssl_items}}
+
+    ### Docker/Stacks
+    {{#docker_items}}
+    - [{{status}}] {{descricao}} - **{{risco}}**
+    {{/docker_items}}
+
+    ### Backup
+    {{#backup_items}}
+    - [{{status}}] {{descricao}} - **{{risco}}**
+    {{/backup_items}}
+
+    ## Plano de Acao
+    | # | Acao | Risco | Prazo | Responsavel |
+    |---|------|-------|-------|-------------|
+    {{#acoes}}
+    | {{numero}} | {{descricao}} | {{risco}} | {{prazo}} | {{agente}} |
+    {{/acoes}}

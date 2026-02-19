@@ -1,0 +1,157 @@
+# =============================================================
+# TASK SCHEDULER - Escalonador de Tarefas
+# =============================================================
+# Gerencia fila de tarefas com priorizacao, preempcao e retry
+# =============================================================
+
+versao: 1.0
+
+scheduler:
+  estrategia: priority_queue  # fifo | priority_queue | round_robin
+
+  # ---------------------------------------------------------
+  # NIVEIS DE PRIORIDADE
+  # ---------------------------------------------------------
+  prioridades:
+    critica: 100    # Emergencias, deadlines hoje
+    alta: 75        # Tarefas com deadline proximo
+    normal: 50      # Padrao
+    baixa: 25       # Background, melhorias
+    ociosa: 10      # Manutencao de rotina
+
+  # ---------------------------------------------------------
+  # REGRAS DE PRIORIZACAO AUTOMATICA
+  # ---------------------------------------------------------
+  regras:
+    - condicao: "tarefa.tipo == 'cancelamento'"
+      prioridade: critica
+      motivo: "Cancelamentos tem SLA de 24h"
+
+    - condicao: "tarefa.tipo == 'caso-critico'"
+      prioridade: critica
+      motivo: "Casos criticos requerem atencao imediata"
+
+    - condicao: "tarefa.deadline < hoje + 2 dias"
+      prioridade: alta
+      motivo: "Deadline proximo"
+
+    - condicao: "tarefa.tipo == 'deploy'"
+      prioridade: alta
+      motivo: "Deploy precisa ser publicado"
+
+    - condicao: "tarefa.tipo == 'health-check'"
+      prioridade: ociosa
+      motivo: "Manutencao de rotina"
+
+    - condicao: "tarefa.tipo == 'limpeza-memoria'"
+      prioridade: ociosa
+      motivo: "Manutencao de rotina"
+
+    - condicao: "usuario.marcou_urgente == true"
+      prioridade: critica
+      motivo: "Decisao explicita do usuario"
+
+  # ---------------------------------------------------------
+  # PREEMPCAO
+  # ---------------------------------------------------------
+  preempcao:
+    habilitada: true
+    salvar_estado: true   # Salva progresso da tarefa interrompida
+    restaurar: true       # Retoma de onde parou
+    diferenca_minima: 50  # Diferenca de peso para preemptar (critica vs normal)
+    checkpoint:
+      formato: "workspace/.state/task_{id}_checkpoint.yaml"
+      conteudo:
+        - fase_atual
+        - dados_parciais
+        - decisoes_tomadas
+        - contexto_agente
+
+  # ---------------------------------------------------------
+  # RETRY
+  # ---------------------------------------------------------
+  retry:
+    max_tentativas: 3
+    backoff:
+      tipo: exponencial  # fixo | linear | exponencial
+      base: 1            # segundos
+      formula: "base * 2^(tentativa - 1)"  # 1s, 2s, 4s
+    condicoes_retentaveis:
+      - "erro_transiente"
+      - "timeout"
+      - "gate_falhou"
+    condicoes_nao_retentaveis:
+      - "erro_constituicao"
+      - "credenciais_invalidas"
+      - "usuario_cancelou"
+    entre_retries:
+      self_critique: true  # Ativar auto-critica entre tentativas
+      referencia: "core/workflows/self-critique.yaml"
+
+  # ---------------------------------------------------------
+  # LIMITES
+  # ---------------------------------------------------------
+  limites:
+    max_tarefas_ativas: 3
+    max_paralelas: 5
+    timeout_padrao: "30min"
+    timeout_por_tipo:
+      criar-headline: "5min"
+      criar-email: "10min"
+      criar-landing: "20min"
+      processar-cancelamento: "15min"
+      deploy: "10min"
+
+  # ---------------------------------------------------------
+  # ESTADOS DA TAREFA
+  # ---------------------------------------------------------
+  estados:
+    criada:
+      descricao: "Tarefa registrada, ainda nao na fila"
+      transicoes: [na_fila]
+    na_fila:
+      descricao: "Aguardando escalonamento"
+      transicoes: [escalonada]
+    escalonada:
+      descricao: "Selecionada para execucao"
+      transicoes: [em_execucao]
+    em_execucao:
+      descricao: "Agente ativo trabalhando"
+      transicoes: [validando, pausada, falha]
+    validando:
+      descricao: "Passando pelos Quality Gates"
+      transicoes: [concluida, falha]
+    concluida:
+      descricao: "Finalizada com sucesso"
+      transicoes: []
+    pausada:
+      descricao: "Checkpoint salvo, aguarda retomada"
+      transicoes: [na_fila]
+    falha:
+      descricao: "Erro encontrado"
+      transicoes: [na_fila, abandonada]
+    abandonada:
+      descricao: "Falhou apos max retries"
+      transicoes: []
+
+  # ---------------------------------------------------------
+  # TEMPLATE DE TAREFA
+  # ---------------------------------------------------------
+  template_tarefa:
+    id: "task_{timestamp}_{seq}"
+    tipo: null
+    extensao: null
+    agente: null
+    prioridade: normal
+    estado: criada
+    criada_em: null
+    iniciada_em: null
+    concluida_em: null
+    progresso: 0        # percentual 0-100
+    checkpoint: null
+    dependencias: []     # IDs de tarefas que devem terminar antes
+    timeout: null        # Usa timeout_padrao se null
+    retries: 0
+    max_retries: 3
+    resultado: null
+    erro: null

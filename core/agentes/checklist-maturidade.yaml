@@ -1,0 +1,180 @@
+# Checklist de Maturidade de Agentes
+# Use para avaliar e evoluir agentes do Sleep Agent
+
+# ============================================================
+# CRITERIOS POR NIVEL
+# ============================================================
+
+nivel_1:
+  nome: "Basico"
+  indicador: "[*--]"
+  descricao: "Agente funcional com capacidades limitadas"
+  criterios:
+    - id: arquivo_existe
+      descricao: "Arquivo de definicao do agente existe"
+      obrigatorio: true
+      verificacao: "extensoes/[ext]/agentes/[AGENTE].md existe"
+
+    - id: persona
+      descricao: "Persona definida (quem e, especialidade)"
+      obrigatorio: true
+      verificacao: "Secao 'Identidade' ou 'Persona' preenchida"
+
+    - id: processo
+      descricao: "Processo de trabalho descrito"
+      obrigatorio: true
+      verificacao: "Secao 'Processo' ou 'Como trabalha' preenchida"
+
+    - id: tom_voz
+      descricao: "Tom de voz definido"
+      obrigatorio: true
+      verificacao: "Secao 'Tom de Voz' ou caracteristicas de comunicacao"
+
+nivel_2:
+  nome: "Intermediario"
+  indicador: "[**-]"
+  descricao: "Agente funcional e util para maioria dos casos"
+  inclui: nivel_1
+  criterios:
+    - id: tarefas
+      descricao: "Pelo menos 3 tarefas estruturadas"
+      obrigatorio: true
+      verificacao: "3+ arquivos em tarefas/ referenciando este agente"
+      minimo: 3
+
+    - id: conhecimento
+      descricao: "Base de conhecimento basica"
+      obrigatorio: true
+      verificacao: "Arquivos em conhecimento/ relevantes ao agente"
+      minimo: 2
+
+    - id: workflow
+      descricao: "Pelo menos 1 workflow"
+      obrigatorio: true
+      verificacao: "1+ workflow em workflows/ usando este agente"
+      minimo: 1
+
+    - id: referencias
+      descricao: "Referencias bibliograficas"
+      obrigatorio: false
+      verificacao: "Secao 'Referencias' com livros/autores"
+
+nivel_3:
+  nome: "Completo"
+  indicador: "[***]"
+  descricao: "Agente totalmente equipado para qualquer situacao"
+  inclui: nivel_2
+  criterios:
+    - id: templates
+      descricao: "Template para cada tarefa"
+      obrigatorio: true
+      verificacao: "Cada tarefa tem template de saida definido"
+
+    - id: exemplos
+      descricao: "Exemplos de uso documentados"
+      obrigatorio: true
+      verificacao: "Pasta exemplos/ ou secao de exemplos na documentacao"
+      minimo: 2
+
+    - id: gates
+      descricao: "Gates de qualidade especificos"
+      obrigatorio: true
+      verificacao: "Tarefas tem gates nivel 2 (agente revisor) definidos"
+
+    - id: memoria
+      descricao: "Integracao com sistema de memoria"
+      obrigatorio: true
+      verificacao: "Tarefas capturam insights ao final"
+
+    - id: documentacao
+      descricao: "Documentacao completa"
+      obrigatorio: true
+      verificacao: "README.md ou documentacao extensa no arquivo do agente"
+
+# ============================================================
+# CALCULO DE MATURIDADE
+# ============================================================
+
+calculo:
+  nivel_1:
+    criterios_obrigatorios: [arquivo_existe, persona, processo, tom_voz]
+    todos_obrigatorios: true
+
+  nivel_2:
+    requer: nivel_1
+    criterios_obrigatorios: [tarefas, conhecimento, workflow]
+    todos_obrigatorios: true
+
+  nivel_3:
+    requer: nivel_2
+    criterios_obrigatorios: [templates, exemplos, gates, memoria, documentacao]
+    minimo_obrigatorios: 4  # 4 de 5 para nivel 3
+
+# ============================================================
+# ACOES DE EVOLUCAO
+# ============================================================
+
+evolucao:
+  nivel_1_para_2:
+    prioridade:
+      - criar_tarefas
+      - adicionar_conhecimento
+      - criar_workflow
+    estimativa: "2-4 horas de trabalho"
+
+  nivel_2_para_3:
+    prioridade:
+      - criar_templates
+      - documentar_exemplos
+      - definir_gates
+      - integrar_memoria
+      - completar_documentacao
+    estimativa: "4-8 horas de trabalho"
+
+# ============================================================
+# ALERTAS E RECOMENDACOES
+# ============================================================
+
+alertas:
+  usar_nivel_1_tarefa_complexa:
+    condicao: "Tarefa marcada como complexa + agente nivel 1"
+    mensagem: |
+      O agente {agente} esta em nivel Basico.
+      Para esta tarefa, recomendo usar um agente mais completo
+      ou combinar com outros agentes em um workflow.
+
+  falta_conhecimento:
+    condicao: "Tarefa requer conhecimento que agente nao tem"
+    mensagem: |
+      O agente {agente} pode nao ter todo conhecimento necessario
+      para esta tarefa. Considere adicionar referencias ou
+      usar outro agente.
+
+  nivel_3_recomendado:
+    condicao: "Tarefa critica + agente nivel < 3"
+    mensagem: |
+      Para tarefas criticas, recomendo usar agentes nivel 3 (Completo).
+      O agente {agente} esta em nivel {nivel}.
+
+# ============================================================
+# FORMATO DE SAIDA DO COMANDO /maturidade
+# ============================================================
+
+formato_saida:
+  cabecalho: |
+    Maturidade dos Agentes
+    ======================
+
+  linha_extensao: |
+    {extensao}:
+
+  linha_agente: |
+      {indicador} {nome} - {nivel_nome}
+
+  resumo: |
+    ---
+    Total: {total} agentes
+    Nivel 3: {nivel_3} | Nivel 2: {nivel_2} | Nivel 1: {nivel_1}
+
+  legenda: |
+    Legenda: [***] Completo | [**-] Intermediario | [*--] Basico

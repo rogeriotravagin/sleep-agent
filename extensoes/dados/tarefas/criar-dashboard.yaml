@@ -1,0 +1,279 @@
+# Tarefa: Criar Dashboard
+# Agente: Analista de Dados
+
+id: criar-dashboard
+nome: Criar Dashboard
+comando: /dashboard
+agente: analista-dados
+fase: visualizacao
+
+descricao: |
+  Estrutura um dashboard efetivo com metricas relevantes,
+  visualizacoes apropriadas e layout que facilita decisoes.
+
+# ============================================
+# ENTRADAS NECESSARIAS
+# ============================================
+
+entradas:
+  obrigatorias:
+    - id: objetivo
+      pergunta: "Qual o objetivo deste dashboard?"
+      exemplo: "Acompanhar performance de vendas em tempo real"
+
+    - id: audiencia
+      pergunta: "Quem vai usar? (diretoria, gerentes, time operacional)"
+      exemplo: "Time de vendas e diretoria comercial"
+
+    - id: decisoes
+      pergunta: "Que decisoes serao tomadas com base nele?"
+      exemplo: "Alocar recursos, ajustar metas, identificar problemas"
+
+  opcionais:
+    - id: frequencia
+      pergunta: "Com que frequencia sera consultado?"
+      opcoes:
+        - Tempo real
+        - Diario
+        - Semanal
+        - Mensal
+      default: "Diario"
+
+    - id: metricas_conhecidas
+      pergunta: "Ja tem metricas definidas que quer incluir?"
+      exemplo: "Receita, tickets, conversao"
+
+    - id: ferramenta
+      pergunta: "Qual ferramenta sera usada?"
+      exemplo: "Power BI, Tableau, Looker, Google Data Studio"
+
+# ============================================
+# PROCESSO DE EXECUCAO
+# ============================================
+
+passos:
+  1_definicao:
+    nome: "Definir Proposito"
+    acoes:
+      - Clarificar objetivos do dashboard
+      - Identificar audiencia e suas necessidades
+      - Mapear decisoes que serao tomadas
+    output: "Proposito claro definido"
+
+  2_metricas:
+    nome: "Definir Metricas"
+    acoes:
+      - Identificar North Star Metric
+      - Definir KPIs de suporte
+      - Estabelecer metas e benchmarks
+      - Definir formula de calculo de cada metrica
+    output: "Framework de metricas"
+
+  3_estrutura:
+    nome: "Estruturar Dashboard"
+    acoes:
+      - Definir hierarquia de informacao
+      - Escolher visualizacoes para cada metrica
+      - Planejar filtros e drill-downs
+      - Desenhar layout
+    output: "Estrutura do dashboard"
+
+  4_especificacao:
+    nome: "Especificar Detalhes"
+    acoes:
+      - Detalhar cada componente
+      - Definir fonte de dados
+      - Especificar frequencia de atualizacao
+      - Documentar regras de negocio
+    output: "Especificacao completa"
+
+# ============================================
+# TEMPLATE DE SAIDA
+# ============================================
+
+template_saida: |
+  # Dashboard: {nome}
+
+  ## Visao Geral
+
+  **Objetivo:** {objetivo}
+
+  **Audiencia:** {audiencia}
+
+  **Frequencia de Uso:** {frequencia}
+
+  **Decisoes Suportadas:**
+  - {decisao_1}
+  - {decisao_2}
+  - {decisao_3}
+
+  ---
+
+  ## Framework de Metricas
+
+  ### North Star Metric
+
+  **{nome_north_star}**
+  - Definicao: {o_que_mede}
+  - Formula: {como_calcular}
+  - Meta: {valor_alvo}
+  - Por que importa: {justificativa}
+
+  ### KPIs de Suporte
+
+  | KPI | Definicao | Formula | Meta | Fonte |
+  |-----|-----------|---------|------|-------|
+  | {kpi_1} | {def_1} | {formula_1} | {meta_1} | {fonte_1} |
+  | {kpi_2} | {def_2} | {formula_2} | {meta_2} | {fonte_2} |
+  | {kpi_3} | {def_3} | {formula_3} | {meta_3} | {fonte_3} |
+
+  ### Metricas de Contexto
+
+  | Metrica | Proposito |
+  |---------|-----------|
+  | {metrica_1} | {para_que} |
+  | {metrica_2} | {para_que} |
+
+  ---
+
+  ## Layout do Dashboard
+
+  ### Estrutura Visual
+
+  ```
+  +--------------------------------------------------+
+  |  FILTROS: [Periodo] [Segmento] [Produto]         |
+  +--------------------------------------------------+
+  |                                                  |
+  |  +----------+  +----------+  +----------+        |
+  |  |  KPI 1   |  |  KPI 2   |  |  KPI 3   |        |
+  |  | {valor}  |  | {valor}  |  | {valor}  |        |
+  |  | vs meta  |  | vs meta  |  | vs meta  |        |
+  |  +----------+  +----------+  +----------+        |
+  |                                                  |
+  +--------------------------------------------------+
+  |                                                  |
+  |  GRAFICO PRINCIPAL: {tipo}                       |
+  |  {descricao do que mostra}                       |
+  |                                                  |
+  +--------------------------------------------------+
+  |                                                  |
+  |  +----------------------+  +-------------------+ |
+  |  | GRAFICO SECUNDARIO 1 |  | GRAFICO SECUND. 2 | |
+  |  | {tipo}               |  | {tipo}            | |
+  |  +----------------------+  +-------------------+ |
+  |                                                  |
+  +--------------------------------------------------+
+  |                                                  |
+  |  TABELA DE DETALHES                              |
+  |  {colunas e descricao}                           |
+  |                                                  |
+  +--------------------------------------------------+
+  ```
+
+  ---
+
+  ## Especificacao dos Componentes
+
+  ### 1. Cards de KPI
+
+  #### {nome_kpi_1}
+  - **Visualizacao:** Card com numero grande
+  - **Valor principal:** {formula}
+  - **Comparacao:** vs. {baseline}
+  - **Indicadores:** Seta + cor (verde/vermelho)
+  - **Fonte:** {tabela/campo}
+  - **Atualizacao:** {frequencia}
+
+  ### 2. Grafico Principal
+
+  - **Tipo:** {linha/barra/area}
+  - **Eixo X:** {dimensao}
+  - **Eixo Y:** {metrica}
+  - **Segmentacao:** {se aplicavel}
+  - **Periodo:** {range de tempo}
+  - **Drill-down:** {detalhamento disponivel}
+
+  ### 3. Graficos Secundarios
+
+  #### {grafico_2}
+  - **Tipo:** {tipo}
+  - **O que mostra:** {descricao}
+  - **Quando usar:** {contexto}
+
+  ### 4. Tabela de Detalhes
+
+  | Coluna | Tipo | Ordenacao | Formatacao |
+  |--------|------|-----------|------------|
+  | {col_1} | {tipo} | {asc/desc} | {formato} |
+
+  ---
+
+  ## Filtros e Interatividade
+
+  ### Filtros Globais
+
+  | Filtro | Tipo | Opcoes | Default |
+  |--------|------|--------|---------|
+  | Periodo | Dropdown/Calendar | {opcoes} | {default} |
+  | {filtro_2} | {tipo} | {opcoes} | {default} |
+
+  ### Drill-downs
+
+  - De {nivel_1} para {nivel_2}: {como acessar}
+  - De {nivel_2} para {nivel_3}: {como acessar}
+
+  ---
+
+  ## Regras de Negocio
+
+  ### Calculos
+
+  ```
+  {nome_metrica} = {formula_detalhada}
+
+  Exemplo:
+  Taxa de Conversao = (Vendas Fechadas / Oportunidades Criadas) * 100
+  ```
+
+  ### Cores e Status
+
+  | Status | Condicao | Cor |
+  |--------|----------|-----|
+  | Bom | >= meta | Verde |
+  | Atencao | entre X% e meta | Amarelo |
+  | Critico | < X% | Vermelho |
+
+  ---
+
+  ## Fontes de Dados
+
+  | Metrica | Fonte | Tabela/API | Campo |
+  |---------|-------|------------|-------|
+  | {metrica_1} | {sistema} | {tabela} | {campo} |
+
+  ---
+
+  ## Governanca
+
+  - **Owner:** {responsavel}
+  - **Atualizacao:** {frequencia}
+  - **Revisao:** {quando revisar metricas}
+  - **Suporte:** {quem contactar}
+
+# ============================================
+# QUALIDADE
+# ============================================
+
+gates_qualidade:
+  - North Star Metric definida e justificada
+  - Todas as metricas com formula clara
+  - Layout hierarquico (geral -> detalhe)
+  - Visualizacoes apropriadas para cada metrica
+  - Filtros e drill-downs planejados
+  - Fontes de dados identificadas
+
+output:
+  formato: md
+  destino: output/{produto}/dashboards/
+  nome_arquivo: dashboard-{nome_slug}-{data}.md

@@ -1,0 +1,233 @@
+# Workflow: Sequencia de Emails para Mautic
+
+id: sequencia-email-mautic
+nome: Criar Sequencia de Emails HTML para Mautic 5
+descricao: Gera sequencia completa de emails em HTML para automacao no Mautic 5
+comando: /sequencia-mautic
+versao: "1.0"
+
+sobre: |
+  Este workflow cria sequencias completas de email marketing em HTML com inline CSS,
+  prontas para configurar como campanhas automatizadas no Mautic 5.
+
+  Cada email da sequencia vem com:
+  - Copy completa usando frameworks dos mestres
+  - Codigo HTML pronto para colar no editor de codigo do Mautic
+  - Instrucoes de configuracao da automacao no Mautic
+  - Timing recomendado entre emails
+
+# Tipos de Sequencia
+tipos:
+  welcome:
+    nome: Welcome / Soap Opera Sequence
+    referencia: Andre Chaperon
+    emails: 5-7
+    cadencia: diaria
+    objetivo: Construir relacionamento e fazer primeira venda
+    estrutura:
+      - email: 1
+        nome: Boas-vindas
+        foco: Entregar lead magnet + apresentar historia
+        timing: imediato
+      - email: 2
+        nome: Historia pessoal
+        foco: Construir conexao + vulnerabilidade
+        timing: 1 dia
+      - email: 3
+        nome: Virada
+        foco: Revelar conflito e como superou
+        timing: 1 dia
+      - email: 4
+        nome: Conteudo de valor
+        foco: Ensinar algo util + mostrar autoridade
+        timing: 1 dia
+      - email: 5
+        nome: Resultado
+        foco: Mostrar transformacao + prova social
+        timing: 1 dia
+      - email: 6
+        nome: Oferta
+        foco: Apresentar produto como solucao natural
+        timing: 2 dias
+      - email: 7
+        nome: Fechamento
+        foco: Urgencia + ultima chance
+        timing: 1 dia
+
+  cart_abandonment:
+    nome: Cart Abandonment
+    emails: 3-5
+    cadencia: crescente
+    objetivo: Recuperar carrinhos abandonados
+    estrutura:
+      - email: 1
+        nome: Lembrete gentil
+        foco: Lembrar o que deixou no carrinho
+        timing: 1-3 horas
+      - email: 2
+        nome: Incentivo
+        foco: Oferecer beneficio extra
+        timing: 24 horas
+      - email: 3
+        nome: Urgencia
+        foco: Escassez + prova social
+        timing: 48 horas
+      - email: 4
+        nome: Ultima tentativa
+        foco: Desconto final ou bonus
+        timing: 72 horas
+
+  lancamento:
+    nome: Launch Sequence (PLF)
+    referencia: Jeff Walker
+    emails: 8-10
+    cadencia: variavel
+    objetivo: Lancar produto com antecipacao e urgencia
+    estrutura:
+      - email: 1
+        nome: Teaser
+        foco: Gerar curiosidade
+        timing: 7 dias antes
+      - email: 2
+        nome: Pre-launch 1
+        foco: Problema + oportunidade
+        timing: 5 dias antes
+      - email: 3
+        nome: Pre-launch 2
+        foco: Transformacao + prova
+        timing: 3 dias antes
+      - email: 4
+        nome: Pre-launch 3
+        foco: Experiencia + antecipacao
+        timing: 1 dia antes
+      - email: 5
+        nome: Abertura
+        foco: Carrinho aberto + oferta completa
+        timing: dia do lancamento
+      - email: 6
+        nome: FAQ
+        foco: Quebrar objecoes
+        timing: dia 2
+      - email: 7
+        nome: Prova social
+        foco: Depoimentos e resultados
+        timing: dia 3
+      - email: 8
+        nome: 24h para fechar
+        foco: Urgencia real
+        timing: dia 4
+      - email: 9
+        nome: Ultimo dia
+        foco: FOMO + escassez
+        timing: dia 5 (manha)
+      - email: 10
+        nome: Ultimas horas
+        foco: Fechamento final
+        timing: dia 5 (noite)
+
+  nurture:
+    nome: Nurture / Educacional
+    emails: 5-8
+    cadencia: 2-3 dias
+    objetivo: Educar e aquecer lead para compra
+    estrutura:
+      - email: 1
+        nome: Framework
+        foco: Ensinar conceito chave
+        timing: dia 1
+      - email: 2
+        nome: Erro comum
+        foco: Mostrar o que nao fazer
+        timing: dia 3
+      - email: 3
+        nome: Caso pratico
+        foco: Exemplo real de aplicacao
+        timing: dia 5
+      - email: 4
+        nome: Mito vs realidade
+        foco: Quebrar crencas limitantes
+        timing: dia 7
+      - email: 5
+        nome: Checklist
+        foco: Ferramenta pratica
+        timing: dia 10
+      - email: 6
+        nome: Transicao
+        foco: Conectar aprendizado a oferta
+        timing: dia 12
+
+  reengajamento:
+    nome: Re-engagement / Win-back
+    emails: 3-5
+    cadencia: 3-5 dias
+    objetivo: Reativar contatos inativos
+    estrutura:
+      - email: 1
+        nome: Sentimos sua falta
+        foco: Reconectar + valor
+        timing: 30 dias inativo
+      - email: 2
+        nome: Novidades
+        foco: O que mudou desde que saiu
+        timing: 3 dias depois
+      - email: 3
+        nome: Oferta exclusiva
+        foco: Incentivo para voltar
+        timing: 5 dias depois
+      - email: 4
+        nome: Despedida
+        foco: Ultima chance antes de remover
+        timing: 7 dias depois
+
+# Etapas do Workflow
+etapas:
+  - numero: 1
+    nome: Briefing da Sequencia
+    agente: email-builder
+    descricao: Definir tipo de sequencia, produto, publico e objetivos
+    perguntas:
+      - Qual tipo de sequencia? (welcome, cart, lancamento, nurture, reengajamento)
+      - Produto/servico?
+      - Publico-alvo?
+      - Quantos emails na sequencia?
+      - Qual a oferta final (se aplicavel)?
+
+  - numero: 2
+    nome: Estrategia da Sequencia
+    agente: estrategista
+    descricao: Definir arco narrativo e estrategia de cada email
+    depende_de: 1
+    entregavel: Mapa da sequencia com objetivo de cada email
+
+  - numero: 3
+    nome: Copy dos Emails
+    agente: copywriter
+    descricao: Escrever copy de cada email da sequencia
+    depende_de: 2
+    entregavel: Copy completa de todos os emails
+
+  - numero: 4
+    nome: Montagem HTML
+    agente: email-builder
+    descricao: Montar todos os emails em HTML com inline CSS
+    depende_de: 3
+    entregavel: Codigos HTML de toda a sequencia
+
+  - numero: 5
+    nome: Instrucoes Mautic
+    agente: email-builder
+    descricao: Criar guia de configuracao da automacao no Mautic
+    depende_de: 4
+    entregavel: Guia de implementacao com timing e triggers
+
+# Entrega final
+entrega_final:
+  formato: pasta
+  estrutura: |
+    workspace/[estrutura]/marketing/emails/sequencia-[nome]/
+    ├── 00-estrategia.md                 # Mapa da sequencia
+    ├── 01-[nome-email].html             # Email 1 HTML
+    ├── 02-[nome-email].html             # Email 2 HTML
+    ├── ...
+    ├── guia-automacao-mautic.md         # Como configurar no Mautic
+    └── copy-completa.md                 # Todas as copies para revisao

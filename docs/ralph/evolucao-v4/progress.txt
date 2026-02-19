@@ -1,0 +1,44 @@
+# Sleep Agent v4 Evolution - Progress Log
+
+## Projeto
+- **Nome:** Sleep Agent v4 - Evolucao Natural
+- **Objetivo:** Evoluir o Sleep Agent com melhorias de memoria, contexto, qualidade e resiliencia
+- **Essencia:** Manter foco em ajudar profissionais nao-tecnicos
+
+## Codebase Patterns
+<!-- Adicione padroes descobertos aqui -->
+- Sleep Agent usa estrutura modular: core/ + extensoes/ + workspace/
+- Extensoes sao plugins independentes com extensao.yaml como manifesto
+- Agentes sao definidos em arquivos .md com persona, processo e referencias
+- Tarefas usam formato YAML com entradas, passos, saida e gates
+- Workflows sao sequencias de fases com agentes e tarefas
+- Tom de voz: profissional mas acessivel, direto ao ponto, sem jargoes tecnicos
+
+## Key Files Reference
+- .claude/CLAUDE.md - Identidade principal do sistema
+- core/orquestrador/ORQUESTRADOR.md - Logica de delegacao
+- core/setup/SETUP.md - Configuracao inicial
+- core/templates/tarefa.yaml - Template base de tarefas
+- extensoes/*/extensao.yaml - Manifesto de cada extensao
+
+## Principios Criticos
+1. **Nao perder essencia:** Sleep Agent e para profissionais NAO-TECNICOS
+2. **Linguagem acessivel:** Evitar jargoes, ser direto
+3. **Evolucao natural:** Melhorias parecem crescimento organico, nao importacao
+4. **Compatibilidade:** Minimizar quebras para usuarios existentes
+
+## Quality Gates Status
+- [ ] Arquivos criados seguem padroes existentes
+- [ ] Documentacao clara e acessivel
+- [ ] Exemplos praticos incluidos
+- [ ] Tom de voz consistente
+- [ ] Nenhuma referencia a sistemas externos
+
+## File List (Cumulative)
+<!-- Arquivos criados/modificados serao listados aqui -->
+
+## Session Log
+<!-- Historico de sessoes sera adicionado aqui -->
+
+---
+Started: 2026-02-06
