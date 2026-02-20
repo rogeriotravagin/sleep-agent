@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marketing Machine - Seu departamento de marketing completo com IA, funcionando em 10 minutos. 19 especialistas, 60+ metodologias, entregas prontas pra publicar.">
+    <meta name="author" content="Alexander Liberatori">
+    <title>Marketing Machine - Seu Departamento de Marketing Completo com IA</title>
+    <style>
+        @media (max-width: 768px) {
+            .hero-headline { font-size: 28px !important; line-height: 1.2 !important; }
+            .hero-sub { font-size: 16px !important; padding: 0 8px !important; }
+            .section-title { font-size: 24px !important; }
+            .section-subtitle { font-size: 16px !important; }
+            .grid-3 { grid-template-columns: 1fr !important; }
+            .grid-2 { grid-template-columns: 1fr !important; }
+            .grid-4 { grid-template-columns: 1fr !important; }
+            .pricing-grid { grid-template-columns: 1fr !important; }
+            .comparison-table { overflow-x: auto !important; }
+            .comparison-table table { min-width: 600px !important; }
+            .hero-section { padding: 60px 16px 48px !important; }
+            .section-padding { padding: 48px 16px !important; }
+            .timeline-item { flex-direction: column !important; text-align: center !important; }
+            .timeline-badge { margin-bottom: 12px !important; }
+            .value-row { flex-direction: column !important; gap: 4px !important; text-align: center !important; }
+            .cta-button { font-size: 14px !important; padding: 16px 24px !important; }
+            .pricing-card { margin-bottom: 24px !important; }
+            .faq-question { font-size: 16px !important; }
+            .stat-number { font-size: 32px !important; }
+            .dept-icon { font-size: 32px !important; }
+            .step-number { width: 48px !important; height: 48px !important; font-size: 20px !important; }
+            .guarantee-icon { font-size: 48px !important; }
+            .final-cta-section { padding: 48px 16px !important; }
+        }
+        @media (max-width: 480px) {
+            .hero-headline { font-size: 22px !important; }
+            .hero-sub { font-size: 14px !important; }
+            .section-title { font-size: 20px !important; }
+            .pricing-price { font-size: 36px !important; }
+            .pricing-installment { font-size: 14px !important; }
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .grid-3 { grid-template-columns: 1fr 1fr !important; }
+            .pricing-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #0a0a0a; color: #b0b0b0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased;">
+
+<!-- ==================== HERO SECTION ==================== -->
+<section class="hero-section" style="padding: 100px 24px 80px; text-align: center; background: linear-gradient(180deg, #0f0f1a 0%, #0a0a0a 60%); position: relative; overflow: hidden;">
+    <!-- Subtle background pattern -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 0%, rgba(0, 212, 255, 0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 0%, rgba(124, 58, 237, 0.06) 0%, transparent 50%); pointer-events: none;"></div>
+
+    <div style="max-width: 900px; margin: 0 auto; position: relative; z-index: 1;">
+        <!-- Badge -->
+        <div style="display: inline-block; padding: 6px 20px; border: 1px solid rgba(0, 212, 255, 0.3); border-radius: 50px; font-size: 13px; color: #00D4FF; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 32px; background: rgba(0, 212, 255, 0.05);">
+            Turma 01 &bull; 50 Vagas
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="hero-headline" style="font-size: 48px; font-weight: 800; color: #ffffff; line-height: 1.15; margin: 0 0 24px 0; letter-spacing: -0.5px;">
+            Seu Departamento de Marketing Completo, Funcionando em
+            <span style="background: linear-gradient(135deg, #00D4FF, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">10 Minutos</span>
+        </h1>
+
+        <!-- Subheadline -->
+        <p class="hero-sub" style="font-size: 19px; color: #b0b0b0; max-width: 720px; margin: 0 auto 40px; line-height: 1.7; padding: 0 16px;">
+            19 especialistas de marketing treinados nos maiores mestres da persuasao, 60+ metodologias de pesquisa e entregas prontas pra publicar. Tudo no seu computador, por uma fracao do custo de um estagiario.
+        </p>
+
+        <!-- CTA Button -->
+        <a href="{CHECKOUT_URL}" class="cta-button" style="display: inline-block; padding: 18px 48px; background: linear-gradient(135deg, #00D4FF, #7C3AED); color: #ffffff; font-size: 16px; font-weight: 700; text-decoration: none; border-radius: 12px; letter-spacing: 1px; text-transform: uppercase; transition: opacity 0.3s; box-shadow: 0 4px 24px rgba(0, 212, 255, 0.25);">
+            QUERO MINHA MARKETING MACHINE
+        </a>
+
+        <!-- Trust text -->
+        <p style="font-size: 13px; color: #666666; margin-top: 20px; line-height: 1.6;">
+            Garantia de 30 dias. Primeira entrega em 24h ou seu dinheiro de volta.
+        </p>
+
+        <!-- Quick stats row -->
+        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 48px; flex-wrap: wrap;">
+            <div style="text-align: center;">
+                <div class="stat-number" style="font-size: 40px; font-weight: 800; background: linear-gradient(135deg, #00D4FF, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">19</div>
+                <div style="font-size: 13px; color: #888888; text-transform: uppercase; letter-spacing: 1px;">Especialistas</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-number" style="font-size: 40px; font-weight: 800; background: linear-gradient(135deg, #00D4FF, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">60+</div>
+                <div style="font-size: 13px; color: #888888; text-transform: uppercase; letter-spacing: 1px;">Metodologias</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-number" style="font-size: 40px; font-weight: 800; background: linear-gradient(135deg, #00D4FF, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">37+</div>
+                <div style="font-size: 13px; color: #888888; text-transform: uppercase; letter-spacing: 1px;">Templates</div>
+            </div>
+            <div style="text-align: center;">
+                <div class="stat-number" style="font-size: 40px; font-weight: 800; background: linear-gradient(135deg, #00D4FF, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">24/7</div>
+                <div style="font-size: 13px; color: #888888; text-transform: uppercase; letter-spacing: 1px;">Disponibilidade</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== PROBLEM SECTION ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #0a0a0a;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+        <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; text-align: center; margin: 0 0 16px 0; line-height: 1.2;">
+            Voce ja tentou usar ChatGPT pro seu marketing?
+        </h2>
+        <p class="section-subtitle" style="font-size: 18px; color: #888888; text-align: center; max-width: 650px; margin: 0 auto 48px; line-height: 1.7;">
+            Entao voce sabe exatamente como e essa frustracao
+        </p>
+
+        <!-- Pain Points Grid -->
+        <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <!-- Pain 1 -->
+            <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 16px; padding: 32px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #ff4444, transparent);"></div>
+                <div style="font-size: 32px; margin-bottom: 16px;">&#x1F9E0;</div>
+                <h3 style="font-size: 20px; font-weight: 700; color: #ffffff; margin: 0 0 12px 0;">Esquece tudo</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    Cada conversa comeca do zero. Voce explica seu negocio, seu publico, seu tom de voz. De novo. E de novo. Na quinta vez, voce desiste e escreve voce mesmo.
+                </p>
+            </div>
+
+            <!-- Pain 2 -->
+            <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 16px; padding: 32px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #ff4444, transparent);"></div>
+                <div style="font-size: 32px; margin-bottom: 16px;">&#x1F4C4;</div>
+                <h3 style="font-size: 20px; font-weight: 700; color: #ffffff; margin: 0 0 12px 0;">Texto generico</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    O resultado poderia ser de qualquer empresa. Sem personalidade, sem estrategia, sem aquele toque que faz o cliente sentir que voce esta falando com ele.
+                </p>
+            </div>
+
+            <!-- Pain 3 -->
+            <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 16px; padding: 32px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #ff4444, transparent);"></div>
+                <div style="font-size: 32px; margin-bottom: 16px;">&#x1F6E0;&#xFE0F;</div>
+                <h3 style="font-size: 20px; font-weight: 700; color: #ffffff; margin: 0 0 12px 0;">Voce faz tudo</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    Voce se torna o gerente de prompts. Pesquisa, briefing, revisao, formatacao. A IA vira mais uma tarefa na sua lista, nao a solucao que prometeram.
+                </p>
+            </div>
+
+            <!-- Pain 4 -->
+            <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 16px; padding: 32px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #ff4444, transparent);"></div>
+                <div style="font-size: 32px; margin-bottom: 16px;">&#x1F5A5;&#xFE0F;</div>
+                <h3 style="font-size: 20px; font-weight: 700; color: #ffffff; margin: 0 0 12px 0;">Sem formato</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    Voce recebe um bloco de texto cru. Agora precisa formatar, diagramar, transformar em email, landing page, anuncio. O trabalho de verdade nem comecou.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== "WHAT IF" TRANSITION ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background: linear-gradient(180deg, #0a0a0a, #0f0f1a, #0a0a0a);">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p style="font-size: 14px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 24px 0;">Imagine por um segundo</p>
+        <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 24px 0; line-height: 1.25;">
+            E se voce pudesse ter um departamento de marketing inteiro, com especialistas coordenados, que conhecem seu negocio de cor?
+        </h2>
+        <p style="font-size: 18px; color: #b0b0b0; margin: 0 0 16px 0; line-height: 1.7;">
+            Um time que lembra de cada decisao que voce tomou. Que entrega emails prontos pra enviar, landing pages prontas pra publicar, campanhas prontas pra rodar.
+        </p>
+        <p style="font-size: 18px; color: #b0b0b0; margin: 0 0 16px 0; line-height: 1.7;">
+            Sem briefing repetitivo. Sem formatacao manual. Sem esperar dias por uma entrega.
+        </p>
+        <p style="font-size: 20px; color: #ffffff; font-weight: 600; margin: 24px 0 0 0;">
+            Isso existe. E voce configura em 10 minutos.
+        </p>
+    </div>
+</section>
+
+<!-- ==================== INTRODUCING MARKETING MACHINE ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #0a0a0a;">
+    <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+        <!-- Product Name -->
+        <p style="font-size: 14px; color: #7C3AED; text-transform: uppercase; letter-spacing: 3px; margin: 0 0 16px 0;">Apresentando</p>
+        <h2 style="font-size: 52px; font-weight: 900; margin: 0 0 8px 0; line-height: 1.1;">
+            <span style="background: linear-gradient(135deg, #00D4FF, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Marketing Machine</span>
+        </h2>
+        <p style="font-size: 14px; color: #666666; margin: 0 0 32px 0; letter-spacing: 1px;">por Alexander Liberatori</p>
+        <p style="font-size: 20px; color: #ffffff; font-weight: 600; max-width: 700px; margin: 0 auto 16px; line-height: 1.5;">
+            Marketing Machine nao e uma ferramenta. E um departamento.
+        </p>
+        <p style="font-size: 17px; color: #888888; max-width: 650px; margin: 0 auto 56px; line-height: 1.7;">
+            Um framework completo com 19 agentes especializados que pesquisam, criam, revisam e entregam seu marketing pronto pra publicar. Com memoria persistente que aprende seu negocio a cada interacao.
+        </p>
+
+        <!-- 3 Key Differentiators -->
+        <div class="grid-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px;">
+            <!-- Memory -->
+            <div style="background: linear-gradient(180deg, #111111, #0e0e0e); border: 1px solid #1e1e1e; border-radius: 16px; padding: 40px 28px; text-align: center;">
+                <div style="width: 64px; height: 64px; border-radius: 16px; background: rgba(0, 212, 255, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px;">
+                    &#x1F9E0;
+                </div>
+                <h3 style="font-size: 20px; font-weight: 700; color: #ffffff; margin: 0 0 12px 0;">Memoria Persistente</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    3 camadas de memoria que guardam tudo sobre seu negocio. Sua marca, seu publico, seu historico. Nunca mais repita um briefing.
+                </p>
+            </div>
+
+            <!-- Specialists -->
+            <div style="background: linear-gradient(180deg, #111111, #0e0e0e); border: 1px solid #1e1e1e; border-radius: 16px; padding: 40px 28px; text-align: center;">
+                <div style="width: 64px; height: 64px; border-radius: 16px; background: rgba(124, 58, 237, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px;">
+                    &#x1F465;
+                </div>
+                <h3 style="font-size: 20px; font-weight: 700; color: #ffffff; margin: 0 0 12px 0;">19 Especialistas</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    Cada agente e treinado em mestres como Halbert, Ogilvy, Schwartz e Georgi. Nao e um chatbot generico. Sao especialistas com metodologias reais.
+                </p>
+            </div>
+
+            <!-- Output -->
+            <div style="background: linear-gradient(180deg, #111111, #0e0e0e); border: 1px solid #1e1e1e; border-radius: 16px; padding: 40px 28px; text-align: center;">
+                <div style="width: 64px; height: 64px; border-radius: 16px; background: rgba(0, 212, 255, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px;">
+                    &#x1F3AF;
+                </div>
+                <h3 style="font-size: 20px; font-weight: 700; color: #ffffff; margin: 0 0 12px 0;">Entrega Pronta</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    Emails em HTML, landing pages formatadas, campanhas completas. Voce recebe a peca pronta pra publicar, nao um rascunho pra trabalhar em cima.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== THE 9 EXTENSIONS ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #111111;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <p style="font-size: 14px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0;">Sua equipe completa</p>
+            <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; line-height: 1.2;">
+                9 Departamentos Especializados
+            </h2>
+            <p class="section-subtitle" style="font-size: 17px; color: #888888; max-width: 600px; margin: 0 auto; line-height: 1.7;">
+                Cada extensao e um departamento inteiro, com agentes treinados, templates prontos e workflows automatizados
+            </p>
+        </div>
+
+        <div class="grid-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+            <!-- Marketing -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #00D4FF, #7C3AED);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x1F4E3;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Marketing</h3>
+                <p style="font-size: 13px; color: #00D4FF; margin: 0 0 10px 0; font-weight: 600;">19 agentes &bull; 60+ frameworks</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Pesquisa de mercado, copywriting, emails, landing pages, campanhas, anuncios. Tudo com metodologias de mestres reais.
+                </p>
+            </div>
+
+            <!-- Branding -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #7C3AED, #00D4FF);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x1F3A8;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Branding</h3>
+                <p style="font-size: 13px; color: #7C3AED; margin: 0 0 10px 0; font-weight: 600;">Identidade completa</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Identidade visual, tom de voz, design system, guia de marca. A base que garante consistencia em tudo que voce publica.
+                </p>
+            </div>
+
+            <!-- Produtos -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #00D4FF, #7C3AED);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x1F4E6;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Produtos</h3>
+                <p style="font-size: 13px; color: #00D4FF; margin: 0 0 10px 0; font-weight: 600;">PRDs e roadmaps</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Documentacao de produto, roadmaps, PRDs, analise de features. Estrutura profissional para seu produto crescer certo.
+                </p>
+            </div>
+
+            <!-- Customer Success -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #7C3AED, #00D4FF);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x1F91D;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Customer Success</h3>
+                <p style="font-size: 13px; color: #7C3AED; margin: 0 0 10px 0; font-weight: 600;">Retencao e churn</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Onboarding, retencao, reversao de cancelamentos, health score. Cuide dos clientes que voce ja conquistou.
+                </p>
+            </div>
+
+            <!-- Dados -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #00D4FF, #7C3AED);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x1F4CA;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Dados</h3>
+                <p style="font-size: 13px; color: #00D4FF; margin: 0 0 10px 0; font-weight: 600;">Analise e dashboards</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Analise de metricas, dashboards, relatorios automatizados. Decisoes baseadas em dados, nao em achismo.
+                </p>
+            </div>
+
+            <!-- Deploy -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #7C3AED, #00D4FF);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x1F680;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Deploy</h3>
+                <p style="font-size: 13px; color: #7C3AED; margin: 0 0 10px 0; font-weight: 600;">Vercel e dominios</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Publicacao automatizada na Vercel, configuracao de dominios, SSL. Da criacao ao ar em minutos.
+                </p>
+            </div>
+
+            <!-- DevOps -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #00D4FF, #7C3AED);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x2699;&#xFE0F;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">DevOps</h3>
+                <p style="font-size: 13px; color: #00D4FF; margin: 0 0 10px 0; font-weight: 600;">Infraestrutura e seguranca</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Servidores, Docker, firewall, backups, monitoramento. Infraestrutura enterprise sem precisar de um SysAdmin.
+                </p>
+            </div>
+
+            <!-- Educacional -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #7C3AED, #00D4FF);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x1F393;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Educacional</h3>
+                <p style="font-size: 13px; color: #7C3AED; margin: 0 0 10px 0; font-weight: 600;">Cursos e gamificacao</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Criacao de cursos, trilhas de aprendizado, gamificacao, certificados. Transforme conhecimento em produto.
+                </p>
+            </div>
+
+            <!-- TI -->
+            <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #00D4FF, #7C3AED);"></div>
+                <div class="dept-icon" style="font-size: 36px; margin-bottom: 12px;">&#x1F4BB;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">TI</h3>
+                <p style="font-size: 13px; color: #00D4FF; margin: 0 0 10px 0; font-weight: 600;">Suporte tecnico</p>
+                <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">
+                    Troubleshooting, integracoes, automacoes, configuracoes tecnicas. Seu departamento de TI pessoal.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== HOW IT WORKS ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #0a0a0a;">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <p style="font-size: 14px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0;">Simples assim</p>
+            <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0; line-height: 1.2;">
+                Como Funciona
+            </h2>
+        </div>
+
+        <!-- Step 1 -->
+        <div style="display: flex; align-items: flex-start; gap: 32px; margin-bottom: 48px;">
+            <div class="step-number" style="min-width: 64px; width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15)); border: 1px solid rgba(0, 212, 255, 0.3); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #00D4FF;">1</div>
+            <div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Instale em 5 minutos</h3>
+                <p style="font-size: 16px; color: #888888; margin: 0; line-height: 1.7;">
+                    Um comando no terminal e o setup guiado configura tudo pra voce. Responda algumas perguntas sobre seu negocio e o sistema ja comeca a aprender quem voce e.
+                </p>
+                <div style="margin-top: 16px; background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 16px 20px; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace; font-size: 14px; color: #00D4FF;">
+                    <span style="color: #666666;">$</span> git clone marketing-machine && cd marketing-machine<br>
+                    <span style="color: #666666;">$</span> ./setup.sh
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="display: flex; align-items: flex-start; gap: 32px; margin-bottom: 48px;">
+            <div class="step-number" style="min-width: 64px; width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15)); border: 1px solid rgba(124, 58, 237, 0.3); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #7C3AED;">2</div>
+            <div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Diga o que precisa</h3>
+                <p style="font-size: 16px; color: #888888; margin: 0; line-height: 1.7;">
+                    Fale em linguagem natural. "Preciso de uma sequencia de 5 emails pra lancar meu curso". O orquestrador identifica a extensao, seleciona o agente certo e delega a tarefa automaticamente.
+                </p>
+                <div style="margin-top: 16px; background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 16px 20px; font-size: 15px; color: #b0b0b0;">
+                    <span style="color: #7C3AED; font-weight: 600;">Voce:</span> "Cria uma landing page de venda pro meu produto, com foco em dono de e-commerce"<br><br>
+                    <span style="color: #00D4FF; font-weight: 600;">Marketing Machine:</span> "Delegando para @mkt-estrategista (pesquisa) &#8594; @mkt-copy-vsl (copy) &#8594; @mkt-email-builder (HTML)..."
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div style="display: flex; align-items: flex-start; gap: 32px;">
+            <div class="step-number" style="min-width: 64px; width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15)); border: 1px solid rgba(0, 212, 255, 0.3); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #00D4FF;">3</div>
+            <div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Receba pronto</h3>
+                <p style="font-size: 16px; color: #888888; margin: 0; line-height: 1.7;">
+                    Emails em HTML prontos pro Mautic. Landing pages prontas pra publicar. Campanhas completas com sequencia, copy e design. Revise, aprove e publique. Sem formatacao, sem retrabalho.
+                </p>
+                <div style="margin-top: 16px; background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 16px 20px; font-size: 15px; color: #b0b0b0;">
+                    <span style="color: #4ade80;">&#10003;</span> landing-page-venda.html <span style="color: #666666;">(pronta pra publicar)</span><br>
+                    <span style="color: #4ade80;">&#10003;</span> email-sequencia-5-pecas/ <span style="color: #666666;">(HTML inline CSS)</span><br>
+                    <span style="color: #4ade80;">&#10003;</span> pesquisa-mercado.md <span style="color: #666666;">(ICP + insights)</span><br>
+                    <span style="color: #4ade80;">&#10003;</span> copy-anuncios.md <span style="color: #666666;">(3 variantes)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== COMPARISON TABLE ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #111111;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <p style="font-size: 14px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0;">Comparativo honesto</p>
+            <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; line-height: 1.2;">
+                Marketing Machine vs. Suas Alternativas
+            </h2>
+            <p class="section-subtitle" style="font-size: 17px; color: #888888; max-width: 600px; margin: 0 auto;">
+                Veja como cada opcao se compara em custo, velocidade e resultados
+            </p>
+        </div>
+
+        <div class="comparison-table" style="overflow-x: auto; border-radius: 16px; border: 1px solid #252525;">
+            <table style="width: 100%; border-collapse: collapse; background-color: #1a1a1a; font-size: 14px;">
+                <thead>
+                    <tr>
+                        <th style="padding: 20px 16px; text-align: left; color: #888888; font-weight: 600; border-bottom: 1px solid #252525; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; background-color: #151515;"></th>
+                        <th style="padding: 20px 16px; text-align: center; color: #888888; font-weight: 600; border-bottom: 1px solid #252525; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; background-color: #151515;">ChatGPT</th>
+                        <th style="padding: 20px 16px; text-align: center; color: #888888; font-weight: 600; border-bottom: 1px solid #252525; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; background-color: #151515;">Agencia</th>
+                        <th style="padding: 20px 16px; text-align: center; color: #888888; font-weight: 600; border-bottom: 1px solid #252525; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; background-color: #151515;">Freelancer</th>
+                        <th style="padding: 20px 16px; text-align: center; color: #ffffff; font-weight: 700; border-bottom: 2px solid #00D4FF; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; background: linear-gradient(180deg, rgba(0, 212, 255, 0.08), transparent);">Marketing Machine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 16px; color: #ffffff; font-weight: 600; border-bottom: 1px solid #1e1e1e;">Custo</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">R$100/mes</td>
+                        <td style="padding: 16px; text-align: center; color: #ff6b6b; border-bottom: 1px solid #1e1e1e;">R$15-30k/mes</td>
+                        <td style="padding: 16px; text-align: center; color: #ff6b6b; border-bottom: 1px solid #1e1e1e;">R$3-8k/mes</td>
+                        <td style="padding: 16px; text-align: center; color: #4ade80; font-weight: 600; border-bottom: 1px solid #1e1e1e; background: rgba(0, 212, 255, 0.03);">Pagamento unico</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; color: #ffffff; font-weight: 600; border-bottom: 1px solid #1e1e1e;">Memoria</td>
+                        <td style="padding: 16px; text-align: center; color: #ff6b6b; border-bottom: 1px solid #1e1e1e;">Amnesia total</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">Depende da equipe</td>
+                        <td style="padding: 16px; text-align: center; color: #ff6b6b; border-bottom: 1px solid #1e1e1e;">Troca = recomeca</td>
+                        <td style="padding: 16px; text-align: center; color: #4ade80; font-weight: 600; border-bottom: 1px solid #1e1e1e; background: rgba(0, 212, 255, 0.03);">3 camadas persistentes</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; color: #ffffff; font-weight: 600; border-bottom: 1px solid #1e1e1e;">Especialistas</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">1 generico</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">3-5 juniores</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">1 por vez</td>
+                        <td style="padding: 16px; text-align: center; color: #4ade80; font-weight: 600; border-bottom: 1px solid #1e1e1e; background: rgba(0, 212, 255, 0.03);">19 treinados</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; color: #ffffff; font-weight: 600; border-bottom: 1px solid #1e1e1e;">Velocidade</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">Voce faz tudo</td>
+                        <td style="padding: 16px; text-align: center; color: #ff6b6b; border-bottom: 1px solid #1e1e1e;">15-30 dias</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">5-15 dias</td>
+                        <td style="padding: 16px; text-align: center; color: #4ade80; font-weight: 600; border-bottom: 1px solid #1e1e1e; background: rgba(0, 212, 255, 0.03);">Minutos a horas</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; color: #ffffff; font-weight: 600; border-bottom: 1px solid #1e1e1e;">Formato da entrega</td>
+                        <td style="padding: 16px; text-align: center; color: #ff6b6b; border-bottom: 1px solid #1e1e1e;">Texto cru</td>
+                        <td style="padding: 16px; text-align: center; color: #4ade80; border-bottom: 1px solid #1e1e1e;">Pronto</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">Varia muito</td>
+                        <td style="padding: 16px; text-align: center; color: #4ade80; font-weight: 600; border-bottom: 1px solid #1e1e1e; background: rgba(0, 212, 255, 0.03);">HTML pronto</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; color: #ffffff; font-weight: 600; border-bottom: 1px solid #1e1e1e;">Qualidade</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">Sem validacao</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">Depende</td>
+                        <td style="padding: 16px; text-align: center; color: #888888; border-bottom: 1px solid #1e1e1e;">Inconsistente</td>
+                        <td style="padding: 16px; text-align: center; color: #4ade80; font-weight: 600; border-bottom: 1px solid #1e1e1e; background: rgba(0, 212, 255, 0.03);">Gates em 3 niveis</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 16px; color: #ffffff; font-weight: 600;">Disponibilidade</td>
+                        <td style="padding: 16px; text-align: center; color: #888888;">24/7</td>
+                        <td style="padding: 16px; text-align: center; color: #ff6b6b;">Horario comercial</td>
+                        <td style="padding: 16px; text-align: center; color: #ff6b6b;">Quando pode</td>
+                        <td style="padding: 16px; text-align: center; color: #4ade80; font-weight: 600; background: rgba(0, 212, 255, 0.03);">24/7, sem espera</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== REAL SCENARIO (30 MIN) ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #0a0a0a;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <p style="font-size: 14px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0;">Na pratica</p>
+            <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; line-height: 1.2;">
+                O Que Acontece em 30 Minutos
+            </h2>
+            <p class="section-subtitle" style="font-size: 17px; color: #888888; max-width: 600px; margin: 0 auto;">
+                Cenario real: voce precisa lancar uma campanha de email pra um produto novo
+            </p>
+        </div>
+
+        <!-- Timeline -->
+        <div style="position: relative;">
+            <!-- Vertical line -->
+            <div style="position: absolute; left: 32px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, #00D4FF, #7C3AED, transparent);"></div>
+
+            <!-- Min 0-2 -->
+            <div class="timeline-item" style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 36px; position: relative;">
+                <div class="timeline-badge" style="min-width: 64px; width: 64px; height: 64px; border-radius: 50%; background-color: #111111; border: 2px solid #00D4FF; display: flex; align-items: center; justify-content: center; z-index: 1;">
+                    <span style="font-size: 14px; font-weight: 700; color: #00D4FF;">0-2'</span>
+                </div>
+                <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 20px 24px; flex: 1;">
+                    <h4 style="font-size: 17px; font-weight: 700; color: #ffffff; margin: 0 0 6px 0;">Voce descreve o que precisa</h4>
+                    <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">"Preciso de uma sequencia de 5 emails pra lancar meu curso de fotografia pra iniciantes. O preco e R$497 e o publico sao pessoas que ja tem camera mas nao sabem usar direito."</p>
+                </div>
+            </div>
+
+            <!-- Min 2-5 -->
+            <div class="timeline-item" style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 36px; position: relative;">
+                <div class="timeline-badge" style="min-width: 64px; width: 64px; height: 64px; border-radius: 50%; background-color: #111111; border: 2px solid #7C3AED; display: flex; align-items: center; justify-content: center; z-index: 1;">
+                    <span style="font-size: 14px; font-weight: 700; color: #7C3AED;">2-5'</span>
+                </div>
+                <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 20px 24px; flex: 1;">
+                    <h4 style="font-size: 17px; font-weight: 700; color: #ffffff; margin: 0 0 6px 0;">Pesquisa automatica de mercado</h4>
+                    <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">O estrategista analisa o ICP, identifica dores, desejos e objecoes do publico. Consulta a memoria pra ver se ja conhece seu tom de voz e historico.</p>
+                </div>
+            </div>
+
+            <!-- Min 5-12 -->
+            <div class="timeline-item" style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 36px; position: relative;">
+                <div class="timeline-badge" style="min-width: 64px; width: 64px; height: 64px; border-radius: 50%; background-color: #111111; border: 2px solid #00D4FF; display: flex; align-items: center; justify-content: center; z-index: 1;">
+                    <span style="font-size: 14px; font-weight: 700; color: #00D4FF;">5-12'</span>
+                </div>
+                <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 20px 24px; flex: 1;">
+                    <h4 style="font-size: 17px; font-weight: 700; color: #ffffff; margin: 0 0 6px 0;">Copy dos 5 emails e criada</h4>
+                    <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">O copywriter aplica metodologias de Halbert e Schwartz. Cada email com headline, corpo, CTA. Estrutura de antecipacao, prova social, urgencia e abertura de loop.</p>
+                </div>
+            </div>
+
+            <!-- Min 12-20 -->
+            <div class="timeline-item" style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 36px; position: relative;">
+                <div class="timeline-badge" style="min-width: 64px; width: 64px; height: 64px; border-radius: 50%; background-color: #111111; border: 2px solid #7C3AED; display: flex; align-items: center; justify-content: center; z-index: 1;">
+                    <span style="font-size: 14px; font-weight: 700; color: #7C3AED;">12-20'</span>
+                </div>
+                <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 20px 24px; flex: 1;">
+                    <h4 style="font-size: 17px; font-weight: 700; color: #ffffff; margin: 0 0 6px 0;">HTML gerado e validado</h4>
+                    <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">O Email Builder transforma cada email em HTML com inline CSS, botoes em table, tokens de personalizacao. Responsivo e compativel com todos os clientes de email.</p>
+                </div>
+            </div>
+
+            <!-- Min 20-25 -->
+            <div class="timeline-item" style="display: flex; align-items: flex-start; gap: 24px; margin-bottom: 36px; position: relative;">
+                <div class="timeline-badge" style="min-width: 64px; width: 64px; height: 64px; border-radius: 50%; background-color: #111111; border: 2px solid #00D4FF; display: flex; align-items: center; justify-content: center; z-index: 1;">
+                    <span style="font-size: 14px; font-weight: 700; color: #00D4FF;">20-25'</span>
+                </div>
+                <div style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; padding: 20px 24px; flex: 1;">
+                    <h4 style="font-size: 17px; font-weight: 700; color: #ffffff; margin: 0 0 6px 0;">Quality Gates verificam tudo</h4>
+                    <p style="font-size: 14px; color: #888888; margin: 0; line-height: 1.6;">Nivel 1 verifica formato e completude. Nivel 2 valida consistencia com a marca e qualidade da copy. Nivel 3 apresenta pra voce aprovar.</p>
+                </div>
+            </div>
+
+            <!-- Min 25-30 -->
+            <div class="timeline-item" style="display: flex; align-items: flex-start; gap: 24px; position: relative;">
+                <div class="timeline-badge" style="min-width: 64px; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #00D4FF, #7C3AED); display: flex; align-items: center; justify-content: center; z-index: 1;">
+                    <span style="font-size: 14px; font-weight: 700; color: #ffffff;">30'</span>
+                </div>
+                <div style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(124, 58, 237, 0.08)); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 12px; padding: 20px 24px; flex: 1;">
+                    <h4 style="font-size: 17px; font-weight: 700; color: #ffffff; margin: 0 0 6px 0;">Campanha pronta pra enviar &#10003;</h4>
+                    <p style="font-size: 14px; color: #b0b0b0; margin: 0; line-height: 1.6;">5 emails em HTML, pesquisa de mercado documentada, copy aprovada, tudo salvo no workspace. Basta colar no Mautic e agendar.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result callout -->
+        <div style="text-align: center; margin-top: 48px; padding: 32px; background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(124, 58, 237, 0.05)); border: 1px solid rgba(0, 212, 255, 0.15); border-radius: 16px;">
+            <p style="font-size: 18px; color: #ffffff; font-weight: 600; margin: 0 0 8px 0;">
+                Uma agencia levaria 15-30 dias e cobraria R$5.000+
+            </p>
+            <p style="font-size: 15px; color: #888888; margin: 0;">
+                Voce fez em 30 minutos, sentado no sofa, com o mesmo nivel de qualidade
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== VALUE STACK ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #111111;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <p style="font-size: 14px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0;">O valor real</p>
+            <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; line-height: 1.2;">
+                Quanto Custaria Montar Isso Sozinho?
+            </h2>
+        </div>
+
+        <!-- Value items -->
+        <div style="background-color: #1a1a1a; border: 1px solid #252525; border-radius: 16px; padding: 8px 0; overflow: hidden;">
+            <!-- Item 1 -->
+            <div class="value-row" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; border-bottom: 1px solid #1e1e1e;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: #00D4FF;">&#10003;</span>
+                    <span style="color: #ffffff; font-size: 15px; font-weight: 500;">19 Agentes de Copywriting Especializados</span>
+                </div>
+                <span style="color: #888888; font-size: 15px; white-space: nowrap;">R$ 15.000</span>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="value-row" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; border-bottom: 1px solid #1e1e1e;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: #00D4FF;">&#10003;</span>
+                    <span style="color: #ffffff; font-size: 15px; font-weight: 500;">60+ Metodologias de Pesquisa de Mercado</span>
+                </div>
+                <span style="color: #888888; font-size: 15px; white-space: nowrap;">R$ 8.000</span>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="value-row" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; border-bottom: 1px solid #1e1e1e;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: #00D4FF;">&#10003;</span>
+                    <span style="color: #ffffff; font-size: 15px; font-weight: 500;">37+ Templates Prontos (emails, LPs, campanhas)</span>
+                </div>
+                <span style="color: #888888; font-size: 15px; white-space: nowrap;">R$ 5.500</span>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="value-row" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; border-bottom: 1px solid #1e1e1e;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: #00D4FF;">&#10003;</span>
+                    <span style="color: #ffffff; font-size: 15px; font-weight: 500;">7 Workflow Engines com Automacao Completa</span>
+                </div>
+                <span style="color: #888888; font-size: 15px; white-space: nowrap;">R$ 7.000</span>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="value-row" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; border-bottom: 1px solid #1e1e1e;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: #00D4FF;">&#10003;</span>
+                    <span style="color: #ffffff; font-size: 15px; font-weight: 500;">Sistema de Memoria Persistente em 3 Camadas</span>
+                </div>
+                <span style="color: #888888; font-size: 15px; white-space: nowrap;">R$ 6.000</span>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="value-row" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; border-bottom: 1px solid #1e1e1e;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: #00D4FF;">&#10003;</span>
+                    <span style="color: #ffffff; font-size: 15px; font-weight: 500;">9 Departamentos Completos (Marketing a TI)</span>
+                </div>
+                <span style="color: #888888; font-size: 15px; white-space: nowrap;">R$ 12.000</span>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="value-row" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 28px; border-bottom: 1px solid #1e1e1e;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: #00D4FF;">&#10003;</span>
+                    <span style="color: #ffffff; font-size: 15px; font-weight: 500;">Quality Gates em 3 Niveis + Auto-calibracao</span>
+                </div>
+                <span style="color: #888888; font-size: 15px; white-space: nowrap;">R$ 4.800</span>
+            </div>
+
+            <!-- Item 8 -->
+            <div class="value-row" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 28px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="color: #00D4FF;">&#10003;</span>
+                    <span style="color: #ffffff; font-size: 15px; font-weight: 500;">Ralph: Motor Autonomo de Desenvolvimento</span>
+                </div>
+                <span style="color: #888888; font-size: 15px; white-space: nowrap;">R$ 5.000</span>
+            </div>
+        </div>
+
+        <!-- Total -->
+        <div style="text-align: center; margin-top: 40px;">
+            <p style="font-size: 16px; color: #888888; margin: 0 0 8px 0;">Valor total se voce contratasse tudo separado</p>
+            <p style="font-size: 48px; font-weight: 800; color: #666666; margin: 0 0 8px 0; text-decoration: line-through; text-decoration-color: #ff4444;">R$ 63.300</p>
+            <p style="font-size: 17px; color: #b0b0b0; margin: 0;">Voce tem acesso a tudo isso por uma fracao desse valor &#8595;</p>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== PRICING SECTION ==================== -->
+<section id="precos" class="section-padding" style="padding: 80px 24px; background: linear-gradient(180deg, #0a0a0a, #0f0f1a);">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <p style="font-size: 14px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0;">Escolha seu plano</p>
+            <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; line-height: 1.2;">
+                Comece Agora com Marketing Machine
+            </h2>
+            <p class="section-subtitle" style="font-size: 17px; color: #888888; max-width: 550px; margin: 0 auto;">
+                Pagamento unico. Sem mensalidade. Sem surpresas.
+            </p>
+        </div>
+
+        <!-- Pricing Grid -->
+        <div class="pricing-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; align-items: start;">
+
+            <!-- Essencial -->
+            <div class="pricing-card" style="background-color: #111111; border: 1px solid #252525; border-radius: 16px; padding: 40px 28px; text-align: center;">
+                <p style="font-size: 13px; color: #888888; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 8px 0;">Essencial</p>
+                <div class="pricing-price" style="font-size: 48px; font-weight: 800; color: #ffffff; margin: 0 0 4px 0;">R$997</div>
+                <p class="pricing-installment" style="font-size: 15px; color: #888888; margin: 0 0 32px 0;">ou 12x de R$97</p>
+
+                <div style="text-align: left; margin-bottom: 32px;">
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao de Marketing completa (19 agentes)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao de Branding</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Motor central (orquestrador + memoria)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">60+ metodologias de pesquisa</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">37+ templates prontos</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Quality Gates em 3 niveis</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Garantia de 30 dias</span>
+                    </div>
+                </div>
+
+                <a href="{CHECKOUT_URL}" style="display: block; padding: 16px 24px; background-color: #1a1a1a; border: 1px solid #333333; color: #ffffff; font-size: 14px; font-weight: 700; text-decoration: none; border-radius: 12px; letter-spacing: 0.5px; text-transform: uppercase;">
+                    QUERO O ESSENCIAL
+                </a>
+            </div>
+
+            <!-- Profissional (Recommended) -->
+            <div class="pricing-card" style="background: linear-gradient(180deg, #111111, #0e0e16); border: 2px solid #00D4FF; border-radius: 16px; padding: 40px 28px; text-align: center; position: relative; transform: scale(1.03); box-shadow: 0 0 40px rgba(0, 212, 255, 0.1);">
+                <!-- Badge -->
+                <div style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #00D4FF, #7C3AED); color: #ffffff; font-size: 12px; font-weight: 700; padding: 6px 20px; border-radius: 50px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap;">
+                    Recomendado
+                </div>
+
+                <p style="font-size: 13px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 8px 0;">Profissional</p>
+                <div class="pricing-price" style="font-size: 48px; font-weight: 800; color: #ffffff; margin: 0 0 4px 0;">R$1.997</div>
+                <p class="pricing-installment" style="font-size: 15px; color: #888888; margin: 0 0 32px 0;">ou 12x de R$197</p>
+
+                <div style="text-align: left; margin-bottom: 32px;">
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;"><strong style="color: #ffffff;">Tudo do Essencial</strong>, mais:</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #00D4FF; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao de Produtos (PRDs, roadmaps)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #00D4FF; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao de Customer Success</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #00D4FF; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao de Dados (analise, dashboards)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #00D4FF; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao Educacional (cursos, gamificacao)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #00D4FF; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Ralph: motor autonomo de desenvolvimento</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #00D4FF; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Suporte por comunidade exclusiva</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px;">
+                        <span style="color: #00D4FF; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Garantia de 30 dias</span>
+                    </div>
+                </div>
+
+                <a href="{CHECKOUT_URL}" class="cta-button" style="display: block; padding: 16px 24px; background: linear-gradient(135deg, #00D4FF, #7C3AED); color: #ffffff; font-size: 14px; font-weight: 700; text-decoration: none; border-radius: 12px; letter-spacing: 0.5px; text-transform: uppercase; box-shadow: 0 4px 20px rgba(0, 212, 255, 0.25);">
+                    QUERO O PROFISSIONAL
+                </a>
+            </div>
+
+            <!-- Enterprise -->
+            <div class="pricing-card" style="background-color: #111111; border: 1px solid #252525; border-radius: 16px; padding: 40px 28px; text-align: center;">
+                <p style="font-size: 13px; color: #888888; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 8px 0;">Enterprise</p>
+                <div class="pricing-price" style="font-size: 48px; font-weight: 800; color: #ffffff; margin: 0 0 4px 0;">R$2.997</div>
+                <p class="pricing-installment" style="font-size: 15px; color: #888888; margin: 0 0 32px 0;">ou 12x de R$297</p>
+
+                <div style="text-align: left; margin-bottom: 32px;">
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #4ade80; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;"><strong style="color: #ffffff;">Tudo do Profissional</strong>, mais:</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #7C3AED; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao de Deploy (Vercel, dominios)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #7C3AED; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao de DevOps (infraestrutura)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #7C3AED; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Extensao de TI (suporte tecnico)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #7C3AED; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Consultoria 1:1 de setup (60 min)</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px;">
+                        <span style="color: #7C3AED; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Acesso antecipado a novas extensoes</span>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 10px;">
+                        <span style="color: #7C3AED; font-size: 14px; margin-top: 2px;">&#10003;</span>
+                        <span style="font-size: 14px; color: #b0b0b0;">Garantia de 30 dias</span>
+                    </div>
+                </div>
+
+                <a href="{CHECKOUT_URL}" style="display: block; padding: 16px 24px; background-color: #1a1a1a; border: 1px solid #333333; color: #ffffff; font-size: 14px; font-weight: 700; text-decoration: none; border-radius: 12px; letter-spacing: 0.5px; text-transform: uppercase;">
+                    QUERO O ENTERPRISE
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== BONUS SECTION ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #0a0a0a;">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <p style="font-size: 14px; color: #7C3AED; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 16px 0;">Bonus exclusivos</p>
+            <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; line-height: 1.2;">
+                Voce Ainda Recebe de Bonus
+            </h2>
+            <p class="section-subtitle" style="font-size: 17px; color: #888888; max-width: 550px; margin: 0 auto;">
+                Tudo incluso na sua compra, sem custo adicional
+            </p>
+        </div>
+
+        <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <!-- Bonus 1 -->
+            <div style="background: linear-gradient(180deg, #1a1a1a, #151515); border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; background: rgba(124, 58, 237, 0.15); color: #7C3AED; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 0 16px 0 12px; text-transform: uppercase; letter-spacing: 1px;">Todos os planos</div>
+                <div style="font-size: 28px; margin-bottom: 12px;">&#x1F4DA;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Biblioteca de Frameworks de Copy</h3>
+                <p style="font-size: 14px; color: #888888; margin: 0 0 12px 0; line-height: 1.6;">
+                    Todos os frameworks dos maiores copywriters do mundo, organizados e prontos pra usar. Halbert, Ogilvy, Schwartz, Georgi, Kennedy e mais.
+                </p>
+                <p style="font-size: 13px; color: #666666; margin: 0;">Valor: <span style="text-decoration: line-through;">R$2.500</span></p>
+            </div>
+
+            <!-- Bonus 2 -->
+            <div style="background: linear-gradient(180deg, #1a1a1a, #151515); border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; background: rgba(124, 58, 237, 0.15); color: #7C3AED; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 0 16px 0 12px; text-transform: uppercase; letter-spacing: 1px;">Todos os planos</div>
+                <div style="font-size: 28px; margin-bottom: 12px;">&#x1F4E7;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Pack de Templates HTML (Email + LP)</h3>
+                <p style="font-size: 14px; color: #888888; margin: 0 0 12px 0; line-height: 1.6;">
+                    Templates profissionais de email marketing e landing pages em HTML com inline CSS. Compativeis com Mautic, Mailchimp e qualquer plataforma.
+                </p>
+                <p style="font-size: 13px; color: #666666; margin: 0;">Valor: <span style="text-decoration: line-through;">R$1.800</span></p>
+            </div>
+
+            <!-- Bonus 3 -->
+            <div style="background: linear-gradient(180deg, #1a1a1a, #151515); border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; background: rgba(0, 212, 255, 0.15); color: #00D4FF; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 0 16px 0 12px; text-transform: uppercase; letter-spacing: 1px;">Profissional +</div>
+                <div style="font-size: 28px; margin-bottom: 12px;">&#x1F916;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Ralph: Motor Autonomo</h3>
+                <p style="font-size: 14px; color: #888888; margin: 0 0 12px 0; line-height: 1.6;">
+                    O sistema executa tarefas complexas de forma autonoma enquanto voce dorme. Configure a tarefa e receba o resultado pronto quando acordar.
+                </p>
+                <p style="font-size: 13px; color: #666666; margin: 0;">Valor: <span style="text-decoration: line-through;">R$3.000</span></p>
+            </div>
+
+            <!-- Bonus 4 -->
+            <div style="background: linear-gradient(180deg, #1a1a1a, #151515); border: 1px solid #252525; border-radius: 16px; padding: 28px; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; background: rgba(0, 212, 255, 0.15); color: #00D4FF; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 0 16px 0 12px; text-transform: uppercase; letter-spacing: 1px;">Profissional +</div>
+                <div style="font-size: 28px; margin-bottom: 12px;">&#x1F4AC;</div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin: 0 0 8px 0;">Comunidade Exclusiva</h3>
+                <p style="font-size: 14px; color: #888888; margin: 0 0 12px 0; line-height: 1.6;">
+                    Grupo fechado com outros usuarios da Marketing Machine. Troque experiencias, templates customizados e atualizacoes em primeira mao.
+                </p>
+                <p style="font-size: 13px; color: #666666; margin: 0;">Valor: <span style="text-decoration: line-through;">R$1.200</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== GUARANTEE SECTION ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #111111;">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div class="grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+            <!-- Guarantee 1 -->
+            <div style="background: linear-gradient(180deg, #1a1a1a, #151515); border: 1px solid rgba(0, 212, 255, 0.2); border-radius: 16px; padding: 40px 32px; text-align: center;">
+                <div class="guarantee-icon" style="font-size: 56px; margin-bottom: 20px;">&#x1F6E1;&#xFE0F;</div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #ffffff; margin: 0 0 16px 0;">30 Dias de Garantia Incondicional</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    Se por qualquer motivo voce nao gostar, basta enviar um email em ate 30 dias e devolvemos 100% do seu investimento. Sem perguntas, sem burocracia, sem estresse.
+                </p>
+            </div>
+
+            <!-- Guarantee 2 -->
+            <div style="background: linear-gradient(180deg, #1a1a1a, #151515); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: 16px; padding: 40px 32px; text-align: center;">
+                <div class="guarantee-icon" style="font-size: 56px; margin-bottom: 20px;">&#x26A1;</div>
+                <h3 style="font-size: 22px; font-weight: 700; color: #ffffff; margin: 0 0 16px 0;">Primeira Entrega em 24 Horas</h3>
+                <p style="font-size: 15px; color: #888888; margin: 0; line-height: 1.7;">
+                    Se voce instalar, configurar e nao receber nenhuma entrega concreta nas primeiras 24 horas, devolvemos seu dinheiro integralmente. Simples assim.
+                </p>
+            </div>
+        </div>
+
+        <p style="text-align: center; font-size: 16px; color: #ffffff; margin-top: 32px; font-weight: 500;">
+            Voce nao esta arriscando nada. O risco e todo nosso.
+        </p>
+    </div>
+</section>
+
+<!-- ==================== OBJECTION HANDLING / FAQ ==================== -->
+<section class="section-padding" style="padding: 80px 24px; background-color: #0a0a0a;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 16px 0; line-height: 1.2;">
+                Perguntas Frequentes
+            </h2>
+        </div>
+
+        <!-- FAQ 1 -->
+        <div style="margin-bottom: 16px;">
+            <details style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden;">
+                <summary class="faq-question" style="padding: 20px 24px; color: #ffffff; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Nao sou tecnico. Consigo usar?</span>
+                    <span style="color: #00D4FF; font-size: 20px; transition: transform 0.3s;">+</span>
+                </summary>
+                <div style="padding: 0 24px 20px; color: #888888; font-size: 15px; line-height: 1.7;">
+                    Sim. O setup e guiado passo a passo e leva 5-10 minutos. Voce precisa instalar o Claude Code (tambem guiado) e rodar um comando no terminal. Depois disso, toda interacao e em linguagem natural. Voce fala o que precisa e recebe pronto. No plano Enterprise, voce ainda tem 60 minutos de consultoria 1:1 pra garantir que tudo funcione perfeitamente.
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div style="margin-bottom: 16px;">
+            <details style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden;">
+                <summary class="faq-question" style="padding: 20px 24px; color: #ffffff; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Ja tentei IA pra marketing e nao funcionou</span>
+                    <span style="color: #00D4FF; font-size: 20px;">+</span>
+                </summary>
+                <div style="padding: 0 24px 20px; color: #888888; font-size: 15px; line-height: 1.7;">
+                    A diferenca fundamental e que o ChatGPT (e similares) sao ferramentas genericas sem memoria e sem especializacao. A Marketing Machine e um sistema completo com 19 agentes treinados em metodologias reais de copywriting, memoria persistente que aprende seu negocio e entregas formatadas prontas pra publicar. Nao e a mesma coisa. E como comparar um bloco de notas com um departamento de marketing inteiro.
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div style="margin-bottom: 16px;">
+            <details style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden;">
+                <summary class="faq-question" style="padding: 20px 24px; color: #ffffff; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Quanto custa pra manter funcionando?</span>
+                    <span style="color: #00D4FF; font-size: 20px;">+</span>
+                </summary>
+                <div style="padding: 0 24px 20px; color: #888888; font-size: 15px; line-height: 1.7;">
+                    A Marketing Machine roda em cima do Claude Code (da Anthropic). Voce precisa de uma assinatura do Claude Pro (US$20/mes) ou Claude Max pra uso intensivo. O custo da Marketing Machine em si e unico, sem mensalidade. Entao seu custo recorrente e apenas a assinatura do Claude, que voce provavelmente ja usaria de qualquer forma.
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div style="margin-bottom: 16px;">
+            <details style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden;">
+                <summary class="faq-question" style="padding: 20px 24px; color: #ffffff; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    <span>E se a Anthropic mudar algo no Claude?</span>
+                    <span style="color: #00D4FF; font-size: 20px;">+</span>
+                </summary>
+                <div style="padding: 0 24px 20px; color: #888888; font-size: 15px; line-height: 1.7;">
+                    A Marketing Machine e construida em cima de padroes abertos (arquivos Markdown e YAML). Se a Anthropic atualizar o Claude, o sistema continua funcionando porque nao depende de APIs proprietarias ou plugins especificos. Alem disso, atualizacoes da Marketing Machine sao gratuitas pra todos os clientes. Quando algo muda, a gente adapta e voce recebe a versao atualizada.
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div style="margin-bottom: 16px;">
+            <details style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden;">
+                <summary class="faq-question" style="padding: 20px 24px; color: #ffffff; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Funciona pra qualquer nicho?</span>
+                    <span style="color: #00D4FF; font-size: 20px;">+</span>
+                </summary>
+                <div style="padding: 0 24px 20px; color: #888888; font-size: 15px; line-height: 1.7;">
+                    Sim. O sistema de memoria e setup adaptativo faz com que a Marketing Machine aprenda qualquer negocio. No setup inicial, voce responde sobre seu mercado, publico, tom de voz e produto. A partir dai, todos os agentes trabalham com esse contexto. Funciona pra infoprodutos, e-commerce, SaaS, servicos, consultorias e qualquer modelo de negocio que precise de marketing.
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div style="margin-bottom: 16px;">
+            <details style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden;">
+                <summary class="faq-question" style="padding: 20px 24px; color: #ffffff; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Posso usar pra mais de um negocio?</span>
+                    <span style="color: #00D4FF; font-size: 20px;">+</span>
+                </summary>
+                <div style="padding: 0 24px 20px; color: #888888; font-size: 15px; line-height: 1.7;">
+                    Sim. O workspace suporta estrutura de holding com multiplas empresas e produtos. Cada negocio tem sua propria memoria, identidade e configuracoes. O sistema sabe alternar entre eles sem misturar informacoes.
+                </div>
+            </details>
+        </div>
+
+        <!-- FAQ 7 -->
+        <div>
+            <details style="background-color: #111111; border: 1px solid #1e1e1e; border-radius: 12px; overflow: hidden;">
+                <summary class="faq-question" style="padding: 20px 24px; color: #ffffff; font-size: 17px; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                    <span>E caro. Vale a pena?</span>
+                    <span style="color: #00D4FF; font-size: 20px;">+</span>
+                </summary>
+                <div style="padding: 0 24px 20px; color: #888888; font-size: 15px; line-height: 1.7;">
+                    Coloque na ponta do lapiz. Um copywriter freelancer cobra R$3.000-8.000 por mes. Uma agencia, R$15.000-30.000. Um estagiario de marketing custa R$1.500/mes mais encargos. A Marketing Machine e um pagamento unico que substitui todos eles, funciona 24/7, nunca pede ferias e melhora com o tempo. No plano Profissional, o investimento se paga na primeira campanha que voce lanca.
+                </div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FINAL CTA ==================== -->
+<section class="final-cta-section" style="padding: 80px 24px; background: linear-gradient(180deg, #0f0f1a, #0a0a0a); position: relative; overflow: hidden;">
+    <!-- Background effect -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 50% 50%, rgba(0, 212, 255, 0.04) 0%, transparent 70%); pointer-events: none;"></div>
+
+    <div style="max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1;">
+        <p style="font-size: 14px; color: #00D4FF; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 24px 0;">Sua decisao</p>
+
+        <h2 class="section-title" style="font-size: 36px; font-weight: 800; color: #ffffff; margin: 0 0 24px 0; line-height: 1.25;">
+            Voce Pode Continuar Fazendo Tudo Sozinho. Ou Pode Ter um Time Inteiro Trabalhando Pra Voce.
+        </h2>
+
+        <p style="font-size: 17px; color: #b0b0b0; margin: 0 0 16px 0; line-height: 1.7;">
+            19 especialistas treinados nos maiores mestres da persuasao. 60+ metodologias de pesquisa. 37+ templates prontos. Memoria que nunca esquece seu negocio. Entregas em HTML prontas pra publicar.
+        </p>
+
+        <p style="font-size: 17px; color: #b0b0b0; margin: 0 0 32px 0; line-height: 1.7;">
+            Tudo isso funcionando no seu computador, 24 horas por dia, 7 dias por semana. Por um pagamento unico que custa menos que um mes de freelancer.
+        </p>
+
+        <!-- Urgency -->
+        <div style="display: inline-block; background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(124, 58, 237, 0.3); border-radius: 12px; padding: 16px 32px; margin-bottom: 32px;">
+            <p style="font-size: 15px; color: #7C3AED; margin: 0; font-weight: 600;">
+                &#9733; Turma 01: apenas 50 vagas com preco de lancamento
+            </p>
+        </div>
+
+        <br>
+
+        <!-- Pricing reminder -->
+        <div style="display: flex; justify-content: center; gap: 32px; margin-bottom: 40px; flex-wrap: wrap;">
+            <div>
+                <div style="font-size: 14px; color: #888888; margin-bottom: 4px;">Essencial</div>
+                <div style="font-size: 22px; font-weight: 700; color: #ffffff;">12x R$97</div>
+            </div>
+            <div style="width: 1px; background: #333333;"></div>
+            <div>
+                <div style="font-size: 14px; color: #00D4FF; margin-bottom: 4px; font-weight: 600;">Profissional</div>
+                <div style="font-size: 22px; font-weight: 700; color: #ffffff;">12x R$197</div>
+            </div>
+            <div style="width: 1px; background: #333333;"></div>
+            <div>
+                <div style="font-size: 14px; color: #888888; margin-bottom: 4px;">Enterprise</div>
+                <div style="font-size: 22px; font-weight: 700; color: #ffffff;">12x R$297</div>
+            </div>
+        </div>
+
+        <!-- Big CTA -->
+        <a href="#precos" class="cta-button" style="display: inline-block; padding: 20px 56px; background: linear-gradient(135deg, #00D4FF, #7C3AED); color: #ffffff; font-size: 17px; font-weight: 700; text-decoration: none; border-radius: 12px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 4px 30px rgba(0, 212, 255, 0.3), 0 0 60px rgba(124, 58, 237, 0.1);">
+            QUERO MINHA MARKETING MACHINE
+        </a>
+
+        <p style="font-size: 13px; color: #666666; margin-top: 16px;">
+            Garantia de 30 dias &bull; Primeira entrega em 24h &bull; Pagamento seguro
+        </p>
+
+        <p style="font-size: 20px; color: #ffffff; font-weight: 600; margin-top: 40px; font-style: italic;">
+            "Seu time esta esperando."
+        </p>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer style="padding: 40px 24px; background-color: #0a0a0a; border-top: 1px solid #1a1a1a;">
+    <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <p style="font-size: 18px; font-weight: 700; margin: 0 0 8px 0;">
+            <span style="background: linear-gradient(135deg, #00D4FF, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Marketing Machine</span>
+        </p>
+        <p style="font-size: 14px; color: #666666; margin: 0 0 16px 0;">por Alexander Liberatori</p>
+        <div style="margin-bottom: 16px;">
+            <a href="#" style="font-size: 13px; color: #555555; text-decoration: none; margin: 0 12px;">Termos de Uso</a>
+            <span style="color: #333333;">|</span>
+            <a href="#" style="font-size: 13px; color: #555555; text-decoration: none; margin: 0 12px;">Politica de Privacidade</a>
+            <span style="color: #333333;">|</span>
+            <a href="#" style="font-size: 13px; color: #555555; text-decoration: none; margin: 0 12px;">Contato</a>
+        </div>
+        <p style="font-size: 12px; color: #444444; margin: 0 0 8px 0;">
+            Este produto utiliza inteligencia artificial como base tecnologica. Os resultados podem variar de acordo com a configuracao, uso e contexto de cada negocio.
+        </p>
+        <p style="font-size: 12px; color: #444444; margin: 0;">
+            &copy; 2026 Alexander Liberatori. Todos os direitos reservados.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
