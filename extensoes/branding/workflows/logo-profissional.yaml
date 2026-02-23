@@ -1,0 +1,494 @@
+# Workflow: Logo Profissional
+# Padrao Sleep Agent v5 com Quality Gates, Handoff Estruturado e Self-Critique
+# v3.0 - HTML-first: Logo criado em HTML + CSS, SVG como exportacao
+
+id: logo-profissional
+nome: Criacao Profissional de Logo
+descricao: Processo completo de criacao de logo com time de 3 especialistas (HTML-first)
+comando: /logo-profissional
+
+versao: "3.0"
+
+# Baseado em: Paul Rand, Sagi Haviv, Aaron Draplin, Michael Bierut, Massimo Vignelli
+# Time: Logo Architect + Logo Craftsman + Logo Critic
+
+duracao_estimada: "Processo completo em 6 fases"
+resultado_final: "Logo profissional em HTML + CSS com variantes + SVG exportado para favicon"
+
+# =====================================================
+# PRINCIPIOS INEGOCIAVEIS
+# =====================================================
+
+principios:
+  - "HTML-first. SVG e exportacao."
+  - "Google Fonts. Nunca system fonts."
+  - "CSS Variables para temas. Uma base, variantes por classe."
+  - "Monocromatico primeiro. Cor por ultimo."
+  - "Maximo 3 elementos na marca."
+  - "Zero JavaScript no logo."
+  - "Deve funcionar em 16x16px (favicon via SVG export)."
+  - "Descritivel em 1 frase sem 'com' ou 'e'."
+  - "Nunca representar literalmente."
+
+# =====================================================
+# FASES DO WORKFLOW
+# =====================================================
+
+fases:
+  # ===================================================
+  # FASE 1: DISCOVERY (Logo Architect)
+  # ===================================================
+  - numero: 1
+    nome: DISCOVERY
+    agente: logo-architect
+    objetivo: "Entender marca, mercado e contexto"
+
+    tarefas:
+      - id: briefing-marca
+        nome: "Coletar Briefing de Marca"
+        perguntas_obrigatorias:
+          - "Qual o nome da marca e o que significa?"
+          - "O que a empresa FAZ em UMA frase?"
+          - "Quem usa o produto? (comportamento, nao demografico)"
+          - "Qual sentimento deve provocar em 1 segundo?"
+          - "Onde o logo vai aparecer mais? (digital, print, produto)"
+          - "O que a marca NAO e?"
+        consultar:
+          - "workspace/.state/blackboard.yaml"
+          - "workspace/.memoria/semantica/marca.yaml"
+          - "workspace/.memoria/semantica/publico.yaml"
+
+      - id: auditoria-visual
+        nome: "Auditar Concorrentes Visuais"
+        minimo: 5
+        por_concorrente:
+          - Nome
+          - Tipo de logo
+          - Cores
+          - Complexidade
+          - Sentimento
+          - Cliches usados
+        output: "Mapa de espacos visuais livres vs ocupados"
+
+    entregas:
+      - Briefing completo documentado
+      - Auditoria visual com 5+ concorrentes
+      - Espacos visuais livres identificados
+
+    gates:
+      nivel_1:
+        - "6 perguntas respondidas?"
+        - "5+ concorrentes auditados?"
+        - "Blackboard consultado?"
+      nivel_2:
+        - "Logo Critic valida que briefing e completo"
+      nivel_3:
+        - "Usuario confirma que briefing reflete a marca"
+
+  # ===================================================
+  # FASE 2: CONCEITUACAO (Logo Architect)
+  # ===================================================
+  - numero: 2
+    nome: CONCEITUACAO
+    agente: logo-architect
+    objetivo: "Desenvolver 2-3 direcoes conceituais"
+    dependencias: [1]
+
+    tarefas:
+      - id: gerar-conceitos
+        nome: "Gerar Conceitos"
+        quantidade: "5-7 direcoes iniciais"
+        por_conceito:
+          - Metafora visual (NUNCA literal)
+          - Tipo de logo recomendado
+          - Feeling/emocao
+          - Racional estrategico
+          - Referencia inspiradora
+        restricoes:
+          - "NENHUMA representacao literal"
+          - "NENHUM cliche do setor (robo, cerebro, circuito)"
+          - "Cada conceito descritivel em 1 frase"
+
+      - id: selecionar-finalistas
+        nome: "Selecionar 2-3 Finalistas"
+        criterios:
+          haviv_3:
+            - "E apropriado para ESTA marca?"
+            - "E distintivo e memoravel?"
+            - "E simples?"
+          rand_7:
+            - "Distintividade"
+            - "Visibilidade"
+            - "Adaptabilidade"
+            - "Universalidade"
+            - "Atemporalidade"
+            - "Simplicidade"
+            - "Memorabilidade"
+
+      - id: briefing-tecnico
+        nome: "Criar Briefing Tecnico para Craftsman"
+        handoff:
+          formato: "handoff-template.yaml"
+          incluir:
+            - Conceito escolhido
+            - Tipo de logo
+            - Paleta (max 2 cores + neutros)
+            - Restricoes tecnicas
+            - Referencias (inspiracao, NAO copia)
+            - Anti-patterns a evitar
+            - Google Font sugerida
+
+    entregas:
+      - 2-3 conceitos documentados com racional
+      - Validacao contra Haviv + Rand
+      - Briefing tecnico em formato handoff
+
+    gates:
+      nivel_1:
+        - "2+ conceitos documentados?"
+        - "Nenhum conceito e literal?"
+        - "Handoff preenchido?"
+      nivel_2:
+        - "Logo Critic valida conceitos contra Haviv + Rand"
+      nivel_3:
+        - "Usuario escolhe direcao preferida"
+
+  # ===================================================
+  # FASE 3: EXECUCAO HTML (Logo Craftsman)
+  # ===================================================
+  - numero: 3
+    nome: EXECUCAO
+    agente: logo-craftsman
+    objetivo: "Construir logo em HTML + CSS profissional"
+    dependencias: [2]
+
+    tarefas:
+      - id: setup-font
+        nome: "Configurar Google Font"
+        especificacoes:
+          preconnect: true
+          pesos: "somente os necessarios (ex: 300, 700)"
+          display: "swap"
+
+      - id: construir-mark
+        nome: "Construir Mark em CSS/SVG inline"
+        regras:
+          - "Formas simples: CSS puro (border-radius, borders)"
+          - "Formas complexas: SVG inline dentro do HTML"
+          - "ZERO efeitos que nao sejam box-shadow ou opacity"
+          - "Maximo 3 elementos"
+          - "Testar em preto primeiro (monocromatico)"
+
+      - id: montar-wordmark
+        nome: "Montar Wordmark com Flexbox"
+        regras:
+          - "display: inline-flex; align-items: baseline"
+          - "Pesos diferenciados (light + bold)"
+          - "letter-spacing preciso"
+          - "Google Font (NUNCA system font)"
+
+      - id: criar-temas
+        nome: "Criar Sistema de Temas via CSS Variables"
+        variantes:
+          dark:
+            classe: "logo--dark"
+            descricao: "Fundo escuro, marca colorida (principal)"
+          light:
+            classe: "logo--light"
+            descricao: "Fundo claro, marca em tom escuro"
+          mono:
+            classe: "logo--mono"
+            descricao: "Preto sobre branco"
+          mono_inv:
+            classe: "logo--mono-inv"
+            descricao: "Branco sobre preto"
+
+      - id: criar-icones
+        nome: "Criar Icones em Multiplas Escalas"
+        escalas:
+          - "96px (lg)"
+          - "48px (md)"
+          - "32px (sm)"
+          - "16px (xs - favicon)"
+
+      - id: responsividade
+        nome: "Implementar Responsividade"
+        breakpoints:
+          - "max-width: 600px (mobile)"
+          - "max-width: 360px (extra small - so icon)"
+
+      - id: interatividade
+        nome: "Adicionar Hover States Sutis"
+        regras:
+          - "scale(1.02) no hover"
+          - "Animacao sutil no mark (pulse, fade)"
+          - "ZERO animacao ao carregar"
+          - "ZERO JavaScript"
+
+      - id: exportar-svg
+        nome: "Exportar SVG do Mark"
+        regras:
+          - "So o mark geometrico (sem texto)"
+          - "ViewBox pequeno (80x80 ou 64x64)"
+          - "Zero filters, zero gradientes"
+          - "Sem declaration XML"
+          - "Sem width/height fixos"
+
+    entregas:
+      - 1 arquivo HTML com todas variantes (dark, light, mono, mono-inv, icones)
+      - 1 arquivo SVG do mark (exportacao para favicon)
+      - Documentacao tecnica (fonte, cores, CSS variables)
+      - Handoff para Logo Critic
+
+    gates:
+      nivel_1:
+        - "HTML valido e semantico?"
+        - "Google Font carregada com preconnect?"
+        - "CSS Variables para todos temas?"
+        - "Flexbox para alinhamento?"
+        - "Min 4 variantes presentes?"
+        - "Icones em 4 escalas?"
+        - "Responsivo?"
+        - "Zero JavaScript?"
+        - "SVG exportado (so mark)?"
+        - "Max 3 cores no mark?"
+      nivel_2:
+        - "Logo Critic executa bateria de 7 testes"
+      nivel_3:
+        - "Usuario abre HTML no browser e aprova visual"
+
+  # ===================================================
+  # FASE 4: VALIDACAO (Logo Critic)
+  # ===================================================
+  - numero: 4
+    nome: VALIDACAO
+    agente: logo-critic
+    objetivo: "Validar contra todos criterios profissionais"
+    dependencias: [3]
+
+    tarefas:
+      - id: bateria-testes
+        nome: "Executar 7 Testes Obrigatorios"
+        testes:
+          1_silhueta: "Forma distintiva em preto solido?"
+          2_favicon: "Identificavel em 16x16? (verificar via icone no HTML)"
+          3_descricao: "Descritivel em 1 frase?"
+          4_doodle: "Desenhavel de memoria?"
+          5_swap: "Distintivo vs concorrentes?"
+          6_inverso: "Funciona dark E light? (verificar variantes no HTML)"
+          7_contexto: "Funciona como favicon, avatar, print?"
+
+      - id: auditoria-html
+        nome: "Auditar HTML + CSS"
+        verificar:
+          bloqueadores:
+            - "JavaScript presente?"
+            - "System font como primaria?"
+            - "Layout sem flexbox (margins absolutas)?"
+            - "Cores > 3 no mark?"
+            - "Elementos > 5?"
+          alertas:
+            - "Google Font sem preconnect?"
+            - "Sem CSS Variables?"
+            - "Sem responsividade?"
+            - "Animacao ao carregar?"
+
+      - id: auditoria-svg
+        nome: "Auditar SVG Exportado"
+        verificar:
+          bloqueadores:
+            - "Texto presente no SVG?"
+            - "Filters presentes?"
+            - "Gradientes decorativos?"
+          alertas:
+            - "ViewBox > 256?"
+            - "width/height fixos?"
+
+      - id: validacao-mestres
+        nome: "Validar Haviv (3) + Rand (7)"
+        criterios: 10
+        minimo_aprovacao: 8
+
+      - id: veredito
+        nome: "Emitir Veredito Final"
+        escala:
+          10: "Profissional - aprovar"
+          8_9: "Quase la - ajustes menores"
+          6_7: "Retornar ao Craftsman"
+          4_5: "Retornar ao Architect"
+          1_3: "Recomecar"
+
+    entregas:
+      - Relatorio de validacao (7 testes)
+      - Auditoria HTML + CSS
+      - Auditoria SVG exportado
+      - Validacao Haviv + Rand
+      - Veredito final com score
+
+    gates:
+      nivel_1:
+        - "Todos 7 testes executados?"
+        - "Auditoria HTML completa?"
+        - "Auditoria SVG completa?"
+        - "Score atribuido?"
+      nivel_2:
+        - "Self-critique: justificativas sao objetivas?"
+      nivel_3:
+        - "Usuario concorda com avaliacao"
+
+    self_critique:
+      ativado: true
+      max_ciclos: 3
+      processo:
+        1_analisar: "O que falhou nos testes?"
+        2_diagnosticar: "Qual a causa raiz?"
+        3_planejar: "O que o Craftsman deve fazer diferente?"
+        4_executar: "Retornar com diagnostico especifico"
+        5_registrar: "Salvar aprendizado na memoria episodica"
+
+  # ===================================================
+  # FASE 5: REFINAMENTO (Logo Craftsman, se necessario)
+  # ===================================================
+  - numero: 5
+    nome: REFINAMENTO
+    agente: logo-craftsman
+    objetivo: "Aplicar correcoes do Logo Critic"
+    dependencias: [4]
+    condicional: "Se score < 8 na Fase 4"
+
+    tarefas:
+      - id: corrigir-bloqueadores
+        nome: "Resolver Bloqueadores"
+        prioridade: "CRITICA"
+        processo:
+          - "Ler diagnostico do Logo Critic"
+          - "Aplicar correcoes na ordem de prioridade"
+          - "Re-testar cada correcao"
+
+      - id: aplicar-melhorias
+        nome: "Aplicar Melhorias Recomendadas"
+        prioridade: "ALTA"
+
+      - id: re-submeter
+        nome: "Re-submeter para Validacao"
+        handoff: "De volta ao Logo Critic (Fase 4)"
+
+    gates:
+      nivel_1:
+        - "Todos bloqueadores resolvidos?"
+        - "HTML continua valido?"
+      nivel_2:
+        - "Logo Critic re-avalia com score >= 8?"
+
+    circuit_breaker:
+      max_ciclos: 3
+      acao_apos_limite: "Retornar ao Logo Architect para re-conceituacao"
+
+  # ===================================================
+  # FASE 6: ENTREGA (Logo Craftsman)
+  # ===================================================
+  - numero: 6
+    nome: ENTREGA
+    agente: logo-craftsman
+    objetivo: "Preparar entrega final"
+    dependencias: [4]
+    condicional: "Se score >= 8 na Fase 4"
+
+    tarefas:
+      - id: briefing-final
+        nome: "Criar Briefing Final"
+        incluir:
+          - Conceito e racional
+          - Especificacoes tecnicas (HTML + CSS + SVG)
+          - Google Font utilizada
+          - CSS Variables definidas
+          - Paleta de cores com codigos
+          - Versoes disponiveis
+          - Diretrizes de uso
+          - Validacao (score e testes)
+
+      - id: organizar-assets
+        nome: "Organizar Assets"
+        estrutura: |
+          workspace/[marca]-brand/logo/
+          ├── [marca]-logo.html           # Arquivo principal (todas variantes)
+          ├── [marca]-icon.svg            # Mark exportado (favicon/static)
+          ├── BRIEFING-LOGO.md            # Briefing completo
+          ├── 01-discovery.md             # Processo: discovery
+          ├── 02-conceitos.md             # Processo: conceitos
+          └── 03-validacao.md             # Processo: validacao
+
+      - id: atualizar-blackboard
+        nome: "Atualizar Blackboard"
+        campos:
+          - "marca.logo_conceito"
+          - "marca.logo_cores"
+          - "marca.logo_tipo"
+          - "marca.logo_fonte"
+
+      - id: salvar-memoria
+        nome: "Salvar na Memoria"
+        episodica:
+          - "Processo de criacao do logo"
+          - "Decisoes tomadas"
+          - "Feedback do usuario"
+        semantica:
+          - "Marca visual definida"
+          - "Paleta de cores da marca"
+          - "Fonte da marca"
+
+    entregas:
+      - 1 arquivo HTML com todas variantes
+      - 1 arquivo SVG (mark para favicon)
+      - Briefing completo (BRIEFING-LOGO.md)
+      - Blackboard atualizado
+      - Memoria persistida
+
+    gates:
+      nivel_1:
+        - "HTML existe e e valido?"
+        - "SVG exportado existe e e valido?"
+        - "Briefing esta completo?"
+        - "Blackboard atualizado?"
+      nivel_2:
+        - "Logo Critic confirma score >= 8"
+      nivel_3:
+        - "Usuario aprova entrega final"
+
+# =====================================================
+# METRICAS DE QUALIDADE
+# =====================================================
+
+metricas:
+  logo:
+    - "Score >= 8/10 na bateria do Logo Critic"
+    - "HTML valido sem JavaScript"
+    - "Google Font carregada corretamente"
+    - "CSS Variables para todos temas"
+    - "Passa em TODOS 7 testes obrigatorios"
+    - "Passa nos 3 criterios de Haviv"
+    - "Passa nos 7 passos de Rand"
+    - "SVG exportado: so mark, zero texto, zero effects"
+    - "Funciona em 16x16px (favicon via SVG)"
+    - "Descritivel em 1 frase"
+    - "Max 3 elementos na marca"
+    - "Max 3 cores"
+
+  processo:
+    - "Discovery completo com blackboard consultado"
+    - "Auditoria visual com 5+ concorrentes"
+    - "Handoff estruturado entre cada agente"
+    - "Self-critique documentado quando aplicavel"
+    - "Memoria atualizada ao final"
+
+# =====================================================
+# INTEGRACAO RALPH
+# =====================================================
+
+ralph:
+  modo: "content"
+  branch: ""
+  paralelizacao:
+    habilitada: false
+  stories_por_fase: 1
+  quality_gates: "obrigatorios antes de marcar passes: true"

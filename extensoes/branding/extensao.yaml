@@ -1,16 +1,16 @@
 # Extensao: Branding & Visual
-# Versao: 1.0 - Framework Ralph de Execucao Visual
+# Versao: 3.0 - HTML-first Logo Craft
 
 nome: Branding & Visual
 slug: branding
 descricao: Framework completo de branding - da identidade visual ao posicionamento
-versao: "1.0"
+versao: "3.0"
 status: ativo
 
 comando: /branding
 
 mensagem_ativacao: |
-  **Sleep Agent - Extensao Branding & Visual v1.1**
+  **Sleep Agent - Extensao Branding & Visual v3.0**
 
   Framework completo baseado nas maiores referencias mundiais:
   - Paul Rand, Saul Bass, Milton Glaser (Logo Design)
@@ -22,19 +22,29 @@ mensagem_ativacao: |
   - Josef Muller-Brockmann, Dieter Rams (Analise Visual)
 
   **Agentes Disponiveis:**
-  - `@brand-designer` - Designer Visual (logos, identidade, graficos)
+  - `@brand-designer` - Designer Visual (identidade, graficos)
   - `@brand-ux` - UI/UX Specialist (interfaces, landing pages)
   - `@brand-estrategia` - Brand Strategist (estrategia, posicionamento)
   - `@brand-analista` - Design Analyst (analise de referencias, diretrizes)
 
+  **Time de Logo Especialista (v3.0 - HTML-first):**
+  - `@logo-architect` - Arquiteto de Logo (conceito, estrategia, Rand/Haviv)
+  - `@logo-craftsman` - Artesao HTML/CSS (execucao tecnica, Google Fonts, temas)
+  - `@logo-critic` - Critico Implacavel (validacao, 7 testes, auditoria)
+
+  **Abordagem HTML-first:**
+  Logo criado em HTML + CSS (Google Fonts, CSS Variables, Flexbox).
+  SVG exportado somente para favicon e contextos estaticos.
+
   **Workflows Completos:**
+  - `/logo-profissional` - Logo profissional HTML-first com 3 especialistas (6 fases)
   - `/brand-completo` - Do zero a identidade completa (8 fases)
   - `/landing-completa` - Landing page de alta conversao
   - `/identidade-visual` - Sistema de identidade visual
   - `/analise-design` - Analisar referencia e criar style guide
 
   **Tarefas Rapidas:**
-  - `/criar-logo` - Conceito e briefing de logo
+  - `/criar-logo` - Logo profissional HTML-first (ativa time de 3 especialistas)
   - `/definir-marca` - Definir identidade de marca
   - `/criar-landing` - Landing page otimizada
   - `/posicionamento` - Posicionamento de marca
@@ -133,6 +143,67 @@ agentes:
       - Criacao de style guides
       - Diretrizes de design
 
+  # TIME DE LOGO ESPECIALISTA (v2.0)
+  - id: logo-architect
+    arquivo: agentes/LOGO-ARCHITECT.md
+    comando: "@logo-architect"
+    maturidade: 3  # Completo
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: true
+      exemplos: true
+      gates: true
+    especialidades:
+      - Conceituacao de logo
+      - Estrategia visual
+      - Auditoria competitiva
+      - Validacao conceitual (Rand/Haviv)
+      - Handoff estruturado
+
+  - id: logo-craftsman
+    arquivo: agentes/LOGO-CRAFTSMAN.md
+    comando: "@logo-craftsman"
+    maturidade: 3  # Completo
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: true
+      exemplos: true
+      gates: true
+    especialidades:
+      - Execucao HTML + CSS profissional (PRIMARIO)
+      - Google Fonts e tipografia real
+      - CSS Variables e sistema de temas
+      - Geometria CSS e SVG inline
+      - Exportacao SVG limpo (SECUNDARIO - favicon)
+
+  - id: logo-critic
+    arquivo: agentes/LOGO-CRITIC.md
+    comando: "@logo-critic"
+    maturidade: 3  # Completo
+    checklist:
+      persona: true
+      processo: true
+      tarefas: true
+      conhecimento: true
+      workflows: true
+      templates: true
+      exemplos: true
+      gates: true
+    especialidades:
+      - Bateria de 7 testes profissionais
+      - Auditoria SVG (anti-patterns)
+      - Validacao Haviv (3 criterios)
+      - Validacao Rand (7 passos)
+      - Diagnostico e priorizacao
+
 # =====================================================
 # TAREFAS
 # =====================================================
@@ -218,6 +289,12 @@ workflows:
     comando: /analise-design
     descricao: Analisar referencia e criar style guide do produto
 
+  # NOVO v2.0: Logo profissional com time especialista
+  - id: logo-profissional
+    arquivo: workflows/logo-profissional.yaml
+    comando: /logo-profissional
+    descricao: Logo profissional com 3 especialistas (Architect → Craftsman → Critic)
+
 # =====================================================
 # BASE DE CONHECIMENTO
 # =====================================================
@@ -227,6 +304,10 @@ conhecimento:
   - branding.md
   - logo-design.md
   - ui-ux.md
+  # Expert (v3.0)
+  - html-logo-craft.md      # PRIMARIO: Craft HTML para logos
+  - svg-craft-expert.md      # SECUNDARIO: Exportacao SVG
+  - ai-company-logos.md
   - landing-pages.md
   - personal-branding.md
   - design-systems.md

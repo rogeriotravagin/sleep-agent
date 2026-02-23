@@ -46,11 +46,10 @@ design_analyst:
     - extrair-diretrizes
     - criar-styleguide
 
-# Agente Designer
+# Agente Designer (identidade visual geral)
 designer:
-  agente: agentes/DESIGNER.md
+  agente: agentes/BRAND-DESIGNER.md
   gatilhos:
-    - logo
     - identidade visual
     - paleta de cores
     - tipografia
@@ -58,8 +57,50 @@ designer:
     - elementos visuais
     - marca visual
   tarefas:
-    - criar-logo
     - paleta-cores
+
+# =====================================================
+# TIME DE LOGO ESPECIALISTA (v3.0 - HTML-first)
+# Processo: Architect → Craftsman (HTML) → Critic
+# Logo criado em HTML + CSS. SVG exportado para favicon.
+# =====================================================
+
+# Agente Logo Architect (conceituacao estrategica)
+logo_architect:
+  agente: agentes/LOGO-ARCHITECT.md
+  gatilhos:
+    - logo
+    - criar logo
+    - conceito de logo
+    - briefing de logo
+    - conceituacao visual
+  tarefas:
+    - criar-logo
+
+# Agente Logo Craftsman (execucao HTML-first, SVG export)
+logo_craftsman:
+  agente: agentes/LOGO-CRAFTSMAN.md
+  gatilhos:
+    - executar logo
+    - html logo
+    - construir logo
+    - implementar logo
+    - svg logo
+    - favicon
+  tarefas:
+    - executar-logo-html
+    - exportar-logo-svg
+
+# Agente Logo Critic (validacao implacavel)
+logo_critic:
+  agente: agentes/LOGO-CRITIC.md
+  gatilhos:
+    - validar logo
+    - avaliar logo
+    - testar logo
+    - criticar logo
+  tarefas:
+    - validar-logo
 
 # Agente UI/UX
 uiux:
@@ -101,8 +142,11 @@ prioridade:
   ordem:
     - design_analyst     # Primeiro: analise de referencias
     - brand_strategist   # Segundo: estrategia
-    - designer           # Terceiro: identidade visual
-    - uiux               # Quarto: interfaces
+    - logo_architect     # Terceiro: conceituacao de logo
+    - logo_craftsman     # Quarto: execucao HTML + SVG export
+    - logo_critic        # Quinto: validacao
+    - designer           # Sexto: identidade visual geral
+    - uiux               # Setimo: interfaces
 
 # =====================================================
 # CASOS ESPECIAIS
@@ -116,6 +160,10 @@ casos_especiais:
       workflow: workflows/identidade-visual.yaml
     - gatilho: "analisar e criar"
       workflow: workflows/analise-design.yaml
+    - gatilho: "logo profissional"
+      workflow: workflows/logo-profissional.yaml
+    - gatilho: "criar logo"
+      workflow: workflows/logo-profissional.yaml
 
   explorar_primeiro:
     - "quero criar uma marca"
